@@ -6,6 +6,10 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
+/**
+ * Dark color scheme for the IGV PERU application.
+ * Utilizes deep green shades for backgrounds and surfaces to maintain a cohesive brand identity.
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Green400,
     onPrimary = Green900,
@@ -27,6 +31,10 @@ private val DarkColorScheme = darkColorScheme(
     inverseOnSurface = Grey300
 )
 
+/**
+ * Light color scheme for the IGV PERU application.
+ * Focuses on clarity and readability with white and light green backgrounds.
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Green600,
     onPrimary = White50,
@@ -48,6 +56,12 @@ private val LightColorScheme = lightColorScheme(
     inverseOnSurface = Grey100
 )
 
+/**
+ * Theme for the IGV PERU application.
+ *
+ * @param darkTheme Whether the dark theme should be used. Defaults to the system setting.
+ * @param content The composable content to be displayed within this theme.
+ */
 @Composable
 fun IGVPERUTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
