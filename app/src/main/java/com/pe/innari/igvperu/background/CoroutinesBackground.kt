@@ -10,10 +10,10 @@ import kotlin.time.Duration.Companion.milliseconds
 /**
  * Clase encargada de manejar ejecuciones en segundo plano utilizando Corrutinas y Jetpack Compose.
  *
- * @property timeType El tipo de unidad de tiempo ([TimeType]) a utilizar para el retraso.
- * @property timeOut El valor del tiempo de espera antes de ejecutar la acción. Por defecto es 0.
+ * @param timeUnit El tipo de unidad de tiempo ([TimeType]) a utilizar para el retraso.
+ * @param delayAmount La cantidad de tiempo que se esperará antes de ejecutar la acción.
  */
-class CoroutinesBackground(private val timeType: TimeType, private val timeOut: Long = 0L) {
+class CoroutinesBackground(private val timeUnit: TimeType, private val delayAmount: Long = 0L) {
 
     /**
      * Composable que ejecuta un bloque de código después de un retraso determinado.
@@ -23,28 +23,23 @@ class CoroutinesBackground(private val timeType: TimeType, private val timeOut: 
      */
     @Composable
     fun LaunchedEffect(method: () -> Unit) = LaunchedEffect(Unit) {
-        if (timeOut != 0L) {
-            delay(timeType())
+        if (delayAmount != 0L) {
+            delay(calculateDelayDuration())
         }
         method()
     }
 
-    /**
-     * Convierte el [timeOut] a milisegundos basándose en el [timeType] proporcionado.
-     *
-     * @return Duración en milisegundos.
-     */
-    private fun timeType() = when (timeType) {
+    private fun calculateDelayDuration() = when (timeUnit) {
         TimeType.HOURS -> {
-            TimeUnit.HOURS.toMillis(timeOut).milliseconds
+            TimeUnit.HOURS.toMillis(delayAmount).milliseconds
         }
 
         TimeType.MINUTES -> {
-            TimeUnit.MINUTES.toMillis(timeOut).milliseconds
+            TimeUnit.MINUTES.toMillis(delayAmount).milliseconds
         }
 
         TimeType.SECONDS -> {
-            TimeUnit.SECONDS.toMillis(timeOut).milliseconds
+            TimeUnit.SECONDS.toMillis(delayAmount).milliseconds
         }
     }
 }

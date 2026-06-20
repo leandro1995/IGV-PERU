@@ -19,12 +19,9 @@ class MainActivity : ComponentActivity() {
      * Instancia de [CoroutinesBackground] configurada para manejar el tiempo del Splash Screen.
      */
     private val coroutinesBackground =
-        CoroutinesBackground(timeType = TimeType.SECONDS, timeOut = SPLASH_TIME_OUT)
+        CoroutinesBackground(timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_DURATION_SECONDS)
 
-    /**
-     * Estado que indica si la Splash Screen debe seguir mostrándose.
-     */
-    private var isSplashScreen = true
+    private var shouldShowSplashScreen = true
 
     /**
      * Punto de entrada de la actividad. Configura el Splash Screen y el diseño de borde a borde.
@@ -32,25 +29,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splashScreen.setKeepOnScreenCondition { isSplashScreen }
+        splashScreen.setKeepOnScreenCondition { shouldShowSplashScreen }
         enableEdgeToEdge()
-        content()
+        setupMainContent()
     }
 
     /**
-     * Establece el contenido de la UI utilizando Jetpack Compose.
+     * Configura el contenido principal de la aplicación y gestiona la transición de la Splash Screen.
      */
-    private fun content() = setContent {
+    private fun setupMainContent() = setContent {
         IGVPERUTheme {
-            // Efecto que cambia el estado para ocultar el Splash Screen después del tiempo definido
-            coroutinesBackground.LaunchedEffect { isSplashScreen = false }
+            coroutinesBackground.LaunchedEffect { shouldShowSplashScreen = false }
         }
     }
 
+    /**
+     * Contiene constantes y configuraciones estáticas para [MainActivity].
+     */
     companion object {
-        /**
-         * Tiempo de espera para el Splash Screen en segundos.
-         */
-        private const val SPLASH_TIME_OUT = 2L
+        private const val SPLASH_SCREEN_DURATION_SECONDS = 2L
     }
 }
