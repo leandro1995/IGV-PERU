@@ -9,18 +9,18 @@ class Adaptable {
 
     @Composable
     fun ViewWindow(
-        compactVertical: @Composable () -> Unit,
-        compactHorizontal: @Composable () -> Unit,
+        compactPortrait: @Composable () -> Unit,
+        compactLandScape: @Composable () -> Unit,
         medium: @Composable () -> Unit,
         expanded: @Composable () -> Unit
     ) {
         when (viewType()) {
-            ViewType.COMPACT_VERTICAL -> {
-                compactVertical()
+            ViewType.COMPACT_PORTRAIT -> {
+                compactPortrait()
             }
 
-            ViewType.COMPACT_HORIZONTAL -> {
-                compactHorizontal()
+            ViewType.COMPACT_LAND_SCAPE -> {
+                compactLandScape()
             }
 
             ViewType.MEDIUM -> {
@@ -58,11 +58,11 @@ class Adaptable {
     @Composable
     private fun viewType() = when {
         isMediumWidth() && isCompactHeight() -> {
-            ViewType.COMPACT_HORIZONTAL
+            ViewType.COMPACT_LAND_SCAPE
         }
 
         isCompactWidth() -> {
-            ViewType.COMPACT_VERTICAL
+            ViewType.COMPACT_PORTRAIT
         }
 
         isExpandedWidth() -> {

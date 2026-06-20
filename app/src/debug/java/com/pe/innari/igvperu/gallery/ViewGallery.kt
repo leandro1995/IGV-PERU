@@ -9,13 +9,13 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
 class ViewGallery : ViewAmbient() {
 
     @Composable
-    override fun CompactVertical() {
-        Text("CompactVertical")
+    override fun CompactPortrait() {
+        Text("CompactPortrait")
     }
 
     @Composable
-    override fun CompactHorizontal() {
-        Text("CompactHorizontal")
+    override fun CompactLandScape() {
+        Text("CompactLandScape")
     }
 
     @Composable

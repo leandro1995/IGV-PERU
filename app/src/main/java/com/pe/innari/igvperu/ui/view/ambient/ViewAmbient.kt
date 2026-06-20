@@ -13,21 +13,21 @@ abstract class ViewAmbient {
     }
 
     @Composable
-    protected abstract fun CompactVertical()
+    protected abstract fun CompactPortrait()
 
     @Composable
-    protected open fun CompactHorizontal() {
-        CompactVertical()
+    protected open fun CompactLandScape() {
+        CompactPortrait()
     }
 
     @Composable
     protected open fun Medium() {
-        CompactVertical()
+        CompactPortrait()
     }
 
     @Composable
     protected open fun Expanded() {
-        CompactVertical()
+        CompactPortrait()
     }
 
     @Composable
@@ -43,8 +43,8 @@ abstract class ViewAmbient {
     @Composable
     private fun ViewWindow() {
         adaptable.ViewWindow(
-            compactVertical = { CompactVertical() },
-            compactHorizontal = { CompactHorizontal() },
+            compactPortrait = { CompactPortrait() },
+            compactLandScape = { CompactLandScape() },
             medium = { Medium() },
             expanded = { Expanded() })
     }
