@@ -1,3 +1,10 @@
 package com.pe.innari.igvperu.background
 
-class CoroutinesBackground
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+
+class CoroutinesBackground {
+
+    @Composable
+    fun LaunchedEffect(method: () -> Unit) = LaunchedEffect(Unit) { method() }
+}
