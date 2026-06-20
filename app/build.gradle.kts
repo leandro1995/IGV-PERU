@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.compose.adaptive)
     implementation(libs.material)
     implementation(libs.kotlinx.coroutines.core)
     testImplementation(libs.junit)
