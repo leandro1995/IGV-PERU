@@ -31,6 +31,16 @@ abstract class ViewAmbient {
     }
 
     @Composable
+    protected open fun NightPreview() {
+        OnCreateView()
+    }
+
+    @Composable
+    protected open fun NotNightPreview() {
+        OnCreateView()
+    }
+
+    @Composable
     private fun ViewWindow() {
         adaptable.ViewWindow(
             compactVertical = { CompactVertical() },
