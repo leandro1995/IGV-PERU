@@ -12,22 +12,22 @@ class CoroutinesBackground(private val timeType: TimeType, private val timeOut: 
     @Composable
     fun LaunchedEffect(method: () -> Unit) = LaunchedEffect(Unit) {
         if (timeOut != 0L) {
-            delay(timeType().milliseconds)
+            delay(timeType())
         }
         method()
     }
 
     private fun timeType() = when (timeType) {
         TimeType.HOURS -> {
-            TimeUnit.HOURS.toMillis(timeOut)
+            TimeUnit.HOURS.toMillis(timeOut).milliseconds
         }
 
         TimeType.MINUTES -> {
-            TimeUnit.MINUTES.toMillis(timeOut)
+            TimeUnit.MINUTES.toMillis(timeOut).milliseconds
         }
 
         TimeType.SECONDS -> {
-            TimeUnit.SECONDS.toMillis(timeOut)
+            TimeUnit.SECONDS.toMillis(timeOut).milliseconds
         }
     }
 }
