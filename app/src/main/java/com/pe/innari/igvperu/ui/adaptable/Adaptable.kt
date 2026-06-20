@@ -8,6 +8,32 @@ import com.pe.innari.igvperu.ui.view.ambient.type.ViewType
 class Adaptable {
 
     @Composable
+    fun ViewWindow(
+        compactVertical: @Composable () -> Unit,
+        compactHorizontal: @Composable () -> Unit,
+        medium: @Composable () -> Unit,
+        expanded: @Composable () -> Unit
+    ) {
+        when (viewType()) {
+            ViewType.COMPACT_VERTICAL -> {
+                compactVertical()
+            }
+
+            ViewType.COMPACT_HORIZONTAL -> {
+                compactHorizontal()
+            }
+
+            ViewType.MEDIUM -> {
+                medium()
+            }
+
+            ViewType.EXPANDED -> {
+                expanded()
+            }
+        }
+    }
+
+    @Composable
     private fun windowSizeClass() =
         currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
 
