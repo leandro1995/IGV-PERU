@@ -15,10 +15,7 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 class MainActivity : ComponentActivity() {
 
-    /**
-     * Instancia de [CoroutinesBackground] configurada para manejar el tiempo del Splash Screen.
-     */
-    private val coroutinesBackground =
+    private val splashScreenDelay =
         CoroutinesBackground(timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_DURATION_SECONDS)
 
     private var shouldShowSplashScreen = true
@@ -31,15 +28,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         splashScreen.setKeepOnScreenCondition { shouldShowSplashScreen }
         enableEdgeToEdge()
-        setupMainContent()
+        setAppContentWithSplashScreen()
     }
 
-    /**
-     * Configura el contenido principal de la aplicación y gestiona la transición de la Splash Screen.
-     */
-    private fun setupMainContent() = setContent {
+    private fun setAppContentWithSplashScreen() = setContent {
         IGVPERUTheme {
-            coroutinesBackground.LaunchedEffect { shouldShowSplashScreen = false }
+            splashScreenDelay.LaunchedEffect { shouldShowSplashScreen = false }
         }
     }
 
