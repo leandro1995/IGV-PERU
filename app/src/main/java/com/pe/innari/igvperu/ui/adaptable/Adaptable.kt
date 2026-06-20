@@ -3,7 +3,7 @@ package com.pe.innari.igvperu.ui.adaptable
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowSizeClass
-import com.pe.innari.igvperu.ui.view.ambient.type.ViewType
+import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 
 class Adaptable {
 
