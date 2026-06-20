@@ -1,3 +1,10 @@
 package com.pe.innari.igvperu.ui.component.ambient
 
-abstract class ComponentAmbient
+import androidx.compose.runtime.Composable
+
+abstract class ComponentAmbient {
+
+    @Composable
+    open fun OnCreateView(view: @Composable () -> Unit) {
+    }
+}
