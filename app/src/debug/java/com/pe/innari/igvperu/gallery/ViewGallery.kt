@@ -9,4 +9,14 @@ class ViewGallery : ViewAmbient() {
     override fun CompactVertical() {
 
     }
+
+    @Composable
+    override fun NightPreview() {
+        super.NightPreview()
+    }
+
+    @Composable
+    override fun NotNightPreview() {
+        super.NotNightPreview()
+    }
 }
