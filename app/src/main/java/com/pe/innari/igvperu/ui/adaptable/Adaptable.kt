@@ -27,7 +27,7 @@ class Adaptable {
         medium: @Composable () -> Unit,
         expanded: @Composable () -> Unit
     ) {
-        when (viewType()) {
+        when (resolveViewTypeFromWindowSize()) {
             ViewType.COMPACT_PORTRAIT -> {
                 compactPortrait()
             }
@@ -46,57 +46,39 @@ class Adaptable {
         }
     }
 
-    /**
-     * Obtiene la información de tamaño de ventana adaptable actual.
-     */
     @Composable
-    private fun windowSizeClass() =
+    private fun getCurrentWindowSizeClass() =
         currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
 
-    /**
-     * Indica si el ancho actual es compacto.
-     */
     @Composable
-    private fun isCompactWidth() =
-        !windowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
+    private fun isWindowWidthCompact() =
+        !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
 
-    /**
-     * Indica si el ancho actual es medio.
-     */
     @Composable
-    private fun isMediumWidth() =
-        windowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !windowSizeClass().isWidthAtLeastBreakpoint(
+    private fun isWindowWidthMedium() =
+        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(
             WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
         )
 
-    /**
-     * Indica si el ancho actual es expandido.
-     */
     @Composable
-    private fun isExpandedWidth() =
-        windowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
+    private fun isWindowWidthExpanded() =
+        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
 
-    /**
-     * Indica si el alto actual es compacto (común en modo landscape de teléfonos).
-     */
     @Composable
-    private fun isCompactHeight() =
-        !windowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
+    private fun isWindowHeightCompact() =
+        !getCurrentWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
 
-    /**
-     * Determina el [ViewType] actual basándose en las dimensiones de la pantalla.
-     */
     @Composable
-    private fun viewType() = when {
-        isMediumWidth() && isCompactHeight() -> {
+    private fun resolveViewTypeFromWindowSize() = when {
+        isWindowWidthMedium() && isWindowHeightCompact() -> {
             ViewType.COMPACT_LAND_SCAPE
         }
 
-        isCompactWidth() -> {
+        isWindowWidthCompact() -> {
             ViewType.COMPACT_PORTRAIT
         }
 
-        isExpandedWidth() -> {
+        isWindowWidthExpanded() -> {
             ViewType.EXPANDED
         }
 

@@ -14,11 +14,11 @@ abstract class ViewAmbient {
 
     /**
      * Punto de entrada principal para renderizar la vista.
-     * Utiliza internamente [ViewWindow] para decidir qué layout mostrar.
+     * Utiliza internamente [RenderAdaptableView] para decidir qué layout mostrar.
      */
     @Composable
     fun OnCreateView() {
-        ViewWindow()
+        RenderAdaptableView()
     }
 
     /** UI para dispositivos compactos en modo vertical. Debe ser implementado por las subclases. */
@@ -55,11 +55,8 @@ abstract class ViewAmbient {
         OnCreateView()
     }
 
-    /**
-     * Configura la ventana de la vista utilizando la lógica de adaptabilidad.
-     */
     @Composable
-    private fun ViewWindow() {
+    private fun RenderAdaptableView() {
         adaptable.ViewWindow(
             compactPortrait = { CompactPortrait() },
             compactLandScape = { CompactLandScape() },
