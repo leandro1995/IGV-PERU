@@ -4,44 +4,33 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.pe.innari.igvperu.background.CoroutinesBackground
+import com.pe.innari.igvperu.background.type.TimeType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val coroutinesBackground =
+        CoroutinesBackground(timeType = TimeType.SECONDS, timeOut = SPLASH_TIME_OUT)
+
+    private var isSplashScreen = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        splashScreen.setKeepOnScreenCondition { isSplashScreen }
         enableEdgeToEdge()
-        setContent {
-            IGVPERUTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        content()
+    }
+
+    private fun content() = setContent {
+        IGVPERUTheme {
+            coroutinesBackground.LaunchedEffect { isSplashScreen = false }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IGVPERUTheme {
-        Greeting("Android")
+    companion object {
+        private const val SPLASH_TIME_OUT = 2L
     }
 }
