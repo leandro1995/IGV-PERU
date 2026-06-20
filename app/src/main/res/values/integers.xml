@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Duración predeterminada para la animación del icono de la Splash Screen (en milisegundos) -->
+    <integer name="animate_icon_time_out">200</integer>
+</resources>
