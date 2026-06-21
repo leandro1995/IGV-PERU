@@ -47,6 +47,25 @@ class Adaptable {
     }
 
     @Composable
+    fun resolveViewTypeFromWindowSize() = when {
+        isWindowWidthMedium() && isWindowHeightCompact() -> {
+            ViewType.COMPACT_LAND_SCAPE
+        }
+
+        isWindowWidthCompact() -> {
+            ViewType.COMPACT_PORTRAIT
+        }
+
+        isWindowWidthExpanded() -> {
+            ViewType.EXPANDED
+        }
+
+        else -> {
+            ViewType.MEDIUM
+        }
+    }
+
+    @Composable
     private fun getCurrentWindowSizeClass() =
         currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
 
@@ -67,23 +86,4 @@ class Adaptable {
     @Composable
     private fun isWindowHeightCompact() =
         !getCurrentWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
-
-    @Composable
-    private fun resolveViewTypeFromWindowSize() = when {
-        isWindowWidthMedium() && isWindowHeightCompact() -> {
-            ViewType.COMPACT_LAND_SCAPE
-        }
-
-        isWindowWidthCompact() -> {
-            ViewType.COMPACT_PORTRAIT
-        }
-
-        isWindowWidthExpanded() -> {
-            ViewType.EXPANDED
-        }
-
-        else -> {
-            ViewType.MEDIUM
-        }
-    }
 }
