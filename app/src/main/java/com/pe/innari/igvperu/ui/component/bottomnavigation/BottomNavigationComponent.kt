@@ -10,6 +10,24 @@ class BottomNavigationComponent : ComponentAmbient() {
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
+
+        when (bottomNavigationType()) {
+            BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
+                BottomNavigationBar()
+            }
+
+            BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
+                BottomNavigationRail()
+            }
+        }
+    }
+
+    @Composable
+    private fun BottomNavigationBar() {
+    }
+
+    @Composable
+    private fun BottomNavigationRail() {
     }
 
     @Composable
