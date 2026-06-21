@@ -19,6 +19,11 @@ class BottomNavigationGallery : ViewAmbient() {
         }
     }
 
+    @Composable
+    override fun CompactLandScape() {
+        super.CompactLandScape()
+    }
+
     @NightPreview
     @Composable
     override fun NightPreview() {
