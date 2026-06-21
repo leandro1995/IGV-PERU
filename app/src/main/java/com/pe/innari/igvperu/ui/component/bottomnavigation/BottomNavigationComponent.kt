@@ -1,6 +1,13 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
@@ -13,21 +20,33 @@ class BottomNavigationComponent : ComponentAmbient() {
 
         when (bottomNavigationType()) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                BottomNavigationBar()
+                BottomNavigationBar(view = view)
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                BottomNavigationRail()
+                BottomNavigationRail(view = view)
             }
         }
     }
 
     @Composable
-    private fun BottomNavigationBar() {
+    private fun BottomNavigationBar(view: @Composable () -> Unit) {
+        Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues)) {
+                view()
+            }
+        }
     }
 
     @Composable
-    private fun BottomNavigationRail() {
+    private fun BottomNavigationRail(view: @Composable () -> Unit) {
+        Row(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .weight(1F)
+                    .fillMaxSize()
+            ) { view() }
+        }
     }
 
     @Composable
