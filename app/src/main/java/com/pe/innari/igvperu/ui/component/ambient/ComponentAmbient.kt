@@ -8,6 +8,11 @@ abstract class ComponentAmbient {
     protected val adaptable = Adaptable()
 
     @Composable
+    protected open fun Instance() {
+    }
+
+    @Composable
     open fun OnCreateView(view: @Composable () -> Unit) {
+        Instance()
     }
 }
