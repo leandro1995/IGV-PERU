@@ -2,6 +2,7 @@ package com.pe.innari.igvperu.ui.view.ambient
 
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.adaptable.Adaptable
+import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 /**
  * Clase base abstracta para la creación de vistas adaptables en la aplicación.
@@ -46,13 +47,17 @@ abstract class ViewAmbient {
     /** Previsualización en modo oscuro. */
     @Composable
     protected open fun NightPreview() {
-        OnCreateView()
+        IGVPERUTheme(darkTheme = true) {
+            OnCreateView()
+        }
     }
 
     /** Previsualización en modo claro. */
     @Composable
     protected open fun NotNightPreview() {
-        OnCreateView()
+        IGVPERUTheme(darkTheme = false) {
+            OnCreateView()
+        }
     }
 
     @Composable
