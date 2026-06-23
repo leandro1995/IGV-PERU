@@ -1,11 +1,18 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -20,6 +27,9 @@ import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
+import com.pe.innari.igvperu.ui.theme.Dimen1
+import com.pe.innari.igvperu.ui.theme.Dimen16
+import com.pe.innari.igvperu.ui.theme.Dimen22
 
 class BottomNavigationComponent(private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>) :
     ComponentAmbient() {
@@ -72,15 +82,25 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
 
     @Composable
     private fun NavigationBar() {
-        NavigationBar {
-            itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                NavigationBarItem(selected = index == indexSelect.intValue, onClick = {
-                    indexSelect.intValue = index
-                }, icon = {
-                    Icon(painter = painterResource(item.icon), contentDescription = null)
-                }, label = {
-                    Text(text = item.label)
-                })
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .navigationBarsPadding()
+                .padding(start = Dimen16, end = Dimen16),
+            shape = RoundedCornerShape(Dimen22),
+            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        ) {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
+                itemBottomNavigationMutableList.forEachIndexed { index, item ->
+                    NavigationBarItem(selected = index == indexSelect.intValue, onClick = {
+                        indexSelect.intValue = index
+                    }, icon = {
+                        Icon(painter = painterResource(item.icon), contentDescription = null)
+                    }, label = {
+                        Text(text = item.label)
+                    })
+                }
             }
         }
     }
