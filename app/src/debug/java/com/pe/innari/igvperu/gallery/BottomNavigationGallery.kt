@@ -18,7 +18,7 @@ class BottomNavigationGallery : ViewAmbient() {
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 1"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 2"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 3"),
-                ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 4"),
+                ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 4")
             )
         ).OnCreateView {
             Column {
