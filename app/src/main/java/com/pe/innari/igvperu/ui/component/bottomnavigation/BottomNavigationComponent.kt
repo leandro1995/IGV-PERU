@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +32,8 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen22
+import com.pe.innari.igvperu.ui.theme.Dimen24
+import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 
 class BottomNavigationComponent(private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>) :
     ComponentAmbient() {
@@ -42,8 +46,7 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
 
         indexSelect = rememberSaveable { mutableIntStateOf(0) }
     }
-
-
+    
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
@@ -82,28 +85,51 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
 
     @Composable
     private fun NavigationBar() {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-                .padding(start = Dimen16, end = Dimen16),
-            shape = RoundedCornerShape(Dimen22),
-            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
+        CardContent {
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                    NavigationBarItem(selected = index == indexSelect.intValue, onClick = {
-                        indexSelect.intValue = index
-                    }, icon = {
-                        Icon(painter = painterResource(item.icon), contentDescription = null)
-                    }, label = {
-                        Text(text = item.label)
-                    })
+                    NavigationBarItem(
+                        colors = navigationBarItemDefaultsColor(),
+                        selected = index == indexSelect.intValue,
+                        onClick = {
+                            indexSelect.intValue = index
+                        },
+                        icon = {
+                            Icon(
+                                modifier = Modifier.size(Dimen24),
+                                painter = painterResource(item.icon),
+                                contentDescription = null
+                            )
+                        },
+                        label = {
+                            Text(text = item.label, style = ItemBottomNavigationComponent)
+                        })
                 }
             }
         }
     }
+
+    @Composable
+    private fun CardContent(view: @Composable () -> Unit) = Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding()
+            .padding(start = Dimen16, end = Dimen16),
+        shape = RoundedCornerShape(Dimen22),
+        border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        view()
+    }
+
+    @Composable
+    private fun navigationBarItemDefaultsColor() = NavigationBarItemDefaults.colors(
+        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+        selectedIconColor = MaterialTheme.colorScheme.primary,
+        selectedTextColor = MaterialTheme.colorScheme.primary,
+        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+    )
 
     @Composable
     private fun bottomNavigationType() = when (adaptable.resolveViewTypeFromWindowSize()) {
