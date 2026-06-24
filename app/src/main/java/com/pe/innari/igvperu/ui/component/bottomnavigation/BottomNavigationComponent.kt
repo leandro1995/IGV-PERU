@@ -48,11 +48,21 @@ import com.pe.innari.igvperu.ui.theme.Dimen22
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 
+/**
+ * Componente que implementa un sistema de navegación adaptable.
+ * Cambia automáticamente entre una `NavigationBar` (inferior) y una `NavigationRail` (lateral)
+ * dependiendo del tamaño de la pantalla y la orientación.
+ *
+ * @param itemBottomNavigationMutableList Lista de elementos que se mostrarán en la navegación.
+ */
 class BottomNavigationComponent(private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>) :
     ComponentAmbient() {
 
     private lateinit var indexSelect: MutableIntState
 
+    /**
+     * Inicializa el estado de selección del índice de navegación de forma persistente.
+     */
     @Composable
     override fun Instance() {
         super.Instance()
@@ -60,6 +70,12 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         indexSelect = rememberSaveable { mutableIntStateOf(0) }
     }
 
+    /**
+     * Renderiza el componente de navegación envolviendo la vista proporcionada.
+     * Elige entre navegación inferior o lateral según el tipo de vista resuelto.
+     *
+     * @param view El contenido principal de la pantalla.
+     */
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
@@ -75,6 +91,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
+    /**
+     * Implementación de la barra de navegación inferior (Bottom Navigation Bar).
+     */
     @Composable
     private fun BottomNavigationBar(view: @Composable () -> Unit) {
         Scaffold(
@@ -85,6 +104,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
+    /**
+     * Implementación del riel de navegación lateral (Navigation Rail).
+     */
     @Composable
     private fun BottomNavigationRail(view: @Composable () -> Unit) {
         Row(
@@ -112,6 +134,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
+    /**
+     * Renderiza los items dentro de la barra de navegación inferior.
+     */
     @Composable
     private fun NavigationBar() {
         CardContent(
@@ -141,6 +166,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
+    /**
+     * Renderiza los items dentro del riel de navegación lateral.
+     */
     @Composable
     private fun NavigationRail() {
         CardContent(
@@ -173,6 +201,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
+    /**
+     * Contenedor de tarjeta personalizado para los componentes de navegación.
+     */
     @Composable
     private fun CardContent(modifier: Modifier = Modifier, view: @Composable () -> Unit) = Card(
         modifier = modifier,
@@ -183,6 +214,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         view()
     }
 
+    /**
+     * Colores predeterminados para los elementos de la NavigationBar.
+     */
     @Composable
     private fun navigationBarItemDefaultsColor() = NavigationBarItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
@@ -192,6 +226,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
 
+    /**
+     * Colores predeterminados para los elementos de la NavigationRail.
+     */
     @Composable
     private fun navigationRailItemDefaultsColors() = NavigationRailItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
@@ -201,15 +238,24 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
 
+    /**
+     * Define los insets de ventana a considerar.
+     */
     @Composable
     private fun insets() = WindowInsets.safeDrawing.only(
         sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
     )
 
+    /**
+     * Calcula el inset horizontal máximo basado en el layout.
+     */
     @Composable
     private fun horizontalInset() =
         maxOf(layout.calculateStartPadding(), layout.calculateEndPadding())
 
+    /**
+     * Determina el padding inicial para el NavigationRail.
+     */
     @Composable
     private fun startPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
@@ -217,6 +263,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         Dimen24
     }
 
+    /**
+     * Determina el padding superior para el NavigationRail.
+     */
     @Composable
     private fun topPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
@@ -224,6 +273,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         Dimen16
     }
 
+    /**
+     * Determina el padding inferior para el NavigationRail.
+     */
     @Composable
     private fun bottomPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
@@ -231,6 +283,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         Dimen16
     }
 
+    /**
+     * Resuelve el tipo de navegación a utilizar basándose en el tipo de vista adaptable.
+     */
     @Composable
     private fun bottomNavigationType() = when (adaptable.resolveViewTypeFromWindowSize()) {
         ViewType.COMPACT_PORTRAIT -> {
