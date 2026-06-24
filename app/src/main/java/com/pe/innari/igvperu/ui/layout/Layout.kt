@@ -23,7 +23,7 @@ class Layout {
      */
     @Composable
     fun calculateStartPadding() =
-        paddingValue().calculateStartPadding(localLayoutDirectionCurrent())
+        getSafeZonePadding().calculateStartPadding(getCurrentLayoutDirection())
 
     /**
      * Calcula el padding final (end) considerando los insets del sistema y la dirección del layout.
@@ -31,19 +31,12 @@ class Layout {
      * @return Valor del padding final en Dp.
      */
     @Composable
-    fun calculateEndPadding() = paddingValue().calculateEndPadding(localLayoutDirectionCurrent())
+    fun calculateEndPadding() = getSafeZonePadding().calculateEndPadding(getCurrentLayoutDirection())
 
-    /**
-     * Obtiene la dirección actual del layout (LTR o RTL).
-     */
     @Composable
-    private fun localLayoutDirectionCurrent() = LocalLayoutDirection.current
+    private fun getCurrentLayoutDirection() = LocalLayoutDirection.current
 
-    /**
-     * Define los insets que se deben considerar para el cálculo de paddings.
-     * Incluye recortes de pantalla y efectos de cascada (waterfall).
-     */
     @Composable
-    private fun paddingValue() =
+    private fun getSafeZonePadding() =
         WindowInsets.displayCutout.union(WindowInsets.waterfall).asPaddingValues()
 }
