@@ -53,15 +53,15 @@ class Adaptable {
      */
     @Composable
     fun resolveViewTypeFromWindowSize() = when {
-        isWindowWidthMedium() && isWindowHeightCompact() -> {
+        isWidthMedium() && isHeightCompact() -> {
             ViewType.COMPACT_LAND_SCAPE
         }
 
-        isWindowWidthCompact() -> {
+        isWidthCompact() -> {
             ViewType.COMPACT_PORTRAIT
         }
 
-        isWindowWidthExpanded() -> {
+        isWidthExpanded() -> {
             ViewType.EXPANDED
         }
 
@@ -86,40 +86,25 @@ class Adaptable {
         }
     }
 
-    /**
-     * Obtiene la clase de tamaño de ventana actual proporcionada por el sistema.
-     */
     @Composable
-    private fun getCurrentWindowSizeClass() =
+    private fun getWindowSizeClass() =
         currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
 
-    /**
-     * Verifica si el ancho de la ventana es compacto.
-     */
     @Composable
-    private fun isWindowWidthCompact() =
-        !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
+    private fun isWidthCompact() =
+        !getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
 
-    /**
-     * Verifica si el ancho de la ventana es de tamaño medio.
-     */
     @Composable
-    private fun isWindowWidthMedium() =
-        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(
+    private fun isWidthMedium() =
+        getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !getWindowSizeClass().isWidthAtLeastBreakpoint(
             WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
         )
 
-    /**
-     * Verifica si el ancho de la ventana es expandido.
-     */
     @Composable
-    private fun isWindowWidthExpanded() =
-        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
+    private fun isWidthExpanded() =
+        getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
 
-    /**
-     * Verifica si la altura de la ventana es compacta.
-     */
     @Composable
-    private fun isWindowHeightCompact() =
-        !getCurrentWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
+    private fun isHeightCompact() =
+        !getWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
 }
