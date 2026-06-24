@@ -66,6 +66,17 @@ class Adaptable {
     }
 
     @Composable
+    fun isPhoneOrTablet() = when (resolveViewTypeFromWindowSize()) {
+        ViewType.COMPACT_PORTRAIT, ViewType.COMPACT_LAND_SCAPE -> {
+            true
+        }
+
+        ViewType.MEDIUM, ViewType.EXPANDED -> {
+            false
+        }
+    }
+
+    @Composable
     private fun getCurrentWindowSizeClass() =
         currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
 
