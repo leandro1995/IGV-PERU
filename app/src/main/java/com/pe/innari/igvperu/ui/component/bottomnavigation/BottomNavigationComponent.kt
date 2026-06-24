@@ -70,61 +70,54 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         indexSelect = rememberSaveable { mutableIntStateOf(0) }
     }
 
-    /**
-     * Renderiza el componente de navegación envolviendo la vista proporcionada.
-     * Elige entre navegación inferior o lateral según el tipo de vista resuelto.
-     *
-     * @param view El contenido principal de la pantalla.
-     */
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
 
-        when (bottomNavigationType()) {
+        when (resolveNavigationTypeByWindowSize()) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                BottomNavigationBar(view = view)
+                RenderLayoutWithBottomNavigationBar(view = view)
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                BottomNavigationRail(view = view)
+                RenderLayoutWithNavigationRail(view = view)
             }
         }
     }
 
-    /**
-     * Implementación de la barra de navegación inferior (Bottom Navigation Bar).
-     */
     @Composable
-    private fun BottomNavigationBar(view: @Composable () -> Unit) {
+    private fun RenderLayoutWithBottomNavigationBar(view: @Composable () -> Unit) {
         Scaffold(
-            modifier = Modifier.fillMaxSize(), bottomBar = { NavigationBar() }) { paddingValues ->
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = { RenderBottomNavigationBarItems() }) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
                 view()
             }
         }
     }
 
-    /**
-     * Implementación del riel de navegación lateral (Navigation Rail).
-     */
     @Composable
-    private fun BottomNavigationRail(view: @Composable () -> Unit) {
+    private fun RenderLayoutWithNavigationRail(view: @Composable () -> Unit) {
         Row(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
         ) {
             CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
-                Row(modifier = Modifier.windowInsetsPadding(insets = insets())) {
+                Row(modifier = Modifier.windowInsetsPadding(insets = getVerticalSafeDrawingInsets())) {
                     Box(
                         modifier = Modifier.fillMaxHeight().padding(
-                            start = maxOf(horizontalInset(), startPaddingNavigationRail()),
+                            start = maxOf(
+                                getMaxHorizontalSafeZonePadding(),
+                                getNavigationRailStartPadding()
+                            ),
                             end = Dimen16
                         )
                     ) {
-                        NavigationRail()
+                        RenderNavigationRailItems()
                     }
                     Box(
                         modifier = Modifier.padding(
-                            top = topPaddingNavigationRail(), bottom = bottomPaddingNavigationRail()
+                            top = getNavigationRailTopPadding(),
+                            bottom = getNavigationRailBottomPadding()
                         )
                     ) {
                         view()
@@ -134,19 +127,16 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
-    /**
-     * Renderiza los items dentro de la barra de navegación inferior.
-     */
     @Composable
-    private fun NavigationBar() {
-        CardContent(
+    private fun RenderBottomNavigationBarItems() {
+        StyledNavigationCard(
             modifier = Modifier.fillMaxWidth().navigationBarsPadding()
                 .padding(start = Dimen16, end = Dimen16)
         ) {
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 itemBottomNavigationMutableList.forEachIndexed { index, item ->
                     NavigationBarItem(
-                        colors = navigationBarItemDefaultsColor(),
+                        colors = getNavigationBarItemColors(),
                         selected = index == indexSelect.intValue,
                         onClick = {
                             indexSelect.intValue = index
@@ -166,14 +156,12 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
-    /**
-     * Renderiza los items dentro del riel de navegación lateral.
-     */
     @Composable
-    private fun NavigationRail() {
-        CardContent(
+    private fun RenderNavigationRailItems() {
+        StyledNavigationCard(
             modifier = Modifier.padding(
-                top = topPaddingNavigationRail(), bottom = bottomPaddingNavigationRail()
+                top = getNavigationRailTopPadding(),
+                bottom = getNavigationRailBottomPadding()
             )
         ) {
             NavigationRail(
@@ -183,7 +171,7 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
             ) {
                 itemBottomNavigationMutableList.forEachIndexed { index, item ->
                     NavigationRailItem(
-                        colors = navigationRailItemDefaultsColors(),
+                        colors = getNavigationRailItemColors(),
                         selected = index == indexSelect.intValue,
                         onClick = { indexSelect.intValue = index },
                         icon = {
@@ -201,24 +189,19 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         }
     }
 
-    /**
-     * Contenedor de tarjeta personalizado para los componentes de navegación.
-     */
     @Composable
-    private fun CardContent(modifier: Modifier = Modifier, view: @Composable () -> Unit) = Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(Dimen22),
-        border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-    ) {
-        view()
-    }
+    private fun StyledNavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
+        Card(
+            modifier = modifier,
+            shape = RoundedCornerShape(Dimen22),
+            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        ) {
+            view()
+        }
 
-    /**
-     * Colores predeterminados para los elementos de la NavigationBar.
-     */
     @Composable
-    private fun navigationBarItemDefaultsColor() = NavigationBarItemDefaults.colors(
+    private fun getNavigationBarItemColors() = NavigationBarItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
         selectedIconColor = MaterialTheme.colorScheme.primary,
         selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -226,11 +209,8 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
 
-    /**
-     * Colores predeterminados para los elementos de la NavigationRail.
-     */
     @Composable
-    private fun navigationRailItemDefaultsColors() = NavigationRailItemDefaults.colors(
+    private fun getNavigationRailItemColors() = NavigationRailItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
         selectedIconColor = MaterialTheme.colorScheme.primary,
         selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -238,62 +218,45 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
 
-    /**
-     * Define los insets de ventana a considerar.
-     */
     @Composable
-    private fun insets() = WindowInsets.safeDrawing.only(
+    private fun getVerticalSafeDrawingInsets() = WindowInsets.safeDrawing.only(
         sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
     )
 
-    /**
-     * Calcula el inset horizontal máximo basado en el layout.
-     */
     @Composable
-    private fun horizontalInset() =
+    private fun getMaxHorizontalSafeZonePadding() =
         maxOf(layout.calculateStartPadding(), layout.calculateEndPadding())
 
-    /**
-     * Determina el padding inicial para el NavigationRail.
-     */
     @Composable
-    private fun startPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
+    private fun getNavigationRailStartPadding() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
     } else {
         Dimen24
     }
 
-    /**
-     * Determina el padding superior para el NavigationRail.
-     */
     @Composable
-    private fun topPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
+    private fun getNavigationRailTopPadding() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
     } else {
         Dimen16
     }
 
-    /**
-     * Determina el padding inferior para el NavigationRail.
-     */
     @Composable
-    private fun bottomPaddingNavigationRail() = if (adaptable.isPhoneOrTablet()) {
+    private fun getNavigationRailBottomPadding() = if (adaptable.isPhoneOrTablet()) {
         Dimen0
     } else {
         Dimen16
     }
 
-    /**
-     * Resuelve el tipo de navegación a utilizar basándose en el tipo de vista adaptable.
-     */
     @Composable
-    private fun bottomNavigationType() = when (adaptable.resolveViewTypeFromWindowSize()) {
-        ViewType.COMPACT_PORTRAIT -> {
-            BottomNavigationType.BOTTOM_NAVIGATION_BAR
-        }
+    private fun resolveNavigationTypeByWindowSize() =
+        when (adaptable.resolveViewTypeFromWindowSize()) {
+            ViewType.COMPACT_PORTRAIT -> {
+                BottomNavigationType.BOTTOM_NAVIGATION_BAR
+            }
 
-        ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
-            BottomNavigationType.BOTTOM_NAVIGATION_RAIL
+            ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
+                BottomNavigationType.BOTTOM_NAVIGATION_RAIL
+            }
         }
-    }
 }
