@@ -62,59 +62,45 @@ class BottomNavigationComponent(
         )
     }
 
-    /**
-     * Determina el tipo de navegación a renderizar basándose en el tamaño de la ventana.
-     *
-     * @param view El contenido de la pantalla que se mostrará junto a la navegación.
-     */
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
 
-        when (resolveNavigationTypeByWindowSize()) {
+        when (navigationTypeByWindowSize()) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                RenderLayoutWithBottomNavigationBar(view = view)
+                BottomNavigationBarLayout(view = view)
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                RenderLayoutWithNavigationRail(view = view)
+                NavigationRailLayout(view = view)
             }
         }
     }
 
-    /**
-     * Renderiza la interfaz utilizando una barra de navegación inferior.
-     */
     @Composable
-    private fun RenderLayoutWithBottomNavigationBar(view: @Composable () -> Unit) {
+    private fun BottomNavigationBarLayout(view: @Composable () -> Unit) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            bottomBar = { RenderBottomNavigationBarItems() }) { paddingValues ->
+            bottomBar = { BottomNavigationBarContent() }) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
                 view()
             }
         }
     }
 
-    /**
-     * Renderiza la interfaz utilizando un Rail de navegación lateral.
-     */
     @Composable
-    private fun RenderLayoutWithNavigationRail(view: @Composable () -> Unit) {
+    private fun NavigationRailLayout(view: @Composable () -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            CompositionLocalProvider(view = view)
+            ProvideNavigationRailLayout(view = view)
         }
     }
 
-    /**
-     * Configura el proveedor de contenido local y la estructura del layout para el modo Navigation Rail.
-     */
     @Composable
-    private fun CompositionLocalProvider(view: @Composable () -> Unit) =
+    private fun ProvideNavigationRailLayout(view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
             Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
                 Box(
@@ -128,7 +114,7 @@ class BottomNavigationComponent(
                             ), end = Dimen16
                         )
                 ) {
-                    RenderNavigationRailItems()
+                    NavigationRailContent()
                 }
                 Box(
                     modifier = Modifier.padding(
@@ -144,12 +130,9 @@ class BottomNavigationComponent(
             }
         }
 
-    /**
-     * Renderiza los elementos de la barra de navegación inferior dentro de una tarjeta estilizada.
-     */
     @Composable
-    private fun RenderBottomNavigationBarItems() {
-        StyledNavigationCard(
+    private fun BottomNavigationBarContent() {
+        NavigationCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .navigationBarsPadding()
@@ -164,12 +147,9 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Renderiza los elementos del Rail de navegación lateral dentro de una tarjeta estilizada.
-     */
     @Composable
-    private fun RenderNavigationRailItems() {
-        StyledNavigationCard(
+    private fun NavigationRailContent() {
+        NavigationCard(
             modifier = Modifier.padding(
                 top = BottomNavigationComponentPadding.getNavigationRailTopPadding(isPhoneOrTablet = adaptable.isPhoneOrTablet()),
                 bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
@@ -190,11 +170,8 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Aplica un estilo de tarjeta (bordes redondeados, elevación/color) a los contenedores de navegación.
-     */
     @Composable
-    private fun StyledNavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
+    private fun NavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
         Card(
             modifier = modifier,
             shape = RoundedCornerShape(Dimen22),
@@ -204,11 +181,8 @@ class BottomNavigationComponent(
             view()
         }
 
-    /**
-     * Resuelve qué tipo de navegación usar basado en el tipo de vista actual.
-     */
     @Composable
-    private fun resolveNavigationTypeByWindowSize() =
+    private fun navigationTypeByWindowSize() =
         when (adaptable.resolveViewTypeFromWindowSize()) {
             ViewType.COMPACT_PORTRAIT -> {
                 BottomNavigationType.BOTTOM_NAVIGATION_BAR
