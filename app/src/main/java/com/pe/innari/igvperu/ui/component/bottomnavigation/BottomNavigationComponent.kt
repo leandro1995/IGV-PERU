@@ -21,10 +21,8 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +36,7 @@ import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
+import com.pe.innari.igvperu.ui.component.color.BottomNavigationComponentColor
 import com.pe.innari.igvperu.ui.component.padding.BottomNavigationComponentPadding
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -144,7 +143,7 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 itemBottomNavigationMutableList.forEachIndexed { index, item ->
                     NavigationBarItem(
-                        colors = getNavigationBarItemColors(),
+                        colors = BottomNavigationComponentColor.getNavigationBarItemColors(),
                         selected = index == indexSelect.intValue,
                         onClick = {
                             indexSelect.intValue = index
@@ -181,7 +180,7 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
             ) {
                 itemBottomNavigationMutableList.forEachIndexed { index, item ->
                     NavigationRailItem(
-                        colors = getNavigationRailItemColors(),
+                        colors = BottomNavigationComponentColor.getNavigationRailItemColors(),
                         selected = index == indexSelect.intValue,
                         onClick = { indexSelect.intValue = index },
                         icon = {
@@ -209,24 +208,6 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         ) {
             view()
         }
-
-    @Composable
-    private fun getNavigationBarItemColors() = NavigationBarItemDefaults.colors(
-        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-        selectedIconColor = MaterialTheme.colorScheme.primary,
-        selectedTextColor = MaterialTheme.colorScheme.primary,
-        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
-
-    @Composable
-    private fun getNavigationRailItemColors() = NavigationRailItemDefaults.colors(
-        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-        selectedIconColor = MaterialTheme.colorScheme.primary,
-        selectedTextColor = MaterialTheme.colorScheme.primary,
-        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
 
     @Composable
     private fun resolveNavigationTypeByWindowSize() =
