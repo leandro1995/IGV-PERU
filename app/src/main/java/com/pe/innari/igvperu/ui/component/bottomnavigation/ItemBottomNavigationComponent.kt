@@ -41,20 +41,17 @@ class ItemBottomNavigationComponent(
 
         when (bottomNavigationType) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                NavigationBarItem()
+                RenderNavigationBarItems()
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                NavigationRailItem()
+                RenderNavigationRailItems()
             }
         }
     }
 
-    /**
-     * Renderiza los elementos para una [NavigationBar].
-     */
     @Composable
-    private fun NavigationBarItem() {
+    private fun RenderNavigationBarItems() {
         Row {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationBarItem(
@@ -63,36 +60,28 @@ class ItemBottomNavigationComponent(
                     onClick = {
                         indexSelect.intValue = index
                     },
-                    icon = { ItemIcon(item.icon) },
-                    label = { ItemLabel(label = item.label) })
+                    icon = { RenderItemIcon(item.icon) },
+                    label = { RenderItemLabel(label = item.label) })
             }
         }
     }
 
-    /**
-     * Renderiza los elementos para un [NavigationRail].
-     */
     @Composable
-    private fun NavigationRailItem() {
+    private fun RenderNavigationRailItems() {
         Column {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationRailItem(
                     colors = BottomNavigationComponentColor.getNavigationRailItemColors(),
                     selected = index == indexSelect.intValue,
                     onClick = { indexSelect.intValue = index },
-                    icon = { ItemIcon(item.icon) },
-                    label = { ItemLabel(label = item.label) })
+                    icon = { RenderItemIcon(item.icon) },
+                    label = { RenderItemLabel(label = item.label) })
             }
         }
     }
 
-    /**
-     * Renderiza el icono de un ítem de navegación.
-     *
-     * @param icon Recurso de dibujo (Drawable res ID) para el icono.
-     */
     @Composable
-    private fun ItemIcon(icon: Int) {
+    private fun RenderItemIcon(icon: Int) {
         Icon(
             modifier = Modifier.size(Dimen24),
             painter = painterResource(icon),
@@ -100,13 +89,8 @@ class ItemBottomNavigationComponent(
         )
     }
 
-    /**
-     * Renderiza la etiqueta de texto de un ítem de navegación.
-     *
-     * @param label Texto que se mostrará.
-     */
     @Composable
-    private fun ItemLabel(label: String) {
+    private fun RenderItemLabel(label: String) {
         Text(text = label, style = ItemBottomNavigationComponent)
     }
 }
