@@ -18,12 +18,23 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 
+/**
+ * Componente que renderiza los elementos individuales dentro de la barra de navegación o el rail.
+ * Maneja la lógica de selección y visualización de cada ítem (icono y etiqueta).
+ *
+ * @property bottomNavigationType Define si se renderiza como una barra inferior o un rail lateral.
+ * @property indexSelect Estado del índice seleccionado.
+ * @property itemBottomNavigationMutableList Lista de modelos de datos para los ítems de navegación.
+ */
 class ItemBottomNavigationComponent(
     var bottomNavigationType: BottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_BAR,
     private var indexSelect: MutableIntState,
     private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
 ) : ComponentAmbient() {
 
+    /**
+     * Renderiza los ítems basándose en el [bottomNavigationType] actual.
+     */
     @Composable
     override fun OnCreateView() {
         super.OnCreateView()
@@ -39,6 +50,9 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza los elementos para una [NavigationBar].
+     */
     @Composable
     private fun NavigationBarItem() {
         Row {
@@ -55,6 +69,9 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza los elementos para un [NavigationRail].
+     */
     @Composable
     private fun NavigationRailItem() {
         Column {
@@ -69,6 +86,11 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el icono de un ítem de navegación.
+     *
+     * @param icon Recurso de dibujo (Drawable res ID) para el icono.
+     */
     @Composable
     private fun ItemIcon(icon: Int) {
         Icon(
@@ -78,6 +100,11 @@ class ItemBottomNavigationComponent(
         )
     }
 
+    /**
+     * Renderiza la etiqueta de texto de un ítem de navegación.
+     *
+     * @param label Texto que se mostrará.
+     */
     @Composable
     private fun ItemLabel(label: String) {
         Text(text = label, style = ItemBottomNavigationComponent)

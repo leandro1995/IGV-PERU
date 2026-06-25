@@ -13,13 +13,16 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
 
 /**
- * Vista de galería para previsualizar y probar el componente `BottomNavigationComponent`.
+ * Vista de galería para previsualizar y probar el componente [BottomNavigationComponent].
  * Se encuentra en el conjunto de fuentes 'debug' para propósitos de desarrollo.
  */
 class BottomNavigationGallery : ViewAmbient() {
 
     private lateinit var bottomNavigationComponentState: BottomNavigationComponentState
 
+    /**
+     * Inicializa el estado del componente de navegación para la galería.
+     */
     @Composable
     override fun InstanceState() {
         super.InstanceState()
@@ -30,7 +33,7 @@ class BottomNavigationGallery : ViewAmbient() {
 
     /**
      * Implementación para pantallas compactas en modo vertical.
-     * Muestra un ejemplo del `BottomNavigationComponent` con 4 elementos.
+     * Muestra un ejemplo del [BottomNavigationComponent] con 4 elementos.
      */
     @Composable
     override fun CompactPortrait() {
@@ -51,6 +54,7 @@ class BottomNavigationGallery : ViewAmbient() {
 
     /**
      * Implementación para pantallas compactas en modo horizontal.
+     * Utiliza el layout base por defecto.
      */
     @Composable
     override fun CompactLandScape() {

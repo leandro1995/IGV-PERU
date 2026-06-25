@@ -11,6 +11,7 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
+    /** Administrador de adaptabilidad para decidir qué layout mostrar. */
     private val adaptabilityManager = Adaptable()
 
     /**
@@ -58,6 +59,10 @@ abstract class ViewAmbient {
         CompactPortrait()
     }
 
+    /**
+     * Inicializa el estado de la instancia antes de renderizar la UI.
+     * Puede ser sobreescrito para inicializar ViewModels o estados mutables.
+     */
     @Composable
     protected open fun InstanceState() {}
 
@@ -83,6 +88,9 @@ abstract class ViewAmbient {
         }
     }
 
+    /**
+     * Evalúa el tamaño actual de la ventana y delega el renderizado al método correspondiente.
+     */
     @Composable
     private fun RenderLayoutByWindowSize() {
         adaptabilityManager.ViewWindow(

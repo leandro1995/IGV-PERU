@@ -37,14 +37,28 @@ class Layout {
     fun calculateEndPadding() =
         getSafeZonePadding().calculateEndPadding(getCurrentLayoutDirection())
 
+    /**
+     * Obtiene los insets de dibujo seguro verticales (Top y Bottom).
+     * Útil para evitar superposiciones con barras de estado o de navegación.
+     *
+     * @return Insets que cubren solo la parte superior e inferior.
+     */
     @Composable
     fun getVerticalSafeDrawingInsets() = WindowInsets.safeDrawing.only(
         sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
     )
 
+    /**
+     * Obtiene la dirección actual del layout (LTR o RTL).
+     */
     @Composable
     private fun getCurrentLayoutDirection() = LocalLayoutDirection.current
 
+    /**
+     * Combina insets de recorte de pantalla y waterfall para obtener una zona de padding segura.
+     *
+     * @return Los valores de padding resultantes de la unión de insets.
+     */
     @Composable
     private fun getSafeZonePadding() =
         WindowInsets.displayCutout.union(WindowInsets.waterfall).asPaddingValues()

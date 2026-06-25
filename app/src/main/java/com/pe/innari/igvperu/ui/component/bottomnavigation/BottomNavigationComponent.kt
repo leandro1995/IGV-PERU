@@ -36,9 +36,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen22
 
 /**
  * Componente que implementa un sistema de navegación adaptable.
- * Cambia automáticamente entre una `NavigationBar` (inferior) y una `NavigationRail` (lateral)
+ * Cambia automáticamente entre una [NavigationBar] (inferior) y una [NavigationRail] (lateral)
  * dependiendo del tamaño de la pantalla y la orientación.
  *
+ * @param indexSelect Estado mutable que controla el índice seleccionado actualmente.
  * @param itemBottomNavigationMutableList Lista de elementos que se mostrarán en la navegación.
  */
 class BottomNavigationComponent(
@@ -48,6 +49,9 @@ class BottomNavigationComponent(
 
     private lateinit var itemBottomNavigationComponent: ItemBottomNavigationComponent
 
+    /**
+     * Inicializa el componente secundario que renderiza los ítems de navegación.
+     */
     @Composable
     override fun Instance() {
         super.Instance()
@@ -58,6 +62,11 @@ class BottomNavigationComponent(
         )
     }
 
+    /**
+     * Determina el tipo de navegación a renderizar basándose en el tamaño de la ventana.
+     *
+     * @param view El contenido de la pantalla que se mostrará junto a la navegación.
+     */
     @Composable
     override fun OnCreateView(view: @Composable (() -> Unit)) {
         super.OnCreateView(view)
@@ -73,6 +82,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza la interfaz utilizando una barra de navegación inferior.
+     */
     @Composable
     private fun RenderLayoutWithBottomNavigationBar(view: @Composable () -> Unit) {
         Scaffold(
@@ -84,6 +96,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza la interfaz utilizando un Rail de navegación lateral.
+     */
     @Composable
     private fun RenderLayoutWithNavigationRail(view: @Composable () -> Unit) {
         Row(
@@ -95,6 +110,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Configura el proveedor de contenido local y la estructura del layout para el modo Navigation Rail.
+     */
     @Composable
     private fun CompositionLocalProvider(view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
@@ -126,6 +144,9 @@ class BottomNavigationComponent(
             }
         }
 
+    /**
+     * Renderiza los elementos de la barra de navegación inferior dentro de una tarjeta estilizada.
+     */
     @Composable
     private fun RenderBottomNavigationBarItems() {
         StyledNavigationCard(
@@ -143,6 +164,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza los elementos del Rail de navegación lateral dentro de una tarjeta estilizada.
+     */
     @Composable
     private fun RenderNavigationRailItems() {
         StyledNavigationCard(
@@ -166,6 +190,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Aplica un estilo de tarjeta (bordes redondeados, elevación/color) a los contenedores de navegación.
+     */
     @Composable
     private fun StyledNavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
         Card(
@@ -177,6 +204,9 @@ class BottomNavigationComponent(
             view()
         }
 
+    /**
+     * Resuelve qué tipo de navegación usar basado en el tipo de vista actual.
+     */
     @Composable
     private fun resolveNavigationTypeByWindowSize() =
         when (adaptable.resolveViewTypeFromWindowSize()) {
