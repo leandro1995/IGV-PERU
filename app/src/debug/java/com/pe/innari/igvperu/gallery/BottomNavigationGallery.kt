@@ -3,8 +3,11 @@ package com.pe.innari.igvperu.gallery
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
+import com.pe.innari.igvperu.ui.component.bottomnavigation.state.BottomNavigationComponentState
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
@@ -15,6 +18,16 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
  */
 class BottomNavigationGallery : ViewAmbient() {
 
+    private lateinit var bottomNavigationComponentState: BottomNavigationComponentState
+
+    @Composable
+    override fun InstanceState() {
+        super.InstanceState()
+
+        bottomNavigationComponentState =
+            BottomNavigationComponentState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
+    }
+
     /**
      * Implementación para pantallas compactas en modo vertical.
      * Muestra un ejemplo del `BottomNavigationComponent` con 4 elementos.
@@ -22,6 +35,7 @@ class BottomNavigationGallery : ViewAmbient() {
     @Composable
     override fun CompactPortrait() {
         BottomNavigationComponent(
+            indexSelect = bottomNavigationComponentState.indexSelect,
             itemBottomNavigationMutableList = mutableListOf(
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 1"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 2"),
