@@ -28,17 +28,14 @@ class ItemBottomNavigationComponent(
     override fun OnCreateView() {
         super.OnCreateView()
 
-        NavigationBarType()
-    }
+        when (bottomNavigationType) {
+            BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
+                NavigationBarItem()
+            }
 
-    @Composable
-    private fun NavigationBarType() = when (bottomNavigationType) {
-        BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-            NavigationBarItem()
-        }
-
-        BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-            NavigationRailItem()
+            BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
+                NavigationRailItem()
+            }
         }
     }
 
