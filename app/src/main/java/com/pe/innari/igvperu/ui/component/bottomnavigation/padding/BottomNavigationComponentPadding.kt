@@ -12,6 +12,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen24
  */
 class BottomNavigationComponentPadding {
 
+    /**
+     * Proporciona funciones de utilidad para determinar los paddings adecuados según el tipo de dispositivo
+     * y las áreas seguras de la pantalla.
+     */
     companion object {
         /**
          * Calcula el padding inicial para el Navigation Rail considerando zonas seguras y tipo de dispositivo.
@@ -25,8 +29,8 @@ class BottomNavigationComponentPadding {
         fun calculateNavigationRailStartPadding(
             startSafePadding: Dp, endSafePadding: Dp, isPhoneOrTablet: Boolean
         ) = maxOf(
-            calculateMaxSafeHorizontalPadding(startSafePadding, endSafePadding),
-            getDeviceBaseStartPadding(isPhoneOrTablet = isPhoneOrTablet)
+            maxHorizontalSafePadding(startSafePadding, endSafePadding),
+            deviceBaseStartPadding(isPhoneOrTablet = isPhoneOrTablet)
         )
 
         /**
@@ -55,19 +59,13 @@ class BottomNavigationComponentPadding {
             Dimen16
         }
 
-        /**
-         * Calcula el máximo padding horizontal entre inicio y fin para asegurar simetría o cobertura.
-         */
         @Composable
-        private fun calculateMaxSafeHorizontalPadding(
+        private fun maxHorizontalSafePadding(
             startPadding: Dp, endPadding: Dp
         ) = maxOf(startPadding, endPadding)
 
-        /**
-         * Obtiene el padding base lateral según el tipo de dispositivo.
-         */
         @Composable
-        private fun getDeviceBaseStartPadding(isPhoneOrTablet: Boolean) = if (isPhoneOrTablet) {
+        private fun deviceBaseStartPadding(isPhoneOrTablet: Boolean) = if (isPhoneOrTablet) {
             Dimen0
         } else {
             Dimen24
