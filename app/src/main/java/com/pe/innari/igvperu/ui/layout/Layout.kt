@@ -1,10 +1,13 @@
 package com.pe.innari.igvperu.ui.layout
 
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.waterfall
 import androidx.compose.runtime.Composable
@@ -31,7 +34,13 @@ class Layout {
      * @return Valor del padding final en Dp.
      */
     @Composable
-    fun calculateEndPadding() = getSafeZonePadding().calculateEndPadding(getCurrentLayoutDirection())
+    fun calculateEndPadding() =
+        getSafeZonePadding().calculateEndPadding(getCurrentLayoutDirection())
+
+    @Composable
+    fun getVerticalSafeDrawingInsets() = WindowInsets.safeDrawing.only(
+        sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
+    )
 
     @Composable
     private fun getCurrentLayoutDirection() = LocalLayoutDirection.current

@@ -102,7 +102,7 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
         ) {
             CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
-                Row(modifier = Modifier.windowInsetsPadding(insets = getVerticalSafeDrawingInsets())) {
+                Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
                     Box(
                         modifier = Modifier.fillMaxHeight().padding(
                             start = maxOf(
@@ -216,11 +216,6 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         selectedTextColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
-
-    @Composable
-    private fun getVerticalSafeDrawingInsets() = WindowInsets.safeDrawing.only(
-        sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
     )
 
     @Composable
