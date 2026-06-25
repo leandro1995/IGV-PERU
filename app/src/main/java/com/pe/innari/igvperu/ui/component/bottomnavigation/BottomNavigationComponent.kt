@@ -22,6 +22,7 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
 import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
@@ -40,8 +41,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen22
  *
  * @param itemBottomNavigationMutableList Lista de elementos que se mostrarán en la navegación.
  */
-class BottomNavigationComponent(private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>) :
-    ComponentAmbient() {
+class BottomNavigationComponent(
+    private var indexSelect: MutableIntState,
+    private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
+) : ComponentAmbient() {
 
     private lateinit var itemBottomNavigationComponent: ItemBottomNavigationComponent
 
@@ -49,8 +52,10 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
     override fun Instance() {
         super.Instance()
 
-        itemBottomNavigationComponent =
-            ItemBottomNavigationComponent(itemBottomNavigationMutableList = itemBottomNavigationMutableList)
+        itemBottomNavigationComponent = ItemBottomNavigationComponent(
+            indexSelect = indexSelect,
+            itemBottomNavigationMutableList = itemBottomNavigationMutableList
+        )
     }
 
     @Composable
