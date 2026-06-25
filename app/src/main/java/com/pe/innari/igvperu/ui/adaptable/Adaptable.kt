@@ -46,39 +46,22 @@ class Adaptable {
         }
     }
 
+    /**
+     * Resuelve el tipo de vista actual basándose en el tamaño de la ventana.
+     *
+     * @return El [ViewType] que mejor se adapta a las dimensiones actuales.
+     */
     @Composable
-    private fun getCurrentWindowSizeClass() =
-        currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
-
-    @Composable
-    private fun isWindowWidthCompact() =
-        !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
-
-    @Composable
-    private fun isWindowWidthMedium() =
-        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(
-            WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
-        )
-
-    @Composable
-    private fun isWindowWidthExpanded() =
-        getCurrentWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
-
-    @Composable
-    private fun isWindowHeightCompact() =
-        !getCurrentWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
-
-    @Composable
-    private fun resolveViewTypeFromWindowSize() = when {
-        isWindowWidthMedium() && isWindowHeightCompact() -> {
+    fun resolveViewTypeFromWindowSize() = when {
+        isWidthMedium() && isHeightCompact() -> {
             ViewType.COMPACT_LAND_SCAPE
         }
 
-        isWindowWidthCompact() -> {
+        isWidthCompact() -> {
             ViewType.COMPACT_PORTRAIT
         }
 
-        isWindowWidthExpanded() -> {
+        isWidthExpanded() -> {
             ViewType.EXPANDED
         }
 
@@ -86,4 +69,42 @@ class Adaptable {
             ViewType.MEDIUM
         }
     }
+
+    /**
+     * Determina si el dispositivo actual se considera un teléfono o una tablet (Compact o Medium).
+     *
+     * @return `true` si es teléfono o tablet, `false` si es una pantalla expandida.
+     */
+    @Composable
+    fun isPhoneOrTablet() = when (resolveViewTypeFromWindowSize()) {
+        ViewType.COMPACT_PORTRAIT, ViewType.COMPACT_LAND_SCAPE -> {
+            true
+        }
+
+        ViewType.MEDIUM, ViewType.EXPANDED -> {
+            false
+        }
+    }
+
+    @Composable
+    private fun getWindowSizeClass() =
+        currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true).windowSizeClass
+
+    @Composable
+    private fun isWidthCompact() =
+        !getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
+
+    @Composable
+    private fun isWidthMedium() =
+        getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) && !getWindowSizeClass().isWidthAtLeastBreakpoint(
+            WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND
+        )
+
+    @Composable
+    private fun isWidthExpanded() =
+        getWindowSizeClass().isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
+
+    @Composable
+    private fun isHeightCompact() =
+        !getWindowSizeClass().isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND)
 }
