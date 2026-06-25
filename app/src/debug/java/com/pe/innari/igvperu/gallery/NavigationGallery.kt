@@ -1,6 +1,7 @@
 package com.pe.innari.igvperu.gallery
 
 import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
@@ -9,7 +10,7 @@ class NavigationGallery : ViewAmbient() {
 
     @Composable
     override fun CompactPortrait() {
-
+        NavigationComponent().OnCreateView()
     }
 
     @NightPreview
