@@ -22,17 +22,9 @@ import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 
 class ItemBottomNavigationComponent(
     var bottomNavigationType: BottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_BAR,
+    private var indexSelect: MutableIntState,
     private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
 ) : ComponentAmbient() {
-
-    private lateinit var indexSelect: MutableIntState
-
-    @Composable
-    override fun Instance() {
-        super.Instance()
-
-        indexSelect = rememberSaveable { mutableIntStateOf(0) }
-    }
 
     @Composable
     override fun OnCreateView() {
