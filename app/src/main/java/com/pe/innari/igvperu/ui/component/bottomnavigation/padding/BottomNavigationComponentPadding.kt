@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.component.padding
+package com.pe.innari.igvperu.ui.component.bottomnavigation.padding
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp

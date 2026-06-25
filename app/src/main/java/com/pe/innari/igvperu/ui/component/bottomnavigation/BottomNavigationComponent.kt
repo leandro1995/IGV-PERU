@@ -36,8 +36,8 @@ import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
-import com.pe.innari.igvperu.ui.component.color.BottomNavigationComponentColor
-import com.pe.innari.igvperu.ui.component.padding.BottomNavigationComponentPadding
+import com.pe.innari.igvperu.ui.component.bottomnavigation.color.BottomNavigationComponentColor
+import com.pe.innari.igvperu.ui.component.bottomnavigation.padding.BottomNavigationComponentPadding
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen16

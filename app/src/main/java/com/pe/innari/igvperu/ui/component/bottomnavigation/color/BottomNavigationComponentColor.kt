@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.component.color
+package com.pe.innari.igvperu.ui.component.bottomnavigation.color
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
