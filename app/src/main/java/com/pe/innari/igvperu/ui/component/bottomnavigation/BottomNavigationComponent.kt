@@ -91,37 +91,40 @@ class BottomNavigationComponent(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
-                Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .padding(
-                                start = BottomNavigationComponentPadding.calculateNavigationRailStartPadding(
-                                    startSafePadding = layout.calculateStartPadding(),
-                                    endSafePadding = layout.calculateEndPadding(),
-                                    isPhoneOrTablet = adaptable.isPhoneOrTablet()
-                                ), end = Dimen16
-                            )
-                    ) {
-                        RenderNavigationRailItems()
-                    }
-                    Box(
-                        modifier = Modifier.padding(
-                            top = BottomNavigationComponentPadding.getNavigationRailTopPadding(
+            CompositionLocalProvider(view = view)
+        }
+    }
+
+    @Composable
+    private fun CompositionLocalProvider(view: @Composable () -> Unit) =
+        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
+            Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(
+                            start = BottomNavigationComponentPadding.calculateNavigationRailStartPadding(
+                                startSafePadding = layout.calculateStartPadding(),
+                                endSafePadding = layout.calculateEndPadding(),
                                 isPhoneOrTablet = adaptable.isPhoneOrTablet()
-                            ),
-                            bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
-                                isPhoneOrTablet = adaptable.isPhoneOrTablet()
-                            )
+                            ), end = Dimen16
                         )
-                    ) {
-                        view()
-                    }
+                ) {
+                    RenderNavigationRailItems()
+                }
+                Box(
+                    modifier = Modifier.padding(
+                        top = BottomNavigationComponentPadding.getNavigationRailTopPadding(
+                            isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                        ), bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
+                            isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                        )
+                    )
+                ) {
+                    view()
                 }
             }
         }
-    }
 
     @Composable
     private fun RenderBottomNavigationBarItems() {
