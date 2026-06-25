@@ -11,6 +11,10 @@ import androidx.compose.runtime.Composable
  */
 class BottomNavigationComponentColor {
 
+    /**
+     * Proporciona funciones de utilidad para obtener los colores de los componentes de navegación
+     * basados en el tema actual de la aplicación.
+     */
     companion object {
 
         /**
