@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
 import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
-import com.pe.innari.igvperu.ui.component.navigation.NavigationComponentState
+import com.pe.innari.igvperu.ui.component.navigation.state.NavigationComponentState
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview

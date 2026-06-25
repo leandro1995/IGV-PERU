@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.component.navigation
+package com.pe.innari.igvperu.ui.component.navigation.state
 
 import androidx.compose.runtime.Stable
 import androidx.navigation3.runtime.NavBackStack
