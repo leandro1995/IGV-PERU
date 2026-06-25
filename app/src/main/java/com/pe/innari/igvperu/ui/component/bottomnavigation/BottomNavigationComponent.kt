@@ -6,14 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,6 +38,7 @@ import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
+import com.pe.innari.igvperu.ui.component.padding.BottomNavigationComponentPadding
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen16
@@ -99,25 +97,33 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
     @Composable
     private fun RenderLayoutWithNavigationRail(view: @Composable () -> Unit) {
         Row(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
         ) {
             CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
                 Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
                     Box(
-                        modifier = Modifier.fillMaxHeight().padding(
-                            start = maxOf(
-                                getMaxHorizontalSafeZonePadding(),
-                                getNavigationRailStartPadding()
-                            ),
-                            end = Dimen16
-                        )
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(
+                                start = BottomNavigationComponentPadding.calculateNavigationRailStartPadding(
+                                    startSafePadding = layout.calculateStartPadding(),
+                                    endSafePadding = layout.calculateEndPadding(),
+                                    isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                                ), end = Dimen16
+                            )
                     ) {
                         RenderNavigationRailItems()
                     }
                     Box(
                         modifier = Modifier.padding(
-                            top = getNavigationRailTopPadding(),
-                            bottom = getNavigationRailBottomPadding()
+                            top = BottomNavigationComponentPadding.getNavigationRailTopPadding(
+                                isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                            ),
+                            bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
+                                isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                            )
                         )
                     ) {
                         view()
@@ -130,7 +136,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
     @Composable
     private fun RenderBottomNavigationBarItems() {
         StyledNavigationCard(
-            modifier = Modifier.fillMaxWidth().navigationBarsPadding()
+            modifier = Modifier
+                .fillMaxWidth()
+                .navigationBarsPadding()
                 .padding(start = Dimen16, end = Dimen16)
         ) {
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
@@ -160,8 +168,10 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
     private fun RenderNavigationRailItems() {
         StyledNavigationCard(
             modifier = Modifier.padding(
-                top = getNavigationRailTopPadding(),
-                bottom = getNavigationRailBottomPadding()
+                top = BottomNavigationComponentPadding.getNavigationRailTopPadding(isPhoneOrTablet = adaptable.isPhoneOrTablet()),
+                bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
+                    isPhoneOrTablet = adaptable.isPhoneOrTablet()
+                )
             )
         ) {
             NavigationRail(
@@ -217,31 +227,6 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
-
-    @Composable
-    private fun getMaxHorizontalSafeZonePadding() =
-        maxOf(layout.calculateStartPadding(), layout.calculateEndPadding())
-
-    @Composable
-    private fun getNavigationRailStartPadding() = if (adaptable.isPhoneOrTablet()) {
-        Dimen0
-    } else {
-        Dimen24
-    }
-
-    @Composable
-    private fun getNavigationRailTopPadding() = if (adaptable.isPhoneOrTablet()) {
-        Dimen0
-    } else {
-        Dimen16
-    }
-
-    @Composable
-    private fun getNavigationRailBottomPadding() = if (adaptable.isPhoneOrTablet()) {
-        Dimen0
-    } else {
-        Dimen16
-    }
 
     @Composable
     private fun resolveNavigationTypeByWindowSize() =
