@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.compose.adaptive)
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.navigation3.runtime)
     implementation(libs.material)
     implementation(libs.kotlinx.coroutines.core)
     testImplementation(libs.junit)
