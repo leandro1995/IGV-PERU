@@ -11,18 +11,17 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
-    /** Administrador de adaptabilidad para decidir qué layout mostrar. */
-    private val adaptabilityManager = Adaptable()
+    private val windowSizeAdaptor = Adaptable()
 
     /**
      * Punto de entrada principal para renderizar la vista.
-     * Utiliza internamente [RenderLayoutByWindowSize] para decidir qué layout mostrar
+     * Utiliza internamente [RenderAdaptiveLayout] para decidir qué layout mostrar
      * basándose en la configuración actual de la ventana.
      */
     @Composable
     fun OnCreateView() {
         InstanceState()
-        RenderLayoutByWindowSize()
+        RenderAdaptiveLayout()
     }
 
     /**
@@ -88,12 +87,9 @@ abstract class ViewAmbient {
         }
     }
 
-    /**
-     * Evalúa el tamaño actual de la ventana y delega el renderizado al método correspondiente.
-     */
     @Composable
-    private fun RenderLayoutByWindowSize() {
-        adaptabilityManager.ViewWindow(
+    private fun RenderAdaptiveLayout() {
+        windowSizeAdaptor.ViewWindow(
             compactPortrait = { CompactPortrait() },
             compactLandScape = { CompactLandScape() },
             medium = { Medium() },
