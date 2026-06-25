@@ -26,7 +26,7 @@ class Layout {
      */
     @Composable
     fun calculateStartPadding() =
-        getSafeZonePadding().calculateStartPadding(getCurrentLayoutDirection())
+        displayCutoutAndWaterfallPadding().calculateStartPadding(localLayoutDirection())
 
     /**
      * Calcula el padding final (end) considerando los insets del sistema y la dirección del layout.
@@ -35,7 +35,7 @@ class Layout {
      */
     @Composable
     fun calculateEndPadding() =
-        getSafeZonePadding().calculateEndPadding(getCurrentLayoutDirection())
+        displayCutoutAndWaterfallPadding().calculateEndPadding(localLayoutDirection())
 
     /**
      * Obtiene los insets de dibujo seguro verticales (Top y Bottom).
@@ -48,18 +48,10 @@ class Layout {
         sides = WindowInsetsSides.Top + WindowInsetsSides.Bottom
     )
 
-    /**
-     * Obtiene la dirección actual del layout (LTR o RTL).
-     */
     @Composable
-    private fun getCurrentLayoutDirection() = LocalLayoutDirection.current
+    private fun localLayoutDirection() = LocalLayoutDirection.current
 
-    /**
-     * Combina insets de recorte de pantalla y waterfall para obtener una zona de padding segura.
-     *
-     * @return Los valores de padding resultantes de la unión de insets.
-     */
     @Composable
-    private fun getSafeZonePadding() =
+    private fun displayCutoutAndWaterfallPadding() =
         WindowInsets.displayCutout.union(WindowInsets.waterfall).asPaddingValues()
 }
