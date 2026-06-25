@@ -13,6 +13,8 @@ composeBom = "2026.06.00"
 material = "1.14.0"
 navigation3RuntimeVersion = "1.1.3"
 navigation3Ui = "1.1.3"
+kotlinxSerializationCore = "1.11.0"
+kotlinSerialization = "2.2.21"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -34,6 +36,7 @@ androidx-compose-adaptive = { module = "androidx.compose.material3.adaptive:adap
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3Ui" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
@@ -42,3 +45,4 @@ navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", ver
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
