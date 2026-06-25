@@ -33,4 +33,9 @@ abstract class ComponentAmbient {
     open fun OnCreateView(view: @Composable () -> Unit) {
         Instance()
     }
+
+    @Composable
+    open fun OnCreateView() {
+        Instance()
+    }
 }
