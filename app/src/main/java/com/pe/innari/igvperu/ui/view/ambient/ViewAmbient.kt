@@ -20,6 +20,7 @@ abstract class ViewAmbient {
      */
     @Composable
     fun OnCreateView() {
+        InstanceState()
         RenderLayoutByWindowSize()
     }
 
@@ -56,6 +57,9 @@ abstract class ViewAmbient {
     protected open fun Expanded() {
         CompactPortrait()
     }
+
+    @Composable
+    protected open fun InstanceState() {}
 
     /**
      * Configuración de previsualización en modo oscuro.
