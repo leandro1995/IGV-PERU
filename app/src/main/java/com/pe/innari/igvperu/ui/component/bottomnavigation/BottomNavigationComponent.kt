@@ -11,39 +11,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
-import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
-import com.pe.innari.igvperu.ui.component.bottomnavigation.color.BottomNavigationComponentColor
 import com.pe.innari.igvperu.ui.component.bottomnavigation.padding.BottomNavigationComponentPadding
+import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen22
-import com.pe.innari.igvperu.ui.theme.Dimen24
-import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 
 /**
  * Componente que implementa un sistema de navegación adaptable.
@@ -55,16 +43,14 @@ import com.pe.innari.igvperu.ui.theme.ItemBottomNavigationComponent
 class BottomNavigationComponent(private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>) :
     ComponentAmbient() {
 
-    private lateinit var indexSelect: MutableIntState
+    private lateinit var itemBottomNavigationComponent: ItemBottomNavigationComponent
 
-    /**
-     * Inicializa el estado de selección del índice de navegación de forma persistente.
-     */
     @Composable
     override fun Instance() {
         super.Instance()
 
-        indexSelect = rememberSaveable { mutableIntStateOf(0) }
+        itemBottomNavigationComponent =
+            ItemBottomNavigationComponent(itemBottomNavigationMutableList = itemBottomNavigationMutableList)
     }
 
     @Composable
@@ -141,23 +127,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
                 .padding(start = Dimen16, end = Dimen16)
         ) {
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
-                itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                    NavigationBarItem(
-                        colors = BottomNavigationComponentColor.getNavigationBarItemColors(),
-                        selected = index == indexSelect.intValue,
-                        onClick = {
-                            indexSelect.intValue = index
-                        },
-                        icon = {
-                            Icon(
-                                modifier = Modifier.size(Dimen24),
-                                painter = painterResource(item.icon),
-                                contentDescription = null
-                            )
-                        },
-                        label = {
-                            Text(text = item.label, style = ItemBottomNavigationComponent)
-                        })
+                itemBottomNavigationComponent.apply {
+                    bottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_BAR
+                    OnCreateView()
                 }
             }
         }
@@ -178,21 +150,9 @@ class BottomNavigationComponent(private val itemBottomNavigationMutableList: Mut
                 containerColor = MaterialTheme.colorScheme.surface,
                 windowInsets = WindowInsets(Dimen0)
             ) {
-                itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                    NavigationRailItem(
-                        colors = BottomNavigationComponentColor.getNavigationRailItemColors(),
-                        selected = index == indexSelect.intValue,
-                        onClick = { indexSelect.intValue = index },
-                        icon = {
-                            Icon(
-                                modifier = Modifier.size(Dimen24),
-                                painter = painterResource(item.icon),
-                                contentDescription = null
-                            )
-                        },
-                        label = {
-                            Text(text = item.label, style = ItemBottomNavigationComponent)
-                        })
+                itemBottomNavigationComponent.apply {
+                    bottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_RAIL
+                    OnCreateView()
                 }
             }
         }
