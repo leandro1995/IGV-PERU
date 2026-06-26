@@ -1,6 +1,7 @@
 package com.pe.innari.igvperu.gallery
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation3.runtime.NavKey
@@ -26,10 +27,15 @@ class NavigationGallery : ViewAmbient() {
 
     @Composable
     override fun CompactPortrait() {
-        NavigationComponent(backStack = navigationComponentState.backStack).setEntryProvider { entryProviderScope ->
+        val navigationComponent =
+            NavigationComponent(backStack = navigationComponentState.backStack)
+        navigationComponent.setEntryProvider { entryProviderScope ->
             entryProviderScope.entry<Router.OneView> {
                 Column {
                     Text("OneView")
+                    Button(onClick = {
+                        navigationComponent.addEntry(navKey = Router.TwoView)
+                    }) { Text("BOTON TwoView") }
                 }
             }
             entryProviderScope.entry<Router.TwoView> {
@@ -38,7 +44,6 @@ class NavigationGallery : ViewAmbient() {
                 }
             }
         }.OnCreateComponent()
-
     }
 
     @NightPreview
