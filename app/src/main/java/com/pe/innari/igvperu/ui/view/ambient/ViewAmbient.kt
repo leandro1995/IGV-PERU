@@ -13,8 +13,10 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
+    /** Adaptador de tamaño de ventana para manejar la responsividad. */
     private val windowSizeAdaptor = Adaptable()
 
+    /** Referencia a la actividad actual. */
     protected lateinit var activity: Activity
 
     /**
@@ -93,6 +95,9 @@ abstract class ViewAmbient {
         }
     }
 
+    /**
+     * Obtiene la actividad actual desde el contexto de Compose.
+     */
     @Composable
     private fun Instance() {
         LocalActivity.current?.let {
@@ -100,6 +105,9 @@ abstract class ViewAmbient {
         }
     }
 
+    /**
+     * Renderiza el layout adaptable utilizando la utilidad [windowSizeAdaptor].
+     */
     @Composable
     private fun RenderAdaptiveLayout() {
         windowSizeAdaptor.ViewWindow(

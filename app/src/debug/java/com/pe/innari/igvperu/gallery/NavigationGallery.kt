@@ -14,10 +14,17 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
 import kotlinx.serialization.Serializable
 
+/**
+ * Vista de galería para probar y demostrar el funcionamiento del [NavigationComponent].
+ * Permite visualizar la navegación entre diferentes vistas de prueba.
+ */
 class NavigationGallery : ViewAmbient() {
 
     private lateinit var navigationComponentState: NavigationComponentState
 
+    /**
+     * Inicializa el estado de la navegación con una vista inicial.
+     */
     @Composable
     override fun InstanceState() {
         super.InstanceState()
@@ -26,6 +33,10 @@ class NavigationGallery : ViewAmbient() {
             NavigationComponentState(backStack = rememberNavBackStack(Router.OneView))
     }
 
+    /**
+     * Implementación de la UI para dispositivos compactos.
+     * Configura el [NavigationComponent] con rutas de ejemplo.
+     */
     @Composable
     override fun CompactPortrait() {
         val navigationComponent =
@@ -64,6 +75,9 @@ class NavigationGallery : ViewAmbient() {
         super.NotNightPreview()
     }
 
+    /**
+     * Sellado que define las rutas (claves de navegación) para esta galería.
+     */
     sealed class Router {
         @Serializable
         object OneView : NavKey

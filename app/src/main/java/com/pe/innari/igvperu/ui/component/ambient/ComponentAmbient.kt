@@ -24,6 +24,13 @@ abstract class ComponentAmbient {
     protected open fun Instance() {
     }
 
+    /**
+     * Crea una excepción personalizada con el nombre de la clase y un mensaje.
+     *
+     * @param nameClass Nombre de la clase que lanza la excepción.
+     * @param message Mensaje detallado del error.
+     * @return Una instancia de [Exception].
+     */
     protected fun exception(nameClass: String, message: String) = Exception("${nameClass}: $message")
 
     /**
