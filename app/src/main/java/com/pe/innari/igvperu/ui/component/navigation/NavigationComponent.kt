@@ -35,4 +35,8 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
             }
         }
     }
+
+    fun addEntry(navKey: NavKey) {
+        backStack.add(navKey)
+    }
 }
