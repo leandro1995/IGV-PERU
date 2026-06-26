@@ -12,14 +12,17 @@ import com.pe.innari.igvperu.ui.component.navigation.config.callback.NavigationC
 class NavigationComponent(private val backStack: NavBackStack<NavKey>) : ComponentAmbient() {
 
     private var entryProviderScopeCallBack: NavigationComponentConfigCallBack? = null
+    private var onBackPressedCallBack: NavigationComponentConfigCallBack? = null
 
     @Composable
     override fun OnCreateComponent() {
         super.OnCreateComponent()
 
         NavDisplay(backStack = backStack, onBack = {
-            if (backStack.isNotEmpty()) {
-                backStack.removeAt(backStack.lastIndex)
+            onBackPressedCallBack?.onBackPressed() ?: run {
+                if (backStack.isNotEmpty()) {
+                    backStack.removeAt(backStack.lastIndex)
+                }
             }
         }, entryProvider = entryProvider {
             entryProviderScopeCallBack?.entryProviderScope(entryProviderScope = this)
@@ -31,6 +34,16 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
             entryProviderScopeCallBack = object : NavigationComponentConfigCallBack {
                 override fun entryProviderScope(entryProviderScope: EntryProviderScope<NavKey>) {
                     entryProvider(entryProviderScope)
+                }
+            }
+        }
+    }
+
+    fun setOnBackPressed(onBackPressed: () -> Unit) {
+        if (onBackPressedCallBack == null) {
+            onBackPressedCallBack = object : NavigationComponentConfigCallBack {
+                override fun onBackPressed() {
+                    onBackPressed()
                 }
             }
         }
