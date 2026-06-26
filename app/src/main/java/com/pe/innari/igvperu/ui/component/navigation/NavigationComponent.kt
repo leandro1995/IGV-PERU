@@ -7,6 +7,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.config.MessageErrorException
 import com.pe.innari.igvperu.ui.component.navigation.config.callback.NavigationComponentConfigCallBack
 
 class NavigationComponent(private val backStack: NavBackStack<NavKey>) : ComponentAmbient() {
@@ -18,15 +19,22 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
     override fun OnCreateComponent() {
         super.OnCreateComponent()
 
-        NavDisplay(backStack = backStack, onBack = {
-            onBackPressedCallBack?.onBackPressed() ?: run {
-                if (backStack.isNotEmpty()) {
-                    backStack.removeAt(backStack.lastIndex)
+        entryProviderScopeCallBack?.let {
+            NavDisplay(backStack = backStack, onBack = {
+                onBackPressedCallBack?.onBackPressed() ?: run {
+                    if (backStack.isNotEmpty()) {
+                        backStack.removeAt(backStack.lastIndex)
+                    }
                 }
-            }
-        }, entryProvider = entryProvider {
-            entryProviderScopeCallBack?.entryProviderScope(entryProviderScope = this)
-        })
+            }, entryProvider = entryProvider {
+                it.entryProviderScope(entryProviderScope = this)
+            })
+        } ?: run {
+            throw exception(
+                nameClass = this::class.java.name,
+                message = MessageErrorException.EMPTY_PROVIDER_MESSAGE_ERROR_EXCEPTION_NAVIGATION
+            )
+        }
     }
 
     fun setEntryProvider(entryProvider: (entry: EntryProviderScope<NavKey>) -> Unit) = apply {
