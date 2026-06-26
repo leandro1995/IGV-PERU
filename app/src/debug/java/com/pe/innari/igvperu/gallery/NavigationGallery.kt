@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.gallery
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ class NavigationGallery : ViewAmbient() {
     override fun CompactPortrait() {
         val navigationComponent =
             NavigationComponent(backStack = navigationComponentState.backStack)
+
         navigationComponent.setEntryProvider { entryProviderScope ->
             entryProviderScope.entry<Router.OneView> {
                 Column {
@@ -44,6 +46,10 @@ class NavigationGallery : ViewAmbient() {
                 }
             }
         }.OnCreateComponent()
+
+        navigationComponent.setOnBackPressed {
+            Toast.makeText(activity, "RETROCESO BLOQUEADO", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @NightPreview
