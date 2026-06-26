@@ -59,7 +59,7 @@ class NavigationGallery : ViewAmbient() {
         }.OnCreateComponent()
 
         navigationComponent.setOnBackPressed {
-            Toast.makeText(activity, "RETROCESO BLOQUEADO", Toast.LENGTH_SHORT).show()
+            Toast.makeText(currentActivity, "RETROCESO BLOQUEADO", Toast.LENGTH_SHORT).show()
         }
     }
 
