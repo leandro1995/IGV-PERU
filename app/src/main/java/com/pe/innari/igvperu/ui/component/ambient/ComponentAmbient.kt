@@ -24,6 +24,8 @@ abstract class ComponentAmbient {
     protected open fun Instance() {
     }
 
+    protected fun exception(nameClass: String, message: String) = Exception("${nameClass}: $message")
+
     /**
      * Punto de entrada para renderizar el componente con contenido interno.
      *
