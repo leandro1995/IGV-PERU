@@ -30,7 +30,7 @@ abstract class ComponentAmbient {
      * @param view Contenido principal que se mostrará dentro o junto al componente.
      */
     @Composable
-    open fun OnCreateView(view: @Composable (() -> Unit)) {
+    open fun OnCreateComponent(view: @Composable (() -> Unit)) {
         Instance()
     }
 
@@ -38,7 +38,7 @@ abstract class ComponentAmbient {
      * Punto de entrada para renderizar el componente sin contenido interno adicional.
      */
     @Composable
-    open fun OnCreateView() {
+    open fun OnCreateComponent() {
         Instance()
     }
 }

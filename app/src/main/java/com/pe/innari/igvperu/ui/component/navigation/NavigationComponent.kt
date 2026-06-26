@@ -14,8 +14,8 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
     private var entryProviderScopeCallBack: NavigationComponentConfigCallBack? = null
 
     @Composable
-    override fun OnCreateView() {
-        super.OnCreateView()
+    override fun OnCreateComponent() {
+        super.OnCreateComponent()
 
         NavDisplay(backStack = backStack, onBack = {
             if (backStack.isNotEmpty()) {

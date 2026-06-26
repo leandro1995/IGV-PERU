@@ -36,8 +36,8 @@ class ItemBottomNavigationComponent(
      * Renderiza los ítems basándose en el [bottomNavigationType] actual.
      */
     @Composable
-    override fun OnCreateView() {
-        super.OnCreateView()
+    override fun OnCreateComponent() {
+        super.OnCreateComponent()
 
         when (bottomNavigationType) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
