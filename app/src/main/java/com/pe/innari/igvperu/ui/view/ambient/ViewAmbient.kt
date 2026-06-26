@@ -1,5 +1,7 @@
 package com.pe.innari.igvperu.ui.view.ambient
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.adaptable.Adaptable
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
@@ -13,6 +15,8 @@ abstract class ViewAmbient {
 
     private val windowSizeAdaptor = Adaptable()
 
+    protected lateinit var activity: Activity
+
     /**
      * Punto de entrada principal para renderizar la vista.
      * Utiliza internamente [RenderAdaptiveLayout] para decidir qué layout mostrar
@@ -20,6 +24,7 @@ abstract class ViewAmbient {
      */
     @Composable
     fun OnCreateView() {
+        Instance()
         InstanceState()
         RenderAdaptiveLayout()
     }
@@ -63,7 +68,8 @@ abstract class ViewAmbient {
      * Puede ser sobreescrito para inicializar ViewModels o estados mutables.
      */
     @Composable
-    protected open fun InstanceState() {}
+    protected open fun InstanceState() {
+    }
 
     /**
      * Configuración de previsualización en modo oscuro.
@@ -84,6 +90,13 @@ abstract class ViewAmbient {
     protected open fun NotNightPreview() {
         IGVPERUTheme(darkTheme = false) {
             OnCreateView()
+        }
+    }
+
+    @Composable
+    private fun Instance() {
+        LocalActivity.current?.let {
+            activity = it
         }
     }
 
