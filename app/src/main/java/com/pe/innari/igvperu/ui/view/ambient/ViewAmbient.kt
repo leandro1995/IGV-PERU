@@ -1,5 +1,7 @@
 package com.pe.innari.igvperu.ui.view.ambient
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.adaptable.Adaptable
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
@@ -11,17 +13,20 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
-    private val windowSizeAdaptor = Adaptable()
+    private val responsiveLayoutAdaptor = Adaptable()
+
+    protected lateinit var currentActivity: Activity
 
     /**
      * Punto de entrada principal para renderizar la vista.
-     * Utiliza internamente [RenderAdaptiveLayout] para decidir qué layout mostrar
+     * Utiliza internamente [RenderAdaptiveUI] para decidir qué layout mostrar
      * basándose en la configuración actual de la ventana.
      */
     @Composable
     fun OnCreateView() {
+        InitializeActivity()
         InstanceState()
-        RenderAdaptiveLayout()
+        RenderAdaptiveUI()
     }
 
     /**
@@ -63,7 +68,8 @@ abstract class ViewAmbient {
      * Puede ser sobreescrito para inicializar ViewModels o estados mutables.
      */
     @Composable
-    protected open fun InstanceState() {}
+    protected open fun InstanceState() {
+    }
 
     /**
      * Configuración de previsualización en modo oscuro.
@@ -88,8 +94,15 @@ abstract class ViewAmbient {
     }
 
     @Composable
-    private fun RenderAdaptiveLayout() {
-        windowSizeAdaptor.ViewWindow(
+    private fun InitializeActivity() {
+        LocalActivity.current?.let {
+            currentActivity = it
+        }
+    }
+
+    @Composable
+    private fun RenderAdaptiveUI() {
+        responsiveLayoutAdaptor.ViewWindow(
             compactPortrait = { CompactPortrait() },
             compactLandScape = { CompactLandScape() },
             medium = { Medium() },

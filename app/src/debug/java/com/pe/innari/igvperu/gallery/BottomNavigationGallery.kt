@@ -45,7 +45,7 @@ class BottomNavigationGallery : ViewAmbient() {
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 3"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 4")
             )
-        ).OnCreateView {
+        ).OnCreateComponent {
             Column {
                 Text("BottomNavigationGallery")
             }

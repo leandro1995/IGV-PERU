@@ -63,8 +63,8 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    override fun OnCreateView(view: @Composable (() -> Unit)) {
-        super.OnCreateView(view)
+    override fun OnCreateComponent(view: @Composable (() -> Unit)) {
+        super.OnCreateComponent(view)
 
         when (navigationTypeByWindowSize()) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
@@ -141,7 +141,7 @@ class BottomNavigationComponent(
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 itemBottomNavigationComponent.apply {
                     bottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_BAR
-                    OnCreateView()
+                    OnCreateComponent()
                 }
             }
         }
@@ -164,7 +164,7 @@ class BottomNavigationComponent(
             ) {
                 itemBottomNavigationComponent.apply {
                     bottomNavigationType = BottomNavigationType.BOTTOM_NAVIGATION_RAIL
-                    OnCreateView()
+                    OnCreateComponent()
                 }
             }
         }
