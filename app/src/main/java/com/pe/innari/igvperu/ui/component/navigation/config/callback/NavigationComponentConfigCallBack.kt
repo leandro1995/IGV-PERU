@@ -5,5 +5,6 @@ import androidx.navigation3.runtime.NavKey
 
 interface NavigationComponentConfigCallBack {
 
-    fun entryProviderScope(entryProviderScope: EntryProviderScope<NavKey>)
+    fun entryProviderScope(entryProviderScope: EntryProviderScope<NavKey>) {}
+    fun onBackPressed() {}
 }
