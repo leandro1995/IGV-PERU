@@ -26,7 +26,7 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
         })
     }
 
-    fun setEntryProvider(entryProvider: (entry: EntryProviderScope<NavKey>) -> Unit) {
+    fun setEntryProvider(entryProvider: (entry: EntryProviderScope<NavKey>) -> Unit) = apply {
         if (entryProviderScopeCallBack == null) {
             entryProviderScopeCallBack = object : NavigationComponentConfigCallBack {
                 override fun entryProviderScope(entryProviderScope: EntryProviderScope<NavKey>) {

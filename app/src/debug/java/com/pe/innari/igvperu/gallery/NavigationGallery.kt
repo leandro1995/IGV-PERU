@@ -26,21 +26,19 @@ class NavigationGallery : ViewAmbient() {
 
     @Composable
     override fun CompactPortrait() {
-        NavigationComponent(backStack = navigationComponentState.backStack).apply {
-            setEntryProvider { entryProviderScope ->
-                entryProviderScope.entry<Router.OneView> {
-                    Column {
-                        Text("OneView")
-                    }
-                }
-                entryProviderScope.entry<Router.TwoView> {
-                    Column {
-                        Text("TwoView")
-                    }
+        NavigationComponent(backStack = navigationComponentState.backStack).setEntryProvider { entryProviderScope ->
+            entryProviderScope.entry<Router.OneView> {
+                Column {
+                    Text("OneView")
                 }
             }
-            OnCreateComponent()
-        }
+            entryProviderScope.entry<Router.TwoView> {
+                Column {
+                    Text("TwoView")
+                }
+            }
+        }.OnCreateComponent()
+
     }
 
     @NightPreview
