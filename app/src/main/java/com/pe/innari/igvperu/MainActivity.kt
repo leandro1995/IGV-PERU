@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pe.innari.igvperu.background.CoroutinesBackground
 import com.pe.innari.igvperu.background.type.TimeType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
+import com.pe.innari.igvperu.ui.view.home.HomeView
 
 /**
  * Actividad principal de la aplicación IGV PERU.
@@ -15,8 +16,10 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 class MainActivity : ComponentActivity() {
 
-    private val splashScreenDelay =
-        CoroutinesBackground(timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_DURATION_SECONDS)
+    private val splashScreenDelay = CoroutinesBackground(
+        timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_DURATION_SECONDS
+    )
+    private val homeView = HomeView()
 
     private var shouldShowSplashScreen = true
 
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
     private fun setAppContentWithSplashScreen() = setContent {
         IGVPERUTheme {
             splashScreenDelay.LaunchedEffect { shouldShowSplashScreen = false }
+            homeView.OnCreateView()
         }
     }
 
