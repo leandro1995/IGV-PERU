@@ -26,6 +26,7 @@ abstract class ViewAmbient {
     fun OnCreateView() {
         InitializeActivity()
         InstanceState()
+        InstanceComponent()
         RenderAdaptiveUI()
     }
 
@@ -69,6 +70,10 @@ abstract class ViewAmbient {
      */
     @Composable
     protected open fun InstanceState() {
+    }
+
+    @Composable
+    protected open fun InstanceComponent() {
     }
 
     /**
