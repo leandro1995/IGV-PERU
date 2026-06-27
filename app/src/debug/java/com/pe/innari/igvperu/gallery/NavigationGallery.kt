@@ -20,18 +20,12 @@ import kotlinx.serialization.Serializable
  */
 class NavigationGallery : ViewAmbient() {
 
-    private lateinit var navigationComponentState: NavigationComponentState
-
     /**
      * Inicializa el estado de la navegación con una vista inicial.
      */
     @Composable
-    override fun InstanceState() {
-        super.InstanceState()
-
-        navigationComponentState =
-            NavigationComponentState(backStack = rememberNavBackStack(Router.OneView))
-    }
+    override fun state() =
+        NavigationComponentState(backStack = rememberNavBackStack(Router.OneView))
 
     /**
      * Implementación de la UI para dispositivos compactos.
@@ -40,7 +34,7 @@ class NavigationGallery : ViewAmbient() {
     @Composable
     override fun CompactPortrait() {
         val navigationComponent =
-            NavigationComponent(backStack = navigationComponentState.backStack)
+            NavigationComponent(backStack = state().backStack)
 
         navigationComponent.setEntryProvider { entryProviderScope ->
             entryProviderScope.entry<Router.OneView> {

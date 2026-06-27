@@ -18,18 +18,12 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
  */
 class BottomNavigationGallery : ViewAmbient() {
 
-    private lateinit var bottomNavigationComponentState: BottomNavigationComponentState
-
     /**
      * Inicializa el estado del componente de navegación para la galería.
      */
     @Composable
-    override fun InstanceState() {
-        super.InstanceState()
-
-        bottomNavigationComponentState =
-            BottomNavigationComponentState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
-    }
+    override fun state() =
+        BottomNavigationComponentState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
 
     /**
      * Implementación para pantallas compactas en modo vertical.
@@ -38,8 +32,7 @@ class BottomNavigationGallery : ViewAmbient() {
     @Composable
     override fun CompactPortrait() {
         BottomNavigationComponent(
-            indexSelect = bottomNavigationComponentState.indexSelect,
-            itemBottomNavigationMutableList = mutableListOf(
+            indexSelect = state().indexSelect, itemBottomNavigationMutableList = mutableListOf(
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 1"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 2"),
                 ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Prueba 3"),

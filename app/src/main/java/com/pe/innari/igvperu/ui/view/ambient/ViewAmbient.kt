@@ -25,7 +25,7 @@ abstract class ViewAmbient {
     @Composable
     fun OnCreateView() {
         InitializeActivity()
-        InstanceState()
+        state()
         InstanceComponent()
         RenderAdaptiveUI()
     }
@@ -69,8 +69,7 @@ abstract class ViewAmbient {
      * Puede ser sobreescrito para inicializar ViewModels o estados mutables.
      */
     @Composable
-    protected open fun InstanceState() {
-    }
+    protected open fun state(): Any = {}
 
     @Composable
     protected open fun InstanceComponent() {
