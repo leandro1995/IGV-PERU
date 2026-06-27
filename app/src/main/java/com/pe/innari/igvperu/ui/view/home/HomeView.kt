@@ -15,21 +15,16 @@ import com.pe.innari.igvperu.ui.view.home.state.HomeViewState
 class HomeView : ViewAmbient() {
 
     private lateinit var bottomNavigationComponent: BottomNavigationComponent
-    private lateinit var homeViewState: HomeViewState
 
     @Composable
-    override fun InstanceState() {
-        super.InstanceState()
-
-        homeViewState = HomeViewState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
-    }
+    override fun state() = HomeViewState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
 
     @Composable
     override fun InstanceComponent() {
         super.InstanceComponent()
 
         bottomNavigationComponent = BottomNavigationComponent(
-            indexSelect = homeViewState.indexSelect,
+            indexSelect = state().indexSelect,
             itemBottomNavigationMutableList = itemBottomNavigationMutableList()
         )
     }
