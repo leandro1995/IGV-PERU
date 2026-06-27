@@ -1,23 +1,31 @@
 package com.pe.innari.igvperu.ui.view.home
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.res.stringResource
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
+import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
+import com.pe.innari.igvperu.ui.view.home.navigation.HomeViewNavigation
 import com.pe.innari.igvperu.ui.view.home.state.HomeViewState
 
 class HomeView : ViewAmbient() {
 
     private lateinit var bottomNavigationComponent: BottomNavigationComponent
+    private lateinit var navigationComponent: NavigationComponent
 
     @Composable
-    override fun state() = HomeViewState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
+    override fun state() = HomeViewState(
+        indexSelect = rememberSaveable { mutableIntStateOf(0) },
+        backStack = rememberNavBackStack(HomeViewNavigation.Calculator)
+    )
 
     @Composable
     override fun InstanceComponent() {
@@ -27,11 +35,28 @@ class HomeView : ViewAmbient() {
             indexSelect = state().indexSelect,
             itemBottomNavigationMutableList = itemBottomNavigationMutableList()
         )
+
+        navigationComponent = NavigationComponent(backStack = state().backStack)
     }
 
     @Composable
     override fun CompactPortrait() {
-        bottomNavigationComponent.OnCreateComponent { }
+        bottomNavigationComponent.OnCreateComponent {
+            navigationComponent.setEntryProvider {
+                it.entry<HomeViewNavigation.Calculator> {
+                    Text("Calculator")
+                }
+                it.entry<HomeViewNavigation.History> {
+                    Text("History")
+                }
+                it.entry<HomeViewNavigation.Calentar> {
+                    Text("Calentar")
+                }
+                it.entry<HomeViewNavigation.Setting> {
+                    Text("Setting")
+                }
+            }.OnCreateComponent()
+        }
     }
 
     @Composable
