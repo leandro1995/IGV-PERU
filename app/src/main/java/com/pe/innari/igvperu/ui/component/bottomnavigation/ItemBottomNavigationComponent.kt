@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,20 +46,17 @@ class ItemBottomNavigationComponent(
 
         when (bottomNavigationType) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                RenderNavigationBarItems()
+                CreateNavigationBarItems()
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                RenderNavigationRailItems()
+                CreateNavigationRailItems()
             }
         }
     }
 
-    /**
-     * Renderiza la fila de elementos para la [NavigationBar].
-     */
     @Composable
-    private fun RenderNavigationBarItems() {
+    private fun CreateNavigationBarItems() {
         Row {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationBarItem(
@@ -71,17 +66,14 @@ class ItemBottomNavigationComponent(
                         indexSelect.intValue = index
                         onClickCallBack?.onClickListener(navKey = item.navKey)
                     },
-                    icon = { RenderItemIcon(item.icon) },
-                    label = { RenderItemLabel(label = item.label) })
+                    icon = { CreateItemIcon(item.icon) },
+                    label = { CreateItemLabel(label = item.label) })
             }
         }
     }
 
-    /**
-     * Renderiza la columna de elementos para el [NavigationRail].
-     */
     @Composable
-    private fun RenderNavigationRailItems() {
+    private fun CreateNavigationRailItems() {
         Column {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationRailItem(
@@ -91,8 +83,8 @@ class ItemBottomNavigationComponent(
                         indexSelect.intValue = index
                         onClickCallBack?.onClickListener(navKey = item.navKey)
                     },
-                    icon = { RenderItemIcon(item.icon) },
-                    label = { RenderItemLabel(label = item.label) })
+                    icon = { CreateItemIcon(item.icon) },
+                    label = { CreateItemLabel(label = item.label) })
             }
         }
     }
@@ -110,13 +102,8 @@ class ItemBottomNavigationComponent(
         }
     }
 
-    /**
-     * Renderiza el icono del ítem de navegación.
-     *
-     * @param icon Recurso drawable del icono.
-     */
     @Composable
-    private fun RenderItemIcon(icon: Int) {
+    private fun CreateItemIcon(icon: Int) {
         Icon(
             modifier = Modifier.size(Dimen24),
             painter = painterResource(icon),
@@ -124,13 +111,8 @@ class ItemBottomNavigationComponent(
         )
     }
 
-    /**
-     * Renderiza el texto descriptivo (etiqueta) del ítem.
-     *
-     * @param label Texto a mostrar.
-     */
     @Composable
-    private fun RenderItemLabel(label: String) {
+    private fun CreateItemLabel(label: String) {
         Text(text = label, style = ItemBottomNavigationComponent)
     }
 }
