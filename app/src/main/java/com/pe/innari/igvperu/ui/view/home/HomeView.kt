@@ -38,6 +38,7 @@ class HomeView : ViewAmbient() {
         navigationComponent = NavigationComponent(backStack = state().backStack)
 
         bottomNavigationCallBack()
+        navigationCallBack()
     }
 
     @Composable
@@ -64,6 +65,10 @@ class HomeView : ViewAmbient() {
         bottomNavigationComponent.setOnclick {
             navigationComponent.addEntry(navKey = it)
         }
+    }
+
+    private fun navigationCallBack() {
+        navigationComponent.setOnBackPressed { currentActivity.finish() }
     }
 
     @Composable
