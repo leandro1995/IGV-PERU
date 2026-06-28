@@ -16,17 +16,31 @@ import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
 import com.pe.innari.igvperu.ui.view.home.navigation.HomeViewNavigation
 import com.pe.innari.igvperu.ui.view.home.state.HomeViewState
 
+/**
+ * Vista principal de la aplicación que gestiona la navegación base y la estructura general (Home).
+ * Implementa [ViewAmbient] para adaptarse a diferentes tamaños de pantalla y configuraciones.
+ */
 class HomeView : ViewAmbient() {
 
     private lateinit var bottomNavigationComponent: BottomNavigationComponent
     private lateinit var navigationComponent: NavigationComponent
 
+    /**
+     * Define y recuerda el estado persistente de la vista Home.
+     * Mantiene el índice seleccionado de la navegación inferior y el backstack de navegación.
+     *
+     * @return Una instancia de [HomeViewState] con el estado actual.
+     */
     @Composable
     override fun state() = HomeViewState(
         indexSelect = rememberSaveable { mutableIntStateOf(0) },
         backStack = rememberNavBackStack(HomeViewNavigation.Calculator)
     )
 
+    /**
+     * Instancia y configura los componentes visuales necesarios para esta vista.
+     * Inicializa [BottomNavigationComponent] y [NavigationComponent] vinculándolos con el estado.
+     */
     @Composable
     override fun InstanceComponent() {
         super.InstanceComponent()
@@ -41,6 +55,10 @@ class HomeView : ViewAmbient() {
         navigationCallBack()
     }
 
+    /**
+     * Implementación de la interfaz de usuario para dispositivos compactos (Portrait).
+     * Define el contenedor de navegación y provee las entradas para las diferentes secciones de la Home.
+     */
     @Composable
     override fun CompactPortrait() {
         bottomNavigationComponent.OnCreateComponent {
@@ -61,16 +79,29 @@ class HomeView : ViewAmbient() {
         }
     }
 
+    /**
+     * Configura la lógica de respuesta a eventos de clic en la barra de navegación.
+     * Al hacer clic, se añade una nueva entrada al componente de navegación principal.
+     */
     private fun bottomNavigationCallBack() {
         bottomNavigationComponent.setOnclick {
             navigationComponent.addEntry(navKey = it)
         }
     }
 
+    /**
+     * Configura el comportamiento del botón atrás para esta vista.
+     * En este caso, finaliza la actividad actual.
+     */
     private fun navigationCallBack() {
         navigationComponent.setOnBackPressed { currentActivity.finish() }
     }
 
+    /**
+     * Genera la lista de elementos que compondrán la navegación inferior.
+     *
+     * @return Lista mutable de [ItemBottomNavigation].
+     */
     @Composable
     private fun itemBottomNavigationMutableList() = mutableListOf(
         ItemBottomNavigation(
@@ -92,12 +123,18 @@ class HomeView : ViewAmbient() {
         )
     )
 
+    /**
+     * Previsualización en modo claro de la vista Home.
+     */
     @NotNightPreview
     @Composable
     override fun NotNightPreview() {
         super.NotNightPreview()
     }
 
+    /**
+     * Previsualización en modo oscuro de la vista Home.
+     */
     @NightPreview
     @Composable
     override fun NightPreview() {

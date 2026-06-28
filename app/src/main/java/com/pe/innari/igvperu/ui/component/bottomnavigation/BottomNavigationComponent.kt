@@ -53,7 +53,9 @@ class BottomNavigationComponent(
     private var onclickCallBack: BottomNavigationComponentCallBack? = null
 
     /**
-     * Inicializa el componente secundario que renderiza los ítems de navegación.
+     * Inicializa las dependencias internas del componente.
+     * Crea la instancia de [ItemBottomNavigationComponent] y configura su listener de clics
+     * para propagar los eventos hacia [onclickCallBack].
      */
     @Composable
     override fun Instance() {
@@ -69,6 +71,12 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Crea y renderiza el componente basándose en el tipo de navegación determinado por el tamaño de la ventana.
+     * Alterna entre [BottomNavigationBarLayout] y [NavigationRailLayout].
+     *
+     * @param view Contenido principal que se mostrará junto a la navegación.
+     */
     @Composable
     override fun OnCreateComponent(view: @Composable (() -> Unit)) {
         super.OnCreateComponent(view)
@@ -84,6 +92,11 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Establece el callback para manejar los eventos de clic en los elementos de navegación.
+     *
+     * @param onClick Función lambda que recibe la [NavKey] seleccionada.
+     */
     fun setOnclick(onClick: (navKey: NavKey) -> Unit) {
         onclickCallBack = object : BottomNavigationComponentCallBack {
             override fun onClickListener(navKey: NavKey) {
@@ -92,6 +105,12 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el layout que utiliza una barra de navegación inferior.
+     * Ideal para dispositivos en modo vertical (Compact Portrait).
+     *
+     * @param view Contenido principal de la pantalla.
+     */
     @Composable
     private fun BottomNavigationBarLayout(view: @Composable () -> Unit) {
         Scaffold(
@@ -103,6 +122,12 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el layout que utiliza un rail de navegación lateral.
+     * Ideal para dispositivos en modo horizontal o pantallas grandes.
+     *
+     * @param view Contenido principal de la pantalla.
+     */
     @Composable
     private fun NavigationRailLayout(view: @Composable () -> Unit) {
         Row(
@@ -114,6 +139,12 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Provee el contexto y los insets necesarios para el layout de Navigation Rail.
+     * Maneja los márgenes internos y el área de dibujo segura.
+     *
+     * @param view Contenido principal.
+     */
     @Composable
     private fun ProvideNavigationRailLayout(view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
@@ -145,6 +176,9 @@ class BottomNavigationComponent(
             }
         }
 
+    /**
+     * Renderiza el contenido visual de la [NavigationBar] dentro de una tarjeta estilizada.
+     */
     @Composable
     private fun BottomNavigationBarContent() {
         NavigationCard(
@@ -162,6 +196,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el contenido visual del [NavigationRail] dentro de una tarjeta estilizada.
+     */
     @Composable
     private fun NavigationRailContent() {
         NavigationCard(
@@ -185,6 +222,13 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Contenedor genérico en forma de tarjeta para los elementos de navegación.
+     * Aplica estilos comunes como bordes redondeados y colores de superficie.
+     *
+     * @param modifier Modificador para personalizar el layout de la tarjeta.
+     * @param view Contenido composable que se incluirá en la tarjeta.
+     */
     @Composable
     private fun NavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) = Card(
         modifier = modifier,
@@ -195,6 +239,12 @@ class BottomNavigationComponent(
         view()
     }
 
+    /**
+     * Resuelve el tipo de navegación ([BottomNavigationType]) que debe mostrarse según
+     * el tamaño actual de la ventana y la orientación del dispositivo.
+     *
+     * @return El tipo de navegación sugerido.
+     */
     @Composable
     private fun navigationTypeByWindowSize() = when (adaptable.resolveViewTypeFromWindowSize()) {
         ViewType.COMPACT_PORTRAIT -> {

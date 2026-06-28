@@ -21,15 +21,18 @@ import kotlinx.serialization.Serializable
 class BottomNavigationGallery : ViewAmbient() {
 
     /**
-     * Inicializa el estado del componente de navegación para la galería.
+     * Inicializa y recuerda el estado del componente de navegación para la galería.
+     *
+     * @return Instancia de [BottomNavigationComponentState] con el índice inicial en 0.
      */
     @Composable
     override fun state() =
         BottomNavigationComponentState(indexSelect = rememberSaveable { mutableIntStateOf(0) })
 
     /**
-     * Implementación para pantallas compactas en modo vertical.
-     * Muestra un ejemplo del [BottomNavigationComponent] con 4 elementos.
+     * Implementación para pantallas compactas en modo vertical (Phones).
+     * Muestra un ejemplo funcional del [BottomNavigationComponent] configurado con 4 ítems de prueba.
+     * Incluye un área de contenido simple con un texto.
      */
     @Composable
     override fun CompactPortrait() {
@@ -61,8 +64,8 @@ class BottomNavigationGallery : ViewAmbient() {
     }
 
     /**
-     * Implementación para pantallas compactas en modo horizontal.
-     * Utiliza el layout base por defecto.
+     * Implementación para pantallas compactas en modo horizontal (Landscape).
+     * Reutiliza la implementación base definida en [ViewAmbient].
      */
     @Composable
     override fun CompactLandScape() {
@@ -70,7 +73,7 @@ class BottomNavigationGallery : ViewAmbient() {
     }
 
     /**
-     * Previsualización en modo oscuro de la galería.
+     * Previsualización de la galería forzando el modo oscuro (Dark Mode).
      */
     @NightPreview
     @Composable
@@ -79,7 +82,7 @@ class BottomNavigationGallery : ViewAmbient() {
     }
 
     /**
-     * Previsualización en modo claro de la galería.
+     * Previsualización de la galería forzando el modo claro (Light Mode).
      */
     @NotNightPreview
     @Composable
@@ -87,6 +90,9 @@ class BottomNavigationGallery : ViewAmbient() {
         super.NotNightPreview()
     }
 
+    /**
+     * Sellado que define los destinos de navegación ficticios utilizados únicamente en esta galería.
+     */
     sealed class BottomNavigationNavigation {
         @Serializable
         object OneView : NavKey

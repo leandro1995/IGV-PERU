@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +39,8 @@ class ItemBottomNavigationComponent(
     private var onClickCallBack: ItemBottomNavigationComponentCallBack? = null
 
     /**
-     * Renderiza los ítems basándose en el [bottomNavigationType] actual.
+     * Punto de entrada para la creación del componente.
+     * Renderiza los ítems como una barra inferior o un rail lateral basándose en [bottomNavigationType].
      */
     @Composable
     override fun OnCreateComponent() {
@@ -54,6 +57,9 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza la fila de elementos para la [NavigationBar].
+     */
     @Composable
     private fun RenderNavigationBarItems() {
         Row {
@@ -71,6 +77,9 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza la columna de elementos para el [NavigationRail].
+     */
     @Composable
     private fun RenderNavigationRailItems() {
         Column {
@@ -88,6 +97,11 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Configura el callback de eventos de clic para los ítems.
+     *
+     * @param onClick Lambda que se ejecutará al seleccionar un ítem.
+     */
     fun setOnClick(onClick: (navKey: NavKey) -> Unit) {
         onClickCallBack = object : ItemBottomNavigationComponentCallBack {
             override fun onClickListener(navKey: NavKey) {
@@ -96,6 +110,11 @@ class ItemBottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el icono del ítem de navegación.
+     *
+     * @param icon Recurso drawable del icono.
+     */
     @Composable
     private fun RenderItemIcon(icon: Int) {
         Icon(
@@ -105,6 +124,11 @@ class ItemBottomNavigationComponent(
         )
     }
 
+    /**
+     * Renderiza el texto descriptivo (etiqueta) del ítem.
+     *
+     * @param label Texto a mostrar.
+     */
     @Composable
     private fun RenderItemLabel(label: String) {
         Text(text = label, style = ItemBottomNavigationComponent)

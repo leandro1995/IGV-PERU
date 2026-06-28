@@ -21,15 +21,18 @@ import kotlinx.serialization.Serializable
 class NavigationGallery : ViewAmbient() {
 
     /**
-     * Inicializa el estado de la navegación con una vista inicial.
+     * Inicializa el estado de la navegación comenzando en la ruta [Router.OneView].
+     *
+     * @return Instancia de [NavigationComponentState] con el backstack inicializado.
      */
     @Composable
     override fun state() =
         NavigationComponentState(backStack = rememberNavBackStack(Router.OneView))
 
     /**
-     * Implementación de la UI para dispositivos compactos.
-     * Configura el [NavigationComponent] con rutas de ejemplo.
+     * Implementación de la interfaz de usuario para dispositivos compactos.
+     * Configura el [NavigationComponent] con rutas de ejemplo y gestiona la transición entre ellas.
+     * También define un comportamiento personalizado para el botón atrás.
      */
     @Composable
     override fun CompactPortrait() {
@@ -57,12 +60,18 @@ class NavigationGallery : ViewAmbient() {
         }
     }
 
+    /**
+     * Previsualización de la galería en modo oscuro.
+     */
     @NightPreview
     @Composable
     override fun NightPreview() {
         super.NightPreview()
     }
 
+    /**
+     * Previsualización de la galería en modo claro.
+     */
     @NotNightPreview
     @Composable
     override fun NotNightPreview() {
@@ -70,12 +79,18 @@ class NavigationGallery : ViewAmbient() {
     }
 
     /**
-     * Sellado que define las rutas (claves de navegación) para esta galería.
+     * Clase sellada que define las rutas (claves de navegación) de prueba para esta galería.
      */
     sealed class Router {
+        /**
+         * Primera vista de prueba.
+         */
         @Serializable
         object OneView : NavKey
 
+        /**
+         * Segunda vista de prueba accesible desde la primera.
+         */
         @Serializable
         object TwoView : NavKey
     }

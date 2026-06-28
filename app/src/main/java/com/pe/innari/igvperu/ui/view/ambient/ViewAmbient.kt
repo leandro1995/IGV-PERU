@@ -13,14 +13,21 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
+    /**
+     * Adaptador encargado de resolver el tipo de layout según el tamaño de la ventana.
+     */
     private val responsiveLayoutAdaptor = Adaptable()
 
+    /**
+     * Referencia a la actividad actual que aloja esta vista.
+     * Se inicializa automáticamente en [InitializeActivity].
+     */
     protected lateinit var currentActivity: Activity
 
     /**
      * Punto de entrada principal para renderizar la vista.
-     * Utiliza internamente [RenderAdaptiveUI] para decidir qué layout mostrar
-     * basándose en la configuración actual de la ventana.
+     * Ejecuta el ciclo de vida de la vista: inicialización de actividad, estado,
+     * instanciación de componentes y finalmente renderizado adaptativo.
      */
     @Composable
     fun OnCreateView() {
@@ -32,14 +39,14 @@ abstract class ViewAmbient {
 
     /**
      * UI para dispositivos compactos en modo vertical (ej. Teléfonos).
-     * Debe ser implementado por las subclases.
+     * Obligatorio de implementar por las subclases.
      */
     @Composable
     protected abstract fun CompactPortrait()
 
     /**
      * UI para dispositivos compactos en modo horizontal (ej. Teléfonos rotados).
-     * Por defecto usa la implementación de [CompactPortrait].
+     * Por defecto, delega en [CompactPortrait].
      */
     @Composable
     protected open fun CompactLandScape() {
@@ -47,8 +54,8 @@ abstract class ViewAmbient {
     }
 
     /**
-     * UI para dispositivos de tamaño medio (ej. Tablets pequeñas o plegables).
-     * Por defecto usa la implementación de [CompactPortrait].
+     * UI para dispositivos de tamaño medio (ej. Tablets pequeñas o dispositivos plegables).
+     * Por defecto, delega en [CompactPortrait].
      */
     @Composable
     protected open fun Medium() {
@@ -56,8 +63,8 @@ abstract class ViewAmbient {
     }
 
     /**
-     * UI para pantallas expandidas (ej. Tablets grandes o monitores).
-     * Por defecto usa la implementación de [CompactPortrait].
+     * UI para pantallas expandidas (ej. Tablets grandes o monitores de escritorio).
+     * Por defecto, delega en [CompactPortrait].
      */
     @Composable
     protected open fun Expanded() {
@@ -65,19 +72,25 @@ abstract class ViewAmbient {
     }
 
     /**
-     * Inicializa el estado de la instancia antes de renderizar la UI.
-     * Puede ser sobreescrito para inicializar ViewModels o estados mutables.
+     * Inicializa y retorna el estado de la instancia antes de renderizar la interfaz.
+     * Se debe sobreescribir para manejar ViewModels, estados mutables o persistentes.
+     *
+     * @return El objeto de estado de la vista.
      */
     @Composable
     protected open fun state(): Any = {}
 
+    /**
+     * Hook para instanciar y configurar componentes visuales complejos.
+     * Se llama después de [state] y antes de [RenderAdaptiveUI].
+     */
     @Composable
     protected open fun InstanceComponent() {
     }
 
     /**
-     * Configuración de previsualización en modo oscuro.
-     * Envuelve [OnCreateView] con el tema de la aplicación forzando el modo oscuro.
+     * Configuración de previsualización para el modo oscuro.
+     * Envuelve [OnCreateView] dentro de [IGVPERUTheme] con darkTheme = true.
      */
     @Composable
     protected open fun NightPreview() {
@@ -87,8 +100,8 @@ abstract class ViewAmbient {
     }
 
     /**
-     * Configuración de previsualización en modo claro.
-     * Envuelve [OnCreateView] con el tema de la aplicación forzando el modo claro.
+     * Configuración de previsualización para el modo claro.
+     * Envuelve [OnCreateView] dentro de [IGVPERUTheme] con darkTheme = false.
      */
     @Composable
     protected open fun NotNightPreview() {
@@ -97,6 +110,9 @@ abstract class ViewAmbient {
         }
     }
 
+    /**
+     * Obtiene y asigna la actividad actual desde el contexto de Compose.
+     */
     @Composable
     private fun InitializeActivity() {
         LocalActivity.current?.let {
@@ -104,6 +120,11 @@ abstract class ViewAmbient {
         }
     }
 
+    /**
+     * Delega el renderizado al adaptador responsivo, el cual seleccionará
+     * la función de layout adecuada ([CompactPortrait], [CompactLandScape], [Medium], [Expanded])
+     * basándose en la configuración actual de la pantalla.
+     */
     @Composable
     private fun RenderAdaptiveUI() {
         responsiveLayoutAdaptor.ViewWindow(
