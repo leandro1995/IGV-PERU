@@ -13,14 +13,11 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 abstract class ViewAmbient {
 
-    /**
-     * Adaptador encargado de resolver el tipo de layout según el tamaño de la ventana.
-     */
-    private val responsiveLayoutAdaptor = Adaptable()
+    private val adaptableLayout = Adaptable()
 
     /**
      * Referencia a la actividad actual que aloja esta vista.
-     * Se inicializa automáticamente en [InitializeActivity].
+     * Se inicializa automáticamente en [ResolveCurrentActivity].
      */
     protected lateinit var currentActivity: Activity
 
@@ -31,10 +28,10 @@ abstract class ViewAmbient {
      */
     @Composable
     fun OnCreateView() {
-        InitializeActivity()
+        ResolveCurrentActivity()
         state()
         InstanceComponent()
-        RenderAdaptiveUI()
+        RenderResponsiveLayout()
     }
 
     /**
@@ -82,7 +79,7 @@ abstract class ViewAmbient {
 
     /**
      * Hook para instanciar y configurar componentes visuales complejos.
-     * Se llama después de [state] y antes de [RenderAdaptiveUI].
+     * Se llama después de [state] y antes de [RenderResponsiveLayout].
      */
     @Composable
     protected open fun InstanceComponent() {
@@ -110,24 +107,16 @@ abstract class ViewAmbient {
         }
     }
 
-    /**
-     * Obtiene y asigna la actividad actual desde el contexto de Compose.
-     */
     @Composable
-    private fun InitializeActivity() {
+    private fun ResolveCurrentActivity() {
         LocalActivity.current?.let {
             currentActivity = it
         }
     }
 
-    /**
-     * Delega el renderizado al adaptador responsivo, el cual seleccionará
-     * la función de layout adecuada ([CompactPortrait], [CompactLandScape], [Medium], [Expanded])
-     * basándose en la configuración actual de la pantalla.
-     */
     @Composable
-    private fun RenderAdaptiveUI() {
-        responsiveLayoutAdaptor.ViewWindow(
+    private fun RenderResponsiveLayout() {
+        adaptableLayout.ViewWindow(
             compactPortrait = { CompactPortrait() },
             compactLandScape = { CompactLandScape() },
             medium = { Medium() },
