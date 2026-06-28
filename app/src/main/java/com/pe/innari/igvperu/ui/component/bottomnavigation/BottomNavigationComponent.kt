@@ -24,8 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
+import androidx.navigation3.runtime.NavKey
 import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.config.callback.BottomNavigationComponentCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.padding.BottomNavigationComponentPadding
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
@@ -48,6 +50,7 @@ class BottomNavigationComponent(
 ) : ComponentAmbient() {
 
     private lateinit var itemBottomNavigationComponent: ItemBottomNavigationComponent
+    private var onclickCallBack: BottomNavigationComponentCallBack? = null
 
     /**
      * Inicializa el componente secundario que renderiza los ítems de navegación.
@@ -60,6 +63,10 @@ class BottomNavigationComponent(
             indexSelect = indexSelect,
             itemBottomNavigationMutableList = itemBottomNavigationMutableList
         )
+
+        itemBottomNavigationComponent.setOnClick {
+            onclickCallBack?.onClickListener(navKey = it)
+        }
     }
 
     @Composable
@@ -73,6 +80,14 @@ class BottomNavigationComponent(
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
                 NavigationRailLayout(view = view)
+            }
+        }
+    }
+
+    fun setOnclick(onClick: (navKey: NavKey) -> Unit) {
+        onclickCallBack = object : BottomNavigationComponentCallBack {
+            override fun onClickListener(navKey: NavKey) {
+                onClick(navKey)
             }
         }
     }
@@ -171,25 +186,23 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
-        Card(
-            modifier = modifier,
-            shape = RoundedCornerShape(Dimen22),
-            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
-            view()
-        }
+    private fun NavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) = Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(Dimen22),
+        border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        view()
+    }
 
     @Composable
-    private fun navigationTypeByWindowSize() =
-        when (adaptable.resolveViewTypeFromWindowSize()) {
-            ViewType.COMPACT_PORTRAIT -> {
-                BottomNavigationType.BOTTOM_NAVIGATION_BAR
-            }
-
-            ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
-                BottomNavigationType.BOTTOM_NAVIGATION_RAIL
-            }
+    private fun navigationTypeByWindowSize() = when (adaptable.resolveViewTypeFromWindowSize()) {
+        ViewType.COMPACT_PORTRAIT -> {
+            BottomNavigationType.BOTTOM_NAVIGATION_BAR
         }
+
+        ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
+            BottomNavigationType.BOTTOM_NAVIGATION_RAIL
+        }
+    }
 }

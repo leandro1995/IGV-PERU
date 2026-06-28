@@ -35,8 +35,9 @@ class HomeView : ViewAmbient() {
             indexSelect = state().indexSelect,
             itemBottomNavigationMutableList = itemBottomNavigationMutableList()
         )
-
         navigationComponent = NavigationComponent(backStack = state().backStack)
+
+        bottomNavigationCallBack()
     }
 
     @Composable
@@ -59,19 +60,30 @@ class HomeView : ViewAmbient() {
         }
     }
 
+    private fun bottomNavigationCallBack() {
+        bottomNavigationComponent.setOnclick {
+            navigationComponent.addEntry(navKey = it)
+        }
+    }
+
     @Composable
     private fun itemBottomNavigationMutableList() = mutableListOf(
         ItemBottomNavigation(
             icon = R.drawable.ic_calculator,
-            label = stringResource(R.string.calculator_bottom_navigation)
+            label = stringResource(R.string.calculator_bottom_navigation),
+            navKey = HomeViewNavigation.Calculator
         ), ItemBottomNavigation(
-            icon = R.drawable.ic_history, label = stringResource(R.string.history_bottom_navigation)
+            icon = R.drawable.ic_history,
+            label = stringResource(R.string.history_bottom_navigation),
+            navKey = HomeViewNavigation.History
         ), ItemBottomNavigation(
             icon = R.drawable.ic_calendar,
-            label = stringResource(R.string.calendar_bottom_navigation)
+            label = stringResource(R.string.calendar_bottom_navigation),
+            navKey = HomeViewNavigation.Calentar
         ), ItemBottomNavigation(
             icon = R.drawable.ic_settings,
-            label = stringResource(R.string.settings_bottom_navigation)
+            label = stringResource(R.string.settings_bottom_navigation),
+            navKey = HomeViewNavigation.Setting
         )
     )
 

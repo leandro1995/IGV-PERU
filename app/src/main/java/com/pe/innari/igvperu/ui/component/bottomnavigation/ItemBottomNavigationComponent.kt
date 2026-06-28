@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation3.runtime.NavKey
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.color.BottomNavigationComponentColor
+import com.pe.innari.igvperu.ui.component.bottomnavigation.config.callback.ItemBottomNavigationComponentCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
 import com.pe.innari.igvperu.ui.theme.Dimen24
@@ -31,6 +33,8 @@ class ItemBottomNavigationComponent(
     private var indexSelect: MutableIntState,
     private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
 ) : ComponentAmbient() {
+
+    private var onClickCallBack: ItemBottomNavigationComponentCallBack? = null
 
     /**
      * Renderiza los ítems basándose en el [bottomNavigationType] actual.
@@ -59,6 +63,7 @@ class ItemBottomNavigationComponent(
                     selected = index == indexSelect.intValue,
                     onClick = {
                         indexSelect.intValue = index
+                        onClickCallBack?.onClickListener(navKey = item.navKey)
                     },
                     icon = { RenderItemIcon(item.icon) },
                     label = { RenderItemLabel(label = item.label) })
@@ -73,9 +78,20 @@ class ItemBottomNavigationComponent(
                 NavigationRailItem(
                     colors = BottomNavigationComponentColor.getNavigationRailItemColors(),
                     selected = index == indexSelect.intValue,
-                    onClick = { indexSelect.intValue = index },
+                    onClick = {
+                        indexSelect.intValue = index
+                        onClickCallBack?.onClickListener(navKey = item.navKey)
+                    },
                     icon = { RenderItemIcon(item.icon) },
                     label = { RenderItemLabel(label = item.label) })
+            }
+        }
+    }
+
+    fun setOnClick(onClick: (navKey: NavKey) -> Unit) {
+        onClickCallBack = object : ItemBottomNavigationComponentCallBack {
+            override fun onClickListener(navKey: NavKey) {
+                onClick(navKey)
             }
         }
     }

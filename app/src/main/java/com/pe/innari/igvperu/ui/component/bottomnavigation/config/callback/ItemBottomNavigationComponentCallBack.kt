@@ -1,3 +1,8 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation.config.callback
 
-interface ItemBottomNavigationComponentCallBack
+import androidx.navigation3.runtime.NavKey
+
+interface ItemBottomNavigationComponentCallBack {
+
+    fun onClickListener(navKey: NavKey)
+}
