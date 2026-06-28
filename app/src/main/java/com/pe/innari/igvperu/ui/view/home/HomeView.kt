@@ -47,12 +47,12 @@ class HomeView : ViewAmbient() {
 
         bottomNavigationComponent = BottomNavigationComponent(
             indexSelect = state().indexSelect,
-            itemBottomNavigationMutableList = itemBottomNavigationMutableList()
+            itemBottomNavigationMutableList = createBottomNavigationItems()
         )
         navigationComponent = NavigationComponent(backStack = state().backStack)
 
-        bottomNavigationCallBack()
-        navigationCallBack()
+        configureBottomNavigationActions()
+        configureBackNavigationAction()
     }
 
     /**
@@ -79,31 +79,18 @@ class HomeView : ViewAmbient() {
         }
     }
 
-    /**
-     * Configura la lógica de respuesta a eventos de clic en la barra de navegación.
-     * Al hacer clic, se añade una nueva entrada al componente de navegación principal.
-     */
-    private fun bottomNavigationCallBack() {
+    private fun configureBottomNavigationActions() {
         bottomNavigationComponent.setOnclick {
             navigationComponent.addEntry(navKey = it)
         }
     }
 
-    /**
-     * Configura el comportamiento del botón atrás para esta vista.
-     * En este caso, finaliza la actividad actual.
-     */
-    private fun navigationCallBack() {
+    private fun configureBackNavigationAction() {
         navigationComponent.setOnBackPressed { currentActivity.finish() }
     }
 
-    /**
-     * Genera la lista de elementos que compondrán la navegación inferior.
-     *
-     * @return Lista mutable de [ItemBottomNavigation].
-     */
     @Composable
-    private fun itemBottomNavigationMutableList() = mutableListOf(
+    private fun createBottomNavigationItems() = mutableListOf(
         ItemBottomNavigation(
             icon = R.drawable.ic_calculator,
             label = stringResource(R.string.calculator_bottom_navigation),
