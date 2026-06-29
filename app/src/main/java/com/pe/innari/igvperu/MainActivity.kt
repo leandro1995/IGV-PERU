@@ -45,6 +45,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Contiene las constantes de configuración y valores estáticos de la actividad principal.
+     */
     companion object {
         private const val SPLASH_SCREEN_MIN_DURATION_SECONDS = 2L
     }
