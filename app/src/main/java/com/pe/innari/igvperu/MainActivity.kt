@@ -16,22 +16,13 @@ import com.pe.innari.igvperu.ui.view.home.HomeView
  */
 class MainActivity : ComponentActivity() {
 
-    /**
-     * Instancia de [CoroutinesBackground] para gestionar el retraso artificial del Splash Screen.
-     */
-    private val splashScreenDelay = CoroutinesBackground(
-        timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_DURATION_SECONDS
+    private val splashScreenDelayManager = CoroutinesBackground(
+        timeUnit = TimeType.SECONDS, delayAmount = SPLASH_SCREEN_MIN_DURATION_SECONDS
     )
 
-    /**
-     * Instancia de la vista principal que se mostrará tras el Splash Screen.
-     */
-    private val homeView = HomeView()
+    private val mainHomeView = HomeView()
 
-    /**
-     * Bandera que controla si el Splash Screen debe permanecer en pantalla.
-     */
-    private var shouldShowSplashScreen = true
+    private var isSplashScreenActive = true
 
     /**
      * Punto de entrada de la actividad. Configura el Splash Screen, habilita el diseño edge-to-edge
@@ -42,30 +33,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splashScreen.setKeepOnScreenCondition { shouldShowSplashScreen }
+        splashScreen.setKeepOnScreenCondition { isSplashScreenActive }
         enableEdgeToEdge()
-        setAppContentWithSplashScreen()
+        initializeMainContentWithSplashScreen()
     }
 
-    /**
-     * Establece el contenido principal de la aplicación utilizando Compose.
-     * Aplica el tema global, gestiona la ocultación del Splash Screen mediante un efecto lanzado
-     * y renderiza la vista [HomeView].
-     */
-    private fun setAppContentWithSplashScreen() = setContent {
+    private fun initializeMainContentWithSplashScreen() = setContent {
         IGVPERUTheme {
-            splashScreenDelay.LaunchedEffect { shouldShowSplashScreen = false }
-            homeView.OnCreateView()
+            splashScreenDelayManager.LaunchedEffect { isSplashScreenActive = false }
+            mainHomeView.OnCreateView()
         }
     }
 
-    /**
-     * Contiene constantes y configuraciones estáticas para [MainActivity].
-     */
     companion object {
-        /**
-         * Duración en segundos que el Splash Screen permanecerá visible como mínimo.
-         */
-        private const val SPLASH_SCREEN_DURATION_SECONDS = 2L
+        private const val SPLASH_SCREEN_MIN_DURATION_SECONDS = 2L
     }
 }
