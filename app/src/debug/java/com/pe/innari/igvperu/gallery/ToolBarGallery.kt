@@ -1,15 +1,25 @@
 package com.pe.innari.igvperu.gallery
 
 import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.component.toolbar.ToolBarComponent
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 import com.pe.innari.igvperu.ui.view.ambient.preview.NightPreview
 import com.pe.innari.igvperu.ui.view.ambient.preview.NotNightPreview
 
 class ToolBarGallery : ViewAmbient() {
 
+    private lateinit var toolBarComponent: ToolBarComponent
+
+    @Composable
+    override fun InstanceComponent() {
+        super.InstanceComponent()
+
+        toolBarComponent = ToolBarComponent()
+    }
+
     @Composable
     override fun CompactPortrait() {
-
+        toolBarComponent.OnCreateComponent()
     }
 
     @NotNightPreview
