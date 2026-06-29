@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">IGV PERÚ</string>
+
+    <!-- Bottom Navigation -->
+    <string name="calculator_bottom_navigation">Calculadora</string>
+    <string name="history_bottom_navigation">Historial</string>
+    <string name="calendar_bottom_navigation">Cronograma</string>
+    <string name="settings_bottom_navigation">Ajustes</string>
 </resources>

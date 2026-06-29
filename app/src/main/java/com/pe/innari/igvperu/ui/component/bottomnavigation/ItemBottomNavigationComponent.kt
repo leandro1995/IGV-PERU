@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation3.runtime.NavKey
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.color.BottomNavigationComponentColor
+import com.pe.innari.igvperu.ui.component.bottomnavigation.config.callback.ItemBottomNavigationComponentCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
 import com.pe.innari.igvperu.ui.theme.Dimen24
@@ -32,8 +34,11 @@ class ItemBottomNavigationComponent(
     private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
 ) : ComponentAmbient() {
 
+    private var onClickCallBack: ItemBottomNavigationComponentCallBack? = null
+
     /**
-     * Renderiza los ítems basándose en el [bottomNavigationType] actual.
+     * Punto de entrada para la creación del componente.
+     * Renderiza los ítems como una barra inferior o un rail lateral basándose en [bottomNavigationType].
      */
     @Composable
     override fun OnCreateComponent() {
@@ -41,17 +46,17 @@ class ItemBottomNavigationComponent(
 
         when (bottomNavigationType) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                RenderNavigationBarItems()
+                CreateNavigationBarItems()
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                RenderNavigationRailItems()
+                CreateNavigationRailItems()
             }
         }
     }
 
     @Composable
-    private fun RenderNavigationBarItems() {
+    private fun CreateNavigationBarItems() {
         Row {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationBarItem(
@@ -59,29 +64,46 @@ class ItemBottomNavigationComponent(
                     selected = index == indexSelect.intValue,
                     onClick = {
                         indexSelect.intValue = index
+                        onClickCallBack?.onClickListener(navKey = item.navKey)
                     },
-                    icon = { RenderItemIcon(item.icon) },
-                    label = { RenderItemLabel(label = item.label) })
+                    icon = { CreateItemIcon(item.icon) },
+                    label = { CreateItemLabel(label = item.label) })
             }
         }
     }
 
     @Composable
-    private fun RenderNavigationRailItems() {
+    private fun CreateNavigationRailItems() {
         Column {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationRailItem(
                     colors = BottomNavigationComponentColor.getNavigationRailItemColors(),
                     selected = index == indexSelect.intValue,
-                    onClick = { indexSelect.intValue = index },
-                    icon = { RenderItemIcon(item.icon) },
-                    label = { RenderItemLabel(label = item.label) })
+                    onClick = {
+                        indexSelect.intValue = index
+                        onClickCallBack?.onClickListener(navKey = item.navKey)
+                    },
+                    icon = { CreateItemIcon(item.icon) },
+                    label = { CreateItemLabel(label = item.label) })
+            }
+        }
+    }
+
+    /**
+     * Configura el callback de eventos de clic para los ítems.
+     *
+     * @param onClick Lambda que se ejecutará al seleccionar un ítem.
+     */
+    fun setOnClick(onClick: (navKey: NavKey) -> Unit) {
+        onClickCallBack = object : ItemBottomNavigationComponentCallBack {
+            override fun onClickListener(navKey: NavKey) {
+                onClick(navKey)
             }
         }
     }
 
     @Composable
-    private fun RenderItemIcon(icon: Int) {
+    private fun CreateItemIcon(icon: Int) {
         Icon(
             modifier = Modifier.size(Dimen24),
             painter = painterResource(icon),
@@ -90,7 +112,7 @@ class ItemBottomNavigationComponent(
     }
 
     @Composable
-    private fun RenderItemLabel(label: String) {
+    private fun CreateItemLabel(label: String) {
         Text(text = label, style = ItemBottomNavigationComponent)
     }
 }

@@ -24,8 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Modifier
+import androidx.navigation3.runtime.NavKey
 import com.pe.innari.igvperu.ui.adaptable.type.ViewType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.config.callback.BottomNavigationComponentCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.padding.BottomNavigationComponentPadding
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationType
@@ -48,9 +50,12 @@ class BottomNavigationComponent(
 ) : ComponentAmbient() {
 
     private lateinit var itemBottomNavigationComponent: ItemBottomNavigationComponent
+    private var onclickCallBack: BottomNavigationComponentCallBack? = null
 
     /**
-     * Inicializa el componente secundario que renderiza los ítems de navegación.
+     * Inicializa las dependencias internas del componente.
+     * Crea la instancia de [ItemBottomNavigationComponent] y configura su listener de clics
+     * para propagar los eventos hacia [onclickCallBack].
      */
     @Composable
     override fun Instance() {
@@ -60,28 +65,51 @@ class BottomNavigationComponent(
             indexSelect = indexSelect,
             itemBottomNavigationMutableList = itemBottomNavigationMutableList
         )
+
+        itemBottomNavigationComponent.setOnClick {
+            onclickCallBack?.onClickListener(navKey = it)
+        }
     }
 
+    /**
+     * Crea y renderiza el componente basándose en el tipo de navegación determinado por el tamaño de la ventana.
+     * Alterna entre [CreateBottomNavigationBarLayout] y [CreateNavigationRailLayout].
+     *
+     * @param view Contenido principal que se mostrará junto a la navegación.
+     */
     @Composable
     override fun OnCreateComponent(view: @Composable (() -> Unit)) {
         super.OnCreateComponent(view)
 
-        when (navigationTypeByWindowSize()) {
+        when (resolveNavigationTypeFromWindowSize()) {
             BottomNavigationType.BOTTOM_NAVIGATION_BAR -> {
-                BottomNavigationBarLayout(view = view)
+                CreateBottomNavigationBarLayout(view = view)
             }
 
             BottomNavigationType.BOTTOM_NAVIGATION_RAIL -> {
-                NavigationRailLayout(view = view)
+                CreateNavigationRailLayout(view = view)
+            }
+        }
+    }
+
+    /**
+     * Establece el callback para manejar los eventos de clic en los elementos de navegación.
+     *
+     * @param onClick Función lambda que recibe la [NavKey] seleccionada.
+     */
+    fun setOnclick(onClick: (navKey: NavKey) -> Unit) {
+        onclickCallBack = object : BottomNavigationComponentCallBack {
+            override fun onClickListener(navKey: NavKey) {
+                onClick(navKey)
             }
         }
     }
 
     @Composable
-    private fun BottomNavigationBarLayout(view: @Composable () -> Unit) {
+    private fun CreateBottomNavigationBarLayout(view: @Composable () -> Unit) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            bottomBar = { BottomNavigationBarContent() }) { paddingValues ->
+            bottomBar = { CreateBottomNavigationBarContent() }) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
                 view()
             }
@@ -89,18 +117,18 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationRailLayout(view: @Composable () -> Unit) {
+    private fun CreateNavigationRailLayout(view: @Composable () -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            ProvideNavigationRailLayout(view = view)
+            ConfigureNavigationRailLayout(view = view)
         }
     }
 
     @Composable
-    private fun ProvideNavigationRailLayout(view: @Composable () -> Unit) =
+    private fun ConfigureNavigationRailLayout(view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onBackground) {
             Row(modifier = Modifier.windowInsetsPadding(insets = layout.getVerticalSafeDrawingInsets())) {
                 Box(
@@ -114,7 +142,7 @@ class BottomNavigationComponent(
                             ), end = Dimen16
                         )
                 ) {
-                    NavigationRailContent()
+                    CreateNavigationRailContent()
                 }
                 Box(
                     modifier = Modifier.padding(
@@ -131,8 +159,8 @@ class BottomNavigationComponent(
         }
 
     @Composable
-    private fun BottomNavigationBarContent() {
-        NavigationCard(
+    private fun CreateBottomNavigationBarContent() {
+        CreateStyledNavigationCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .navigationBarsPadding()
@@ -148,8 +176,8 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationRailContent() {
-        NavigationCard(
+    private fun CreateNavigationRailContent() {
+        CreateStyledNavigationCard(
             modifier = Modifier.padding(
                 top = BottomNavigationComponentPadding.getNavigationRailTopPadding(isPhoneOrTablet = adaptable.isPhoneOrTablet()),
                 bottom = BottomNavigationComponentPadding.getNavigationRailBottomPadding(
@@ -171,25 +199,23 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) =
-        Card(
-            modifier = modifier,
-            shape = RoundedCornerShape(Dimen22),
-            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
-            view()
-        }
+    private fun CreateStyledNavigationCard(modifier: Modifier = Modifier, view: @Composable () -> Unit) = Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(Dimen22),
+        border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outline),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        view()
+    }
 
     @Composable
-    private fun navigationTypeByWindowSize() =
-        when (adaptable.resolveViewTypeFromWindowSize()) {
-            ViewType.COMPACT_PORTRAIT -> {
-                BottomNavigationType.BOTTOM_NAVIGATION_BAR
-            }
-
-            ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
-                BottomNavigationType.BOTTOM_NAVIGATION_RAIL
-            }
+    private fun resolveNavigationTypeFromWindowSize() = when (adaptable.resolveViewTypeFromWindowSize()) {
+        ViewType.COMPACT_PORTRAIT -> {
+            BottomNavigationType.BOTTOM_NAVIGATION_BAR
         }
+
+        ViewType.COMPACT_LAND_SCAPE, ViewType.MEDIUM, ViewType.EXPANDED -> {
+            BottomNavigationType.BOTTOM_NAVIGATION_RAIL
+        }
+    }
 }
