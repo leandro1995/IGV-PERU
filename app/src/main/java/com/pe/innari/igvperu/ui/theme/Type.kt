@@ -26,3 +26,9 @@ val Typography = Typography(
  */
 val ItemBottomNavigationComponent =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
+
+val TitleToolbarComponent =
+    TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(R.font.semi_bold)))
+
+val SubTitleToolbarComponent =
+    TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.regular)))
