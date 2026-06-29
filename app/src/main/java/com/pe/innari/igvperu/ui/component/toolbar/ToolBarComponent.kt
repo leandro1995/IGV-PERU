@@ -1,7 +1,6 @@
 package com.pe.innari.igvperu.ui.component.toolbar
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,7 +30,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen48
+import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.Dimen80
+import com.pe.innari.igvperu.ui.theme.SubTitleToolbarComponent
+import com.pe.innari.igvperu.ui.theme.TitleToolbarComponent
 
 class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
 
@@ -79,8 +81,18 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                         .fillMaxHeight()
                 )
                 Column {
-                    Text(text = toolBar.title)
-                    Text(text = toolBar.subTitle)
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = toolBar.title,
+                        style = TitleToolbarComponent
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = Dimen5),
+                        text = toolBar.subTitle,
+                        style = SubTitleToolbarComponent
+                    )
                 }
             }
         }
