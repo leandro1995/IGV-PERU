@@ -8,9 +8,13 @@ import androidx.compose.ui.unit.sp
  */
 val Dimen0 = 0.dp
 val Dimen1 = 1.dp
+val Dimen14 = 14.dp
 val Dimen16 = 16.dp
+val Dimen20 = 20.dp
 val Dimen22 = 22.dp
 val Dimen24 = 24.dp
+val Dimen48 = 48.dp
+val Dimen80 = 80.dp
 
 /**
  * Definiciones de tamaños de texto comunes (Sp).
