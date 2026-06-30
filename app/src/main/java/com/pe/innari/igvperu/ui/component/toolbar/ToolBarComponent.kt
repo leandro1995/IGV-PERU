@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.toolbar.color.ToolBarComponentColor
+import com.pe.innari.igvperu.ui.component.toolbar.elevation.ToolBarComponentElevation
 import com.pe.innari.igvperu.ui.component.toolbar.model.ToolBar
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen14
@@ -46,7 +47,8 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                 .fillMaxWidth()
                 .height(Dimen80),
             shape = RoundedCornerShape(size = Dimen20),
-            colors = ToolBarComponentColor.cardDefaultsElevatedCardColors()
+            colors = ToolBarComponentColor.cardDefaultsElevatedCardColors(),
+            elevation = ToolBarComponentElevation.cardDefaultsCardElevation()
         ) {
             Row(
                 modifier = Modifier
