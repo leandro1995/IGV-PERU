@@ -27,8 +27,14 @@ val Typography = Typography(
 val ItemBottomNavigationComponent =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
 
+/**
+ * Estilo de texto utilizado para el título en el componente ToolBar.
+ */
 val TitleToolbarComponent =
     TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
+/**
+ * Estilo de texto utilizado para el subtítulo en el componente ToolBar.
+ */
 val SubTitleToolbarComponent =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.regular)))

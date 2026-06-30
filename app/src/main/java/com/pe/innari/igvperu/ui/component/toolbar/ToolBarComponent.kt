@@ -36,8 +36,17 @@ import com.pe.innari.igvperu.ui.theme.Dimen80
 import com.pe.innari.igvperu.ui.theme.SubTitleToolbarComponent
 import com.pe.innari.igvperu.ui.theme.TitleToolbarComponent
 
+/**
+ * Componente de barra de herramientas (ToolBar) personalizado que muestra un icono, un título y un subtítulo.
+ * Utiliza un [ElevatedCard] para proporcionar elevación y un diseño visualmente diferenciado.
+ *
+ * @property toolBar Modelo de datos que contiene la información a mostrar en la barra de herramientas.
+ */
 class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
 
+    /**
+     * Crea la interfaz de usuario del componente utilizando Jetpack Compose.
+     */
     @Composable
     override fun OnCreateComponent() {
         super.OnCreateComponent()
