@@ -9,6 +9,9 @@ import androidx.compose.runtime.Composable
  */
 class ToolBarComponentColor {
 
+    /**
+     * Objeto compañero que proporciona acceso a las configuraciones de color del componente.
+     */
     companion object {
 
         /**

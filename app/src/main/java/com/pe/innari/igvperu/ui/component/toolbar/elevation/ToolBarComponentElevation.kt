@@ -9,6 +9,9 @@ import com.pe.innari.igvperu.ui.theme.Dimen6
  */
 class ToolBarComponentElevation {
 
+    /**
+     * Objeto compañero que proporciona acceso a las configuraciones de elevación del componente.
+     */
     companion object {
 
         /**
