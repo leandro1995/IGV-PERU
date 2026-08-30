@@ -1,3 +1,9 @@
 package com.pe.innari.igvperu.ui.view.ambient
 
-abstract class ViewAmbient
+import androidx.compose.runtime.Composable
+
+abstract class ViewAmbient {
+
+    @Composable
+    abstract fun OnCreate()
+}
