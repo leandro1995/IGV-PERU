@@ -3,6 +3,18 @@ package com.pe.innari.igvperu.ui.view.adaptivepreview
 import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview
 
+/**
+ * Clase de anotación para previsualización múltiple de Composables en diferentes escenarios adaptativos.
+ *
+ * Esta previsualización múltiple incluye:
+ * - Teléfono Retrato (Claro y Oscuro)
+ * - Teléfono Paisaje (Claro y Oscuro)
+ * - Tablet Retrato (Claro y Oscuro)
+ * - Tablet Paisaje (Claro y Oscuro)
+ *
+ * Utilice esta anotación en sus funciones de previsualización de Composable para ver cómo se adapta la interfaz de usuario
+ * a varios tamaños de pantalla y temas del sistema.
+ */
 @Preview(
     name = "Phone Portrait - Light",
     group = "Adaptive Light",
