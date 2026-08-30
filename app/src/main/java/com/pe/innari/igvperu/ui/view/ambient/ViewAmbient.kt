@@ -6,4 +6,9 @@ abstract class ViewAmbient {
 
     @Composable
     abstract fun OnCreate()
+
+    @Composable
+    open fun Preview() {
+        OnCreate()
+    }
 }
