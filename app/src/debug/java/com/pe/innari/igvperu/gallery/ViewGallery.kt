@@ -12,10 +12,19 @@ import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 class ViewGallery : ViewAmbient() {
 
     @Composable
-    override fun OnCreate() {
+    override fun PortraitPhone() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "Hola mundo", modifier = Modifier.padding(innerPadding)
+                text = "PortraitPhone", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapePhone() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapePhone", modifier = Modifier.padding(innerPadding)
             )
         }
     }
