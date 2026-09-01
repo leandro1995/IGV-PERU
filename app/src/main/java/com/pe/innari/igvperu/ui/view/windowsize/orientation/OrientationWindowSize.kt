@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.view.windowsize.orientation
 
-enum class OrientationWindowSize
+enum class OrientationWindowSize {
+    PORTRAIT, LANDSCAPE
+}
