@@ -1,7 +1,6 @@
 package com.pe.innari.igvperu.ui.view.windowsize
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.res.Configuration
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -10,7 +9,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import com.pe.innari.igvperu.ui.view.windowsize.model.Information
 import com.pe.innari.igvperu.ui.view.windowsize.orientation.OrientationWindowSize
 
-class ViewWindowSize(private val activity: Activity) {
+class ViewWindowSize {
 
     @Composable
     fun TypeWindowSize(
