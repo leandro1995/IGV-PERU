@@ -2,7 +2,6 @@ package com.pe.innari.igvperu.ui.view.windowsize
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
@@ -49,10 +48,6 @@ class ViewWindowSize {
     @Composable
     private fun width() = localConfigurationCurrent().screenWidthDp
 
-    @SuppressLint("ConfigurationScreenWidthHeight")
-    @Composable
-    private fun height() = localConfigurationCurrent().screenHeightDp
-
     @Composable
     private fun widthSize() = when {
         width() < COMPACT_WIDTH_SIZE -> {
@@ -65,21 +60,6 @@ class ViewWindowSize {
 
         else -> {
             WindowWidthSizeClass.Expanded
-        }
-    }
-
-    @Composable
-    private fun heightSize() = when {
-        height() < COMPACT_HEIGHT_SIZE -> {
-            WindowHeightSizeClass.Compact
-        }
-
-        height() < MEDIUM_HEIGHT_SIZE -> {
-            WindowHeightSizeClass.Medium
-        }
-
-        else -> {
-            WindowHeightSizeClass.Expanded
         }
     }
 
@@ -102,7 +82,5 @@ class ViewWindowSize {
     companion object {
         private const val COMPACT_WIDTH_SIZE = 600
         private const val MEDIUM_WIDTH_SIZE = 8400
-        private const val COMPACT_HEIGHT_SIZE = 480
-        private const val MEDIUM_HEIGHT_SIZE = 900
     }
 }
