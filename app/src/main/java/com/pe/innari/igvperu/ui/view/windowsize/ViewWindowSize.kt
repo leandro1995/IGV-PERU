@@ -7,9 +7,41 @@ import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
+import com.pe.innari.igvperu.ui.view.windowsize.model.Information
 import com.pe.innari.igvperu.ui.view.windowsize.orientation.OrientationWindowSize
 
 class ViewWindowSize(private val activity: Activity) {
+
+    @Composable
+    fun TypeWindowSize(
+        portraitPhone: @Composable () -> Unit,
+        landScapePhone: @Composable () -> Unit,
+        medium: @Composable () -> Unit,
+        portraitTablet: @Composable () -> Unit,
+        landScapeTablet: @Composable () -> Unit,
+    ) {
+        when {
+            information().isCompact() && information().isPortrait() -> {
+                portraitPhone()
+            }
+
+            information().isCompact() && information().isLandscape() -> {
+                landScapePhone()
+            }
+
+            information().isMedium() -> {
+                medium()
+            }
+
+            information().isExpanded() && information().isPortrait() -> {
+                portraitTablet()
+            }
+
+            else -> {
+                landScapeTablet()
+            }
+        }
+    }
 
     @Composable
     private fun localConfigurationCurrent() = LocalConfiguration.current
@@ -62,6 +94,11 @@ class ViewWindowSize(private val activity: Activity) {
             OrientationWindowSize.PORTRAIT
         }
     }
+
+    @Composable
+    private fun information() = Information(
+        windowWidthSizeClass = widthSize(), orientationWindowSize = orientation()
+    )
 
     companion object {
         private const val COMPACT_WIDTH_SIZE = 600
