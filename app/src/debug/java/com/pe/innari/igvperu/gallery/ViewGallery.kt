@@ -29,6 +29,33 @@ class ViewGallery : ViewAmbient() {
         }
     }
 
+    @Composable
+    override fun Medium() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "Medium", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun PortraitTablet() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "PortraitTablet", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapeTablet() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapeTablet", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
     @ThemeAdaptivePreview
     @Composable
     override fun Preview() {
