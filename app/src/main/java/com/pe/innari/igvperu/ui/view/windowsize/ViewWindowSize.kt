@@ -9,7 +9,6 @@ import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_EXPANDED_
 import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import com.pe.innari.igvperu.ui.view.windowsize.model.Information
 import com.pe.innari.igvperu.ui.view.windowsize.orientation.OrientationWindowSize
 import com.pe.innari.igvperu.ui.view.windowsize.type.TypeWindowSize
 
@@ -29,11 +28,6 @@ class ViewWindowSize {
         windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
 
         ViewAdaptive(
-            information = Information(
-                widthType = widthType(),
-                heightType = heightType(),
-                orientationWindowSize = orientation()
-            ),
             portraitCompact = portraitCompact,
             landScapeCompact = landScapeCompact,
             portraitMedium = portraitMedium,
@@ -88,8 +82,13 @@ class ViewWindowSize {
     }
 
     @Composable
+    private fun isPortrait() = orientation() == OrientationWindowSize.PORTRAIT
+
+    @Composable
+    private fun isLandscape() = orientation() == OrientationWindowSize.LANDSCAPE
+
+    @Composable
     private fun ViewAdaptive(
-        information: Information,
         portraitCompact: @Composable () -> Unit,
         landScapeCompact: @Composable () -> Unit,
         portraitMedium: @Composable () -> Unit,
@@ -97,14 +96,14 @@ class ViewWindowSize {
         portraitExpanded: @Composable () -> Unit,
         landScapeExpanded: @Composable () -> Unit
     ) {
-        if (information.isLandscape() && information.heightType == TypeWindowSize.COMPACT) {
+        if (isLandscape() && heightType() == TypeWindowSize.COMPACT) {
             landScapeCompact()
         }
 
-        when (information.widthType) {
+        when (widthType()) {
 
             TypeWindowSize.COMPACT -> {
-                if (information.isPortrait()) {
+                if (isPortrait()) {
                     portraitCompact()
                 } else {
                     landScapeCompact()
@@ -112,7 +111,7 @@ class ViewWindowSize {
             }
 
             TypeWindowSize.MEDIUM -> {
-                if (information.isPortrait()) {
+                if (isPortrait()) {
                     portraitMedium()
                 } else {
                     landScapeMedium()
@@ -120,7 +119,7 @@ class ViewWindowSize {
             }
 
             TypeWindowSize.EXPANDED -> {
-                if (information.isPortrait()) {
+                if (isPortrait()) {
                     portraitExpanded()
                 } else {
                     landScapeExpanded()
