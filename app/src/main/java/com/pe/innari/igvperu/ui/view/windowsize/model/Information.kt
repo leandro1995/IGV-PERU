@@ -1,18 +1,13 @@
 package com.pe.innari.igvperu.ui.view.windowsize.model
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import com.pe.innari.igvperu.ui.view.windowsize.orientation.OrientationWindowSize
+import com.pe.innari.igvperu.ui.view.windowsize.type.TypeWindowSize
 
 class Information(
-    private val windowWidthSizeClass: WindowWidthSizeClass,
+    val widthType: TypeWindowSize,
+    val heightType: TypeWindowSize,
     private val orientationWindowSize: OrientationWindowSize
 ) {
-
-    fun isCompact() = windowWidthSizeClass == WindowWidthSizeClass.Compact
-
-    fun isMedium() = windowWidthSizeClass == WindowWidthSizeClass.Medium
-
-    fun isExpanded() = windowWidthSizeClass == WindowWidthSizeClass.Expanded
 
     fun isPortrait() = orientationWindowSize == OrientationWindowSize.PORTRAIT
 
