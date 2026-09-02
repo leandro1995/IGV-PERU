@@ -19,34 +19,40 @@ abstract class ViewAmbient {
     @Composable
     fun OnCreate() {
         viewWindowSize.TypeWindowSize(
-            portraitPhone = { PortraitPhone() },
-            landScapePhone = { LandScapePhone() },
-            medium = { Medium() },
-            portraitTablet = { PortraitTablet() },
-            landScapeTablet = { LandScapeTablet() })
+            portraitCompact = { PortraitCompact() },
+            portraitMedium = { PortraitMedium() },
+            portraitExpanded = { PortraitExpanded() },
+            landScapeCompact = { LandScapeCompact() },
+            landScapeMedium = { LandScapeMedium() },
+            landScapeExpanded = { LandScapeExpanded() })
     }
 
     @Composable
-    abstract fun PortraitPhone()
+    abstract fun PortraitCompact()
 
     @Composable
-    protected open fun LandScapePhone() {
-        PortraitPhone()
+    protected open fun PortraitMedium() {
+        PortraitCompact()
     }
 
     @Composable
-    protected open fun Medium() {
-        PortraitPhone()
+    protected open fun PortraitExpanded() {
+        PortraitCompact()
     }
 
     @Composable
-    protected open fun PortraitTablet() {
-        PortraitPhone()
+    protected open fun LandScapeCompact() {
+        PortraitCompact()
     }
 
     @Composable
-    protected open fun LandScapeTablet() {
-        PortraitPhone()
+    protected open fun LandScapeMedium() {
+        PortraitCompact()
+    }
+
+    @Composable
+    protected open fun LandScapeExpanded() {
+        PortraitCompact()
     }
 
     /**
