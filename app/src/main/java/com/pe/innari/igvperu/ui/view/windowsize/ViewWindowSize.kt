@@ -1,67 +1,80 @@
 package com.pe.innari.igvperu.ui.view.windowsize
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.adaptive.WindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_EXPANDED_LOWER_BOUND
+import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import com.pe.innari.igvperu.ui.view.windowsize.model.Information
 import com.pe.innari.igvperu.ui.view.windowsize.orientation.OrientationWindowSize
+import com.pe.innari.igvperu.ui.view.windowsize.type.TypeWindowSize
 
 class ViewWindowSize {
 
+    private lateinit var windowAdaptiveInfo: WindowAdaptiveInfo
+
     @Composable
     fun TypeWindowSize(
-        portraitPhone: @Composable () -> Unit,
-        landScapePhone: @Composable () -> Unit,
-        medium: @Composable () -> Unit,
-        portraitTablet: @Composable () -> Unit,
-        landScapeTablet: @Composable () -> Unit,
+        portraitCompact: @Composable () -> Unit,
+        landScapeCompact: @Composable () -> Unit,
+        portraitMedium: @Composable () -> Unit,
+        landScapeMedium: @Composable () -> Unit,
+        portraitExpanded: @Composable () -> Unit,
+        landScapeExpanded: @Composable () -> Unit
     ) {
-        when {
-            information().isCompact() && information().isPortrait() -> {
-                portraitPhone()
-            }
+        windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
 
-            information().isCompact() && information().isLandscape() -> {
-                landScapePhone()
-            }
+        ViewAdaptive(
+            information = Information(
+                widthType = widthType(),
+                heightType = heightType(),
+                orientationWindowSize = orientation()
+            ),
+            portraitCompact = portraitCompact,
+            landScapeCompact = landScapeCompact,
+            portraitMedium = portraitMedium,
+            landScapeMedium = landScapeMedium,
+            portraitExpanded = portraitExpanded,
+            landScapeExpanded = landScapeExpanded
+        )
+    }
 
-            information().isMedium() -> {
-                medium()
-            }
+    private fun windowSizeClass() = windowAdaptiveInfo.windowSizeClass
 
-            information().isExpanded() && information().isPortrait() -> {
-                portraitTablet()
-            }
+    private fun widthType() = when {
+        windowSizeClass().isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND) -> {
+            TypeWindowSize.EXPANDED
+        }
 
-            else -> {
-                landScapeTablet()
-            }
+        windowSizeClass().isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) -> {
+            TypeWindowSize.MEDIUM
+        }
+
+        else -> {
+            TypeWindowSize.COMPACT
+        }
+    }
+
+    private fun heightType() = when {
+        windowSizeClass().isHeightAtLeastBreakpoint(HEIGHT_DP_EXPANDED_LOWER_BOUND) -> {
+            TypeWindowSize.EXPANDED
+        }
+
+        windowSizeClass().isHeightAtLeastBreakpoint(HEIGHT_DP_MEDIUM_LOWER_BOUND) -> {
+            TypeWindowSize.MEDIUM
+        }
+
+        else -> {
+            TypeWindowSize.COMPACT
         }
     }
 
     @Composable
     private fun localConfigurationCurrent() = LocalConfiguration.current
-
-    @SuppressLint("ConfigurationScreenWidthHeight")
-    @Composable
-    private fun width() = localConfigurationCurrent().screenWidthDp
-
-    @Composable
-    private fun widthSize() = when {
-        width() < COMPACT_WIDTH_SIZE -> {
-            WindowWidthSizeClass.Compact
-        }
-
-        width() < MEDIUM_WIDTH_SIZE -> {
-            WindowWidthSizeClass.Medium
-        }
-
-        else -> {
-            WindowWidthSizeClass.Expanded
-        }
-    }
 
     @Composable
     private fun orientation() = when (localConfigurationCurrent().orientation) {
@@ -75,12 +88,44 @@ class ViewWindowSize {
     }
 
     @Composable
-    private fun information() = Information(
-        windowWidthSizeClass = widthSize(), orientationWindowSize = orientation()
-    )
+    private fun ViewAdaptive(
+        information: Information,
+        portraitCompact: @Composable () -> Unit,
+        landScapeCompact: @Composable () -> Unit,
+        portraitMedium: @Composable () -> Unit,
+        landScapeMedium: @Composable () -> Unit,
+        portraitExpanded: @Composable () -> Unit,
+        landScapeExpanded: @Composable () -> Unit
+    ) {
+        if (information.isLandscape() && information.heightType == TypeWindowSize.COMPACT) {
+            landScapeCompact()
+        }
 
-    companion object {
-        private const val COMPACT_WIDTH_SIZE = 600
-        private const val MEDIUM_WIDTH_SIZE = 8400
+        when (information.widthType) {
+
+            TypeWindowSize.COMPACT -> {
+                if (information.isPortrait()) {
+                    portraitCompact()
+                } else {
+                    landScapeCompact()
+                }
+            }
+
+            TypeWindowSize.MEDIUM -> {
+                if (information.isPortrait()) {
+                    portraitMedium()
+                } else {
+                    landScapeMedium()
+                }
+            }
+
+            TypeWindowSize.EXPANDED -> {
+                if (information.isPortrait()) {
+                    portraitExpanded()
+                } else {
+                    landScapeExpanded()
+                }
+            }
+        }
     }
 }
