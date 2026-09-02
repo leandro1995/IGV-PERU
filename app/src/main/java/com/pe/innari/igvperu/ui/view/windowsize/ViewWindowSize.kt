@@ -97,32 +97,40 @@ class ViewWindowSize {
         landScapeExpanded: @Composable () -> Unit
     ) {
         if (isLandscape() && heightType() == TypeWindowSize.COMPACT) {
-            landScapeCompact()
-        }
-
-        when (widthType()) {
-
-            TypeWindowSize.COMPACT -> {
-                if (isPortrait()) {
-                    portraitCompact()
-                } else {
+            when (widthType()) {
+                TypeWindowSize.COMPACT -> {
                     landScapeCompact()
                 }
-            }
 
-            TypeWindowSize.MEDIUM -> {
-                if (isPortrait()) {
-                    portraitMedium()
-                } else {
+                TypeWindowSize.MEDIUM, TypeWindowSize.EXPANDED -> {
                     landScapeMedium()
                 }
             }
+        } else {
+            when (widthType()) {
 
-            TypeWindowSize.EXPANDED -> {
-                if (isPortrait()) {
-                    portraitExpanded()
-                } else {
-                    landScapeExpanded()
+                TypeWindowSize.COMPACT -> {
+                    if (isPortrait()) {
+                        portraitCompact()
+                    } else {
+                        landScapeCompact()
+                    }
+                }
+
+                TypeWindowSize.MEDIUM -> {
+                    if (isPortrait()) {
+                        portraitMedium()
+                    } else {
+                        landScapeMedium()
+                    }
+                }
+
+                TypeWindowSize.EXPANDED -> {
+                    if (isPortrait()) {
+                        portraitExpanded()
+                    } else {
+                        landScapeExpanded()
+                    }
                 }
             }
         }
