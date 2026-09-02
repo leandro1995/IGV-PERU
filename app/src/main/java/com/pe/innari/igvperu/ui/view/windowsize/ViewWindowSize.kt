@@ -7,8 +7,24 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.window.core.layout.WindowSizeClass
 import com.pe.innari.igvperu.ui.view.windowsize.type.TypeWindowSize
 
+/**
+ * Objeto utilitario para gestionar diseños adaptativos basados en el tamaño de la ventana y la orientación.
+ *
+ * Utiliza `WindowSizeClass` para determinar el tipo de diseño que debe mostrarse según las dimensiones
+ * actuales de la pantalla.
+ */
 object ViewWindowSize {
 
+    /**
+     * Composable que selecciona automáticamente el diseño adecuado basado en el tamaño y la orientación.
+     *
+     * @param portraitCompact Diseño para pantallas compactas en orientación vertical.
+     * @param landScapeCompact Diseño para pantallas compactas en orientación horizontal.
+     * @param portraitMedium Diseño para pantallas medianas en orientación vertical.
+     * @param landScapeMedium Diseño para pantallas medianas en orientación horizontal.
+     * @param portraitExpanded Diseño para pantallas expandidas en orientación vertical.
+     * @param landScapeExpanded Diseño para pantallas expandidas en orientación horizontal.
+     */
     @Composable
     fun AdaptiveLayout(
         portraitCompact: @Composable () -> Unit,
@@ -38,18 +54,27 @@ object ViewWindowSize {
         )
     }
 
+    /**
+     * Determina el [TypeWindowSize] del ancho de la ventana.
+     */
     private fun getWidthType(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
         windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND) -> TypeWindowSize.EXPANDED
         windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) -> TypeWindowSize.MEDIUM
         else -> TypeWindowSize.COMPACT
     }
 
+    /**
+     * Determina el [TypeWindowSize] del alto de la ventana.
+     */
     private fun getHeightType(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
         windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_EXPANDED_LOWER_BOUND) -> TypeWindowSize.EXPANDED
         windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND) -> TypeWindowSize.MEDIUM
         else -> TypeWindowSize.COMPACT
     }
 
+    /**
+     * Función interna que realiza la selección del Composable a mostrar basándose en los tipos de tamaño calculados.
+     */
     @Composable
     private fun ViewAdaptive(
         widthType: TypeWindowSize,
