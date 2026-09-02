@@ -11,14 +11,12 @@ import com.pe.innari.igvperu.ui.view.windowsize.ViewWindowSize
  */
 abstract class ViewAmbient {
 
-    private val viewWindowSize = ViewWindowSize()
-
     /**
      * Función abstracta que debe ser implementada por las subclases para definir el contenido de la interfaz de usuario Composable.
      */
     @Composable
     fun OnCreate() {
-        viewWindowSize.TypeWindowSize(
+        ViewWindowSize.AdaptiveLayout(
             portraitCompact = { PortraitCompact() },
             portraitMedium = { PortraitMedium() },
             portraitExpanded = { PortraitExpanded() },
