@@ -12,46 +12,55 @@ import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 class ViewGallery : ViewAmbient() {
 
     @Composable
-    override fun PortraitPhone() {
+    override fun PortraitCompact() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "PortraitPhone", modifier = Modifier.padding(innerPadding)
+                text = "PortraitCompact", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun LandScapePhone() {
+    override fun PortraitMedium() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "LandScapePhone", modifier = Modifier.padding(innerPadding)
+                text = "PortraitMedium", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun Medium() {
+    override fun PortraitExpanded() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "Medium", modifier = Modifier.padding(innerPadding)
+                text = "PortraitExpanded", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun PortraitTablet() {
+    override fun LandScapeCompact() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "PortraitTablet", modifier = Modifier.padding(innerPadding)
+                text = "LandScapeCompact", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun LandScapeTablet() {
+    override fun LandScapeMedium() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "LandScapeTablet", modifier = Modifier.padding(innerPadding)
+                text = "LandScapeMedium", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapeExpanded() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapeExpanded", modifier = Modifier.padding(innerPadding)
             )
         }
     }
