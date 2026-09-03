@@ -12,10 +12,55 @@ import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 class ViewGallery : ViewAmbient() {
 
     @Composable
-    override fun OnCreate() {
+    override fun PortraitCompact() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "Hola mundo", modifier = Modifier.padding(innerPadding)
+                text = "PortraitCompact", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun PortraitMedium() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "PortraitMedium", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun PortraitExpanded() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "PortraitExpanded", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapeCompact() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapeCompact", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapeMedium() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapeMedium", modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+
+    @Composable
+    override fun LandScapeExpanded() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Text(
+                text = "LandScapeExpanded", modifier = Modifier.padding(innerPadding)
             )
         }
     }
