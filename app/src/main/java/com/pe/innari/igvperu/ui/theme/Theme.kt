@@ -1,6 +1,5 @@
 package com.pe.innari.igvperu.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -11,32 +10,75 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * Configuración del esquema de colores para el modo oscuro.
+ * Define la relación entre los colores de la paleta y los roles semánticos de Material 3.
+ */
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Teal80,
+    onPrimary = Teal20,
+    primaryContainer = Teal30,
+    onPrimaryContainer = Teal95,
+    secondary = TealGrey85,
+    secondaryContainer = TealGrey35,
+    tertiary = Pink80,
+    tertiaryContainer = Pink30,
+    background = Neutral6,
+    surface = Neutral6,
+    surfaceContainerLowest = Neutral4,
+    surfaceContainerLow = Neutral9,
+    surfaceContainer = Neutral12,
+    surfaceContainerHigh = Neutral15,
+    surfaceContainerHighest = Neutral20,
+    onSurface = Neutral91,
+    onSurfaceVariant = TealGrey82,
+    outline = TealGrey60,
+    outlineVariant = TealGrey28,
+    error = Red80,
+    errorContainer = Red30
 )
 
+/**
+ * Configuración del esquema de colores para el modo claro.
+ * Define la relación entre los colores de la paleta y los roles semánticos de Material 3.
+ */
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = Teal40,
+    onPrimary = White100,
+    primaryContainer = Teal95,
+    onPrimaryContainer = Teal10,
+    secondary = TealGrey40,
+    secondaryContainer = TealGrey90,
+    tertiary = Pink40,
+    tertiaryContainer = Pink90,
+    background = Neutral98,
+    surface = Neutral98,
+    surfaceContainerLowest = White100,
+    surfaceContainerLow = Neutral95,
+    surfaceContainer = Neutral92,
+    surfaceContainerHigh = Neutral90,
+    surfaceContainerHighest = Neutral87,
+    onSurface = Neutral10,
+    onSurfaceVariant = TealGrey30,
+    outline = TealGrey50,
+    outlineVariant = TealGrey80,
+    error = Red40,
+    errorContainer = Red90
 )
 
+/**
+ * Componente principal del tema para la aplicación IGV-PERU.
+ *
+ * Aplica el diseño visual de Material 3, permitiendo el soporte para modo oscuro,
+ * claro y colores dinámicos (en Android 12+).
+ *
+ * @param darkTheme Define si se debe aplicar el modo oscuro. Por defecto detecta la configuración del sistema.
+ * @param dynamicColor Si es verdadero y el dispositivo corre Android 12+, utiliza colores dinámicos del sistema.
+ * @param content El contenido de la UI que se renderizará dentro de este tema.
+ */
 @Composable
 fun IGVPERUTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
