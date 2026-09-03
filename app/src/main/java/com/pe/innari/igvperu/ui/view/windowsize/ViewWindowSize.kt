@@ -37,11 +37,11 @@ object ViewWindowSize {
         val info = currentWindowAdaptiveInfoV2()
         val config = LocalConfiguration.current
 
-        val widthType = getWidthType(info.windowSizeClass)
-        val heightType = getHeightType(info.windowSizeClass)
+        val widthType = classifyWidthWindowSize(info.windowSizeClass)
+        val heightType = classifyHeightWindowSize(info.windowSizeClass)
         val isLandscape = config.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-        ViewAdaptive(
+        RenderAdaptiveLayoutByWindowSize(
             widthType = widthType,
             heightType = heightType,
             isLandscape = isLandscape,
@@ -54,29 +54,20 @@ object ViewWindowSize {
         )
     }
 
-    /**
-     * Determina el [TypeWindowSize] del ancho de la ventana.
-     */
-    private fun getWidthType(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
+    private fun classifyWidthWindowSize(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
         windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND) -> TypeWindowSize.EXPANDED
         windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) -> TypeWindowSize.MEDIUM
         else -> TypeWindowSize.COMPACT
     }
 
-    /**
-     * Determina el [TypeWindowSize] del alto de la ventana.
-     */
-    private fun getHeightType(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
+    private fun classifyHeightWindowSize(windowSizeClass: WindowSizeClass): TypeWindowSize = when {
         windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_EXPANDED_LOWER_BOUND) -> TypeWindowSize.EXPANDED
         windowSizeClass.isHeightAtLeastBreakpoint(WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND) -> TypeWindowSize.MEDIUM
         else -> TypeWindowSize.COMPACT
     }
 
-    /**
-     * Función interna que realiza la selección del Composable a mostrar basándose en los tipos de tamaño calculados.
-     */
     @Composable
-    private fun ViewAdaptive(
+    private fun RenderAdaptiveLayoutByWindowSize(
         widthType: TypeWindowSize,
         heightType: TypeWindowSize,
         isLandscape: Boolean,
