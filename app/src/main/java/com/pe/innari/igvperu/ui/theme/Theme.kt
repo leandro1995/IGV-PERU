@@ -10,6 +10,10 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * Configuración del esquema de colores para el modo oscuro.
+ * Define la relación entre los colores de la paleta y los roles semánticos de Material 3.
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Teal80,
     onPrimary = Teal20,
@@ -34,6 +38,10 @@ private val DarkColorScheme = darkColorScheme(
     errorContainer = Red30
 )
 
+/**
+ * Configuración del esquema de colores para el modo claro.
+ * Define la relación entre los colores de la paleta y los roles semánticos de Material 3.
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Teal40,
     onPrimary = White100,
@@ -58,6 +66,16 @@ private val LightColorScheme = lightColorScheme(
     errorContainer = Red90
 )
 
+/**
+ * Componente principal del tema para la aplicación IGV-PERU.
+ *
+ * Aplica el diseño visual de Material 3, permitiendo el soporte para modo oscuro,
+ * claro y colores dinámicos (en Android 12+).
+ *
+ * @param darkTheme Define si se debe aplicar el modo oscuro. Por defecto detecta la configuración del sistema.
+ * @param dynamicColor Si es verdadero y el dispositivo corre Android 12+, utiliza colores dinámicos del sistema.
+ * @param content El contenido de la UI que se renderizará dentro de este tema.
+ */
 @Composable
 fun IGVPERUTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
