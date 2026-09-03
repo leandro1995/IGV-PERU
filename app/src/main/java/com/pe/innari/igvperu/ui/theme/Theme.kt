@@ -17,9 +17,27 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Teal40,
+    onPrimary = White100,
+    primaryContainer = Teal95,
+    onPrimaryContainer = Teal10,
+    secondary = TealGrey40,
+    secondaryContainer = TealGrey90,
+    tertiary = Pink40,
+    tertiaryContainer = Pink90,
+    background = Neutral98,
+    surface = Neutral98,
+    surfaceContainerLowest = White100,
+    surfaceContainerLow = Neutral95,
+    surfaceContainer = Neutral92,
+    surfaceContainerHigh = Neutral90,
+    surfaceContainerHighest = Neutral87,
+    onSurface = Neutral10,
+    onSurfaceVariant = TealGrey30,
+    outline = TealGrey50,
+    outlineVariant = TealGrey80,
+    error = Red40,
+    errorContainer = Red90
 )
 
 @Composable
