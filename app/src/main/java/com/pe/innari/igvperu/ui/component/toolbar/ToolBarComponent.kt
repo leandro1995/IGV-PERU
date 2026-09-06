@@ -22,6 +22,7 @@ import com.pe.innari.igvperu.ui.component.toolbar.model.ToolBar
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen24
+import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.Dimen76
 import com.pe.innari.igvperu.ui.theme.SuTitleToolBar
 import com.pe.innari.igvperu.ui.theme.TitleToolBar
@@ -59,7 +60,7 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                         .padding(start = Dimen20, end = Dimen20)
                 ) {
                     Text(text = toolBar.title, style = TitleToolBar)
-                    Text(text = toolBar.subTitle, style = SuTitleToolBar)
+                    Text(modifier = Modifier.padding(top = Dimen5), text = toolBar.subTitle, style = SuTitleToolBar)
                 }
             }
         }
