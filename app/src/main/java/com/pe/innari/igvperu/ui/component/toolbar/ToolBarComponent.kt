@@ -1,6 +1,6 @@
 package com.pe.innari.igvperu.ui.component.toolbar
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,9 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.toolbar.model.ToolBar
+import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen76
+import com.pe.innari.igvperu.ui.theme.SuTitleToolBar
+import com.pe.innari.igvperu.ui.theme.TitleToolBar
 
 class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
 
@@ -28,7 +33,11 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
         OutlinedCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Dimen76)
+                .height(Dimen76),
+            colors = CardDefaults.outlinedCardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            border = BorderStroke(width = Dimen1, color = MaterialTheme.colorScheme.outlineVariant)
         ) {
             Row(
                 modifier = Modifier
@@ -40,7 +49,8 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                     Icon(
                         modifier = Modifier.size(Dimen24),
                         painter = painterResource(toolBar.icon()),
-                        contentDescription = null
+                        contentDescription = (null),
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
                 Column(
@@ -48,8 +58,8 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                         .fillMaxWidth()
                         .padding(start = Dimen20, end = Dimen20)
                 ) {
-                    Text(text = toolBar.title)
-                    Text(text = toolBar.subTitle)
+                    Text(text = toolBar.title, style = TitleToolBar)
+                    Text(text = toolBar.subTitle, style = SuTitleToolBar)
                 }
             }
         }
