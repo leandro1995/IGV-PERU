@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.component
+package com.pe.innari.igvperu.ui.component.toolbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -40,9 +40,11 @@ class ToolBarComponent : ComponentAmbient() {
                     painter = painterResource(R.drawable.ic_launcher_background),
                     contentDescription = null
                 )
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = Dimen20, end = Dimen20)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = Dimen20, end = Dimen20)
+                ) {
                     Text(text = "1")
                     Text(text = "2")
                 }
