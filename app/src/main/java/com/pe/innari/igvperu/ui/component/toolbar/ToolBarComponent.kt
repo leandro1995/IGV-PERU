@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +37,7 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (toolBar.hasIcon()) {
-                    Image(
+                    Icon(
                         modifier = Modifier.size(Dimen24),
                         painter = painterResource(toolBar.icon()),
                         contentDescription = null
