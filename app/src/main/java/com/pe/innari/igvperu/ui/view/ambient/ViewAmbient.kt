@@ -86,7 +86,7 @@ abstract class ViewAmbient {
      */
     @Composable
     open fun Preview() {
-        IGVPERUTheme {
+        IGVPERUTheme(dynamicColor = false) {
             OnCreate()
         }
     }
