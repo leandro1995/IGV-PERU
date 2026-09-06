@@ -14,13 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.toolbar.model.ToolBar
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen76
 
-class ToolBarComponent : ComponentAmbient() {
+class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
 
     @Composable
     override fun OnCreate() {
@@ -35,18 +35,20 @@ class ToolBarComponent : ComponentAmbient() {
                     .padding(horizontal = Dimen20),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    modifier = Modifier.size(Dimen24),
-                    painter = painterResource(R.drawable.ic_launcher_background),
-                    contentDescription = null
-                )
+                if (toolBar.hasIcon()) {
+                    Image(
+                        modifier = Modifier.size(Dimen24),
+                        painter = painterResource(toolBar.icon()),
+                        contentDescription = null
+                    )
+                }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = Dimen20, end = Dimen20)
                 ) {
-                    Text(text = "1")
-                    Text(text = "2")
+                    Text(text = toolBar.title)
+                    Text(text = toolBar.subTitle)
                 }
             }
         }
