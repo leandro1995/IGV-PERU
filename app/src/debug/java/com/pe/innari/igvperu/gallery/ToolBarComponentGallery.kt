@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.gallery
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.component.ToolBarComponent
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
@@ -11,7 +12,9 @@ class ToolBarComponentGallery : ViewAmbient() {
 
     @Composable
     override fun PortraitCompact() {
-        toolBarComponent.OnCreate()
+        Column {
+            toolBarComponent.OnCreate()
+        }
     }
 
     @ThemeAdaptivePreview
