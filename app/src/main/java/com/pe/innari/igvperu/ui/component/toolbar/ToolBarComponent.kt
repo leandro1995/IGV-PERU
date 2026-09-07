@@ -27,8 +27,20 @@ import com.pe.innari.igvperu.ui.theme.Dimen76
 import com.pe.innari.igvperu.ui.theme.SuTitleToolBar
 import com.pe.innari.igvperu.ui.theme.TitleToolBar
 
+/**
+ * Componente visual que implementa una barra de herramientas (ToolBar) personalizada.
+ *
+ * Utiliza un diseño basado en tarjetas ([OutlinedCard]) para mostrar un icono opcional,
+ * un título y un subtítulo, siguiendo los estilos definidos en el tema del proyecto.
+ *
+ * @property toolBar Objeto [ToolBar] que contiene los datos a mostrar.
+ */
 class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
 
+    /**
+     * Construye la interfaz de la barra de herramientas utilizando Compose.
+     * Implementa la estructura visual con bordes, espaciado y alineación definida.
+     */
     @Composable
     override fun OnCreate() {
         OutlinedCard(
