@@ -81,8 +81,13 @@ abstract class ViewAmbient {
     }
 
     /**
-     * Implementación por defecto para previsualizar la vista.
-     * Envuelve el contenido de [OnCreate] dentro del tema [IGVPERUTheme].
+     * Función base para la previsualización del componente en el editor de diseño.
+     *
+     * Proporciona un entorno de vista previa estandarizado envolviendo el contenido de [OnCreate]
+     * dentro de [IGVPERUTheme]. Esta función está diseñada para ser sobrescrita en las clases
+     * hijas y anotada con anotaciones de previsualización como `ThemeAdaptivePreview`.
+     *
+     * Por defecto, deshabilita el color dinámico para asegurar la fidelidad al diseño base.
      */
     @Composable
     open fun Preview() {
