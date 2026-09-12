@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,14 +10,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
@@ -26,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
+import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen22
 import com.pe.innari.igvperu.ui.theme.ItemDeselectBotonNavigation
 import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
@@ -47,7 +53,9 @@ class BottomNavigationComponent(
             }
 
             TypeBottomNavigation.HORIZONTAL -> {
-                BottomNavigationHorizontal(view = view)
+                CompositionLocalProvider(containerColor = MaterialTheme.colorScheme.surfaceContainerLow) {
+                    BottomNavigationHorizontal(view = view)
+                }
             }
         }
     }
@@ -58,7 +66,14 @@ class BottomNavigationComponent(
             modifier = Modifier.fillMaxSize(),
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
             contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-            bottomBar = { NavigationVertical() }) { paddingValues ->
+            bottomBar = {
+                Column {
+                    HorizontalDivider(
+                        thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                    )
+                    NavigationVertical()
+                }
+            }) { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -75,9 +90,13 @@ class BottomNavigationComponent(
                 .windowInsetsPadding(WindowInsets.safeDrawing)
         ) {
             NavigationHorizontal()
+            VerticalDivider(
+                thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+            )
             Box(
                 modifier = Modifier
                     .weight(1F)
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
                     .fillMaxSize()
             ) { view() }
         }
@@ -89,13 +108,18 @@ class BottomNavigationComponent(
         contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
-            NavigationBarItem(selected = indexSelect(index = index), onClick = {
-                indexPosition.intValue = index
-            }, icon = {
-                IconItem(icon = item.icon)
-            }, label = {
-                LabelItem(title = item.title, indexSelect = indexSelect(index = index))
-            })
+            NavigationBarItem(
+                colors = navigationVerticalColors(),
+                selected = indexSelect(index = index),
+                onClick = {
+                    indexPosition.intValue = index
+                },
+                icon = {
+                    IconItem(icon = item.icon)
+                },
+                label = {
+                    LabelItem(title = item.title, indexSelect = indexSelect(index = index))
+                })
         }
     }
 
@@ -106,13 +130,18 @@ class BottomNavigationComponent(
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
-            NavigationRailItem(selected = indexSelect(index = index), onClick = {
-                indexPosition.intValue = index
-            }, icon = {
-                IconItem(icon = item.icon)
-            }, label = {
-                LabelItem(title = item.title, indexSelect = indexSelect(index = index))
-            })
+            NavigationRailItem(
+                colors = navigationHorizontalColors(),
+                selected = indexSelect(index = index),
+                onClick = {
+                    indexPosition.intValue = index
+                },
+                icon = {
+                    IconItem(icon = item.icon)
+                },
+                label = {
+                    LabelItem(title = item.title, indexSelect = indexSelect(index = index))
+                })
         }
     }
 
@@ -130,6 +159,22 @@ class BottomNavigationComponent(
         } else {
             ItemDeselectBotonNavigation
         }
+    )
+
+    @Composable
+    private fun navigationVerticalColors() = NavigationBarItemDefaults.colors(
+        selectedIconColor = MaterialTheme.colorScheme.primary,
+        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        selectedTextColor = MaterialTheme.colorScheme.primary,
+        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+
+    @Composable
+    private fun navigationHorizontalColors() = NavigationRailItemDefaults.colors(
+        selectedIconColor = MaterialTheme.colorScheme.primary,
+        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        selectedTextColor = MaterialTheme.colorScheme.primary,
+        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
     )
 
     private fun indexSelect(index: Int) = index == indexPosition.intValue
