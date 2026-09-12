@@ -51,7 +51,7 @@ class BottomNavigationComponent(
     @Composable
     private fun BottomNavigationVertical(view: @Composable () -> Unit) {
         Scaffold(
-            modifier = Modifier.fillMaxSize(), bottomBar = { NavigationBar() }) { paddingValues ->
+            modifier = Modifier.fillMaxSize(), bottomBar = { NavigationVertical() }) { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -80,7 +80,7 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationBar() = NavigationBar {
+    private fun NavigationVertical() = NavigationBar {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
             NavigationBarItem(selected = indexPosition.intValue == index, onClick = {
                 indexPosition.intValue = index
