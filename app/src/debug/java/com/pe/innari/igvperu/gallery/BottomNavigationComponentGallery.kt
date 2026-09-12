@@ -13,8 +13,8 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun PortraitCompact() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.VERTICAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.BOTTOM,
+            items = itemBottomNavigation()
         ).OnCreate {
             Text("PortraitCompact")
         }
@@ -23,8 +23,8 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun PortraitMedium() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.HORIZONTAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.RAIL,
+            items = itemBottomNavigation()
         ).OnCreate {
             Text("PortraitMedium")
         }
@@ -33,18 +33,18 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun PortraitExpanded() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.HORIZONTAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.RAIL,
+            items = itemBottomNavigation()
         ).OnCreate {
-            Text("PortraitMedium")
+            Text("PortraitExpanded")
         }
     }
 
     @Composable
     override fun LandScapeCompact() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.HORIZONTAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.RAIL,
+            items = itemBottomNavigation()
         ).OnCreate {
             Text("LandScapeCompact")
         }
@@ -53,8 +53,8 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun LandScapeMedium() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.HORIZONTAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.RAIL,
+            items = itemBottomNavigation()
         ).OnCreate {
             Text("LandScapeMedium")
         }
@@ -63,14 +63,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun LandScapeExpanded() {
         BottomNavigationComponent(
-            typeBottomNavigation = TypeBottomNavigation.HORIZONTAL,
-            itemBottomNavigationMutableList = itemBottonNavigation()
+            typeBottomNavigation = TypeBottomNavigation.RAIL,
+            items = itemBottomNavigation()
         ).OnCreate {
             Text("LandScapeExpanded")
         }
     }
 
-    private fun itemBottonNavigation() = mutableListOf(
+    private fun itemBottomNavigation() = listOf(
         ItemBottomNavigation(title = "Item1", icon = android.R.drawable.star_on),
         ItemBottomNavigation(title = "Item2", icon = android.R.drawable.ic_delete),
         ItemBottomNavigation(title = "Item3", icon = android.R.drawable.ic_media_ff),
