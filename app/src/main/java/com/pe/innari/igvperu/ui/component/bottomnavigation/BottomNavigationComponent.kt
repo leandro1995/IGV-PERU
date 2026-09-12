@@ -5,21 +5,38 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
+import com.pe.innari.igvperu.ui.theme.Dimen22
 
-class BottomNavigationComponent(private val typeBottomNavigation: TypeBottomNavigation) :
-    ComponentAmbient() {
+class BottomNavigationComponent(
+    private val typeBottomNavigation: TypeBottomNavigation,
+    private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
+) : ComponentAmbient() {
+
+    private lateinit var indexPosition: MutableIntState
 
     @Composable
     override fun OnCreate(view: @Composable (() -> Unit)) {
+        indexPosition = rememberSaveable { mutableIntStateOf(0) }
+
         when (typeBottomNavigation) {
             TypeBottomNavigation.VERTICAL -> {
                 BottomNavigationVertical(view = view)
@@ -33,8 +50,13 @@ class BottomNavigationComponent(private val typeBottomNavigation: TypeBottomNavi
 
     @Composable
     private fun BottomNavigationVertical(view: @Composable () -> Unit) {
-        Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {}) { paddingValues ->
-            Column(modifier = Modifier.padding(paddingValues)) { view() }
+        Scaffold(
+            modifier = Modifier.fillMaxSize(), bottomBar = { NavigationBar() }) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) { view() }
         }
     }
 
@@ -56,4 +78,27 @@ class BottomNavigationComponent(private val typeBottomNavigation: TypeBottomNavi
             }
         }
     }
+
+    @Composable
+    private fun NavigationBar() = NavigationBar {
+        itemBottomNavigationMutableList.forEachIndexed { index, item ->
+            NavigationBarItem(selected = indexPosition.intValue == index, onClick = {
+                indexPosition.intValue = index
+            }, icon = {
+                IconItem(icon = item.icon)
+            }, label = {
+                LabelItem(title = item.title)
+            })
+        }
+    }
+
+    @Composable
+    private fun IconItem(icon: Int) = Icon(
+        modifier = Modifier.size(Dimen22),
+        painter = painterResource(icon),
+        contentDescription = null
+    )
+
+    @Composable
+    private fun LabelItem(title: String) = Text(text = title)
 }
