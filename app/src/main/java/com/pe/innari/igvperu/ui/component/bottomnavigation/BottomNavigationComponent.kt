@@ -166,7 +166,8 @@ class BottomNavigationComponent(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
     )
 
     @Composable
@@ -174,7 +175,8 @@ class BottomNavigationComponent(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
-        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        indicatorColor = MaterialTheme.colorScheme.primaryContainer
     )
 
     private fun indexSelect(index: Int) = index == indexPosition.intValue
