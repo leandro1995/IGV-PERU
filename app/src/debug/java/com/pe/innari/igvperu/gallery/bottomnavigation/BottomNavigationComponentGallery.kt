@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.gallery
+package com.pe.innari.igvperu.gallery.bottomnavigation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
