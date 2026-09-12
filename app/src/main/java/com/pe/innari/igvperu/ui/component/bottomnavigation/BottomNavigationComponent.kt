@@ -51,7 +51,8 @@ class BottomNavigationComponent(
     @Composable
     private fun BottomNavigationVertical(view: @Composable () -> Unit) {
         Scaffold(
-            modifier = Modifier.fillMaxSize(), bottomBar = { NavigationVertical() }) { paddingValues ->
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = { NavigationVertical() }) { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -82,7 +83,7 @@ class BottomNavigationComponent(
     @Composable
     private fun NavigationVertical() = NavigationBar {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
-            NavigationBarItem(selected = indexPosition.intValue == index, onClick = {
+            NavigationBarItem(selected = indexSelect(index = index), onClick = {
                 indexPosition.intValue = index
             }, icon = {
                 IconItem(icon = item.icon)
@@ -101,4 +102,6 @@ class BottomNavigationComponent(
 
     @Composable
     private fun LabelItem(title: String) = Text(text = title)
+
+    private fun indexSelect(index: Int) = index == indexPosition.intValue
 }
