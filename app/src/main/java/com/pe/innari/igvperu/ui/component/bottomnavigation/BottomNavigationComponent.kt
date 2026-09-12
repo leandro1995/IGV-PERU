@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -84,11 +86,7 @@ class BottomNavigationComponent(
 
     @Composable
     private fun BottomNavigationHorizontal(view: @Composable () -> Unit) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.safeDrawing)
-        ) {
+        Row(modifier = Modifier.fillMaxSize()) {
             NavigationHorizontal()
             VerticalDivider(
                 thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
@@ -96,8 +94,13 @@ class BottomNavigationComponent(
             Box(
                 modifier = Modifier
                     .weight(1F)
-                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
                     .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Top + WindowInsetsSides.End + WindowInsetsSides.Bottom
+                        )
+                    )
             ) { view() }
         }
     }
@@ -125,9 +128,11 @@ class BottomNavigationComponent(
 
     @Composable
     private fun NavigationHorizontal() = NavigationRail(
+        windowInsets = WindowInsets.safeDrawing.only(
+            WindowInsetsSides.Start + WindowInsetsSides.Top + WindowInsetsSides.Bottom
+        ),
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        windowInsets = WindowInsets(0, 0, 0, 0)
+        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
             NavigationRailItem(
