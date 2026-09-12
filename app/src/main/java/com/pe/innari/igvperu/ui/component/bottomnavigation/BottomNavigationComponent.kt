@@ -25,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -70,7 +71,7 @@ class BottomNavigationComponent(
             }
 
             TypeBottomNavigation.RAIL -> {
-                CompositionLocalProvider(containerColor = MaterialTheme.colorScheme.surfaceContainerLow) {
+                CompositionLocalProvider(androidx.compose.material3.LocalContentColor provides contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow)) {
                     RailNavigationLayout(
                         indexPosition = indexPosition,
                         view = view
@@ -80,9 +81,6 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Implementación específica para la navegación en la parte inferior de la pantalla.
-     */
     @Composable
     private fun BottomBarNavigationLayout(
         indexPosition: MutableIntState,
@@ -91,7 +89,7 @@ class BottomNavigationComponent(
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-            contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+            contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow),
             bottomBar = {
                 Column {
                     HorizontalDivider(
@@ -108,9 +106,6 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Implementación específica para la navegación lateral (Rail), ideal para pantallas anchas o modo paisaje.
-     */
     @Composable
     private fun RailNavigationLayout(
         indexPosition: MutableIntState,
@@ -135,18 +130,15 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Genera los ítems de navegación para el componente [NavigationBar].
-     */
     @Composable
     private fun NavigationBarItems(indexPosition: MutableIntState) = NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
         items.forEachIndexed { index, item ->
             val isSelected = index == indexPosition.intValue
             NavigationBarItem(
-                colors = getNavigationBarItemColors(),
+                colors = createNavigationBarItemColors(),
                 selected = isSelected,
                 onClick = {
                     indexPosition.intValue = index
@@ -160,21 +152,18 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Genera los ítems de navegación para el componente [NavigationRail].
-     */
     @Composable
     private fun NavigationRailItems(indexPosition: MutableIntState) = NavigationRail(
         windowInsets = WindowInsets.safeDrawing.only(
             WindowInsetsSides.Start + WindowInsetsSides.Top + WindowInsetsSides.Bottom
         ),
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+        contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
         items.forEachIndexed { index, item ->
             val isSelected = index == indexPosition.intValue
             NavigationRailItem(
-                colors = getNavigationRailItemColors(),
+                colors = createNavigationRailItemColors(),
                 selected = isSelected,
                 onClick = {
                     indexPosition.intValue = index
@@ -188,11 +177,6 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Renderiza el icono de un ítem de navegación con un tamaño estandarizado.
-     *
-     * @param icon ID del recurso del icono.
-     */
     @Composable
     private fun NavigationItemIcon(icon: Int) = Icon(
         modifier = Modifier.size(Dimen22),
@@ -200,13 +184,6 @@ class BottomNavigationComponent(
         contentDescription = null
     )
 
-    /**
-     * Renderiza la etiqueta de texto de un ítem de navegación, aplicando estilos diferentes
-     * según si el ítem está seleccionado o no.
-     *
-     * @param title El texto a mostrar.
-     * @param isSelected Indica si el ítem actual está seleccionado.
-     */
     @Composable
     private fun NavigationItemLabel(title: String, isSelected: Boolean) = Text(
         text = title, style = if (isSelected) {
@@ -216,11 +193,8 @@ class BottomNavigationComponent(
         }
     )
 
-    /**
-     * Configura los colores de los ítems para el [NavigationBar], incluyendo estados de selección e indicadores.
-     */
     @Composable
-    private fun getNavigationBarItemColors() = NavigationBarItemDefaults.colors(
+    private fun createNavigationBarItemColors() = NavigationBarItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -228,11 +202,8 @@ class BottomNavigationComponent(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
     )
 
-    /**
-     * Configura los colores de los ítems para el [NavigationRail], siguiendo el esquema de colores del sistema.
-     */
     @Composable
-    private fun getNavigationRailItemColors() = NavigationRailItemDefaults.colors(
+    private fun createNavigationRailItemColors() = NavigationRailItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
