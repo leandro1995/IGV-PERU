@@ -63,11 +63,7 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun BottomNavigationHorizontal(
-        containerColor: Color = MaterialTheme.colorScheme.background,
-        contentColor: Color = contentColorFor(containerColor),
-        view: @Composable () -> Unit
-    ) {
+    private fun BottomNavigationHorizontal(view: @Composable () -> Unit) {
         Row(modifier = Modifier.fillMaxSize()) {
             NavigationHorizontal()
             Box(
