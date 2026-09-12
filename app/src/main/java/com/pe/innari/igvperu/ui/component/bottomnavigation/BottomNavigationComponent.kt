@@ -38,11 +38,25 @@ import com.pe.innari.igvperu.ui.theme.Dimen22
 import com.pe.innari.igvperu.ui.theme.ItemDeselectBotonNavigation
 import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
 
+/**
+ * Componente de navegación adaptable que selecciona automáticamente entre una barra inferior (`NavigationBar`)
+ * o un riel lateral (`NavigationRail`) según el tipo especificado.
+ *
+ * @property typeBottomNavigation Determina el estilo visual de la navegación (Inferior o Riel).
+ * @property items Lista de elementos de navegación que se mostrarán.
+ */
 class BottomNavigationComponent(
     private val typeBottomNavigation: TypeBottomNavigation,
     private val items: List<ItemBottomNavigation>
 ) : ComponentAmbient() {
 
+    /**
+     * Construye la estructura de navegación y el contenedor principal para el contenido de la vista.
+     *
+     * Utiliza [rememberSaveable] para mantener el estado del ítem seleccionado durante recreaciones.
+     *
+     * @param view Composable que representa el contenido principal de la pantalla.
+     */
     @Composable
     override fun OnCreate(view: @Composable (() -> Unit)) {
         val indexPosition = rememberSaveable { mutableIntStateOf(0) }
@@ -66,6 +80,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Implementación específica para la navegación en la parte inferior de la pantalla.
+     */
     @Composable
     private fun BottomNavigationBottom(
         indexPosition: MutableIntState,
@@ -91,6 +108,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Implementación específica para la navegación lateral (Rail), ideal para pantallas anchas o modo paisaje.
+     */
     @Composable
     private fun BottomNavigationRail(
         indexPosition: MutableIntState,
@@ -115,6 +135,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Genera los ítems de navegación para el componente [NavigationBar].
+     */
     @Composable
     private fun NavigationBarContent(indexPosition: MutableIntState) = NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -137,6 +160,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Genera los ítems de navegación para el componente [NavigationRail].
+     */
     @Composable
     private fun NavigationRailContent(indexPosition: MutableIntState) = NavigationRail(
         windowInsets = WindowInsets.safeDrawing.only(
@@ -162,6 +188,11 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza el icono de un ítem de navegación con un tamaño estandarizado.
+     *
+     * @param icon ID del recurso del icono.
+     */
     @Composable
     private fun IconItem(icon: Int) = Icon(
         modifier = Modifier.size(Dimen22),
@@ -169,6 +200,13 @@ class BottomNavigationComponent(
         contentDescription = null
     )
 
+    /**
+     * Renderiza la etiqueta de texto de un ítem de navegación, aplicando estilos diferentes
+     * según si el ítem está seleccionado o no.
+     *
+     * @param title El texto a mostrar.
+     * @param isSelected Indica si el ítem actual está seleccionado.
+     */
     @Composable
     private fun LabelItem(title: String, isSelected: Boolean) = Text(
         text = title, style = if (isSelected) {
@@ -178,6 +216,9 @@ class BottomNavigationComponent(
         }
     )
 
+    /**
+     * Configura los colores de los ítems para el [NavigationBar], incluyendo estados de selección e indicadores.
+     */
     @Composable
     private fun navigationBarColors() = NavigationBarItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
@@ -187,6 +228,9 @@ class BottomNavigationComponent(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
     )
 
+    /**
+     * Configura los colores de los ítems para el [NavigationRail], siguiendo el esquema de colores del sistema.
+     */
     @Composable
     private fun navigationRailColors() = NavigationRailItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
