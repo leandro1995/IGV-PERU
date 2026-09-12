@@ -9,7 +9,9 @@ import com.pe.innari.igvperu.ui.view.windowsize.ViewWindowSize
  *
  * Proporciona una forma estandarizada de implementar la interfaz de usuario y su previsualización correspondiente.
  */
-abstract class ViewAmbient {
+abstract class ViewAmbient<M> {
+
+    protected var mutableValues: M? = null
 
     /**
      * Orquestador principal que delega la creación de la interfaz a [ViewWindowSize.AdaptiveLayout].
@@ -19,6 +21,7 @@ abstract class ViewAmbient {
      */
     @Composable
     fun OnCreate() {
+        InstanceMutableValues()
         ViewWindowSize.AdaptiveLayout(
             portraitCompact = { PortraitCompact() },
             portraitMedium = { PortraitMedium() },
@@ -78,6 +81,10 @@ abstract class ViewAmbient {
     @Composable
     protected open fun LandScapeExpanded() {
         PortraitCompact()
+    }
+
+    @Composable
+    protected open fun InstanceMutableValues() {
     }
 
     /**
