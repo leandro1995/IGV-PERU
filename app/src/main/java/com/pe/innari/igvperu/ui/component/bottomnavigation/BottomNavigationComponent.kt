@@ -3,9 +3,12 @@ package com.pe.innari.igvperu.ui.component.bottomnavigation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -64,7 +67,11 @@ class BottomNavigationComponent(
 
     @Composable
     private fun BottomNavigationHorizontal(view: @Composable () -> Unit) {
-        Row(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+        ) {
             NavigationHorizontal()
             Box(
                 modifier = Modifier
@@ -95,7 +102,9 @@ class BottomNavigationComponent(
         contentColor: Color = contentColorFor(containerColor)
     ) {
         NavigationRail(
-            containerColor = containerColor, contentColor = contentColor
+            containerColor = containerColor,
+            contentColor = contentColor,
+            windowInsets = WindowInsets(0, 0, 0, 0)
         ) {
             itemBottomNavigationMutableList.forEachIndexed { index, item ->
                 NavigationRailItem(selected = indexSelect(index = index), onClick = {
