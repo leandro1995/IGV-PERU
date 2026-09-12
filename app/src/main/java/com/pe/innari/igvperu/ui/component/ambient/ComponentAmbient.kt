@@ -15,5 +15,10 @@ abstract class ComponentAmbient {
      * Debe ser implementada por todas las clases que hereden de [ComponentAmbient].
      */
     @Composable
-    abstract fun OnCreate()
+    open fun OnCreate() {
+    }
+
+    @Composable
+    open fun OnCreate(view: @Composable () -> Unit) {
+    }
 }
