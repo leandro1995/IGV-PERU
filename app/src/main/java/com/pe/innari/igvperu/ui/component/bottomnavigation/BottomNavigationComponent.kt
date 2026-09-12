@@ -17,13 +17,11 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
@@ -58,6 +56,8 @@ class BottomNavigationComponent(
     private fun BottomNavigationVertical(view: @Composable () -> Unit) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
             bottomBar = { NavigationVertical() }) { paddingValues ->
             Column(
                 modifier = Modifier
@@ -84,7 +84,10 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationVertical() = NavigationBar {
+    private fun NavigationVertical() = NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+    ) {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
             NavigationBarItem(selected = indexSelect(index = index), onClick = {
                 indexPosition.intValue = index
@@ -97,12 +100,9 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationHorizontal(
-        containerColor: Color = MaterialTheme.colorScheme.background,
-        contentColor: Color = contentColorFor(containerColor)
-    ) = NavigationRail(
-        containerColor = containerColor,
-        contentColor = contentColor,
+    private fun NavigationHorizontal() = NavigationRail(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
         windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
