@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
@@ -68,28 +69,47 @@ class BottomNavigationComponent(
         view: @Composable () -> Unit
     ) {
         Row(modifier = Modifier.fillMaxSize()) {
-            NavigationRail(
-                containerColor = containerColor, contentColor = contentColor
-            ) {
-                Box(
-                    modifier = Modifier
-                        .weight(1F)
-                        .fillMaxSize()
-                ) { view() }
+            NavigationHorizontal()
+            Box(
+                modifier = Modifier
+                    .weight(1F)
+                    .fillMaxSize()
+            ) { view() }
+        }
+    }
+
+    @Composable
+    private fun NavigationVertical() {
+        NavigationBar {
+            itemBottomNavigationMutableList.forEachIndexed { index, item ->
+                NavigationBarItem(selected = index == indexPosition.intValue, onClick = {
+                    indexPosition.intValue = index
+                }, icon = {
+                    IconItem(icon = item.icon)
+                }, label = {
+                    LabelItem(title = item.title)
+                })
             }
         }
     }
 
     @Composable
-    private fun NavigationVertical() = NavigationBar {
-        itemBottomNavigationMutableList.forEachIndexed { index, item ->
-            NavigationBarItem(selected = indexSelect(index = index), onClick = {
-                indexPosition.intValue = index
-            }, icon = {
-                IconItem(icon = item.icon)
-            }, label = {
-                LabelItem(title = item.title)
-            })
+    private fun NavigationHorizontal(
+        containerColor: Color = MaterialTheme.colorScheme.background,
+        contentColor: Color = contentColorFor(containerColor)
+    ) {
+        NavigationRail(
+            containerColor = containerColor, contentColor = contentColor
+        ) {
+            itemBottomNavigationMutableList.forEachIndexed { index, item ->
+                NavigationRailItem(selected = indexSelect(index = index), onClick = {
+                    indexPosition.intValue = index
+                }, icon = {
+                    IconItem(icon = item.icon)
+                }, label = {
+                    LabelItem(title = item.title)
+                })
+            }
         }
     }
 
