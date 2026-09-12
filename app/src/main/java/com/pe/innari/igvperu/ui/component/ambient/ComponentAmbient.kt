@@ -1,8 +1,10 @@
 package com.pe.innari.igvperu.ui.component.ambient
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
 /**
@@ -28,4 +30,10 @@ abstract class ComponentAmbient {
     @Composable
     protected fun contentColorFor(containerColor: Color) =
         MaterialTheme.colorScheme.contentColorFor(containerColor)
+
+    @Composable
+    protected fun CompositionLocalProvider(containerColor: Color, view: @Composable () -> Unit) =
+        CompositionLocalProvider(LocalContentColor provides contentColorFor(containerColor = containerColor)) {
+            view()
+        }
 }
