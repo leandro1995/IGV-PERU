@@ -40,30 +40,37 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
 
 class BottomNavigationComponent(
     private val typeBottomNavigation: TypeBottomNavigation,
-    private val itemBottomNavigationMutableList: MutableList<ItemBottomNavigation>
+    private val items: List<ItemBottomNavigation>
 ) : ComponentAmbient() {
-
-    private lateinit var indexPosition: MutableIntState
 
     @Composable
     override fun OnCreate(view: @Composable (() -> Unit)) {
-        indexPosition = rememberSaveable { mutableIntStateOf(0) }
+        val indexPosition = rememberSaveable { mutableIntStateOf(0) }
 
         when (typeBottomNavigation) {
-            TypeBottomNavigation.VERTICAL -> {
-                BottomNavigationVertical(view = view)
+            TypeBottomNavigation.BOTTOM -> {
+                BottomNavigationBottom(
+                    indexPosition = indexPosition,
+                    view = view
+                )
             }
 
-            TypeBottomNavigation.HORIZONTAL -> {
+            TypeBottomNavigation.RAIL -> {
                 CompositionLocalProvider(containerColor = MaterialTheme.colorScheme.surfaceContainerLow) {
-                    BottomNavigationHorizontal(view = view)
+                    BottomNavigationRail(
+                        indexPosition = indexPosition,
+                        view = view
+                    )
                 }
             }
         }
     }
 
     @Composable
-    private fun BottomNavigationVertical(view: @Composable () -> Unit) {
+    private fun BottomNavigationBottom(
+        indexPosition: MutableIntState,
+        view: @Composable () -> Unit
+    ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -73,10 +80,10 @@ class BottomNavigationComponent(
                     HorizontalDivider(
                         thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
                     )
-                    NavigationVertical()
+                    NavigationBarContent(indexPosition)
                 }
             }) { paddingValues ->
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
@@ -85,9 +92,12 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun BottomNavigationHorizontal(view: @Composable () -> Unit) {
+    private fun BottomNavigationRail(
+        indexPosition: MutableIntState,
+        view: @Composable () -> Unit
+    ) {
         Row(modifier = Modifier.fillMaxSize()) {
-            NavigationHorizontal()
+            NavigationRailContent(indexPosition)
             VerticalDivider(
                 thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
             )
@@ -106,14 +116,15 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationVertical() = NavigationBar(
+    private fun NavigationBarContent(indexPosition: MutableIntState) = NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
-        itemBottomNavigationMutableList.forEachIndexed { index, item ->
+        items.forEachIndexed { index, item ->
+            val isSelected = index == indexPosition.intValue
             NavigationBarItem(
-                colors = navigationVerticalColors(),
-                selected = indexSelect(index = index),
+                colors = navigationBarColors(),
+                selected = isSelected,
                 onClick = {
                     indexPosition.intValue = index
                 },
@@ -121,23 +132,24 @@ class BottomNavigationComponent(
                     IconItem(icon = item.icon)
                 },
                 label = {
-                    LabelItem(title = item.title, indexSelect = indexSelect(index = index))
+                    LabelItem(title = item.title, isSelected = isSelected)
                 })
         }
     }
 
     @Composable
-    private fun NavigationHorizontal() = NavigationRail(
+    private fun NavigationRailContent(indexPosition: MutableIntState) = NavigationRail(
         windowInsets = WindowInsets.safeDrawing.only(
             WindowInsetsSides.Start + WindowInsetsSides.Top + WindowInsetsSides.Bottom
         ),
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         contentColor = contentColorFor(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
-        itemBottomNavigationMutableList.forEachIndexed { index, item ->
+        items.forEachIndexed { index, item ->
+            val isSelected = index == indexPosition.intValue
             NavigationRailItem(
-                colors = navigationHorizontalColors(),
-                selected = indexSelect(index = index),
+                colors = navigationRailColors(),
+                selected = isSelected,
                 onClick = {
                     indexPosition.intValue = index
                 },
@@ -145,7 +157,7 @@ class BottomNavigationComponent(
                     IconItem(icon = item.icon)
                 },
                 label = {
-                    LabelItem(title = item.title, indexSelect = indexSelect(index = index))
+                    LabelItem(title = item.title, isSelected = isSelected)
                 })
         }
     }
@@ -158,8 +170,8 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun LabelItem(title: String, indexSelect: Boolean) = Text(
-        text = title, style = if (indexSelect) {
+    private fun LabelItem(title: String, isSelected: Boolean) = Text(
+        text = title, style = if (isSelected) {
             ItemSelectBotonNavigation
         } else {
             ItemDeselectBotonNavigation
@@ -167,7 +179,7 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun navigationVerticalColors() = NavigationBarItemDefaults.colors(
+    private fun navigationBarColors() = NavigationBarItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -176,13 +188,11 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun navigationHorizontalColors() = NavigationRailItemDefaults.colors(
+    private fun navigationRailColors() = NavigationRailItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         selectedTextColor = MaterialTheme.colorScheme.primary,
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
         indicatorColor = MaterialTheme.colorScheme.primaryContainer
     )
-
-    private fun indexSelect(index: Int) = index == indexPosition.intValue
 }
