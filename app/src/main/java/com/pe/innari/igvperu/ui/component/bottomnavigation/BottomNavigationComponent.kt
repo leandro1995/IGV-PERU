@@ -82,17 +82,15 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationVertical() {
-        NavigationBar {
-            itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                NavigationBarItem(selected = index == indexPosition.intValue, onClick = {
-                    indexPosition.intValue = index
-                }, icon = {
-                    IconItem(icon = item.icon)
-                }, label = {
-                    LabelItem(title = item.title)
-                })
-            }
+    private fun NavigationVertical() = NavigationBar {
+        itemBottomNavigationMutableList.forEachIndexed { index, item ->
+            NavigationBarItem(selected = index == indexPosition.intValue, onClick = {
+                indexPosition.intValue = index
+            }, icon = {
+                IconItem(icon = item.icon)
+            }, label = {
+                LabelItem(title = item.title)
+            })
         }
     }
 
@@ -100,21 +98,19 @@ class BottomNavigationComponent(
     private fun NavigationHorizontal(
         containerColor: Color = MaterialTheme.colorScheme.background,
         contentColor: Color = contentColorFor(containerColor)
+    ) = NavigationRail(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
-        NavigationRail(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            windowInsets = WindowInsets(0, 0, 0, 0)
-        ) {
-            itemBottomNavigationMutableList.forEachIndexed { index, item ->
-                NavigationRailItem(selected = indexSelect(index = index), onClick = {
-                    indexPosition.intValue = index
-                }, icon = {
-                    IconItem(icon = item.icon)
-                }, label = {
-                    LabelItem(title = item.title)
-                })
-            }
+        itemBottomNavigationMutableList.forEachIndexed { index, item ->
+            NavigationRailItem(selected = indexSelect(index = index), onClick = {
+                indexPosition.intValue = index
+            }, icon = {
+                IconItem(icon = item.icon)
+            }, label = {
+                LabelItem(title = item.title)
+            })
         }
     }
 
