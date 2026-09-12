@@ -29,6 +29,8 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen22
+import com.pe.innari.igvperu.ui.theme.ItemDeselectBotonNavigation
+import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
 
 class BottomNavigationComponent(
     private val typeBottomNavigation: TypeBottomNavigation,
@@ -84,12 +86,12 @@ class BottomNavigationComponent(
     @Composable
     private fun NavigationVertical() = NavigationBar {
         itemBottomNavigationMutableList.forEachIndexed { index, item ->
-            NavigationBarItem(selected = index == indexPosition.intValue, onClick = {
+            NavigationBarItem(selected = indexSelect(index = index), onClick = {
                 indexPosition.intValue = index
             }, icon = {
                 IconItem(icon = item.icon)
             }, label = {
-                LabelItem(title = item.title)
+                LabelItem(title = item.title, indexSelect = indexSelect(index = index))
             })
         }
     }
@@ -109,7 +111,7 @@ class BottomNavigationComponent(
             }, icon = {
                 IconItem(icon = item.icon)
             }, label = {
-                LabelItem(title = item.title)
+                LabelItem(title = item.title, indexSelect = indexSelect(index = index))
             })
         }
     }
@@ -122,7 +124,13 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun LabelItem(title: String) = Text(text = title)
+    private fun LabelItem(title: String, indexSelect: Boolean) = Text(
+        text = title, style = if (indexSelect) {
+            ItemSelectBotonNavigation
+        } else {
+            ItemDeselectBotonNavigation
+        }
+    )
 
     private fun indexSelect(index: Int) = index == indexPosition.intValue
 }
