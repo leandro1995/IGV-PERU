@@ -30,11 +30,23 @@ import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.ItemDeselectTab
 import com.pe.innari.igvperu.ui.theme.ItemSelectTab
 
+/**
+ * Componente de interfaz de usuario que muestra una barra de pestañas (tabs).
+ *
+ * Este componente permite al usuario navegar entre diferentes secciones o vistas
+ * seleccionando una pestaña de una lista proporcionada.
+ *
+ * @property tabMutableList Lista mutable de objetos [Tab] que representan cada pestaña.
+ * @property indexPosition Índice de la pestaña que se encuentra actualmente seleccionada.
+ */
 class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
     ComponentAmbient() {
 
     private var tabCallBack: TabCallBack? = null
 
+    /**
+     * Crea y renderiza la estructura principal de la barra de pestañas.
+     */
     @Composable
     override fun OnCreate() {
         Row(
@@ -57,6 +69,11 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
         }
     }
 
+    /**
+     * Establece el callback que se ejecutará cuando el usuario seleccione una pestaña.
+     *
+     * @param method Función lambda que recibe la posición de la pestaña seleccionada.
+     */
     fun setTabCallBackPosition(method: (position: Int) -> Unit) {
         tabCallBack = object : TabCallBack {
             override fun position(position: Int) {
@@ -65,13 +82,20 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
         }
     }
 
+    /**
+     * Renderiza un ítem individual dentro de la barra de pestañas.
+     *
+     * @param modifier Modificador para aplicar al contenedor del ítem.
+     * @param tab El objeto [Tab] que contiene la información del ítem (icono y etiqueta).
+     * @param index La posición del ítem en la lista.
+     */
     @Composable
     private fun ItemTab(modifier: Modifier, tab: Tab, index: Int) {
-        val isSelect = indexPosition == index
+        val isSelected = indexPosition == index
         Row(
             modifier = modifier
                 .background(
-                    color = itemSelectColor(isSelect), shape = RoundedCornerShape(Dimen10)
+                    color = getBackgroundColor(isSelected), shape = RoundedCornerShape(Dimen10)
                 )
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() }, indication = null
@@ -84,33 +108,42 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
             Icon(
                 modifier = Modifier.size(Dimen18),
                 painter = painterResource(tab.icon),
-                tint = itemContentSelectColor(isSelect = isSelect),
+                tint = getContentColor(isSelected),
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(start = Dimen5),
                 text = tab.label,
-                color = itemContentSelectColor(isSelect = isSelect),
-                style = itemFontSelect(isSelect = isSelect)
+                color = getContentColor(isSelected),
+                style = getTextStyle(isSelected)
             )
         }
     }
 
+    /**
+     * Determina el color de fondo basado en el estado de selección.
+     */
     @Composable
-    private fun itemSelectColor(isSelect: Boolean) = if (isSelect) {
+    private fun getBackgroundColor(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
         MaterialTheme.colorScheme.surfaceContainer
     }
 
+    /**
+     * Determina el color del contenido (icono y texto) basado en el estado de selección.
+     */
     @Composable
-    private fun itemContentSelectColor(isSelect: Boolean) = if (isSelect) {
+    private fun getContentColor(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
     }
 
-    private fun itemFontSelect(isSelect: Boolean) = if (isSelect) {
+    /**
+     * Determina el estilo de texto basado en el estado de selección.
+     */
+    private fun getTextStyle(isSelected: Boolean) = if (isSelected) {
         ItemSelectTab
     } else {
         ItemDeselectTab
