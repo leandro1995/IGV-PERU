@@ -25,7 +25,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen3
 import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.Dimen56
 
-class TabComponent(private val tabMutableList: MutableList<Tab>) : ComponentAmbient() {
+class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
+    ComponentAmbient() {
 
     @Composable
     override fun OnCreate() {
@@ -51,7 +52,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>) : ComponentAmbi
 
     @Composable
     private fun ItemTab(modifier: Modifier, tab: Tab, index: Int) {
-        val isSelect = false
+        val isSelect = indexPosition == index
         Row(
             modifier = modifier.background(
                 color = itemSelectColor(isSelect), shape = RoundedCornerShape(Dimen10)
