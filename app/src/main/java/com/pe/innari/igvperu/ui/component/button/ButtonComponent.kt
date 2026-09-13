@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.ui.component.button
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,14 +11,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonType
+import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen48
@@ -39,7 +43,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             }
 
             ButtonType.OUTLINED -> {
-
+                OutlinedButton()
             }
 
             ButtonType.DESTRUCTIVE -> {
@@ -70,6 +74,23 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             ), modifier = Modifier
                 .height(Dimen48)
                 .fillMaxWidth(), onClick = {}) {
+            ContentButton()
+        }
+    }
+
+    @Composable
+    private fun OutlinedButton() {
+        OutlinedButton(
+            border = BorderStroke(Dimen1, MaterialTheme.colorScheme.outline),
+            shape = RoundedCornerShape(Dimen12),
+            colors = buttonColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier
+                .height(Dimen48)
+                .fillMaxWidth(),
+            onClick = {}) {
             ContentButton()
         }
     }
