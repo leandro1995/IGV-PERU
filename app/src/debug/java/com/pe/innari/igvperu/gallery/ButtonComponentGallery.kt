@@ -1,3 +1,19 @@
 package com.pe.innari.igvperu.gallery
 
-class ButtonComponentGallery
+import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
+import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
+
+class ButtonComponentGallery : ViewAmbient<Any>() {
+
+    @Composable
+    override fun PortraitCompact() {
+
+    }
+
+    @ThemeAdaptivePreview
+    @Composable
+    override fun Preview() {
+        super.Preview()
+    }
+}
