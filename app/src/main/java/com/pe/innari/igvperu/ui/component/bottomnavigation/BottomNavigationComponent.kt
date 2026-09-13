@@ -26,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
@@ -56,8 +55,6 @@ class BottomNavigationComponent(
 
     /**
      * Construye la estructura de navegación y el contenedor principal para el contenido de la vista.
-     *
-     * Utiliza [rememberSaveable] para mantener el estado del ítem seleccionado durante recreaciones.
      *
      * @param view Composable que representa el contenido principal de la pantalla.
      */

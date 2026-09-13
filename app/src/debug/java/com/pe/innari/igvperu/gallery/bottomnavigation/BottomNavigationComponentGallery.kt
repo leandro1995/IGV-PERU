@@ -5,18 +5,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import com.pe.innari.igvperu.extension.orEmpty
-import com.pe.innari.igvperu.gallery.bottomnavigation.state.BottomNavigationComponenState
+import com.pe.innari.igvperu.gallery.bottomnavigation.state.BottomNavigationComponentState
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponenState>() {
+class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentState>() {
 
     @Composable
     override fun InstanceMutableValues() {
-        mutableValues = BottomNavigationComponenState(
+        mutableValues = BottomNavigationComponentState(
             indexPosition = rememberSaveable { mutableIntStateOf(0) })
     }
 
