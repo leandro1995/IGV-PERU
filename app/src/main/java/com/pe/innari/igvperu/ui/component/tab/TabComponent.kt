@@ -60,7 +60,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                 .height(Dimen56)
         ) {
             tabMutableList.forEachIndexed { index, tab ->
-                ItemTab(
+                TabItem(
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1F), tab = tab, index = index
@@ -90,12 +90,13 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
      * @param index La posición del ítem en la lista.
      */
     @Composable
-    private fun ItemTab(modifier: Modifier, tab: Tab, index: Int) {
+    private fun TabItem(modifier: Modifier, tab: Tab, index: Int) {
         val isSelected = indexPosition == index
         Row(
             modifier = modifier
                 .background(
-                    color = getBackgroundColor(isSelected), shape = RoundedCornerShape(Dimen10)
+                    color = getBackgroundColorForSelection(isSelected),
+                    shape = RoundedCornerShape(Dimen10)
                 )
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() }, indication = null
@@ -108,14 +109,14 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
             Icon(
                 modifier = Modifier.size(Dimen18),
                 painter = painterResource(tab.icon),
-                tint = getContentColor(isSelected),
+                tint = getContentColorForSelection(isSelected),
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(start = Dimen5),
                 text = tab.label,
-                color = getContentColor(isSelected),
-                style = getTextStyle(isSelected)
+                color = getContentColorForSelection(isSelected),
+                style = getTextStyleForSelection(isSelected)
             )
         }
     }
@@ -124,7 +125,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
      * Determina el color de fondo basado en el estado de selección.
      */
     @Composable
-    private fun getBackgroundColor(isSelected: Boolean) = if (isSelected) {
+    private fun getBackgroundColorForSelection(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
         MaterialTheme.colorScheme.surfaceContainer
@@ -134,7 +135,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
      * Determina el color del contenido (icono y texto) basado en el estado de selección.
      */
     @Composable
-    private fun getContentColor(isSelected: Boolean) = if (isSelected) {
+    private fun getContentColorForSelection(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
@@ -143,7 +144,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
     /**
      * Determina el estilo de texto basado en el estado de selección.
      */
-    private fun getTextStyle(isSelected: Boolean) = if (isSelected) {
+    private fun getTextStyleForSelection(isSelected: Boolean) = if (isSelected) {
         ItemSelectTab
     } else {
         ItemDeselectTab
