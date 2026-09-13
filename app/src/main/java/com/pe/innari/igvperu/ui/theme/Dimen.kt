@@ -38,6 +38,7 @@ val Dimen24 = 24.dp
  * Dimensión de 76dp.
  */
 val Dimen76 = 76.dp
+val Dimen56 = 56.dp
 
 /**
  * Tamaño de texto de 12sp, utilizado para etiquetas y texto secundario.
