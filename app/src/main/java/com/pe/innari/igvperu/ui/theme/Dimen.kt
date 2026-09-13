@@ -13,11 +13,15 @@ import androidx.compose.ui.unit.sp
  * Dimensiones estándar de 1dp, utilizada comúnmente para bordes o divisores.
  */
 val Dimen1 = 1.dp
+val Dimen3 = 3.dp
 
 /**
  * Dimensión de 5dp, utilizada para espaciados pequeños.
  */
 val Dimen5 = 5.dp
+val Dimen10 = 10.dp
+val Dimen14 = 14.dp
+val Dimen18 = 18.dp
 
 /**
  * Dimensión de 20dp.
