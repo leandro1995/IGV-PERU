@@ -24,6 +24,7 @@ class ButtonComponentGallery : ViewAmbient<Any>() {
             ) {
                 ButtonComponent(buttonType = ButtonType.PRIMARY, button = button()).OnCreate()
                 ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.OUTLINED, button = button()).OnCreate()
             }
         }
     }
