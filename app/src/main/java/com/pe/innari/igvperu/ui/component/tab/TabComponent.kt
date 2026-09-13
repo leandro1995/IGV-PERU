@@ -82,20 +82,13 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
         }
     }
 
-    /**
-     * Renderiza un ítem individual dentro de la barra de pestañas.
-     *
-     * @param modifier Modificador para aplicar al contenedor del ítem.
-     * @param tab El objeto [Tab] que contiene la información del ítem (icono y etiqueta).
-     * @param index La posición del ítem en la lista.
-     */
     @Composable
     private fun TabItem(modifier: Modifier, tab: Tab, index: Int) {
         val isSelected = indexPosition == index
         Row(
             modifier = modifier
                 .background(
-                    color = getBackgroundColorForSelection(isSelected),
+                    color = getBackgroundColorBySelection(isSelected),
                     shape = RoundedCornerShape(Dimen10)
                 )
                 .clickable(
@@ -109,42 +102,33 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
             Icon(
                 modifier = Modifier.size(Dimen18),
                 painter = painterResource(tab.icon),
-                tint = getContentColorForSelection(isSelected),
+                tint = getContentColorBySelection(isSelected),
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(start = Dimen5),
                 text = tab.label,
-                color = getContentColorForSelection(isSelected),
-                style = getTextStyleForSelection(isSelected)
+                color = getContentColorBySelection(isSelected),
+                style = getTextStyleBySelection(isSelected)
             )
         }
     }
 
-    /**
-     * Determina el color de fondo basado en el estado de selección.
-     */
     @Composable
-    private fun getBackgroundColorForSelection(isSelected: Boolean) = if (isSelected) {
+    private fun getBackgroundColorBySelection(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
         MaterialTheme.colorScheme.surfaceContainer
     }
 
-    /**
-     * Determina el color del contenido (icono y texto) basado en el estado de selección.
-     */
     @Composable
-    private fun getContentColorForSelection(isSelected: Boolean) = if (isSelected) {
+    private fun getContentColorBySelection(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
     }
 
-    /**
-     * Determina el estilo de texto basado en el estado de selección.
-     */
-    private fun getTextStyleForSelection(isSelected: Boolean) = if (isSelected) {
+    private fun getTextStyleBySelection(isSelected: Boolean) = if (isSelected) {
         ItemSelectTab
     } else {
         ItemDeselectTab
