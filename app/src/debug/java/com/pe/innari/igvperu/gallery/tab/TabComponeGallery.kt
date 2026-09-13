@@ -6,13 +6,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import com.pe.innari.igvperu.extension.orEmpty
+import com.pe.innari.igvperu.gallery.tab.state.TabState
 import com.pe.innari.igvperu.ui.component.tab.TabComponent
 import com.pe.innari.igvperu.ui.component.tab.model.Tab
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class TabComponeGallery : ViewAmbient<Any>() {
+class TabComponeGallery : ViewAmbient<TabState>() {
+
+    @Composable
+    override fun InstanceMutableValues() {
+        mutableValues = TabState(indexPosition = rememberSaveable { mutableIntStateOf(0) })
+    }
 
     @Composable
     override fun PortraitCompact() {
@@ -22,7 +31,10 @@ class TabComponeGallery : ViewAmbient<Any>() {
                     .padding(paddingValues)
                     .fillMaxWidth()
             ) {
-                TabComponent(tabMutableList = tabMutableList()).OnCreate()
+                TabComponent(
+                    tabMutableList = tabMutableList(),
+                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty()
+                ).OnCreate()
             }
         }
     }
