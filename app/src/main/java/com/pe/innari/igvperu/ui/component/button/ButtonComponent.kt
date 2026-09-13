@@ -18,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonType
-import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen48
@@ -36,7 +35,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             }
 
             ButtonType.SECONDARY -> {
-
+                SecondaryButton()
             }
 
             ButtonType.OUTLINED -> {
@@ -55,6 +54,19 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             shape = RoundedCornerShape(Dimen12), colors = buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
+            ), modifier = Modifier
+                .height(Dimen48)
+                .fillMaxWidth(), onClick = {}) {
+            ContentButton()
+        }
+    }
+
+    @Composable
+    private fun SecondaryButton() {
+        Button(
+            shape = RoundedCornerShape(Dimen12), colors = buttonColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
             ), modifier = Modifier
                 .height(Dimen48)
                 .fillMaxWidth(), onClick = {}) {
