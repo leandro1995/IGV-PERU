@@ -61,3 +61,6 @@ val ItemSelectTab =
  */
 val ItemDeselectTab =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+val LabelButton =
+    TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
