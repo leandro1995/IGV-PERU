@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.gallery
+package com.pe.innari.igvperu.gallery.tab
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
