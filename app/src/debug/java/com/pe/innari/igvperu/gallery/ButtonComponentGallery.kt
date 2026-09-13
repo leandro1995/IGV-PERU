@@ -29,11 +29,17 @@ class ButtonComponentGallery : ViewAmbient<Any>() {
                 ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).OnCreate()
                 ButtonComponent(buttonType = ButtonType.OUTLINED, button = button()).OnCreate()
                 ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = button()).OnCreate()
+
+                ButtonComponent(buttonType = ButtonType.PRIMARY, button = buttonWithoutIcon()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.SECONDARY, button = buttonWithoutIcon()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.OUTLINED, button = buttonWithoutIcon()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = buttonWithoutIcon()).OnCreate()
             }
         }
     }
 
     private fun button() = Button(icon = android.R.drawable.star_on, label = "Button")
+    private fun buttonWithoutIcon() = Button(label = "Button")
 
     @ThemeAdaptivePreview
     @Composable
