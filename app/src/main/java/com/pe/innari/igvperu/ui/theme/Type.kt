@@ -46,3 +46,9 @@ val ItemSelectBotonNavigation =
  */
 val ItemDeselectBotonNavigation =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+val ItemSelectTab =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
+
+val ItemDeselectTab =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
