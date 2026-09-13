@@ -1,6 +1,8 @@
 package com.pe.innari.igvperu.ui.component.tab
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,10 +15,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.tab.callback.TabCallBack
 import com.pe.innari.igvperu.ui.component.tab.model.Tab
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen14
@@ -28,6 +32,8 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectTab
 
 class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
     ComponentAmbient() {
+
+    private var tabCallBack: TabCallBack? = null
 
     @Composable
     override fun OnCreate() {
@@ -51,13 +57,27 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
         }
     }
 
+    fun setTabCallBackPosition(method: (position: Int) -> Unit) {
+        tabCallBack = object : TabCallBack {
+            override fun position(position: Int) {
+                method(position)
+            }
+        }
+    }
+
     @Composable
     private fun ItemTab(modifier: Modifier, tab: Tab, index: Int) {
         val isSelect = indexPosition == index
         Row(
-            modifier = modifier.background(
-                color = itemSelectColor(isSelect), shape = RoundedCornerShape(Dimen10)
-            ),
+            modifier = modifier
+                .background(
+                    color = itemSelectColor(isSelect), shape = RoundedCornerShape(Dimen10)
+                )
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() }, indication = null
+                ) {
+                    tabCallBack?.position(position = index)
+                },
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
