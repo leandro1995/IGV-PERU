@@ -24,6 +24,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen3
 import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.Dimen56
+import com.pe.innari.igvperu.ui.theme.ItemDeselectTab
+import com.pe.innari.igvperu.ui.theme.ItemSelectTab
 
 class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
     ComponentAmbient() {
@@ -36,7 +38,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                     color = MaterialTheme.colorScheme.surfaceContainer,
                     shape = RoundedCornerShape(Dimen14)
                 )
-                .padding(Dimen3)
+                .padding(Dimen5)
                 .fillMaxWidth()
                 .height(Dimen56)
         ) {
@@ -69,7 +71,8 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
             Text(
                 modifier = Modifier.padding(start = Dimen5),
                 text = tab.label,
-                color = itemContentSelectColor(isSelect = isSelect)
+                color = itemContentSelectColor(isSelect = isSelect),
+                style = itemFontSelect(isSelect = isSelect)
             )
         }
     }
@@ -86,5 +89,11 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    private fun itemFontSelect(isSelect: Boolean) = if (isSelect) {
+        ItemSelectTab
+    } else {
+        ItemDeselectTab
     }
 }
