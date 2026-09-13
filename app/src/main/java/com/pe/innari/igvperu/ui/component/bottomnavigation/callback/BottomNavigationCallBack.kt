@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation.callback
 
-interface BottomNavigationCallBack
+interface BottomNavigationCallBack {
+    fun position(position: Int)
+}
