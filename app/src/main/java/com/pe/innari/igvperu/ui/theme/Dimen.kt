@@ -15,11 +15,6 @@ import androidx.compose.ui.unit.sp
 val Dimen1 = 1.dp
 
 /**
- * Dimensión de 3dp.
- */
-val Dimen3 = 3.dp
-
-/**
  * Dimensión de 5dp, utilizada para espaciados pequeños.
  */
 val Dimen5 = 5.dp
