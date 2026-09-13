@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNavigationCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -49,6 +50,8 @@ class BottomNavigationComponent(
     private val typeBottomNavigation: TypeBottomNavigation,
     private val items: List<ItemBottomNavigation>
 ) : ComponentAmbient() {
+
+    private var bottomNavigationCallBack: BottomNavigationCallBack? = null
 
     /**
      * Construye la estructura de navegación y el contenedor principal para el contenido de la vista.
@@ -76,6 +79,14 @@ class BottomNavigationComponent(
                         view = view
                     )
                 }
+            }
+        }
+    }
+
+    fun setBottomNavigationCallBackPosition(method: (position: Int) -> Unit) {
+        bottomNavigationCallBack = object : BottomNavigationCallBack {
+            override fun position(position: Int) {
+                method(position)
             }
         }
     }
@@ -137,7 +148,7 @@ class BottomNavigationComponent(
                 colors = createNavigationBarItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-
+                    bottomNavigationCallBack?.position(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
@@ -163,7 +174,7 @@ class BottomNavigationComponent(
                 colors = createNavigationRailItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-
+                    bottomNavigationCallBack?.position(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
