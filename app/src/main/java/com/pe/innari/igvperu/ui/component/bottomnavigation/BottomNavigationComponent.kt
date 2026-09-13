@@ -26,12 +26,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNavigationCallBack
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -43,37 +41,39 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
  * Componente de navegación adaptable que selecciona automáticamente entre una barra inferior (`NavigationBar`)
  * o un riel lateral (`NavigationRail`) según el tipo especificado.
  *
+ * @property indexPosition Índice del elemento actualmente seleccionado.
  * @property typeBottomNavigation Determina el estilo visual de la navegación (Inferior o Riel).
  * @property items Lista de elementos de navegación que se mostrarán.
  */
 class BottomNavigationComponent(
+    private val indexPosition: Int,
     private val typeBottomNavigation: TypeBottomNavigation,
     private val items: List<ItemBottomNavigation>
 ) : ComponentAmbient() {
 
+    private var bottomNavigationCallBack: BottomNavigationCallBack? = null
+
     /**
      * Construye la estructura de navegación y el contenedor principal para el contenido de la vista.
-     *
-     * Utiliza [rememberSaveable] para mantener el estado del ítem seleccionado durante recreaciones.
      *
      * @param view Composable que representa el contenido principal de la pantalla.
      */
     @Composable
     override fun OnCreate(view: @Composable (() -> Unit)) {
-        val indexPosition = rememberSaveable { mutableIntStateOf(0) }
-
         when (typeBottomNavigation) {
             TypeBottomNavigation.BOTTOM -> {
                 BottomBarNavigationLayout(
-                    indexPosition = indexPosition,
                     view = view
                 )
             }
 
             TypeBottomNavigation.RAIL -> {
-                CompositionLocalProvider(androidx.compose.material3.LocalContentColor provides contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow)) {
+                CompositionLocalProvider(
+                    androidx.compose.material3.LocalContentColor provides contentColorFor(
+                        MaterialTheme.colorScheme.surfaceContainerLow
+                    )
+                ) {
                     RailNavigationLayout(
-                        indexPosition = indexPosition,
                         view = view
                     )
                 }
@@ -81,9 +81,21 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Establece el callback para manejar el cambio de posición en la navegación.
+     *
+     * @param method Función lambda que recibe la nueva posición seleccionada.
+     */
+    fun setBottomNavigationCallBackPosition(method: (position: Int) -> Unit) {
+        bottomNavigationCallBack = object : BottomNavigationCallBack {
+            override fun position(position: Int) {
+                method(position)
+            }
+        }
+    }
+
     @Composable
     private fun BottomBarNavigationLayout(
-        indexPosition: MutableIntState,
         view: @Composable () -> Unit
     ) {
         Scaffold(
@@ -95,7 +107,7 @@ class BottomNavigationComponent(
                     HorizontalDivider(
                         thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
                     )
-                    NavigationBarItems(indexPosition)
+                    NavigationBarItems()
                 }
             }) { paddingValues ->
             Box(
@@ -108,11 +120,10 @@ class BottomNavigationComponent(
 
     @Composable
     private fun RailNavigationLayout(
-        indexPosition: MutableIntState,
         view: @Composable () -> Unit
     ) {
         Row(modifier = Modifier.fillMaxSize()) {
-            NavigationRailItems(indexPosition)
+            NavigationRailItems()
             VerticalDivider(
                 thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
             )
@@ -131,29 +142,30 @@ class BottomNavigationComponent(
     }
 
     @Composable
-    private fun NavigationBarItems(indexPosition: MutableIntState) = NavigationBar(
+    private fun NavigationBarItems() = NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow),
     ) {
         items.forEachIndexed { index, item ->
-            val isSelected = index == indexPosition.intValue
             NavigationBarItem(
                 colors = createNavigationBarItemColors(),
-                selected = isSelected,
+                selected = indexSelect(index = index),
                 onClick = {
-                    indexPosition.intValue = index
+                    bottomNavigationCallBack?.position(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
                 },
                 label = {
-                    NavigationItemLabel(title = item.title, isSelected = isSelected)
+                    NavigationItemLabel(
+                        title = item.title, indexSelect = indexSelect(index = index)
+                    )
                 })
         }
     }
 
     @Composable
-    private fun NavigationRailItems(indexPosition: MutableIntState) = NavigationRail(
+    private fun NavigationRailItems() = NavigationRail(
         windowInsets = WindowInsets.safeDrawing.only(
             WindowInsetsSides.Start + WindowInsetsSides.Top + WindowInsetsSides.Bottom
         ),
@@ -161,18 +173,19 @@ class BottomNavigationComponent(
         contentColor = contentColorFor(MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
         items.forEachIndexed { index, item ->
-            val isSelected = index == indexPosition.intValue
             NavigationRailItem(
                 colors = createNavigationRailItemColors(),
-                selected = isSelected,
+                selected = indexSelect(index = index),
                 onClick = {
-                    indexPosition.intValue = index
+                    bottomNavigationCallBack?.position(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
                 },
                 label = {
-                    NavigationItemLabel(title = item.title, isSelected = isSelected)
+                    NavigationItemLabel(
+                        title = item.title, indexSelect = indexSelect(index = index)
+                    )
                 })
         }
     }
@@ -185,8 +198,8 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun NavigationItemLabel(title: String, isSelected: Boolean) = Text(
-        text = title, style = if (isSelected) {
+    private fun NavigationItemLabel(title: String, indexSelect: Boolean) = Text(
+        text = title, style = if (indexSelect) {
             ItemSelectBotonNavigation
         } else {
             ItemDeselectBotonNavigation
@@ -210,4 +223,6 @@ class BottomNavigationComponent(
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
         indicatorColor = MaterialTheme.colorScheme.primaryContainer
     )
+
+    private fun indexSelect(index: Int) = indexPosition == index
 }
