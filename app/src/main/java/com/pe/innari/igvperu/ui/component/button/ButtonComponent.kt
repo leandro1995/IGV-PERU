@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.model.Button
@@ -47,7 +46,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             }
 
             ButtonType.DESTRUCTIVE -> {
-
+                DestructiveButton()
             }
         }
     }
@@ -86,6 +85,23 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             colors = buttonColors(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier
+                .height(Dimen48)
+                .fillMaxWidth(),
+            onClick = {}) {
+            ContentButton()
+        }
+    }
+
+    @Composable
+    private fun DestructiveButton() {
+        OutlinedButton(
+            border = BorderStroke(Dimen1, MaterialTheme.colorScheme.error),
+            shape = RoundedCornerShape(Dimen12),
+            colors = buttonColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.error
             ),
             modifier = Modifier
                 .height(Dimen48)
