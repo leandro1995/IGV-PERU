@@ -34,7 +34,11 @@ class TabComponeGallery : ViewAmbient<TabState>() {
                 TabComponent(
                     tabMutableList = tabMutableList(),
                     indexPosition = mutableValues?.indexPosition?.intValue.orEmpty()
-                ).OnCreate()
+                ).apply {
+                    setTabCallBackPosition {
+                        mutableValues?.indexPosition?.intValue = it
+                    }
+                }.OnCreate()
             }
         }
     }
