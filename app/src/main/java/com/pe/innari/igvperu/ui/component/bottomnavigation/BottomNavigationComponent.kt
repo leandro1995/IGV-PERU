@@ -42,6 +42,7 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
  * Componente de navegación adaptable que selecciona automáticamente entre una barra inferior (`NavigationBar`)
  * o un riel lateral (`NavigationRail`) según el tipo especificado.
  *
+ * @property indexPosition Índice del elemento actualmente seleccionado.
  * @property typeBottomNavigation Determina el estilo visual de la navegación (Inferior o Riel).
  * @property items Lista de elementos de navegación que se mostrarán.
  */
@@ -83,6 +84,11 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Establece el callback para manejar el cambio de posición en la navegación.
+     *
+     * @param method Función lambda que recibe la nueva posición seleccionada.
+     */
     fun setBottomNavigationCallBackPosition(method: (position: Int) -> Unit) {
         bottomNavigationCallBack = object : BottomNavigationCallBack {
             override fun position(position: Int) {
