@@ -21,7 +21,6 @@ import com.pe.innari.igvperu.ui.component.tab.model.Tab
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen18
-import com.pe.innari.igvperu.ui.theme.Dimen3
 import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.ItemDeselectTab
