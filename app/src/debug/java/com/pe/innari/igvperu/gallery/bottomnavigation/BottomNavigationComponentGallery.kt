@@ -2,20 +2,35 @@ package com.pe.innari.igvperu.gallery.bottomnavigation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.pe.innari.igvperu.extension.orEmpty
+import com.pe.innari.igvperu.gallery.bottomnavigation.state.BottomNavigationComponenState
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class BottomNavigationComponentGallery : ViewAmbient() {
+class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponenState>() {
+
+    @Composable
+    override fun InstanceMutableValues() {
+        mutableValues = BottomNavigationComponenState(
+            indexPosition = rememberSaveable { mutableIntStateOf(0) })
+    }
 
     @Composable
     override fun PortraitCompact() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.BOTTOM,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("PortraitCompact")
         }
     }
@@ -23,9 +38,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun PortraitMedium() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("PortraitMedium")
         }
     }
@@ -33,9 +53,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun PortraitExpanded() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("PortraitExpanded")
         }
     }
@@ -43,9 +68,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun LandScapeCompact() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("LandScapeCompact")
         }
     }
@@ -53,9 +83,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun LandScapeMedium() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("LandScapeMedium")
         }
     }
@@ -63,9 +98,14 @@ class BottomNavigationComponentGallery : ViewAmbient() {
     @Composable
     override fun LandScapeExpanded() {
         BottomNavigationComponent(
+            indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
-        ).OnCreate {
+        ).apply {
+            setBottomNavigationCallBackPosition {
+                mutableValues?.indexPosition?.intValue = it
+            }
+        }.OnCreate {
             Text("LandScapeExpanded")
         }
     }
