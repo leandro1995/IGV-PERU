@@ -23,6 +23,7 @@ class ButtonComponentGallery : ViewAmbient<Any>() {
                     .fillMaxSize()
             ) {
                 ButtonComponent(buttonType = ButtonType.PRIMARY, button = button()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).OnCreate()
             }
         }
     }
