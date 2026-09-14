@@ -1,3 +1,3 @@
 package com.pe.innari.igvperu.ui.component.edittext.model
 
-class EditText
+class EditText(val placeHolder: String = "")
