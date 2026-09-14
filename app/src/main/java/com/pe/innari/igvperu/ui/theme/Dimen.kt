@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.sp
  */
 
 val Dimen0 = 0.dp
+
 /**
  * Dimensiones estándar de 1dp, utilizada comúnmente para bordes o divisores.
  */
@@ -26,8 +27,6 @@ val Dimen5 = 5.dp
  */
 val Dimen10 = 10.dp
 
-val Dimen15 = 15.dp
-
 /**
  * Dimensión de 12dp.
  */
@@ -37,6 +36,7 @@ val Dimen12 = 12.dp
  * Dimensión de 14dp.
  */
 val Dimen14 = 14.dp
+val Dimen15 = 15.dp
 
 /**
  * Dimensión de 18dp.
@@ -64,6 +64,7 @@ val Dimen24 = 24.dp
 val Dimen48 = 48.dp
 
 val Dimen55 = 55.dp
+
 /**
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
  */
