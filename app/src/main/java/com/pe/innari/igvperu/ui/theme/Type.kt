@@ -64,3 +64,15 @@ val ItemDeselectTab =
  */
 val LabelButton =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
+
+val TextEditText =
+    TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+val PlaceHolderEditText =
+    TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(resId = R.font.regular)))
+
+val SideLabelEditText =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+val PrefixEditText =
+    TextStyle(fontSize = Text17, fontFamily = FontFamily(Font(resId = R.font.medium)))
