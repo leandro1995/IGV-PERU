@@ -63,6 +63,7 @@ val Dimen48 = 48.dp
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
  */
 val Dimen56 = 56.dp
+val Dimen68 = 68.dp
 
 /**
  * Dimensión de 76dp.
