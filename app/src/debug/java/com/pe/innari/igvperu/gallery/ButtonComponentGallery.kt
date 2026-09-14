@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.gallery
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,15 +26,39 @@ class ButtonComponentGallery : ViewAmbient<Any>() {
                     .padding(paddingValues)
                     .fillMaxSize()
             ) {
-                ButtonComponent(buttonType = ButtonType.PRIMARY, button = button()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.OUTLINED, button = button()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = button()).OnCreate()
+                ButtonComponent(buttonType = ButtonType.PRIMARY, button = button()).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(buttonType = ButtonType.OUTLINED, button = button()).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = button()).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
 
-                ButtonComponent(buttonType = ButtonType.PRIMARY, button = buttonWithoutIcon()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.SECONDARY, button = buttonWithoutIcon()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.OUTLINED, button = buttonWithoutIcon()).OnCreate()
-                ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = buttonWithoutIcon()).OnCreate()
+                ButtonComponent(
+                    buttonType = ButtonType.PRIMARY, button = buttonWithoutIcon()
+                ).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(
+                    buttonType = ButtonType.SECONDARY, button = buttonWithoutIcon()
+                ).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(
+                    buttonType = ButtonType.OUTLINED, button = buttonWithoutIcon()
+                ).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
+                ButtonComponent(
+                    buttonType = ButtonType.DESTRUCTIVE, button = buttonWithoutIcon()
+                ).apply {
+                    setOnclick { Log.e("OnClick", "OnClick") }
+                }.OnCreate()
             }
         }
     }
