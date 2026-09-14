@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +47,9 @@ import com.pe.innari.igvperu.ui.theme.SideLabelEditText
 import com.pe.innari.igvperu.ui.theme.TextEditText
 
 class EditTextComponent(
-    private val editText: EditText, private val trailingIcon: @Composable (() -> Unit)? = null
+    private val editText: EditText,
+    private val textFieldState: TextFieldState,
+    private val trailingIcon: @Composable (() -> Unit)? = null
 ) : ComponentAmbient() {
 
     @Composable
@@ -64,7 +67,7 @@ class EditTextComponent(
                 .onFocusChanged { focusState ->
                     isFocused = focusState.isFocused
                 },
-            state = rememberTextFieldState(),
+            state = textFieldState,
             placeholder = {
                 Text(
                     modifier = Modifier
