@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.LocalTextStyle
@@ -18,10 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
+import com.pe.innari.igvperu.ui.component.edittext.util.EditTextFormatUtil
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
@@ -31,8 +35,7 @@ import com.pe.innari.igvperu.ui.theme.Dimen55
 import com.pe.innari.igvperu.ui.theme.Dimen68
 
 class EditTextComponent(
-    private val editText: EditText,
-    private val trailingIcon: @Composable (() -> Unit)? = null
+    private val editText: EditText, private val trailingIcon: @Composable (() -> Unit)? = null
 ) : ComponentAmbient() {
 
     @Composable
@@ -57,7 +60,9 @@ class EditTextComponent(
                 )
             },
             leadingIcon = { LeadingIcon() },
-            trailingIcon = trailingIcon
+            trailingIcon = trailingIcon,
+            keyboardOptions = keyboardOptions(),
+            inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = editTextType())
         )
     }
 
@@ -93,4 +98,22 @@ class EditTextComponent(
             }
         }
     }
+
+    private fun editTextType() = when (editText.editTextType) {
+        EditTextType.DECIMAL -> {
+            true
+        }
+
+        EditTextType.INTEGER, EditTextType.NONE -> {
+            false
+        }
+    }
+
+    private fun keyboardOptions() = KeyboardOptions(
+        keyboardType = if (editTextType()) {
+            KeyboardType.Decimal
+        } else {
+            KeyboardType.Number
+        }
+    )
 }
