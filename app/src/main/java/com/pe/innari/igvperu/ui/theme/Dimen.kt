@@ -55,9 +55,9 @@ val Dimen22 = 22.dp
 val Dimen24 = 24.dp
 
 /**
- * Dimensión de 76dp.
+ * Dimensión de 48dp, altura común para botones estándar.
  */
-val Dimen76 = 76.dp
+val Dimen48 = 48.dp
 
 /**
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
@@ -65,9 +65,9 @@ val Dimen76 = 76.dp
 val Dimen56 = 56.dp
 
 /**
- * Dimensión de 48dp, altura común para botones estándar.
+ * Dimensión de 76dp.
  */
-val Dimen48 = 48.dp
+val Dimen76 = 76.dp
 
 /**
  * Tamaño de texto de 12sp, utilizado para etiquetas y texto secundario.
