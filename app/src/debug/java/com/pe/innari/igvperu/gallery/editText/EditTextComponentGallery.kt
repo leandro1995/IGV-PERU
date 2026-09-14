@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.gallery
+package com.pe.innari.igvperu.gallery.editText
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
