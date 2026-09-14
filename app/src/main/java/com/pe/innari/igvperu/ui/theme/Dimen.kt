@@ -85,6 +85,7 @@ val Text12 = 12.sp
  * Tamaño de texto de 14sp, utilizado para cuerpo de texto y botones.
  */
 val Text14 = 14.sp
+val Text17 = 17.sp
 
 /**
  * Tamaño de texto de 20sp, utilizado para títulos.
