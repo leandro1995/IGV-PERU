@@ -9,6 +9,8 @@ import androidx.compose.ui.unit.sp
  * Contiene valores de espaciado (dp) y tamaños de texto (sp) estandarizados
  * para mantener la consistencia visual en toda la interfaz de usuario.
  */
+
+val Dimen0 = 0.dp
 /**
  * Dimensiones estándar de 1dp, utilizada comúnmente para bordes o divisores.
  */
@@ -23,6 +25,8 @@ val Dimen5 = 5.dp
  * Dimensión de 10dp.
  */
 val Dimen10 = 10.dp
+
+val Dimen15 = 15.dp
 
 /**
  * Dimensión de 12dp.
@@ -59,6 +63,7 @@ val Dimen24 = 24.dp
  */
 val Dimen48 = 48.dp
 
+val Dimen55 = 55.dp
 /**
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
  */
