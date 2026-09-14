@@ -23,6 +23,10 @@ val Dimen5 = 5.dp
  * Dimensión de 10dp.
  */
 val Dimen10 = 10.dp
+
+/**
+ * Dimensión de 12dp.
+ */
 val Dimen12 = 12.dp
 
 /**
@@ -59,12 +63,20 @@ val Dimen76 = 76.dp
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
  */
 val Dimen56 = 56.dp
+
+/**
+ * Dimensión de 48dp, altura común para botones estándar.
+ */
 val Dimen48 = 48.dp
 
 /**
  * Tamaño de texto de 12sp, utilizado para etiquetas y texto secundario.
  */
 val Text12 = 12.sp
+
+/**
+ * Tamaño de texto de 14sp, utilizado para cuerpo de texto y botones.
+ */
 val Text14 = 14.sp
 
 /**
