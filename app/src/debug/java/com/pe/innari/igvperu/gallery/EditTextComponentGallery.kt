@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
@@ -27,7 +28,8 @@ class EditTextComponentGallery : ViewAmbient<Any>() {
                     editText = EditText(
                         placeHolder = "placeHolder",
                         label = "label",
-                        isCurrencySymbol = true
+                        isCurrencySymbol = true,
+                        editTextType = EditTextType.DECIMAL
                     ),
                     trailingIcon = {
                         Text("AUTO")
