@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.button.callback.ButtonCallBack
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonType
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -29,6 +30,8 @@ import com.pe.innari.igvperu.ui.theme.LabelButton
 
 class ButtonComponent(private val buttonType: ButtonType, private val button: Button) :
     ComponentAmbient() {
+
+    private var buttonCallBack: ButtonCallBack? = null
 
     @Composable
     override fun OnCreate() {
@@ -51,15 +54,28 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
         }
     }
 
+    fun setOnclick(method: () -> Unit) {
+        if (buttonCallBack == null) {
+            buttonCallBack = object : ButtonCallBack {
+                override fun onClick() {
+                    method()
+                }
+            }
+        }
+    }
+
     @Composable
     private fun PrimaryButton() {
         Button(
-            shape = RoundedCornerShape(Dimen12), colors = buttonColors(
+            shape = RoundedCornerShape(Dimen12),
+            colors = buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
-            ), modifier = Modifier
+            ),
+            modifier = Modifier
                 .height(Dimen48)
-                .fillMaxWidth(), onClick = {}) {
+                .fillMaxWidth(),
+            onClick = { buttonCallBack?.onClick() }) {
             ContentButton()
         }
     }
@@ -67,12 +83,15 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
     @Composable
     private fun SecondaryButton() {
         Button(
-            shape = RoundedCornerShape(Dimen12), colors = buttonColors(
+            shape = RoundedCornerShape(Dimen12),
+            colors = buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-            ), modifier = Modifier
+            ),
+            modifier = Modifier
                 .height(Dimen48)
-                .fillMaxWidth(), onClick = {}) {
+                .fillMaxWidth(),
+            onClick = { buttonCallBack?.onClick() }) {
             ContentButton()
         }
     }
@@ -89,7 +108,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             modifier = Modifier
                 .height(Dimen48)
                 .fillMaxWidth(),
-            onClick = {}) {
+            onClick = { buttonCallBack?.onClick() }) {
             ContentButton()
         }
     }
@@ -106,7 +125,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
             modifier = Modifier
                 .height(Dimen48)
                 .fillMaxWidth(),
-            onClick = {}) {
+            onClick = { buttonCallBack?.onClick() }) {
             ContentButton()
         }
     }
