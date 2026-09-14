@@ -43,9 +43,7 @@ class EditTextComponent(
         OutlinedTextField(
             shape = RoundedCornerShape(Dimen14),
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = LocalTextStyle.current.copy(
-                textAlign = TextAlign.End
-            ),
+            textStyle = localTextStyleCurrent(),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen68),
@@ -65,6 +63,11 @@ class EditTextComponent(
             inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = editTextType())
         )
     }
+
+    @Composable
+    private fun localTextStyleCurrent() = LocalTextStyle.current.copy(
+        textAlign = TextAlign.End
+    )
 
     @Composable
     private fun LeadingIcon() {
