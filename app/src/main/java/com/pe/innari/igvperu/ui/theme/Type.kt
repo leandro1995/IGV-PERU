@@ -38,9 +38,6 @@ val SuTitleToolBar =
 /**
  * Estilo de texto para los ítems seleccionados en la barra de navegación inferior.
  */
-/**
- * Estilo de texto para los ítems seleccionados en la barra de navegación inferior.
- */
 val ItemSelectBotonNavigation =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
 
@@ -62,5 +59,8 @@ val ItemSelectTab =
 val ItemDeselectTab =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
 
+/**
+ * Estilo de texto para las etiquetas de los botones.
+ */
 val LabelButton =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
