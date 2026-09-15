@@ -70,10 +70,10 @@ class EditTextComponent(
         var isFocused by remember { mutableStateOf(false) }
 
         OutlinedTextField(
-            colors = colors(),
+            colors = getTextFieldColors(),
             shape = RoundedCornerShape(Dimen14),
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = localTextStyleCurrent(),
+            textStyle = getEndAlignedTextStyle(),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen68)
@@ -92,32 +92,23 @@ class EditTextComponent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             },
-            leadingIcon = { LeadingIcon(isFocused = isFocused) },
+            leadingIcon = { LeadingContent(isFocused = isFocused) },
             trailingIcon = trailingIcon,
-            keyboardOptions = keyboardOptions(),
-            inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = editTextType())
+            keyboardOptions = createKeyboardOptions(),
+            inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = isDecimalType())
         )
     }
 
-    /**
-     * Define el estilo de texto local actual alineado a la derecha con el tamaño de fuente correspondiente.
-     */
     @Composable
-    private fun localTextStyleCurrent() = LocalTextStyle.current.copy(
+    private fun getEndAlignedTextStyle() = LocalTextStyle.current.copy(
         textAlign = TextAlign.End,
         fontStyle = TextEditText.fontStyle,
         fontSize = TextEditText.fontSize,
         color = MaterialTheme.colorScheme.onSurface
     )
 
-    /**
-     * Renderiza la sección inicial (izquierda) del campo de texto, incluyendo la etiqueta,
-     * el divisor vertical dinámico según el estado de enfoque y el símbolo de moneda opcional.
-     *
-     * @param isFocused Indica si el campo de texto tiene el foco actual del sistema.
-     */
     @Composable
-    private fun LeadingIcon(isFocused: Boolean) {
+    private fun LeadingContent(isFocused: Boolean) {
         Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier
@@ -161,11 +152,8 @@ class EditTextComponent(
         }
     }
 
-    /**
-     * Define la paleta de colores para los diferentes estados del [OutlinedTextField].
-     */
     @Composable
-    private fun colors() = OutlinedTextFieldDefaults.colors(
+    private fun getTextFieldColors() = OutlinedTextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         focusedBorderColor = MaterialTheme.colorScheme.primary,
@@ -173,12 +161,7 @@ class EditTextComponent(
         cursorColor = MaterialTheme.colorScheme.primary
     )
 
-    /**
-     * Determina si el tipo de entrada requiere soporte para valores decimales.
-     *
-     * @return true si acepta decimales, false de lo contrario.
-     */
-    private fun editTextType() = when (editText.editTextType) {
+    private fun isDecimalType() = when (editText.editTextType) {
         EditTextType.DECIMAL -> {
             true
         }
@@ -188,11 +171,8 @@ class EditTextComponent(
         }
     }
 
-    /**
-     * Configura las opciones del teclado virtual según el tipo de restricción numérica configurado.
-     */
-    private fun keyboardOptions() = KeyboardOptions(
-        keyboardType = if (editTextType()) {
+    private fun createKeyboardOptions() = KeyboardOptions(
+        keyboardType = if (isDecimalType()) {
             KeyboardType.Decimal
         } else {
             KeyboardType.Number
