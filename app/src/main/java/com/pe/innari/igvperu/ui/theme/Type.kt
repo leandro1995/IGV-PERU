@@ -64,3 +64,27 @@ val ItemDeselectTab =
  */
 val LabelButton =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
+
+/**
+ * Estilo de texto principal para el contenido editable dentro del campo de texto personalizado.
+ */
+val TextEditText =
+    TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+/**
+ * Estilo de texto utilizado para el marcador de sugerencia o placeholder en los campos de texto.
+ */
+val PlaceHolderEditText =
+    TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(resId = R.font.regular)))
+
+/**
+ * Estilo de texto para la etiqueta descriptiva ubicada al costado del campo de texto.
+ */
+val SideLabelEditText =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
+
+/**
+ * Estilo de texto para los prefijos, como el símbolo de la moneda local, dentro del campo de texto.
+ */
+val PrefixEditText =
+    TextStyle(fontSize = Text17, fontFamily = FontFamily(Font(resId = R.font.medium)))

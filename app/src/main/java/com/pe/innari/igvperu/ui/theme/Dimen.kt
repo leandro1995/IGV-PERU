@@ -9,6 +9,12 @@ import androidx.compose.ui.unit.sp
  * Contiene valores de espaciado (dp) y tamaños de texto (sp) estandarizados
  * para mantener la consistencia visual en toda la interfaz de usuario.
  */
+
+/**
+ * Dimensión vacía o de valor cero (0dp).
+ */
+val Dimen0 = 0.dp
+
 /**
  * Dimensiones estándar de 1dp, utilizada comúnmente para bordes o divisores.
  */
@@ -20,7 +26,7 @@ val Dimen1 = 1.dp
 val Dimen5 = 5.dp
 
 /**
- * Dimensión de 10dp.
+ * Dimensión de 10dp, utilizada para márgenes y paddings intermedios.
  */
 val Dimen10 = 10.dp
 
@@ -30,9 +36,14 @@ val Dimen10 = 10.dp
 val Dimen12 = 12.dp
 
 /**
- * Dimensión de 14dp.
+ * Dimensión de 14dp, común para radios de esquinas redondeadas.
  */
 val Dimen14 = 14.dp
+
+/**
+ * Dimensión de 15dp, utilizada para paddings horizontales de componentes de texto.
+ */
+val Dimen15 = 15.dp
 
 /**
  * Dimensión de 18dp.
@@ -55,9 +66,14 @@ val Dimen22 = 22.dp
 val Dimen24 = 24.dp
 
 /**
- * Dimensión de 76dp.
+ * Dimensión de 48dp, altura común para botones estándar.
  */
-val Dimen76 = 76.dp
+val Dimen48 = 48.dp
+
+/**
+ * Dimensión de 55dp, utilizada para la separación del divisor interno.
+ */
+val Dimen55 = 55.dp
 
 /**
  * Dimensión de 56dp, altura estándar para barras de herramientas o botones grandes.
@@ -65,9 +81,14 @@ val Dimen76 = 76.dp
 val Dimen56 = 56.dp
 
 /**
- * Dimensión de 48dp, altura común para botones estándar.
+ * Dimensión de 68dp, altura asignada al componente personalizado de campo de texto.
  */
-val Dimen48 = 48.dp
+val Dimen68 = 68.dp
+
+/**
+ * Dimensión de 76dp.
+ */
+val Dimen76 = 76.dp
 
 /**
  * Tamaño de texto de 12sp, utilizado para etiquetas y texto secundario.
@@ -80,6 +101,11 @@ val Text12 = 12.sp
 val Text14 = 14.sp
 
 /**
- * Tamaño de texto de 20sp, utilizado para títulos.
+ * Tamaño de texto de 17sp, utilizado para símbolos y prefijos importantes.
+ */
+val Text17 = 17.sp
+
+/**
+ * Tamaño de texto de 20sp, utilizado para títulos y valores principales.
  */
 val Text20 = 20.sp
