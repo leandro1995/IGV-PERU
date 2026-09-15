@@ -1,6 +1,8 @@
 package com.pe.innari.igvperu.extension
 
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 
 /**
  * Retorna el valor del entero o 0 si es nulo.
@@ -15,3 +17,5 @@ fun Int?.orEmpty() = this ?: 0
  * @return La instancia existente de [TextFieldState] o una nueva instancia por defecto si es nula.
  */
 fun TextFieldState?.orEmpty() = this ?: TextFieldState()
+
+fun NavBackStack<NavKey>?.orEmpty() = this ?: NavBackStack()
