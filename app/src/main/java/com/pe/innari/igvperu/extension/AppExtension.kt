@@ -18,4 +18,9 @@ fun Int?.orEmpty() = this ?: 0
  */
 fun TextFieldState?.orEmpty() = this ?: TextFieldState()
 
+/**
+ * Retorna la instancia de [NavBackStack] actual o crea una nueva vacía si es nula.
+ *
+ * @return La instancia existente de [NavBackStack] o una nueva instancia por defecto si es nula.
+ */
 fun NavBackStack<NavKey>?.orEmpty() = this ?: NavBackStack()
