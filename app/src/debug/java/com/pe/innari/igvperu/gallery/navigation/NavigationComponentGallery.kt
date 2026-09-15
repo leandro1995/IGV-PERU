@@ -6,6 +6,7 @@ import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.navigation.navigation.Navigation
 import com.pe.innari.igvperu.gallery.navigation.state.NavigationState
 import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
+import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
 class NavigationComponentGallery : ViewAmbient<NavigationState>() {
@@ -18,5 +19,11 @@ class NavigationComponentGallery : ViewAmbient<NavigationState>() {
     @Composable
     override fun PortraitCompact() {
         NavigationComponent(backStack = mutableValues?.backStack.orEmpty()).OnCreate()
+    }
+
+    @ThemeAdaptivePreview
+    @Composable
+    override fun Preview() {
+        super.Preview()
     }
 }
