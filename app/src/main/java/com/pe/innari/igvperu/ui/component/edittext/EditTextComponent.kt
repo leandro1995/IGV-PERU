@@ -45,12 +45,26 @@ import com.pe.innari.igvperu.ui.theme.PrefixEditText
 import com.pe.innari.igvperu.ui.theme.SideLabelEditText
 import com.pe.innari.igvperu.ui.theme.TextEditText
 
+/**
+ * Componente visual de campo de texto personalizado encapsulado bajo la clase base [ComponentAmbient].
+ *
+ * Proporciona un diseño estilizado con soporte para etiquetas internas a la izquierda, divisores dinámicos,
+ * símbolos de moneda condicionales, un marcador de posición alineado a la derecha, e integración automática
+ * con la validación de formato numérico en tiempo real.
+ *
+ * @property editText Configuración visual y de tipo ([EditText]) que define las características del campo.
+ * @property textFieldState Estado de edición del texto controlado por Jetpack Compose ([TextFieldState]).
+ * @property trailingIcon Composable opcional que se muestra al final del campo de texto (icono a la derecha).
+ */
 class EditTextComponent(
     private val editText: EditText,
     private val textFieldState: TextFieldState,
     private val trailingIcon: @Composable (() -> Unit)? = null
 ) : ComponentAmbient() {
 
+    /**
+     * Renderiza e inicializa la estructura visual del campo de texto utilizando [OutlinedTextField].
+     */
     @Composable
     override fun OnCreate() {
         var isFocused by remember { mutableStateOf(false) }
@@ -85,6 +99,9 @@ class EditTextComponent(
         )
     }
 
+    /**
+     * Define el estilo de texto local actual alineado a la derecha con el tamaño de fuente correspondiente.
+     */
     @Composable
     private fun localTextStyleCurrent() = LocalTextStyle.current.copy(
         textAlign = TextAlign.End,
@@ -93,6 +110,12 @@ class EditTextComponent(
         color = MaterialTheme.colorScheme.onSurface
     )
 
+    /**
+     * Renderiza la sección inicial (izquierda) del campo de texto, incluyendo la etiqueta,
+     * el divisor vertical dinámico según el estado de enfoque y el símbolo de moneda opcional.
+     *
+     * @param isFocused Indica si el campo de texto tiene el foco actual del sistema.
+     */
     @Composable
     private fun LeadingIcon(isFocused: Boolean) {
         Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
@@ -138,6 +161,9 @@ class EditTextComponent(
         }
     }
 
+    /**
+     * Define la paleta de colores para los diferentes estados del [OutlinedTextField].
+     */
     @Composable
     private fun colors() = OutlinedTextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
@@ -147,6 +173,11 @@ class EditTextComponent(
         cursorColor = MaterialTheme.colorScheme.primary
     )
 
+    /**
+     * Determina si el tipo de entrada requiere soporte para valores decimales.
+     *
+     * @return true si acepta decimales, false de lo contrario.
+     */
     private fun editTextType() = when (editText.editTextType) {
         EditTextType.DECIMAL -> {
             true
@@ -157,6 +188,9 @@ class EditTextComponent(
         }
     }
 
+    /**
+     * Configura las opciones del teclado virtual según el tipo de restricción numérica configurado.
+     */
     private fun keyboardOptions() = KeyboardOptions(
         keyboardType = if (editTextType()) {
             KeyboardType.Decimal
