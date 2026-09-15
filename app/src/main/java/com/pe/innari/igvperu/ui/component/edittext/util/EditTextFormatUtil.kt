@@ -25,7 +25,7 @@ object EditTextFormatUtil {
                     proposed
                 }
 
-                proposed.matches(regex(allowDecimal = allowDecimal)) -> {
+                proposed.matches(createNumericValidationRegex(allowDecimal = allowDecimal)) -> {
                     proposed
                 }
 
@@ -36,22 +36,14 @@ object EditTextFormatUtil {
         }
     }
 
-    /**
-     * Genera la expresión regular para validar el formato de entrada numérico.
-     *
-     * @param allowDecimal true si se incluye soporte para la parte decimal opcional.
-     * @return Una instancia de [Regex] correspondiente al tipo de validación.
-     */
-    private fun regex(allowDecimal: Boolean) = Regex(
+    private fun createNumericValidationRegex(allowDecimal: Boolean) = Regex(
         if (allowDecimal) {
-            """^\d{1,$MAX_INTEGER_DIGITS}(\.\d{0,$MAX_DECIMAL_DIGITS})?$"""
+            """^\d{1,$MAX_ALLOWED_INTEGER_DIGITS}(\.\d{0,$MAX_ALLOWED_DECIMAL_DIGITS})?$"""
         } else {
-            """^\d{1,$MAX_INTEGER_DIGITS}$"""
+            """^\d{1,$MAX_ALLOWED_INTEGER_DIGITS}$"""
         }
     )
 
-    /** Cantidad máxima permitida de dígitos para la parte entera. */
-    private const val MAX_INTEGER_DIGITS = 10
-    /** Cantidad máxima permitida de dígitos para la parte decimal. */
-    private const val MAX_DECIMAL_DIGITS = 2
+    private const val MAX_ALLOWED_INTEGER_DIGITS = 10
+    private const val MAX_ALLOWED_DECIMAL_DIGITS = 2
 }
