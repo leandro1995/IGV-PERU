@@ -9,4 +9,9 @@ import androidx.compose.foundation.text.input.TextFieldState
  */
 fun Int?.orEmpty() = this ?: 0
 
+/**
+ * Retorna la instancia de [TextFieldState] actual o crea una nueva vacía si es nula.
+ *
+ * @return La instancia existente de [TextFieldState] o una nueva instancia por defecto si es nula.
+ */
 fun TextFieldState?.orEmpty() = this ?: TextFieldState()
