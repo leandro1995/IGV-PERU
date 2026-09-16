@@ -10,7 +10,7 @@ import androidx.annotation.DrawableRes
  * @property subTitle Subtítulo descriptivo que se mostrará debajo del título.
  */
 data class ToolBar(
-    @DrawableRes val icon: Int? = null,
+    @DrawableRes private val icon: Int? = null,
     val title: String,
     val subTitle: String
 ) {
