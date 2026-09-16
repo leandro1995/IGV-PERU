@@ -27,7 +27,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.BOTTOM,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
@@ -42,7 +42,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
@@ -57,7 +57,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
@@ -72,7 +72,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
@@ -87,7 +87,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
@@ -102,7 +102,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
             typeBottomNavigation = TypeBottomNavigation.RAIL,
             items = itemBottomNavigation()
         ).apply {
-            setBottomNavigationCallBackPosition {
+            setCallback {
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
