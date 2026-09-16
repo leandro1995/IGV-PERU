@@ -11,7 +11,7 @@ import androidx.annotation.DrawableRes
 data class Button(@DrawableRes private val icon: Int? = null, val label: String) {
 
     /**
-     * Verifica si la barra de herramientas tiene un icono configurado.
+     * Verifica si el botón tiene un icono configurado.
      *
      * @return true si el icono no es nulo, false en caso contrario.
      */
