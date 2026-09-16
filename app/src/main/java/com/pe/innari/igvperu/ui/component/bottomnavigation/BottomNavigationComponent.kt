@@ -68,10 +68,8 @@ class BottomNavigationComponent(
             }
 
             TypeBottomNavigation.RAIL -> {
-                CompositionLocalProvider(
-                    androidx.compose.material3.LocalContentColor provides contentColorFor(
-                        MaterialTheme.colorScheme.surfaceContainerLow
-                    )
+                ProvideThemeContentColor(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 ) {
                     RailNavigationLayout(
                         view = view
