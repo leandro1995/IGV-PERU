@@ -62,14 +62,14 @@ class ToolBarComponent(private val toolBar: ToolBar) : ComponentAmbient() {
                     Icon(
                         modifier = Modifier.size(Dimen24),
                         painter = painterResource(toolBar.icon()),
-                        contentDescription = (null),
+                        contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = Dimen20, end = Dimen20)
+                        .padding(horizontal = Dimen20)
                 ) {
                     Text(text = toolBar.title, style = TitleToolBar)
                     Text(modifier = Modifier.padding(top = Dimen5), text = toolBar.subTitle, style = SuTitleToolBar)
