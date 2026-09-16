@@ -32,19 +32,19 @@ val TitleToolBar = TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(res
 /**
  * Estilo de texto para el subtítulo en las barras de herramientas.
  */
-val SuTitleToolBar =
+val SubTitleToolBar =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
 
 /**
  * Estilo de texto para los ítems seleccionados en la barra de navegación inferior.
  */
-val ItemSelectBotonNavigation =
+val ItemSelectButtonNavigation =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.semi_bold)))
 
 /**
  * Estilo de texto para los ítems no seleccionados en la barra de navegación inferior.
  */
-val ItemDeselectBotonNavigation =
+val ItemDeselectButtonNavigation =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(resId = R.font.medium)))
 
 /**
