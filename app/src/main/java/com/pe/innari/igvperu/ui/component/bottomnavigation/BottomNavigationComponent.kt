@@ -42,7 +42,7 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectButtonNavigation
  *
  * @property indexPosition Índice del elemento actualmente seleccionado.
  * @property typeBottomNavigation Determina el estilo visual de la navegación (Inferior o Riel).
- * @property items Lista de elementos de navegación que se mostrarán.
+ * @property items Lista de objetos [ItemBottomNavigation] que representan cada elemento de navegación.
  */
 class BottomNavigationComponent(
     private val indexPosition: Int,
@@ -79,7 +79,7 @@ class BottomNavigationComponent(
     }
 
     /**
-     * Establece el callback para manejar el cambio de posición en la navegación.
+     * Establece el callback para gestionar el cambio de posición en la navegación.
      *
      * @param method Función lambda que recibe la nueva posición seleccionada.
      */
