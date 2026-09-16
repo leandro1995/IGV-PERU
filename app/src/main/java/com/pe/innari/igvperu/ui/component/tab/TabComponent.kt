@@ -36,10 +36,10 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectTab
  * Este componente permite al usuario navegar entre diferentes secciones o vistas
  * seleccionando una pestaña de una lista proporcionada.
  *
- * @property tabMutableList Lista mutable de objetos [Tab] que representan cada pestaña.
  * @property indexPosition Índice de la pestaña que se encuentra actualmente seleccionada.
+ * @property items Lista de objetos [Tab] que representan cada pestaña.
  */
-class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
+class TabComponent(private val indexPosition: Int, private val items: List<Tab>) :
     ComponentAmbient() {
 
     private var tabCallBack: TabCallBack? = null
@@ -59,7 +59,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                 .fillMaxWidth()
                 .height(Dimen56)
         ) {
-            tabMutableList.forEachIndexed { index, tab ->
+            items.forEachIndexed { index, tab ->
                 TabItem(
                     modifier = Modifier
                         .fillMaxSize()
@@ -74,9 +74,9 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
      *
      * @param method Función lambda que recibe la posición de la pestaña seleccionada.
      */
-    fun setTabCallBackPosition(method: (position: Int) -> Unit) {
+    fun setCallback(method: (position: Int) -> Unit) {
         tabCallBack = object : TabCallBack {
-            override fun position(position: Int) {
+            override fun onPositionSelected(position: Int) {
                 method(position)
             }
         }
@@ -94,7 +94,7 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() }, indication = null
                 ) {
-                    tabCallBack?.position(position = index)
+                    tabCallBack?.onPositionSelected(position = index)
                 },
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
