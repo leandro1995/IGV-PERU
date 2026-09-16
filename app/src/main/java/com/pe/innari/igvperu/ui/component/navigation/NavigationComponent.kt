@@ -36,7 +36,7 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
     }
 
     /**
-     * Establece la vista de navegación y define cómo se deben proveer las entradas de navegación.
+     * Establece el callback para gestionar las acciones de navegación dentro de la aplicación.
      *
      * @param method Función lambda que recibe un [EntryProviderScope] para definir las rutas.
      */
