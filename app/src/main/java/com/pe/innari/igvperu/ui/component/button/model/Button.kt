@@ -8,4 +8,7 @@ import androidx.annotation.DrawableRes
  * @property icon Recurso drawable opcional para mostrar un icono al lado del texto.
  * @property label Texto descriptivo que se mostrará en el botón.
  */
-class Button(@DrawableRes val icon: Int? = null, val label: String)
+data class Button(
+    @DrawableRes val icon: Int? = null,
+    val label: String
+)
