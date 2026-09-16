@@ -84,9 +84,11 @@ class BottomNavigationComponent(
      * @param method Función lambda que recibe la nueva posición seleccionada.
      */
     fun setCallback(method: (position: Int) -> Unit) {
-        bottomNavigationCallBack = object : BottomNavigationCallBack {
-            override fun onPositionSelected(position: Int) {
-                method(position)
+        if (bottomNavigationCallBack == null) {
+            bottomNavigationCallBack = object : BottomNavigationCallBack {
+                override fun onPositionSelected(position: Int) {
+                    method(position)
+                }
             }
         }
     }
