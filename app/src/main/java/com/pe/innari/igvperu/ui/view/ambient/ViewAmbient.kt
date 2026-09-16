@@ -34,9 +34,9 @@ abstract class ViewAmbient<M> {
             portraitCompact = { PortraitCompact() },
             portraitMedium = { PortraitMedium() },
             portraitExpanded = { PortraitExpanded() },
-            landScapeCompact = { LandScapeCompact() },
-            landScapeMedium = { LandScapeMedium() },
-            landScapeExpanded = { LandScapeExpanded() })
+            landscapeCompact = { LandscapeCompact() },
+            landscapeMedium = { LandscapeMedium() },
+            landscapeExpanded = { LandscapeExpanded() })
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class ViewAmbient<M> {
      * Por defecto, reutiliza la implementación de [PortraitCompact].
      */
     @Composable
-    protected open fun LandScapeCompact() {
+    protected open fun LandscapeCompact() {
         PortraitCompact()
     }
 
@@ -78,7 +78,7 @@ abstract class ViewAmbient<M> {
      * Por defecto, reutiliza la implementación de [PortraitCompact].
      */
     @Composable
-    protected open fun LandScapeMedium() {
+    protected open fun LandscapeMedium() {
         PortraitCompact()
     }
 
@@ -87,7 +87,7 @@ abstract class ViewAmbient<M> {
      * Por defecto, reutiliza la implementación de [PortraitCompact].
      */
     @Composable
-    protected open fun LandScapeExpanded() {
+    protected open fun LandscapeExpanded() {
         PortraitCompact()
     }
 
