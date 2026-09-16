@@ -158,7 +158,7 @@ class BottomNavigationComponent(
                 },
                 label = {
                     NavigationItemLabel(
-                        title = item.title, indexSelect = indexSelect(index = index)
+                        label = item.label, indexSelect = indexSelect(index = index)
                     )
                 })
         }
@@ -184,7 +184,7 @@ class BottomNavigationComponent(
                 },
                 label = {
                     NavigationItemLabel(
-                        title = item.title, indexSelect = indexSelect(index = index)
+                        label = item.label, indexSelect = indexSelect(index = index)
                     )
                 })
         }
@@ -198,8 +198,8 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun NavigationItemLabel(title: String, indexSelect: Boolean) = Text(
-        text = title, style = if (indexSelect) {
+    private fun NavigationItemLabel(label: String, indexSelect: Boolean) = Text(
+        text = label, style = if (indexSelect) {
             ItemSelectBotonNavigation
         } else {
             ItemDeselectBotonNavigation
