@@ -16,5 +16,5 @@ interface NavigationCallBack {
      * @param entryProviderScope El ámbito del proveedor de entradas de navegación que permite
      * definir las rutas y destinos.
      */
-    fun navigate(entryProviderScope: EntryProviderScope<NavKey>)
+    fun onNavigate(entryProviderScope: EntryProviderScope<NavKey>)
 }
