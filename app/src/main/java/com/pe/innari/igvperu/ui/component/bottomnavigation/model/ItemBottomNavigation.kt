@@ -1,11 +1,14 @@
 package com.pe.innari.igvperu.ui.component.bottomnavigation.model
 
+import androidx.annotation.DrawableRes
+
 /**
  * Representa un ítem individual dentro de la navegación.
  *
  * @property icon Recurso de dibujo (Drawable Res) para el icono del ítem.
- * @property title Etiqueta de texto que se mostrará debajo o junto al icono.
+ * @property label Etiqueta de texto que se mostrará debajo o junto al icono.
  */
-class ItemBottomNavigation(
-    val icon: Int, val title: String
+data class ItemBottomNavigation(
+    @DrawableRes val icon: Int,
+    val label: String
 )
