@@ -27,37 +27,37 @@ class ButtonComponentGallery : ViewAmbient<Any>() {
                     .fillMaxSize()
             ) {
                 ButtonComponent(buttonType = ButtonType.PRIMARY, button = button()).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(buttonType = ButtonType.SECONDARY, button = button()).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(buttonType = ButtonType.OUTLINED, button = button()).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(buttonType = ButtonType.DESTRUCTIVE, button = button()).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
 
                 ButtonComponent(
                     buttonType = ButtonType.PRIMARY, button = buttonWithoutIcon()
                 ).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(
                     buttonType = ButtonType.SECONDARY, button = buttonWithoutIcon()
                 ).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(
                     buttonType = ButtonType.OUTLINED, button = buttonWithoutIcon()
                 ).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
                 ButtonComponent(
                     buttonType = ButtonType.DESTRUCTIVE, button = buttonWithoutIcon()
                 ).apply {
-                    setOnclick { Log.e("OnClick", "OnClick") }
+                    setOnClick { Log.e("OnClick", "OnClick") }
                 }.OnCreate()
             }
         }
