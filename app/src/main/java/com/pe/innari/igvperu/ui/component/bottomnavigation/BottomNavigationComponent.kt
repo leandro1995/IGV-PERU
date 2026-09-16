@@ -86,9 +86,9 @@ class BottomNavigationComponent(
      *
      * @param method Función lambda que recibe la nueva posición seleccionada.
      */
-    fun setBottomNavigationCallBackPosition(method: (position: Int) -> Unit) {
+    fun setCallback(method: (position: Int) -> Unit) {
         bottomNavigationCallBack = object : BottomNavigationCallBack {
-            override fun position(position: Int) {
+            override fun onPositionSelected(position: Int) {
                 method(position)
             }
         }
@@ -151,7 +151,7 @@ class BottomNavigationComponent(
                 colors = createNavigationBarItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-                    bottomNavigationCallBack?.position(position = index)
+                    bottomNavigationCallBack?.onPositionSelected(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
@@ -177,7 +177,7 @@ class BottomNavigationComponent(
                 colors = createNavigationRailItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-                    bottomNavigationCallBack?.position(position = index)
+                    bottomNavigationCallBack?.onPositionSelected(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
