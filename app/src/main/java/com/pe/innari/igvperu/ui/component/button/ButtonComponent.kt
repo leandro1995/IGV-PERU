@@ -147,12 +147,12 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
 
     @Composable
     private fun ContentButton() = Row {
-        button.icon?.let {
+        if (button.hasIcon()) {
             Icon(
                 modifier = Modifier
                     .padding(end = Dimen5)
                     .size(Dimen18),
-                painter = painterResource(it),
+                painter = painterResource(button.icon()),
                 contentDescription = null
             )
         }
