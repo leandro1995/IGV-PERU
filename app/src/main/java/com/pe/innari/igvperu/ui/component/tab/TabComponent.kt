@@ -75,9 +75,11 @@ class TabComponent(private val indexPosition: Int, private val items: List<ItemT
      * @param method Función lambda que recibe la posición de la pestaña seleccionada.
      */
     fun setCallback(method: (position: Int) -> Unit) {
-        tabCallBack = object : TabCallBack {
-            override fun onPositionSelected(position: Int) {
-                method(position)
+        if (tabCallBack == null) {
+            tabCallBack = object : TabCallBack {
+                override fun onPositionSelected(position: Int) {
+                    method(position)
+                }
             }
         }
     }
