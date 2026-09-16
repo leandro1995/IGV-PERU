@@ -32,10 +32,10 @@ class TabComponeGallery : ViewAmbient<TabState>() {
                     .fillMaxWidth()
             ) {
                 TabComponent(
-                    tabMutableList = tabMutableList(),
-                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty()
+                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
+                    items = tabList()
                 ).apply {
-                    setTabCallBackPosition {
+                    setCallback {
                         mutableValues?.indexPosition?.intValue = it
                     }
                 }.OnCreate()
@@ -43,7 +43,7 @@ class TabComponeGallery : ViewAmbient<TabState>() {
         }
     }
 
-    private fun tabMutableList() = mutableListOf(
+    private fun tabList() = listOf(
         Tab(icon = android.R.drawable.star_on, "Tab1"),
         Tab(icon = android.R.drawable.star_on, "Tab2")
     )
