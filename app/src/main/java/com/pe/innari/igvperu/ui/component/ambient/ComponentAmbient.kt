@@ -51,7 +51,7 @@ abstract class ComponentAmbient {
      * @param view El contenido que consumirá el color de contenido proporcionado.
      */
     @Composable
-    protected fun CompositionLocalProvider(containerColor: Color, view: @Composable () -> Unit) =
+    protected fun ProvideThemeContentColor(containerColor: Color, view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides contentColorFor(containerColor = containerColor)) {
             view()
         }
