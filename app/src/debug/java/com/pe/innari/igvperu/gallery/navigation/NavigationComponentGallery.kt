@@ -26,7 +26,7 @@ class NavigationComponentGallery : ViewAmbient<NavigationState>() {
     @Composable
     override fun PortraitCompact() {
         val navigation = NavigationComponent(backStack = mutableValues?.backStack.orEmpty())
-        navigation.setNavigationView {
+        navigation.setCallback {
             it.entry<Navigation.Home> {
                 Column(modifier = Modifier.padding(top = 32.dp).fillMaxSize()) {
                     Button(onClick = {

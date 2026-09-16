@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.tab.state.TabState
 import com.pe.innari.igvperu.ui.component.tab.TabComponent
-import com.pe.innari.igvperu.ui.component.tab.model.Tab
+import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
@@ -32,10 +32,10 @@ class TabComponeGallery : ViewAmbient<TabState>() {
                     .fillMaxWidth()
             ) {
                 TabComponent(
-                    tabMutableList = tabMutableList(),
-                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty()
+                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
+                    items = tabList()
                 ).apply {
-                    setTabCallBackPosition {
+                    setCallback {
                         mutableValues?.indexPosition?.intValue = it
                     }
                 }.OnCreate()
@@ -43,9 +43,9 @@ class TabComponeGallery : ViewAmbient<TabState>() {
         }
     }
 
-    private fun tabMutableList() = mutableListOf(
-        Tab(icon = android.R.drawable.star_on, "Tab1"),
-        Tab(icon = android.R.drawable.star_on, "Tab2")
+    private fun tabList() = listOf(
+        ItemTab(icon = android.R.drawable.star_on, "Tab1"),
+        ItemTab(icon = android.R.drawable.star_on, "Tab2")
     )
 
     @ThemeAdaptivePreview

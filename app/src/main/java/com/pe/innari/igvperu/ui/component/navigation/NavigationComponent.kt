@@ -31,19 +31,19 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
         NavDisplay(backStack = backStack, onBack = {
             backStack.removeLastOrNull()
         }, entryProvider = entryProvider {
-            navigationCallBack?.navigate(entryProviderScope = this)
+            navigationCallBack?.onNavigate(entryProviderScope = this)
         })
     }
 
     /**
-     * Establece la vista de navegación y define cómo se deben proveer las entradas de navegación.
+     * Establece el callback para gestionar las acciones de navegación dentro de la aplicación.
      *
      * @param method Función lambda que recibe un [EntryProviderScope] para definir las rutas.
      */
-    fun setNavigationView(method: (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
+    fun setCallback(method: (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
         if (navigationCallBack == null) {
             navigationCallBack = object : NavigationCallBack {
-                override fun navigate(entryProviderScope: EntryProviderScope<NavKey>) {
+                override fun onNavigate(entryProviderScope: EntryProviderScope<NavKey>) {
                     method(entryProviderScope)
                 }
             }

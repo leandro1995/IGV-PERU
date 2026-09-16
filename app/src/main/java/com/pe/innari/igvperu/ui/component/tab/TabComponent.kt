@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.tab.callback.TabCallBack
-import com.pe.innari.igvperu.ui.component.tab.model.Tab
+import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen18
@@ -36,10 +36,10 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectTab
  * Este componente permite al usuario navegar entre diferentes secciones o vistas
  * seleccionando una pestaña de una lista proporcionada.
  *
- * @property tabMutableList Lista mutable de objetos [Tab] que representan cada pestaña.
  * @property indexPosition Índice de la pestaña que se encuentra actualmente seleccionada.
+ * @property items Lista de objetos [ItemTab] que representan cada pestaña.
  */
-class TabComponent(private val tabMutableList: MutableList<Tab>, private val indexPosition: Int) :
+class TabComponent(private val indexPosition: Int, private val items: List<ItemTab>) :
     ComponentAmbient() {
 
     private var tabCallBack: TabCallBack? = null
@@ -59,31 +59,33 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                 .fillMaxWidth()
                 .height(Dimen56)
         ) {
-            tabMutableList.forEachIndexed { index, tab ->
+            items.forEachIndexed { index, item ->
                 TabItem(
                     modifier = Modifier
                         .fillMaxSize()
-                        .weight(1F), tab = tab, index = index
+                        .weight(1F), item = item, index = index
                 )
             }
         }
     }
 
     /**
-     * Establece el callback que se ejecutará cuando el usuario seleccione una pestaña.
+     * Establece el callback para gestionar el cambio de posición en las pestañas.
      *
-     * @param method Función lambda que recibe la posición de la pestaña seleccionada.
+     * @param method Función lambda que recibe la nueva posición seleccionada.
      */
-    fun setTabCallBackPosition(method: (position: Int) -> Unit) {
-        tabCallBack = object : TabCallBack {
-            override fun position(position: Int) {
-                method(position)
+    fun setCallback(method: (position: Int) -> Unit) {
+        if (tabCallBack == null) {
+            tabCallBack = object : TabCallBack {
+                override fun onPositionSelected(position: Int) {
+                    method(position)
+                }
             }
         }
     }
 
     @Composable
-    private fun TabItem(modifier: Modifier, tab: Tab, index: Int) {
+    private fun TabItem(modifier: Modifier, item: ItemTab, index: Int) {
         val isSelected = indexPosition == index
         Row(
             modifier = modifier
@@ -94,20 +96,20 @@ class TabComponent(private val tabMutableList: MutableList<Tab>, private val ind
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() }, indication = null
                 ) {
-                    tabCallBack?.position(position = index)
+                    tabCallBack?.onPositionSelected(position = index)
                 },
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 modifier = Modifier.size(Dimen18),
-                painter = painterResource(tab.icon),
+                painter = painterResource(item.icon),
                 tint = getContentColorBySelection(isSelected),
                 contentDescription = null
             )
             Text(
                 modifier = Modifier.padding(start = Dimen5),
-                text = tab.label,
+                text = item.label,
                 color = getContentColorBySelection(isSelected),
                 style = getTextStyleBySelection(isSelected)
             )

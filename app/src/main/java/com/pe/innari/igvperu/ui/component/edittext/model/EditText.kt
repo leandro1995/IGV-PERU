@@ -10,9 +10,25 @@ import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
  * @property isCurrencySymbol Indica si se debe mostrar el símbolo de moneda local (S/.) como prefijo en el campo.
  * @property editTextType El tipo de restricción numérica de entrada ([EditTextType]) aplicado al campo de texto.
  */
-class EditText(
+data class EditText(
     val placeHolder: String = "",
     val label: String,
     val isCurrencySymbol: Boolean = false,
-    var editTextType: EditTextType = EditTextType.NONE
-)
+    private val editTextType: EditTextType = EditTextType.NONE
+) {
+
+    /**
+     * Determina si el tipo de entrada configurado permite decimales.
+     *
+     * @return true si el tipo es DECIMAL, false si es INTEGER o NONE.
+     */
+    fun isDecimalType() = when (editTextType) {
+        EditTextType.DECIMAL -> {
+            true
+        }
+
+        EditTextType.INTEGER, EditTextType.NONE -> {
+            false
+        }
+    }
+}

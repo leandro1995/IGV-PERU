@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextAlign
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
-import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
 import com.pe.innari.igvperu.ui.component.edittext.util.EditTextFormatUtil
 import com.pe.innari.igvperu.ui.theme.Dimen0
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -95,7 +94,7 @@ class EditTextComponent(
             leadingIcon = { LeadingContent(isFocused = isFocused) },
             trailingIcon = trailingIcon,
             keyboardOptions = createKeyboardOptions(),
-            inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = isDecimalType())
+            inputTransformation = EditTextFormatUtil.numberFormat(allowDecimal = editText.isDecimalType())
         )
     }
 
@@ -161,18 +160,8 @@ class EditTextComponent(
         cursorColor = MaterialTheme.colorScheme.primary
     )
 
-    private fun isDecimalType() = when (editText.editTextType) {
-        EditTextType.DECIMAL -> {
-            true
-        }
-
-        EditTextType.INTEGER, EditTextType.NONE -> {
-            false
-        }
-    }
-
     private fun createKeyboardOptions() = KeyboardOptions(
-        keyboardType = if (isDecimalType()) {
+        keyboardType = if (editText.isDecimalType()) {
             KeyboardType.Decimal
         } else {
             KeyboardType.Number

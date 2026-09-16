@@ -10,5 +10,5 @@ interface TabCallBack {
      *
      * @param position El índice de la pestaña seleccionada.
      */
-    fun position(position: Int)
+    fun onPositionSelected(position: Int)
 }

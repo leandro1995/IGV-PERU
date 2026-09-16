@@ -5,9 +5,9 @@ package com.pe.innari.igvperu.ui.component.bottomnavigation.callback
  */
 interface BottomNavigationCallBack {
     /**
-     * Se invoca cuando se selecciona un nuevo elemento de navegación.
+     * Se invoca cuando se selecciona un nuevo elemento de navegación en una posición específica.
      *
      * @param position El índice del elemento seleccionado.
      */
-    fun position(position: Int)
+    fun onPositionSelected(position: Int)
 }

@@ -39,28 +39,28 @@ class ViewGallery : ViewAmbient<Any>() {
     }
 
     @Composable
-    override fun LandScapeCompact() {
+    override fun LandscapeCompact() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "LandScapeCompact", modifier = Modifier.padding(innerPadding)
+                text = "LandscapeCompact", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun LandScapeMedium() {
+    override fun LandscapeMedium() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "LandScapeMedium", modifier = Modifier.padding(innerPadding)
+                text = "LandscapeMedium", modifier = Modifier.padding(innerPadding)
             )
         }
     }
 
     @Composable
-    override fun LandScapeExpanded() {
+    override fun LandscapeExpanded() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Text(
-                text = "LandScapeExpanded", modifier = Modifier.padding(innerPadding)
+                text = "LandscapeExpanded", modifier = Modifier.padding(innerPadding)
             )
         }
     }

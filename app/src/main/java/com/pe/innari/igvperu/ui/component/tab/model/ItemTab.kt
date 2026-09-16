@@ -8,4 +8,7 @@ import androidx.annotation.DrawableRes
  * @property icon Recurso de dibujo (drawable) que se mostrará como icono de la pestaña.
  * @property label Texto descriptivo que se mostrará en la pestaña.
  */
-data class Tab(@DrawableRes val icon: Int, val label: String)
+data class ItemTab(
+    @DrawableRes val icon: Int,
+    val label: String
+)

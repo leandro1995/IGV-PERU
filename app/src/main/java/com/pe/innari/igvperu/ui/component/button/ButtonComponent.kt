@@ -32,8 +32,8 @@ import com.pe.innari.igvperu.ui.theme.LabelButton
  * Componente de UI que renderiza un botón personalizado basado en Jetpack Compose.
  * Soporta diferentes estilos definidos en [ButtonType] y configuración mediante [Button].
  *
- * @param buttonType Estilo visual del botón (PRIMARY, SECONDARY, etc.).
- * @param button Datos del botón como etiqueta e icono.
+ * @property buttonType Estilo visual del botón (PRIMARY, SECONDARY, etc.).
+ * @property button Datos del botón como etiqueta e icono.
  */
 class ButtonComponent(private val buttonType: ButtonType, private val button: Button) :
     ComponentAmbient() {
@@ -69,7 +69,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
      *
      * @param method Acción a ejecutar cuando se presiona el botón.
      */
-    fun setOnclick(method: () -> Unit) {
+    fun setCallback(method: () -> Unit) {
         if (buttonCallBack == null) {
             buttonCallBack = object : ButtonCallBack {
                 override fun onClick() {
@@ -147,12 +147,12 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
 
     @Composable
     private fun ContentButton() = Row {
-        button.icon?.let {
+        if (button.hasIcon()) {
             Icon(
                 modifier = Modifier
                     .padding(end = Dimen5)
                     .size(Dimen18),
-                painter = painterResource(it),
+                painter = painterResource(button.icon()),
                 contentDescription = null
             )
         }

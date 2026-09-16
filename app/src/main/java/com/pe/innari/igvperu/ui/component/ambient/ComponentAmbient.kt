@@ -44,14 +44,14 @@ abstract class ComponentAmbient {
         MaterialTheme.colorScheme.contentColorFor(containerColor)
 
     /**
-     * Proporciona un [CompositionLocalProvider] que establece automáticamente el color de contenido
+     * Proporciona un [ProvideThemeContentColor] que establece automáticamente el color de contenido
      * adecuado para el [containerColor] especificado.
      *
      * @param containerColor El color de fondo actual.
      * @param view El contenido que consumirá el color de contenido proporcionado.
      */
     @Composable
-    protected fun CompositionLocalProvider(containerColor: Color, view: @Composable () -> Unit) =
+    protected fun ProvideThemeContentColor(containerColor: Color, view: @Composable () -> Unit) =
         CompositionLocalProvider(LocalContentColor provides contentColorFor(containerColor = containerColor)) {
             view()
         }

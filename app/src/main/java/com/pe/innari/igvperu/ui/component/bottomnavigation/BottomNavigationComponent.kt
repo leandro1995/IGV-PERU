@@ -25,7 +25,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
@@ -34,8 +33,8 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavig
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen22
-import com.pe.innari.igvperu.ui.theme.ItemDeselectBotonNavigation
-import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
+import com.pe.innari.igvperu.ui.theme.ItemDeselectButtonNavigation
+import com.pe.innari.igvperu.ui.theme.ItemSelectButtonNavigation
 
 /**
  * Componente de navegación adaptable que selecciona automáticamente entre una barra inferior (`NavigationBar`)
@@ -43,7 +42,7 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
  *
  * @property indexPosition Índice del elemento actualmente seleccionado.
  * @property typeBottomNavigation Determina el estilo visual de la navegación (Inferior o Riel).
- * @property items Lista de elementos de navegación que se mostrarán.
+ * @property items Lista de objetos [ItemBottomNavigation] que representan cada elemento de navegación.
  */
 class BottomNavigationComponent(
     private val indexPosition: Int,
@@ -68,10 +67,8 @@ class BottomNavigationComponent(
             }
 
             TypeBottomNavigation.RAIL -> {
-                CompositionLocalProvider(
-                    androidx.compose.material3.LocalContentColor provides contentColorFor(
-                        MaterialTheme.colorScheme.surfaceContainerLow
-                    )
+                ProvideThemeContentColor(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 ) {
                     RailNavigationLayout(
                         view = view
@@ -82,14 +79,16 @@ class BottomNavigationComponent(
     }
 
     /**
-     * Establece el callback para manejar el cambio de posición en la navegación.
+     * Establece el callback para gestionar el cambio de posición en la navegación.
      *
      * @param method Función lambda que recibe la nueva posición seleccionada.
      */
-    fun setBottomNavigationCallBackPosition(method: (position: Int) -> Unit) {
-        bottomNavigationCallBack = object : BottomNavigationCallBack {
-            override fun position(position: Int) {
-                method(position)
+    fun setCallback(method: (position: Int) -> Unit) {
+        if (bottomNavigationCallBack == null) {
+            bottomNavigationCallBack = object : BottomNavigationCallBack {
+                override fun onPositionSelected(position: Int) {
+                    method(position)
+                }
             }
         }
     }
@@ -151,14 +150,14 @@ class BottomNavigationComponent(
                 colors = createNavigationBarItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-                    bottomNavigationCallBack?.position(position = index)
+                    bottomNavigationCallBack?.onPositionSelected(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
                 },
                 label = {
                     NavigationItemLabel(
-                        title = item.title, indexSelect = indexSelect(index = index)
+                        label = item.label, indexSelect = indexSelect(index = index)
                     )
                 })
         }
@@ -177,14 +176,14 @@ class BottomNavigationComponent(
                 colors = createNavigationRailItemColors(),
                 selected = indexSelect(index = index),
                 onClick = {
-                    bottomNavigationCallBack?.position(position = index)
+                    bottomNavigationCallBack?.onPositionSelected(position = index)
                 },
                 icon = {
                     NavigationItemIcon(icon = item.icon)
                 },
                 label = {
                     NavigationItemLabel(
-                        title = item.title, indexSelect = indexSelect(index = index)
+                        label = item.label, indexSelect = indexSelect(index = index)
                     )
                 })
         }
@@ -198,11 +197,11 @@ class BottomNavigationComponent(
     )
 
     @Composable
-    private fun NavigationItemLabel(title: String, indexSelect: Boolean) = Text(
-        text = title, style = if (indexSelect) {
-            ItemSelectBotonNavigation
+    private fun NavigationItemLabel(label: String, indexSelect: Boolean) = Text(
+        text = label, style = if (indexSelect) {
+            ItemSelectButtonNavigation
         } else {
-            ItemDeselectBotonNavigation
+            ItemDeselectButtonNavigation
         }
     )
 
