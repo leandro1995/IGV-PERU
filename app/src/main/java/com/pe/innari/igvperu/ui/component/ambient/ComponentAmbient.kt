@@ -44,7 +44,7 @@ abstract class ComponentAmbient {
         MaterialTheme.colorScheme.contentColorFor(containerColor)
 
     /**
-     * Proporciona un [CompositionLocalProvider] que establece automáticamente el color de contenido
+     * Proporciona un [ProvideThemeContentColor] que establece automáticamente el color de contenido
      * adecuado para el [containerColor] especificado.
      *
      * @param containerColor El color de fondo actual.
