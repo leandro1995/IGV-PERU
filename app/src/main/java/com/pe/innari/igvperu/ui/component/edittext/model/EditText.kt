@@ -14,5 +14,16 @@ data class EditText(
     val placeHolder: String = "",
     val label: String,
     val isCurrencySymbol: Boolean = false,
-    val editTextType: EditTextType = EditTextType.NONE
-)
+    private val editTextType: EditTextType = EditTextType.NONE
+) {
+
+    fun isDecimalType() = when (editTextType) {
+        EditTextType.DECIMAL -> {
+            true
+        }
+
+        EditTextType.INTEGER, EditTextType.NONE -> {
+            false
+        }
+    }
+}
