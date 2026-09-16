@@ -69,7 +69,7 @@ class ButtonComponent(private val buttonType: ButtonType, private val button: Bu
      *
      * @param method Acción a ejecutar cuando se presiona el botón.
      */
-    fun setOnClick(method: () -> Unit) {
+    fun setCallback(method: () -> Unit) {
         if (buttonCallBack == null) {
             buttonCallBack = object : ButtonCallBack {
                 override fun onClick() {
