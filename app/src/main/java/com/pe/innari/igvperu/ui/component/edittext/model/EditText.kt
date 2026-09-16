@@ -17,6 +17,11 @@ data class EditText(
     private val editTextType: EditTextType = EditTextType.NONE
 ) {
 
+    /**
+     * Determina si el tipo de entrada configurado permite decimales.
+     *
+     * @return true si el tipo es DECIMAL, false si es INTEGER o NONE.
+     */
     fun isDecimalType() = when (editTextType) {
         EditTextType.DECIMAL -> {
             true
