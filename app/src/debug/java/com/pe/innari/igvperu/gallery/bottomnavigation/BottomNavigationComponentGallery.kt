@@ -66,7 +66,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
     }
 
     @Composable
-    override fun LandScapeCompact() {
+    override fun LandscapeCompact() {
         BottomNavigationComponent(
             indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
@@ -76,12 +76,12 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
-            Text("LandScapeCompact")
+            Text("LandscapeCompact")
         }
     }
 
     @Composable
-    override fun LandScapeMedium() {
+    override fun LandscapeMedium() {
         BottomNavigationComponent(
             indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
@@ -91,12 +91,12 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
-            Text("LandScapeMedium")
+            Text("LandscapeMedium")
         }
     }
 
     @Composable
-    override fun LandScapeExpanded() {
+    override fun LandscapeExpanded() {
         BottomNavigationComponent(
             indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
             typeBottomNavigation = TypeBottomNavigation.RAIL,
@@ -106,7 +106,7 @@ class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentSt
                 mutableValues?.indexPosition?.intValue = it
             }
         }.OnCreate {
-            Text("LandScapeExpanded")
+            Text("LandscapeExpanded")
         }
     }
 
