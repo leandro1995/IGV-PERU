@@ -1,5 +1,7 @@
 package com.pe.innari.igvperu.ui.component.toolbar.model
 
+import androidx.annotation.DrawableRes
+
 /**
  * Modelo de datos que representa la configuración de una barra de herramientas (ToolBar).
  *
@@ -7,8 +9,10 @@ package com.pe.innari.igvperu.ui.component.toolbar.model
  * @property title Título principal que se mostrará en la barra.
  * @property subTitle Subtítulo descriptivo que se mostrará debajo del título.
  */
-class ToolBar(
-    private val icon: Int? = null, val title: String, val subTitle: String
+data class ToolBar(
+    @DrawableRes val icon: Int? = null,
+    val title: String,
+    val subTitle: String
 ) {
 
     /**
