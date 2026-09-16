@@ -8,7 +8,19 @@ import androidx.annotation.DrawableRes
  * @property icon Recurso drawable opcional para mostrar un icono al lado del texto.
  * @property label Texto descriptivo que se mostrará en el botón.
  */
-data class Button(
-    @DrawableRes val icon: Int? = null,
-    val label: String
-)
+data class Button(@DrawableRes private val icon: Int? = null, val label: String) {
+
+    /**
+     * Verifica si la barra de herramientas tiene un icono configurado.
+     *
+     * @return true si el icono no es nulo, false en caso contrario.
+     */
+    fun hasIcon() = icon != null
+
+    /**
+     * Obtiene el identificador del recurso del icono.
+     *
+     * @return El ID del recurso del icono, o 0 si no se ha definido ninguno.
+     */
+    fun icon() = icon ?: 0
+}
