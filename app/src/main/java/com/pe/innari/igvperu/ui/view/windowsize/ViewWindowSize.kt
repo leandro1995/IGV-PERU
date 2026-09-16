@@ -19,20 +19,20 @@ object ViewWindowSize {
      * Composable que selecciona automáticamente el diseño adecuado basado en el tamaño y la orientación.
      *
      * @param portraitCompact Diseño para pantallas compactas en orientación vertical.
-     * @param landScapeCompact Diseño para pantallas compactas en orientación horizontal.
+     * @param landscapeCompact Diseño para pantallas compactas en orientación horizontal.
      * @param portraitMedium Diseño para pantallas medianas en orientación vertical.
-     * @param landScapeMedium Diseño para pantallas medianas en orientación horizontal.
+     * @param landscapeMedium Diseño para pantallas medianas en orientación horizontal.
      * @param portraitExpanded Diseño para pantallas expandidas en orientación vertical.
-     * @param landScapeExpanded Diseño para pantallas expandidas en orientación horizontal.
+     * @param landscapeExpanded Diseño para pantallas expandidas en orientación horizontal.
      */
     @Composable
     fun AdaptiveLayout(
         portraitCompact: @Composable () -> Unit,
-        landScapeCompact: @Composable () -> Unit,
+        landscapeCompact: @Composable () -> Unit,
         portraitMedium: @Composable () -> Unit,
-        landScapeMedium: @Composable () -> Unit,
+        landscapeMedium: @Composable () -> Unit,
         portraitExpanded: @Composable () -> Unit,
-        landScapeExpanded: @Composable () -> Unit
+        landscapeExpanded: @Composable () -> Unit
     ) {
         val info = currentWindowAdaptiveInfoV2()
         val config = LocalConfiguration.current
@@ -46,11 +46,11 @@ object ViewWindowSize {
             heightType = heightType,
             isLandscape = isLandscape,
             portraitCompact = portraitCompact,
-            landScapeCompact = landScapeCompact,
+            landscapeCompact = landscapeCompact,
             portraitMedium = portraitMedium,
-            landScapeMedium = landScapeMedium,
+            landscapeMedium = landscapeMedium,
             portraitExpanded = portraitExpanded,
-            landScapeExpanded = landScapeExpanded
+            landscapeExpanded = landscapeExpanded
         )
     }
 
@@ -72,22 +72,22 @@ object ViewWindowSize {
         heightType: TypeWindowSize,
         isLandscape: Boolean,
         portraitCompact: @Composable () -> Unit,
-        landScapeCompact: @Composable () -> Unit,
+        landscapeCompact: @Composable () -> Unit,
         portraitMedium: @Composable () -> Unit,
-        landScapeMedium: @Composable () -> Unit,
+        landscapeMedium: @Composable () -> Unit,
         portraitExpanded: @Composable () -> Unit,
-        landScapeExpanded: @Composable () -> Unit
+        landscapeExpanded: @Composable () -> Unit
     ) {
         if (isLandscape && heightType == TypeWindowSize.COMPACT) {
             when (widthType) {
-                TypeWindowSize.COMPACT -> landScapeCompact()
-                else -> landScapeMedium()
+                TypeWindowSize.COMPACT -> landscapeCompact()
+                else -> landscapeMedium()
             }
         } else {
             when (widthType) {
-                TypeWindowSize.COMPACT -> if (isLandscape) landScapeCompact() else portraitCompact()
-                TypeWindowSize.MEDIUM -> if (isLandscape) landScapeMedium() else portraitMedium()
-                TypeWindowSize.EXPANDED -> if (isLandscape) landScapeExpanded() else portraitExpanded()
+                TypeWindowSize.COMPACT -> if (isLandscape) landscapeCompact() else portraitCompact()
+                TypeWindowSize.MEDIUM -> if (isLandscape) landscapeMedium() else portraitMedium()
+                TypeWindowSize.EXPANDED -> if (isLandscape) landscapeExpanded() else portraitExpanded()
             }
         }
     }
