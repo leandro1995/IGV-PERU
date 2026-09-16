@@ -70,9 +70,9 @@ class TabComponent(private val indexPosition: Int, private val items: List<ItemT
     }
 
     /**
-     * Establece el callback para gestionar las acciones de selección en las pestañas.
+     * Establece el callback para gestionar el cambio de posición en las pestañas.
      *
-     * @param method Función lambda que recibe la posición de la pestaña seleccionada.
+     * @param method Función lambda que recibe la nueva posición seleccionada.
      */
     fun setCallback(method: (position: Int) -> Unit) {
         if (tabCallBack == null) {
