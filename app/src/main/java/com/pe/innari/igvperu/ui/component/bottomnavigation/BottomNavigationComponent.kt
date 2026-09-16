@@ -34,8 +34,8 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavig
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen22
-import com.pe.innari.igvperu.ui.theme.ItemDeselectBotonNavigation
-import com.pe.innari.igvperu.ui.theme.ItemSelectBotonNavigation
+import com.pe.innari.igvperu.ui.theme.ItemDeselectButtonNavigation
+import com.pe.innari.igvperu.ui.theme.ItemSelectButtonNavigation
 
 /**
  * Componente de navegación adaptable que selecciona automáticamente entre una barra inferior (`NavigationBar`)
@@ -200,9 +200,9 @@ class BottomNavigationComponent(
     @Composable
     private fun NavigationItemLabel(label: String, indexSelect: Boolean) = Text(
         text = label, style = if (indexSelect) {
-            ItemSelectBotonNavigation
+            ItemSelectButtonNavigation
         } else {
-            ItemDeselectBotonNavigation
+            ItemDeselectButtonNavigation
         }
     )
 
