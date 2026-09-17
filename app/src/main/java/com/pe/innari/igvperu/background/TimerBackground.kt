@@ -24,17 +24,12 @@ class TimerBackground(private val time: Long = 0L, private val timeType: TimeTyp
     @Composable
     fun Start(onTimeFinished: () -> Unit) {
         LaunchedEffect(Unit) {
-            delay(calculateDuration())
+            delay(getDurationFromTimeType())
             onTimeFinished()
         }
     }
 
-    /**
-     * Calcula la duración en milisegundos basándose en el tiempo y el tipo definidos.
-     *
-     * @return Duración calculada.
-     */
-    private fun calculateDuration() = when (timeType) {
+    private fun getDurationFromTimeType() = when (timeType) {
         TimeType.HOURS -> {
             TimeUnit.HOURS.toMillis(time).milliseconds
         }
