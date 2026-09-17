@@ -15,35 +15,29 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  */
 class MainActivity : ComponentActivity() {
 
-    /** Controla si la pantalla de bienvenida debe permanecer visible. */
-    private var splashEnable = true
+    private var isSplashScreenEnabled = true
 
-    /** Temporizador configurado para manejar el tiempo de salida del Splash Screen. */
-    private val timerBackground =
-        TimerBackground(time = SPLASH_TIME_OUT, timeType = TimeType.SECONDS)
+    private val splashScreenTimer =
+        TimerBackground(time = SPLASH_SCREEN_DURATION_SECONDS, timeType = TimeType.SECONDS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        screenSplash.setKeepOnScreenCondition { splashEnable }
+        screenSplash.setKeepOnScreenCondition { isSplashScreenEnabled }
 
         enableEdgeToEdge()
-        content()
+        setupContent()
     }
 
-    /**
-     * Configura el contenido de la actividad utilizando Jetpack Compose.
-     */
-    private fun content() = setContent {
+    private fun setupContent() = setContent {
         IGVPERUTheme {
             // Inicia el temporizador para ocultar el splash screen
-            timerBackground.Start { splashEnable = false }
+            splashScreenTimer.Start { isSplashScreenEnabled = false }
         }
     }
 
     companion object {
-        /** Tiempo de espera predeterminado para el Splash Screen (en segundos). */
-        private const val SPLASH_TIME_OUT = 3L
+        private const val SPLASH_SCREEN_DURATION_SECONDS = 3L
     }
 }
