@@ -4,44 +4,40 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.pe.innari.igvperu.background.TimerBackground
+import com.pe.innari.igvperu.background.type.TimeType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
+/**
+ * Actividad principal de la aplicación.
+ * Maneja la lógica inicial de la pantalla de bienvenida (Splash Screen) y el contenido principal.
+ */
 class MainActivity : ComponentActivity() {
+
+    private var isSplashScreenEnabled = true
+
+    private val splashScreenTimer =
+        TimerBackground(time = SPLASH_SCREEN_DURATION_SECONDS, timeType = TimeType.SECONDS)
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        screenSplash.setKeepOnScreenCondition { isSplashScreenEnabled }
+
         enableEdgeToEdge()
-        setContent {
-            IGVPERUTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setupContent()
+    }
+
+    private fun setupContent() = setContent {
+        IGVPERUTheme {
+            // Inicia el temporizador para ocultar el splash screen
+            splashScreenTimer.Start { isSplashScreenEnabled = false }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IGVPERUTheme {
-        Greeting("Android")
+    companion object {
+        private const val SPLASH_SCREEN_DURATION_SECONDS = 3L
     }
 }

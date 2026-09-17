@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tema principal de la aplicación (Modo claro / Default) -->
+    <style name="Theme.IGVPERU" parent="Theme.Material3.Light.NoActionBar" />
+
+    <!-- Tema utilizado para la pantalla de bienvenida (Splash Screen) -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Color de fondo de la pantalla de bienvenida -->
+        <item name="windowSplashScreenBackground">@color/teal_40</item>
+        <!-- Icono animado mostrado en el centro -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_not_night</item>
+        <!-- Duración de la animación del splash -->
+        <item name="windowSplashScreenAnimationDuration">@integer/splash_screen_time_out</item>
+        <!-- Tema al que se cambia después de que el splash termine -->
+        <item name="postSplashScreenTheme">@style/Theme.IGVPERU</item>
+    </style>
+
+</resources>
