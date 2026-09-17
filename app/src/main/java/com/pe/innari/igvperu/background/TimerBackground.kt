@@ -19,22 +19,22 @@ class TimerBackground(private val time: Long = 0L, private val timeType: TimeTyp
      * Inicia un temporizador que ejecuta una acción después del tiempo especificado.
      * Utiliza [LaunchedEffect] para manejar el ciclo de vida de Compose.
      *
-     * @param method La función lambda a ejecutar cuando el tiempo expire.
+     * @param onTimeFinished La función lambda a ejecutar cuando el tiempo expire.
      */
     @Composable
-    fun Start(method: () -> Unit) {
+    fun Start(onTimeFinished: () -> Unit) {
         LaunchedEffect(Unit) {
-            delay(timeType())
-            method()
+            delay(calculateDuration())
+            onTimeFinished()
         }
     }
 
     /**
-     * Convierte el tiempo y el tipo de unidad a milisegundos.
+     * Calcula la duración en milisegundos basándose en el tiempo y el tipo definidos.
      *
-     * @return Duración en milisegundos.
+     * @return Duración calculada.
      */
-    private fun timeType() = when (timeType) {
+    private fun calculateDuration() = when (timeType) {
         TimeType.HOURS -> {
             TimeUnit.HOURS.toMillis(time).milliseconds
         }
