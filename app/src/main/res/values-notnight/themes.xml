@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Tema principal de la aplicación (Modo claro / Default) -->
-    <style name="Theme.IGVPERU" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.IGVPERU" parent="Theme.Material3.Light.NoActionBar" />
 
     <!-- Tema utilizado para la pantalla de bienvenida (Splash Screen) -->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
