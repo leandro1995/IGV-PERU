@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.compose.material3.window.size)
     implementation(libs.androidx.compose.adaptive)
     implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.navigation3.runtime)
     implementation(libs.navigation3.ui)
     implementation(libs.androidx.core.splashscreen)
