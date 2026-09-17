@@ -5,11 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.pe.innari.igvperu.background.TimerBackground
+import com.pe.innari.igvperu.background.type.TimeType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val splashEnable = true
+    private var splashEnable = true
+    private val timerBackground =
+        TimerBackground(time = SPLASH_TIME_OUT, timeType = TimeType.MINUTES)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
@@ -21,7 +25,11 @@ class MainActivity : ComponentActivity() {
 
     private fun content() = setContent {
         IGVPERUTheme {
-
+            timerBackground.Start { splashEnable = false }
         }
+    }
+
+    companion object {
+        private const val SPLASH_TIME_OUT = 3L
     }
 }
