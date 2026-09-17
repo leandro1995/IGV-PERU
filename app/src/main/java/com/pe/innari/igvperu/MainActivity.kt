@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
 
     private var splashEnable = true
     private val timerBackground =
-        TimerBackground(time = SPLASH_TIME_OUT, timeType = TimeType.MINUTES)
+        TimerBackground(time = SPLASH_TIME_OUT, timeType = TimeType.SECONDS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val screenSplash = installSplashScreen()
