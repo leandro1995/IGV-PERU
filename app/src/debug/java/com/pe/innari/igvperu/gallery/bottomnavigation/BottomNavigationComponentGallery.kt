@@ -12,7 +12,7 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNaviga
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class BottomNavigationComponentGallery : ViewAmbient<BottomNavigationComponentState>() {
+class BottomNavigationComponentGallery : ViewAmbient() {
 
     @Composable
     override fun InstanceMutableValues() {
