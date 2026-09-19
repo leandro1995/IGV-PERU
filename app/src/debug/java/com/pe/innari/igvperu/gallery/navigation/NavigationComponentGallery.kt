@@ -16,7 +16,7 @@ import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class NavigationComponentGallery : ViewAmbient<NavigationState>() {
+class NavigationComponentGallery : ViewAmbient() {
 
     @Composable
     override fun InstanceMutableValues() {
