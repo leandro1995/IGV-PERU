@@ -20,9 +20,11 @@ import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
 class EditTextComponentGallery : ViewAmbient() {
 
+    private lateinit var editTextState: EditTextState
+
     @Composable
     override fun InstanceMutableValues() {
-        mutableValues = EditTextState(
+        editTextState = EditTextState(
             decimal = rememberTextFieldState(), integer = rememberTextFieldState()
         )
     }
@@ -42,13 +44,13 @@ class EditTextComponentGallery : ViewAmbient() {
                         editTextType = EditTextType.DECIMAL
                     ), trailingIcon = {
                         Text("AUTO")
-                    }, textFieldState = mutableValues?.decimal.orEmpty()
+                    }, textFieldState = editTextState.decimal
                 ).OnCreate()
 
                 EditTextComponent(
                     editText = EditText(
                         placeHolder = "placeHolder", label = "label"
-                    ), textFieldState = mutableValues?.integer.orEmpty()
+                    ), textFieldState = editTextState.integer
                 ).OnCreate()
             }
         }
