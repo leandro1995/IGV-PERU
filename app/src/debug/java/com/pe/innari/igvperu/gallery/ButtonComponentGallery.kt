@@ -15,7 +15,7 @@ import com.pe.innari.igvperu.ui.component.button.type.ButtonType
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class ButtonComponentGallery : ViewAmbient<Any>() {
+class ButtonComponentGallery : ViewAmbient() {
 
     @Composable
     override fun PortraitCompact() {

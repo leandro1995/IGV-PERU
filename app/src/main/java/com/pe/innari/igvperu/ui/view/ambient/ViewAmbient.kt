@@ -8,17 +8,8 @@ import com.pe.innari.igvperu.ui.view.windowsize.ViewWindowSize
  * Clase abstracta base para definir vistas que requieren una estructura común y la aplicación de un tema.
  *
  * Proporciona una forma estandarizada de implementar la interfaz de usuario y su previsualización correspondiente.
- * Utiliza un modelo genérico [M] para manejar valores mutables o estados específicos de la vista.
- *
- * @param M Tipo de dato que representa los valores mutables o el estado de la vista.
  */
-abstract class ViewAmbient<M> {
-
-    /**
-     * Contenedor para los valores mutables o el estado de la vista.
-     * Se recomienda inicializarlo dentro de [InstanceMutableValues].
-     */
-    protected var mutableValues: M? = null
+abstract class ViewAmbient {
 
     /**
      * Orquestador principal que delega la creación de la interfaz a [ViewWindowSize.AdaptiveLayout].
@@ -92,7 +83,7 @@ abstract class ViewAmbient<M> {
     }
 
     /**
-     * Método para inicializar [mutableValues] u otros estados necesarios antes de renderizar la UI.
+     * Método para inicializar estados o valores mutables necesarios antes de renderizar la UI.
      * Se ejecuta automáticamente al inicio de [OnCreate].
      */
     @Composable

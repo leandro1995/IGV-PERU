@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.editText.state.EditTextState
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
@@ -18,11 +17,13 @@ import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class EditTextComponentGallery : ViewAmbient<EditTextState>() {
+class EditTextComponentGallery : ViewAmbient() {
+
+    private lateinit var editTextState: EditTextState
 
     @Composable
     override fun InstanceMutableValues() {
-        mutableValues = EditTextState(
+        editTextState = EditTextState(
             decimal = rememberTextFieldState(), integer = rememberTextFieldState()
         )
     }
@@ -42,13 +43,13 @@ class EditTextComponentGallery : ViewAmbient<EditTextState>() {
                         editTextType = EditTextType.DECIMAL
                     ), trailingIcon = {
                         Text("AUTO")
-                    }, textFieldState = mutableValues?.decimal.orEmpty()
+                    }, textFieldState = editTextState.decimal
                 ).OnCreate()
 
                 EditTextComponent(
                     editText = EditText(
                         placeHolder = "placeHolder", label = "label"
-                    ), textFieldState = mutableValues?.integer.orEmpty()
+                    ), textFieldState = editTextState.integer
                 ).OnCreate()
             }
         }

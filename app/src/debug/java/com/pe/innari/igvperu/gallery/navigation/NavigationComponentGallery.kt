@@ -16,21 +16,27 @@ import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class NavigationComponentGallery : ViewAmbient<NavigationState>() {
+class NavigationComponentGallery : ViewAmbient() {
+
+    private lateinit var navigationState: NavigationState
 
     @Composable
     override fun InstanceMutableValues() {
-        mutableValues = NavigationState(backStack = rememberNavBackStack(Navigation.Home))
+        navigationState = NavigationState(backStack = rememberNavBackStack(Navigation.Home))
     }
 
     @Composable
     override fun PortraitCompact() {
-        val navigation = NavigationComponent(backStack = mutableValues?.backStack.orEmpty())
+        val navigation = NavigationComponent(backStack = navigationState.backStack.orEmpty())
         navigation.setCallback {
             it.entry<Navigation.Home> {
-                Column(modifier = Modifier.padding(top = 32.dp).fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                        .padding(top = 32.dp)
+                        .fillMaxSize()
+                ) {
                     Button(onClick = {
-                        mutableValues?.backStack?.add(Navigation.Detail("HOLA SOY YO"))
+                        navigationState.backStack.add(Navigation.Detail("HOLA SOY YO"))
                     }) {
                         Text("SIGUIENTE")
                     }
