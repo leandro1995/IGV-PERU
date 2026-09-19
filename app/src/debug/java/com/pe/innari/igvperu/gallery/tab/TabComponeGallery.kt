@@ -16,7 +16,7 @@ import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class TabComponeGallery : ViewAmbient<TabState>() {
+class TabComponeGallery : ViewAmbient() {
 
     @Composable
     override fun InstanceMutableValues() {
