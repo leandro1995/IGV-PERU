@@ -11,7 +11,7 @@ import com.pe.innari.igvperu.ui.component.toolbar.model.ToolBar
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class ToolBarComponentGallery : ViewAmbient<Any>() {
+class ToolBarComponentGallery : ViewAmbient() {
 
     private val toolBarNoIconComponent =
         ToolBarComponent(toolBar = ToolBar(title = "title", subTitle = "subTitle"))
