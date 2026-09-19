@@ -12,13 +12,7 @@ import com.pe.innari.igvperu.ui.view.windowsize.ViewWindowSize
  *
  * @param M Tipo de dato que representa los valores mutables o el estado de la vista.
  */
-abstract class ViewAmbient<M> {
-
-    /**
-     * Contenedor para los valores mutables o el estado de la vista.
-     * Se recomienda inicializarlo dentro de [InstanceMutableValues].
-     */
-    protected var mutableValues: M? = null
+abstract class ViewAmbient {
 
     /**
      * Orquestador principal que delega la creación de la interfaz a [ViewWindowSize.AdaptiveLayout].
