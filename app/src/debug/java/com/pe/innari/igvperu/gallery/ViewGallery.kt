@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class ViewGallery : ViewAmbient<Any>() {
+class ViewGallery : ViewAmbient() {
 
     @Composable
     override fun PortraitCompact() {
