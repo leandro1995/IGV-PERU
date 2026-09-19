@@ -18,9 +18,11 @@ import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
 class TabComponeGallery : ViewAmbient() {
 
+    private lateinit var tabState: TabState
+
     @Composable
     override fun InstanceMutableValues() {
-        mutableValues = TabState(indexPosition = rememberSaveable { mutableIntStateOf(0) })
+        tabState = TabState(indexPosition = rememberSaveable { mutableIntStateOf(0) })
     }
 
     @Composable
@@ -32,11 +34,10 @@ class TabComponeGallery : ViewAmbient() {
                     .fillMaxWidth()
             ) {
                 TabComponent(
-                    indexPosition = mutableValues?.indexPosition?.intValue.orEmpty(),
-                    items = tabList()
+                    indexPosition = tabState.indexPosition.intValue.orEmpty(), items = tabList()
                 ).apply {
                     setCallback {
-                        mutableValues?.indexPosition?.intValue = it
+                        tabState.indexPosition.intValue = it
                     }
                 }.OnCreate()
             }
