@@ -18,7 +18,7 @@ import com.pe.innari.igvperu.ui.component.edittext.type.EditTextType
 import com.pe.innari.igvperu.ui.view.adaptivepreview.ThemeAdaptivePreview
 import com.pe.innari.igvperu.ui.view.ambient.ViewAmbient
 
-class EditTextComponentGallery : ViewAmbient<EditTextState>() {
+class EditTextComponentGallery : ViewAmbient() {
 
     @Composable
     override fun InstanceMutableValues() {
