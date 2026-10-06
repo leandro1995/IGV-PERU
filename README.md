@@ -1,8 +1,8 @@
 ## 🇵🇪 IGV PERÚ
 
-<div style="display: flex; justify-content: center;">
+<p align="center">
     <img alt="ic_launcher_readme.png" height="260" src="image/ic_launcher_readme.png" width="260"/>
-</div>
+</p>
 
 **IGV PERÚ** es una aplicación Android gratuita diseñada para facilitar el **cálculo, comprensión y
 consulta de información relacionada con el Impuesto General a las Ventas (IGV) en Perú**.
