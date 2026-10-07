@@ -12,7 +12,56 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme()
 
-private val LightColorScheme = lightColorScheme()
+private val LightColorScheme = lightColorScheme(
+    primary = Teal600,
+    onPrimary = White100,
+    primaryContainer = Teal100,
+    onPrimaryContainer = Teal900,
+    inversePrimary = Teal200,
+    secondary = TealGray600,
+    onSecondary = White100,
+    secondaryContainer = TealGray100,
+    onSecondaryContainer = TealGray900,
+    tertiary = Rose600,
+    onTertiary = White100,
+    tertiaryContainer = Rose100,
+    onTertiaryContainer = Rose900,
+    background = White50,
+    onBackground = Gray950,
+    surface = White50,
+    onSurface = Gray950,
+    surfaceVariant = Gray200,
+    onSurfaceVariant = Gray700,
+    surfaceTint = Teal600,
+    inverseSurface = Gray800,
+    inverseOnSurface = Gray50,
+    error = Red600,
+    onError = White100,
+    errorContainer = Red100,
+    onErrorContainer = Red900,
+    outline = Gray500,
+    outlineVariant = Gray300,
+    scrim = Black100,
+    surfaceBright = White10,
+    surfaceContainerLowest = White100,
+    surfaceContainerLow = White60,
+    surfaceContainer = Gray80,
+    surfaceContainerHigh = Gray150,
+    surfaceContainerHighest = Gray250,
+    surfaceDim = Gray280,
+    primaryFixed = Teal100,
+    primaryFixedDim = Teal250,
+    onPrimaryFixed = Teal950,
+    onPrimaryFixedVariant = Black900,
+    secondaryFixed = TealGray100,
+    secondaryFixedDim = Gray350,
+    onSecondaryFixed = Gray960,
+    onSecondaryFixedVariant = Gray750,
+    tertiaryFixed = Rose100,
+    tertiaryFixedDim = Rose250,
+    onTertiaryFixed = Rose950,
+    onTertiaryFixedVariant = Rose750
+)
 
 @Composable
 fun IGVPERUTheme(
