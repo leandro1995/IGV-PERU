@@ -1,6 +1,5 @@
 package com.pe.innari.igvperu.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -11,32 +10,140 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * Esquema de colores para el tema oscuro (Dark Mode) de la aplicación.
+ *
+ * Asigna las constantes de color definidas en Color.kt a los roles semánticos
+ * del sistema de diseño Material Design 3 para garantizar legibilidad, contraste
+ * y coherencia estética en entornos con poca luz.
+ */
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Teal200,
+    onPrimary = Teal800,
+    primaryContainer = Teal700,
+    onPrimaryContainer = Teal100,
+    inversePrimary = Teal600,
+    secondary = Gray320,
+    onSecondary = Gray850,
+    secondaryContainer = Gray750,
+    onSecondaryContainer = TealGray100,
+    tertiary = Rose300,
+    onTertiary = Rose850,
+    tertiaryContainer = Rose750,
+    onTertiaryContainer = Rose100,
+    background = Gray980,
+    onBackground = Gray160,
+    surface = Gray980,
+    onSurface = Gray160,
+    surfaceVariant = Gray720,
+    onSurfaceVariant = Gray310,
+    surfaceTint = Teal200,
+    inverseSurface = Gray160,
+    inverseOnSurface = Gray820,
+    error = Red200,
+    onError = Red800,
+    errorContainer = Red700,
+    onErrorContainer = Red100,
+    outline = Gray400,
+    outlineVariant = Gray720,
+    scrim = Black100,
+    surfaceBright = Gray780,
+    surfaceContainerLowest = Black950,
+    surfaceContainerLow = Gray960,
+    surfaceContainer = Gray920,
+    surfaceContainerHigh = Gray880,
+    surfaceContainerHighest = Gray810,
+    surfaceDim = Gray980,
+    primaryFixed = Teal100,
+    primaryFixedDim = Teal250,
+    onPrimaryFixed = Teal950,
+    onPrimaryFixedVariant = Black900,
+    secondaryFixed = TealGray100,
+    secondaryFixedDim = Gray350,
+    onSecondaryFixed = Gray960,
+    onSecondaryFixedVariant = Gray750,
+    tertiaryFixed = Rose100,
+    tertiaryFixedDim = Rose250,
+    onTertiaryFixed = Rose950,
+    onTertiaryFixedVariant = Rose750
 )
 
+/**
+ * Esquema de colores para el tema claro (Light Mode) de la aplicación.
+ *
+ * Asigna las constantes de color definidas en Color.kt a los roles semánticos
+ * del sistema de diseño Material Design 3 para mantener el equilibrio visual,
+ * contraste y jerarquía de información en entornos iluminados.
+ */
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = Teal600,
+    onPrimary = White100,
+    primaryContainer = Teal100,
+    onPrimaryContainer = Teal900,
+    inversePrimary = Teal200,
+    secondary = TealGray600,
+    onSecondary = White100,
+    secondaryContainer = TealGray100,
+    onSecondaryContainer = TealGray900,
+    tertiary = Rose600,
+    onTertiary = White100,
+    tertiaryContainer = Rose100,
+    onTertiaryContainer = Rose900,
+    background = White50,
+    onBackground = Gray950,
+    surface = White50,
+    onSurface = Gray950,
+    surfaceVariant = Gray200,
+    onSurfaceVariant = Gray700,
+    surfaceTint = Teal600,
+    inverseSurface = Gray800,
+    inverseOnSurface = Gray50,
+    error = Red600,
+    onError = White100,
+    errorContainer = Red100,
+    onErrorContainer = Red900,
+    outline = Gray500,
+    outlineVariant = Gray300,
+    scrim = Black100,
+    surfaceBright = White10,
+    surfaceContainerLowest = White100,
+    surfaceContainerLow = White60,
+    surfaceContainer = Gray80,
+    surfaceContainerHigh = Gray150,
+    surfaceContainerHighest = Gray250,
+    surfaceDim = Gray280,
+    primaryFixed = Teal100,
+    primaryFixedDim = Teal250,
+    onPrimaryFixed = Teal950,
+    onPrimaryFixedVariant = Black900,
+    secondaryFixed = TealGray100,
+    secondaryFixedDim = Gray350,
+    onSecondaryFixed = Gray960,
+    onSecondaryFixedVariant = Gray750,
+    tertiaryFixed = Rose100,
+    tertiaryFixedDim = Rose250,
+    onTertiaryFixed = Rose950,
+    onTertiaryFixedVariant = Rose750
 )
 
+/**
+ * Tema principal de la aplicación IGV Perú.
+ *
+ * Aplica la configuración del tema de Jetpack Compose mediante [MaterialTheme],
+ * proveyendo los esquemas de color (oscuro/claro) y la tipografía personalizada a
+ * todos los componentes `@Composable` descendientes dentro de [content].
+ *
+ * Ofrece soporte para color dinámico (Dynamic Color) introducido en Android 12 (API 31+).
+ *
+ * @param darkTheme Determina si debe aplicarse el tema oscuro. Por defecto detecta la
+ *                  configuración del sistema operativo con [isSystemInDarkTheme].
+ * @param dynamicColor Si es `true` y el dispositivo corre Android 12+ (API 31+), los
+ *                     colores se derivan dinámicamente del fondo de pantalla del sistema.
+ * @param content El árbol de composables al que se le aplicará este tema.
+ */
 @Composable
 fun IGVPERUTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
