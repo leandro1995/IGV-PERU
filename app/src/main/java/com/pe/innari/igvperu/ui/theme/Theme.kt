@@ -10,6 +10,13 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * Esquema de colores para el tema oscuro (Dark Mode) de la aplicación.
+ *
+ * Asigna las constantes de color definidas en Color.kt a los roles semánticos
+ * del sistema de diseño Material Design 3 para garantizar legibilidad, contraste
+ * y coherencia estética en entornos con poca luz.
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Teal200,
     onPrimary = Teal800,
@@ -61,6 +68,13 @@ private val DarkColorScheme = darkColorScheme(
     onTertiaryFixedVariant = Rose750
 )
 
+/**
+ * Esquema de colores para el tema claro (Light Mode) de la aplicación.
+ *
+ * Asigna las constantes de color definidas en Color.kt a los roles semánticos
+ * del sistema de diseño Material Design 3 para mantener el equilibrio visual,
+ * contraste y jerarquía de información en entornos iluminados.
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Teal600,
     onPrimary = White100,
@@ -112,6 +126,21 @@ private val LightColorScheme = lightColorScheme(
     onTertiaryFixedVariant = Rose750
 )
 
+/**
+ * Tema principal de la aplicación IGV Perú.
+ *
+ * Aplica la configuración del tema de Jetpack Compose mediante [MaterialTheme],
+ * proveyendo los esquemas de color (oscuro/claro) y la tipografía personalizada a
+ * todos los componentes `@Composable` descendientes dentro de [content].
+ *
+ * Ofrece soporte para color dinámico (Dynamic Color) introducido en Android 12 (API 31+).
+ *
+ * @param darkTheme Determina si debe aplicarse el tema oscuro. Por defecto detecta la
+ *                  configuración del sistema operativo con [isSystemInDarkTheme].
+ * @param dynamicColor Si es `true` y el dispositivo corre Android 12+ (API 31+), los
+ *                     colores se derivan dinámicamente del fondo de pantalla del sistema.
+ * @param content El árbol de composables al que se le aplicará este tema.
+ */
 @Composable
 fun IGVPERUTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
