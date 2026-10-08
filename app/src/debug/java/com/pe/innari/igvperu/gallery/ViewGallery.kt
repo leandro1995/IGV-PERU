@@ -1,4 +1,5 @@
 package com.pe.innari.igvperu.gallery
 
-class ViewGallery {
-}
+import com.pe.innari.igvperu.ui.view.ViewAmbient
+
+class ViewGallery : ViewAmbient()
