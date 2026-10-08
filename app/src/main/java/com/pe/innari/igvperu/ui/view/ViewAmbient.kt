@@ -11,6 +11,11 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 abstract class ViewAmbient {
 
     @Composable
+    fun OnCreate() {
+        View()
+    }
+
+    @Composable
     abstract fun View()
 
     @Composable
