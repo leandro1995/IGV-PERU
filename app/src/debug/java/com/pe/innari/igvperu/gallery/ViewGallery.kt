@@ -6,6 +6,11 @@ import com.pe.innari.igvperu.ui.view.ViewAmbient
 
 class ViewGallery : ViewAmbient() {
 
+    @Composable
+    override fun View() {
+
+    }
+
     @Preview
     @Composable
     override fun Preview() {
