@@ -21,6 +21,33 @@ class ViewGallery : ViewAmbient() {
         }
     }
 
+    @Composable
+    override fun PhoneLandscape() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues)) {
+                Text("PhoneLandscape")
+            }
+        }
+    }
+
+    @Composable
+    override fun TabletPortrait() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues)) {
+                Text("TabletPortrait")
+            }
+        }
+    }
+
+    @Composable
+    override fun TabletLandscape() {
+        Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues)) {
+                Text("TabletLandscape")
+            }
+        }
+    }
+
     @AdaptivePreview
     @Composable
     override fun Preview() {
