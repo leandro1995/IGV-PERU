@@ -25,8 +25,18 @@ import com.pe.innari.igvperu.ui.theme.Dimen76
 import com.pe.innari.igvperu.ui.theme.SubTitleToolbarComponent
 import com.pe.innari.igvperu.ui.theme.TitleToolbarComponent
 
+/**
+ * Componente visual de barra superior (Toolbar) que hereda de [ComponentAmbient].
+ *
+ * Muestra un ícono a la izquierda seguido por un título y un subtítulo alineados verticalmente.
+ *
+ * @property toolbar Datos de configuración del toolbar provistos por la clase [Toolbar].
+ */
 class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
 
+    /**
+     * Renderiza la interfaz de usuario composable correspondiente al Toolbar.
+     */
     @Composable
     override fun OnCreate() {
         Row(
