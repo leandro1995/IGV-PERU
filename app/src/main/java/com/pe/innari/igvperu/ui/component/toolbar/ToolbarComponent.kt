@@ -1,7 +1,10 @@
 package com.pe.innari.igvperu.ui.component.toolbar
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,8 +34,8 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
             Column(
                 modifier = Modifier
                     .padding(end = Dimen14)
-                    .fillMaxWidth()
-                    .weight(1F)
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
             ) {
                 Icon(
                     modifier = Modifier.size(Dimen24),
@@ -42,11 +45,12 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1F)
+                    .fillMaxSize()
+                    .weight(1F),
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(toolbar.title)
-                Text(toolbar.subtitle)
+                Text(modifier = Modifier.fillMaxWidth(), text = toolbar.title)
+                Text(modifier = Modifier.fillMaxWidth(), text = toolbar.subtitle)
             }
         }
     }
