@@ -20,6 +20,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen76
+import com.pe.innari.igvperu.ui.theme.SubTitleToolbarComponent
+import com.pe.innari.igvperu.ui.theme.TitleToolbarComponent
 
 class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
 
@@ -49,8 +51,16 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
                     .weight(1F),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(modifier = Modifier.fillMaxWidth(), text = toolbar.title)
-                Text(modifier = Modifier.fillMaxWidth(), text = toolbar.subtitle)
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = toolbar.title,
+                    style = TitleToolbarComponent
+                )
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = toolbar.subtitle,
+                    style = SubTitleToolbarComponent
+                )
             }
         }
     }
