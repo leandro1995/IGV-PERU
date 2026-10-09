@@ -8,27 +8,28 @@ object OrientationAdaptive {
     @Composable
     fun ViewType(
         phonePortrait: @Composable () -> Unit,
-        phoneLandscape: @Composable () -> Unit,
-        tabletPortrait: @Composable () -> Unit,
-        tabletLandscape: @Composable () -> Unit
-    ) = when {
-        !rememberWindowSizeClass().isWidthAtLeastBreakpoint(600) -> {
-            phonePortrait()
-        }
+        phoneLandscape: @Composable () -> Unit = phonePortrait,
+        tabletPortrait: @Composable () -> Unit = phonePortrait,
+        tabletLandscape: @Composable () -> Unit = tabletPortrait
+    ) {
+        val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
 
-        !rememberWindowSizeClass().isHeightAtLeastBreakpoint(480) -> {
-            phoneLandscape()
-        }
+        when {
+            !windowSizeClass.isHeightAtLeastBreakpoint(480) -> {
+                phoneLandscape()
+            }
 
-        !rememberWindowSizeClass().isWidthAtLeastBreakpoint(840) -> {
-            tabletPortrait()
-        }
+            !windowSizeClass.isWidthAtLeastBreakpoint(600) -> {
+                phonePortrait()
+            }
 
-        else -> {
-            tabletLandscape()
+            !windowSizeClass.isWidthAtLeastBreakpoint(840) -> {
+                tabletPortrait()
+            }
+
+            else -> {
+                tabletLandscape()
+            }
         }
     }
-
-    @Composable
-    private fun rememberWindowSizeClass() = currentWindowAdaptiveInfoV2().windowSizeClass
 }
