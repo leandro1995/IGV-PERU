@@ -8,6 +8,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.pe.innari.igvperu.R
 
+/**
+ * Definición global de tipografías predeterminadas para Material Theme 3.
+ */
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -18,6 +21,18 @@ val Typography = Typography(
     )
 )
 
-val TitleToolbarComponent = TextStyle(fontSize = Text20, fontFamily = FontFamily(Font(R.font.bold)))
-val SubTitleToolbarComponent =
-    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
+/**
+ * Estilo de texto para el título principal utilizado en componentes como ToolbarComponent.
+ */
+val TitleToolbarComponent = TextStyle(
+    fontSize = Text20,
+    fontFamily = FontFamily(Font(R.font.bold))
+)
+
+/**
+ * Estilo de texto para el subtítulo utilizado en componentes como ToolbarComponent.
+ */
+val SubTitleToolbarComponent = TextStyle(
+    fontSize = Text12,
+    fontFamily = FontFamily(Font(R.font.medium))
+)
