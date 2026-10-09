@@ -7,6 +7,6 @@ class ToolbarComponent : ComponentAmbient() {
 
     @Composable
     override fun OnCreate() {
-
+        
     }
 }
