@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.component.toolbar.model
 
-class Toolbar
+import androidx.annotation.DrawableRes
+
+class Toolbar(@DrawableRes val icon: Int, val title: String, val subtitle: String)
