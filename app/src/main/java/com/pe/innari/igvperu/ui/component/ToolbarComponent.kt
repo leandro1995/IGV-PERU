@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.component
 
-class ToolbarComponent
+import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+
+class ToolbarComponent : ComponentAmbient()
