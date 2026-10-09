@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.ui.component.toolbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,6 +34,7 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
                 .fillMaxWidth()
                 .height(Dimen76)
                 .padding(start = Dimen20, end = Dimen20)
+                .background(MaterialTheme.colorScheme.surface)
         ) {
             Column(
                 modifier = Modifier
@@ -42,6 +45,7 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
                 Icon(
                     modifier = Modifier.size(Dimen24),
                     painter = painterResource(toolbar.icon),
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null
                 )
             }
@@ -54,12 +58,14 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = toolbar.title,
-                    style = TitleToolbarComponent
+                    style = TitleToolbarComponent,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = toolbar.subtitle,
-                    style = SubTitleToolbarComponent
+                    style = SubTitleToolbarComponent,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
