@@ -17,4 +17,8 @@ abstract class ComponentAmbient {
     @Composable
     open fun OnCreate() {
     }
+
+    @Composable
+    open fun OnCreate(view: @Composable () -> Unit) {
+    }
 }
