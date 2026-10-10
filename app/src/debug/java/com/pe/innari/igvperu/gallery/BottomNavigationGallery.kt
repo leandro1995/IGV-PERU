@@ -1,3 +1,19 @@
 package com.pe.innari.igvperu.gallery
 
-class BottomNavigationGallery
+import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.view.ViewAmbient
+import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
+
+class BottomNavigationGallery : ViewAmbient() {
+
+    @Composable
+    override fun View() {
+
+    }
+
+    @AdaptivePreview
+    @Composable
+    override fun Preview() {
+        super.Preview()
+    }
+}
