@@ -46,10 +46,16 @@ class BottomNavigationComponent(
             }
 
             TypeBottonNavigation.RAIL_NAVIGATION -> {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    RailNavigation()
-                    VerticalDivider(thickness = Dimen1)
-                    view()
+                Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues)
+                    ) {
+                        RailNavigation()
+                        VerticalDivider(thickness = Dimen1)
+                        view()
+                    }
                 }
             }
         }
