@@ -41,10 +41,7 @@ class BottomNavigationComponent(
     private val position: Int,
 ) : ComponentAmbient() {
 
-    /**
-     * Instancia de retrollamada (callback) para gestionar los eventos de selección.
-     */
-    private var bottomNavigationComponentCallback: BottomNavigationComponentCallback? = null
+    private var navigationCallback: BottomNavigationComponentCallback? = null
 
     /**
      * Renderiza el contenedor de navegación (barra inferior o riel lateral) envolviendo la vista [view] suministrada.
@@ -63,7 +60,7 @@ class BottomNavigationComponent(
                                 thickness = Dimen1,
                                 color = MaterialTheme.colorScheme.outlineVariant,
                             )
-                            BarNavigation()
+                            BottomNavigationBar()
                         }
                     },
                 ) { paddingValues ->
@@ -84,7 +81,7 @@ class BottomNavigationComponent(
                             .fillMaxSize()
                             .padding(paddingValues),
                     ) {
-                        RailNavigation()
+                        NavigationRailBar()
                         VerticalDivider(
                             thickness = Dimen1,
                             color = MaterialTheme.colorScheme.outlineVariant,
@@ -102,8 +99,8 @@ class BottomNavigationComponent(
      * @param itemPosition Función que recibe la posición (índice) del elemento seleccionado.
      */
     fun setOnClick(itemPosition: (position: Int) -> Unit) {
-        if (bottomNavigationComponentCallback == null) {
-            bottomNavigationComponentCallback = object : BottomNavigationComponentCallback {
+        if (navigationCallback == null) {
+            navigationCallback = object : BottomNavigationComponentCallback {
                 override fun setPosition(index: Int) {
                     itemPosition(index)
                 }
@@ -111,25 +108,22 @@ class BottomNavigationComponent(
         }
     }
 
-    /**
-     * Renderiza la barra de navegación horizontal inferior utilizando [NavigationBar].
-     */
     @Composable
-    private fun BarNavigation() =
+    private fun BottomNavigationBar() =
         NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemList.forEachIndexed { index, item ->
                 NavigationBarItem(
-                    selected = isIndex(index = index),
+                    selected = isItemSelected(index = index),
                     onClick = {
-                        bottomNavigationComponentCallback?.setPosition(index = index)
+                        navigationCallback?.setPosition(index = index)
                     },
                     icon = {
-                        IconItem(icon = item.icon)
+                        NavigationItemIcon(iconResId = item.icon)
                     },
                     label = {
-                        LabelItem(
+                        NavigationItemLabel(
                             label = item.label,
-                            isIndex = isIndex(index = index),
+                            isSelected = isItemSelected(index = index),
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
@@ -143,25 +137,22 @@ class BottomNavigationComponent(
             }
         }
 
-    /**
-     * Renderiza el riel de navegación vertical lateral utilizando [NavigationRail].
-     */
     @Composable
-    private fun RailNavigation() =
+    private fun NavigationRailBar() =
         NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemList.forEachIndexed { index, item ->
                 NavigationRailItem(
-                    selected = isIndex(index = index),
+                    selected = isItemSelected(index = index),
                     onClick = {
-                        bottomNavigationComponentCallback?.setPosition(index = index)
+                        navigationCallback?.setPosition(index = index)
                     },
                     icon = {
-                        IconItem(icon = item.icon)
+                        NavigationItemIcon(iconResId = item.icon)
                     },
                     label = {
-                        LabelItem(
+                        NavigationItemLabel(
                             label = item.label,
-                            isIndex = isIndex(index = index),
+                            isSelected = isItemSelected(index = index),
                         )
                     },
                     colors = NavigationRailItemDefaults.colors(
@@ -175,36 +166,19 @@ class BottomNavigationComponent(
             }
         }
 
-    /**
-     * Muestra el ícono correspondiente al elemento de navegación.
-     *
-     * @param icon ID del recurso gráfico (drawable) a renderizar.
-     */
     @Composable
-    private fun IconItem(icon: Int) =
-        Icon(painter = painterResource(icon), contentDescription = null)
+    private fun NavigationItemIcon(iconResId: Int) =
+        Icon(painter = painterResource(iconResId), contentDescription = null)
 
-    /**
-     * Muestra el texto o etiqueta del elemento de navegación aplicando el estilo según si está seleccionado o no.
-     *
-     * @param label Texto que se mostrará.
-     * @param isIndex Indica si el elemento actual está seleccionado.
-     */
     @Composable
-    private fun LabelItem(label: String, isIndex: Boolean) = Text(
+    private fun NavigationItemLabel(label: String, isSelected: Boolean) = Text(
         text = label,
-        style = if (isIndex) {
+        style = if (isSelected) {
             ItemSelectBottomNavigationComponent
         } else {
             ItemDeselectedBottomNavigationComponent
         },
     )
 
-    /**
-     * Verifica si el índice proporcionado corresponde a la posición activa seleccionada.
-     *
-     * @param index Índice a comprobar.
-     * @return `true` si coincide con la posición seleccionada, de lo contrario `false`.
-     */
-    private fun isIndex(index: Int): Boolean = position == index
+    private fun isItemSelected(index: Int): Boolean = position == index
 }
