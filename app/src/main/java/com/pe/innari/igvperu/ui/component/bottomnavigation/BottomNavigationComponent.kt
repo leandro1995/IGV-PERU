@@ -27,14 +27,30 @@ import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
 import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
+/**
+ * Componente visual de navegación que permite alternar entre distintas pantallas utilizando
+ * una barra inferior ([TypeBottomNavigation.BAR_NAVIGATION]) o un riel lateral ([TypeBottomNavigation.RAIL_NAVIGATION]).
+ *
+ * @param typeBottomNavigation Define el modo de visualización de la navegación (barra o riel).
+ * @param itemList Lista de elementos ([ItemBottomNavigation]) que conforman las opciones del menú.
+ * @param position Índice del elemento actualmente seleccionado.
+ */
 class BottomNavigationComponent(
     private val typeBottomNavigation: TypeBottomNavigation,
     private val itemList: List<ItemBottomNavigation>,
     private val position: Int,
 ) : ComponentAmbient() {
 
+    /**
+     * Instancia de retrollamada (callback) para gestionar los eventos de selección.
+     */
     private var bottomNavigationComponentCallback: BottomNavigationComponentCallback? = null
 
+    /**
+     * Renderiza el contenedor de navegación (barra inferior o riel lateral) envolviendo la vista [view] suministrada.
+     *
+     * @param view Contenido composable principal que se muestra junto con la estructura de navegación.
+     */
     @Composable
     override fun OnCreate(view: @Composable () -> Unit) {
         when (typeBottomNavigation) {
@@ -80,6 +96,11 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Configura el evento de clic que se ejecutará al seleccionar cualquiera de los elementos de navegación.
+     *
+     * @param itemPosition Función que recibe la posición (índice) del elemento seleccionado.
+     */
     fun setOnClick(itemPosition: (position: Int) -> Unit) {
         if (bottomNavigationComponentCallback == null) {
             bottomNavigationComponentCallback = object : BottomNavigationComponentCallback {
@@ -90,6 +111,9 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Renderiza la barra de navegación horizontal inferior utilizando [NavigationBar].
+     */
     @Composable
     private fun BarNavigation() =
         NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
@@ -119,6 +143,9 @@ class BottomNavigationComponent(
             }
         }
 
+    /**
+     * Renderiza el riel de navegación vertical lateral utilizando [NavigationRail].
+     */
     @Composable
     private fun RailNavigation() =
         NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
@@ -148,10 +175,21 @@ class BottomNavigationComponent(
             }
         }
 
+    /**
+     * Muestra el ícono correspondiente al elemento de navegación.
+     *
+     * @param icon ID del recurso gráfico (drawable) a renderizar.
+     */
     @Composable
     private fun IconItem(icon: Int) =
         Icon(painter = painterResource(icon), contentDescription = null)
 
+    /**
+     * Muestra el texto o etiqueta del elemento de navegación aplicando el estilo según si está seleccionado o no.
+     *
+     * @param label Texto que se mostrará.
+     * @param isIndex Indica si el elemento actual está seleccionado.
+     */
     @Composable
     private fun LabelItem(label: String, isIndex: Boolean) = Text(
         text = label,
@@ -162,5 +200,11 @@ class BottomNavigationComponent(
         },
     )
 
+    /**
+     * Verifica si el índice proporcionado corresponde a la posición activa seleccionada.
+     *
+     * @param index Índice a comprobar.
+     * @return `true` si coincide con la posición seleccionada, de lo contrario `false`.
+     */
     private fun isIndex(index: Int): Boolean = position == index
 }
