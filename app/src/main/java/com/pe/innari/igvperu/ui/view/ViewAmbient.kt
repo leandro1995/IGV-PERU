@@ -13,6 +13,8 @@ import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
  */
 abstract class ViewAmbient<S> {
 
+    protected var mutableState: S? = null
+
     /**
      * Punto de entrada principal para renderizar la vista adaptativa.
      *
@@ -30,7 +32,8 @@ abstract class ViewAmbient<S> {
     }
 
     @Composable
-    protected open fun mutableState(): S? = null
+    protected open fun InstanceMutableState() {
+    }
 
     /**
      * Vista principal y obligatoria, utilizada por defecto para teléfonos en modo vertical (portrait).
