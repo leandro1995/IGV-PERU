@@ -1,3 +1,3 @@
 package com.pe.innari.igvperu.extension
 
-fun Int?.orEmpty() = this ?: 0
+fun Int?.orEmpty(): Int = this ?: 0
