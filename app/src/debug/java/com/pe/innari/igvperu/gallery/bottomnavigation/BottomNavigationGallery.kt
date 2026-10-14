@@ -17,50 +17,54 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
     @Composable
     override fun InstanceMutableState() {
         mutableState = BottomNavigationStatus(
-            position = rememberSaveable { mutableIntStateOf(0) })
+            position = rememberSaveable { mutableIntStateOf(0) },
+        )
     }
 
     @Composable
     override fun View() {
-        BottonNavigation(typeBottonNavigation = TypeBottonNavigation.BAR_NAVIGATION) {
-            Text("Hello BottomNavigation!")
+        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.BAR_NAVIGATION) {
+            Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
     override fun PhoneLandscape() {
-        BottonNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
-            Text("Hello BottomNavigation!")
+        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
+            Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
     override fun TabletLandscape() {
-        BottonNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
-            Text("Hello BottomNavigation!")
+        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
+            Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
-    private fun BottonNavigation(
-        typeBottonNavigation: TypeBottonNavigation, view: @Composable () -> Unit
+    private fun BottomNavigation(
+        typeBottonNavigation: TypeBottonNavigation,
+        content: @Composable () -> Unit,
     ) {
         BottomNavigationComponent(
             typeBottonNavigation = typeBottonNavigation,
             itemMutableList = itemMutableList(),
-            position = mutableState?.position?.intValue.orEmpty()
+            position = mutableState?.position?.intValue.orEmpty(),
         ).apply {
             setOnclick { position ->
                 mutableState?.position?.intValue = position
             }
-        }.OnCreate { view() }
+        }.OnCreate {
+            content()
+        }
     }
 
     private fun itemMutableList() = mutableListOf(
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 1"),
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 2"),
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 3"),
-        ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 4")
+        ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 4"),
     )
 
     @AdaptivePreview
