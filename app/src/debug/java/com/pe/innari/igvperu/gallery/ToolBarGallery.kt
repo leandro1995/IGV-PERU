@@ -11,7 +11,7 @@ import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
-class ToolBarGallery : ViewAmbient() {
+class ToolBarGallery : ViewAmbient<Any>() {
 
     @Composable
     override fun View() {
