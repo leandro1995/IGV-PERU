@@ -11,7 +11,7 @@ import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
  * tipo de dispositivo y orientación (teléfono vertical/horizontal, tableta vertical/horizontal).
  * Permite la reutilización progresiva de vistas definiendo valores por defecto jerárquicos.
  */
-abstract class ViewAmbient {
+abstract class ViewAmbient<S> {
 
     /**
      * Punto de entrada principal para renderizar la vista adaptativa.
@@ -28,6 +28,9 @@ abstract class ViewAmbient {
             tabletLandscape = { TabletLandscape() },
         )
     }
+
+    @Composable
+    protected open fun mutableState(): S? = null
 
     /**
      * Vista principal y obligatoria, utilizada por defecto para teléfonos en modo vertical (portrait).
