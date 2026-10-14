@@ -4,6 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.bottomnavigation.status.BottomNavigationStatus
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
@@ -14,8 +15,10 @@ import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
 
     @Composable
-    override fun mutableState(): BottomNavigationStatus = BottomNavigationStatus(
-        position = rememberSaveable { mutableIntStateOf(0) })
+    override fun InstanceMutableState() {
+        mutableState = BottomNavigationStatus(
+            position = rememberSaveable { mutableIntStateOf(0) })
+    }
 
     @Composable
     override fun View() {
@@ -44,7 +47,7 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
     ) = BottomNavigationComponent(
         typeBottonNavigation = typeBottonNavigation,
         itemMutableList = itemMutableList(),
-        position = mutableState().position.intValue
+        position = mutableState?.position?.intValue.orEmpty()
     ).OnCreate { view() }
 
     private fun itemMutableList() = mutableListOf(
