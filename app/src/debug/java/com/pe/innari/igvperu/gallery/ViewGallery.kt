@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
-class ViewGallery : ViewAmbient() {
+class ViewGallery : ViewAmbient<Any>() {
 
     @Composable
     override fun View() {

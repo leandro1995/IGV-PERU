@@ -25,14 +25,26 @@ val Typography = Typography(
  * Estilo de texto para el título principal utilizado en componentes como ToolbarComponent.
  */
 val TitleToolbarComponent = TextStyle(
-    fontSize = Text20,
-    fontFamily = FontFamily(Font(R.font.bold))
+    fontSize = Text20, fontFamily = FontFamily(Font(R.font.bold))
 )
 
 /**
  * Estilo de texto para el subtítulo utilizado en componentes como ToolbarComponent.
  */
 val SubTitleToolbarComponent = TextStyle(
-    fontSize = Text12,
-    fontFamily = FontFamily(Font(R.font.medium))
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
+)
+
+/**
+ * Estilo de texto para los elementos seleccionados dentro de [com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent].
+ */
+val ItemSelectBottomNavigationComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold))
+)
+
+/**
+ * Estilo de texto para los elementos no seleccionados dentro de [com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent].
+ */
+val ItemDeselectedBottomNavigationComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
 )

@@ -10,8 +10,15 @@ import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
  * Ofrece una estructura estandarizada para definir diferentes distribuciones de UI según el
  * tipo de dispositivo y orientación (teléfono vertical/horizontal, tableta vertical/horizontal).
  * Permite la reutilización progresiva de vistas definiendo valores por defecto jerárquicos.
+ *
+ * @param S Tipo del estado mutable utilizado por la vista.
  */
-abstract class ViewAmbient {
+abstract class ViewAmbient<S> {
+
+    /**
+     * Estado mutable local gestionado por la vista.
+     */
+    protected var mutableState: S? = null
 
     /**
      * Punto de entrada principal para renderizar la vista adaptativa.
@@ -21,12 +28,21 @@ abstract class ViewAmbient {
      */
     @Composable
     fun OnCreate() {
+        InstanceMutableState()
         OrientationAdaptive.ViewType(
             phonePortrait = { View() },
             phoneLandscape = { PhoneLandscape() },
             tabletPortrait = { TabletPortrait() },
             tabletLandscape = { TabletLandscape() },
         )
+    }
+
+    /**
+     * Inicializa o recupera el estado mutable [mutableState] requerido por la vista.
+     * Diseñada para ser sobreescrita en las subclases que requieran gestión de estado composable.
+     */
+    @Composable
+    protected open fun InstanceMutableState() {
     }
 
     /**

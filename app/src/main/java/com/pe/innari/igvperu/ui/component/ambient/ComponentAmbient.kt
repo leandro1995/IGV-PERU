@@ -17,4 +17,13 @@ abstract class ComponentAmbient {
     @Composable
     open fun OnCreate() {
     }
+
+    /**
+     * Sobrecarga de la función composable [OnCreate] para componentes que reciben un contenedor o vista hija.
+     *
+     * @param view Contenido composable que será envuelto o renderizado dentro del componente.
+     */
+    @Composable
+    open fun OnCreate(view: @Composable () -> Unit) {
+    }
 }
