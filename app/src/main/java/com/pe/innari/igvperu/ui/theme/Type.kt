@@ -35,10 +35,16 @@ val SubTitleToolbarComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
 )
 
+/**
+ * Estilo de texto para los elementos seleccionados dentro de [com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent].
+ */
 val ItemSelectBottomNavigationComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold))
 )
 
+/**
+ * Estilo de texto para los elementos no seleccionados dentro de [com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent].
+ */
 val ItemDeselectedBottomNavigationComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
 )
