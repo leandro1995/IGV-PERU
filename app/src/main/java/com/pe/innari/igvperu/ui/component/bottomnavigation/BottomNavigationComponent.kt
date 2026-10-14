@@ -22,14 +22,14 @@ import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNavigationComponentCallback
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
-import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottonNavigation
+import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
 import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
 class BottomNavigationComponent(
-    private val typeBottonNavigation: TypeBottonNavigation,
-    private val itemMutableList: MutableList<ItemBottomNavigation>,
+    private val typeBottomNavigation: TypeBottomNavigation,
+    private val itemList: List<ItemBottomNavigation>,
     private val position: Int,
 ) : ComponentAmbient() {
 
@@ -37,8 +37,8 @@ class BottomNavigationComponent(
 
     @Composable
     override fun OnCreate(view: @Composable () -> Unit) {
-        when (typeBottonNavigation) {
-            TypeBottonNavigation.BAR_NAVIGATION -> {
+        when (typeBottomNavigation) {
+            TypeBottomNavigation.BAR_NAVIGATION -> {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
@@ -61,7 +61,7 @@ class BottomNavigationComponent(
                 }
             }
 
-            TypeBottonNavigation.RAIL_NAVIGATION -> {
+            TypeBottomNavigation.RAIL_NAVIGATION -> {
                 Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
                     Row(
                         modifier = Modifier
@@ -80,7 +80,7 @@ class BottomNavigationComponent(
         }
     }
 
-    fun setOnclick(itemPosition: (position: Int) -> Unit) {
+    fun setOnClick(itemPosition: (position: Int) -> Unit) {
         if (bottomNavigationComponentCallback == null) {
             bottomNavigationComponentCallback = object : BottomNavigationComponentCallback {
                 override fun setPosition(index: Int) {
@@ -93,7 +93,7 @@ class BottomNavigationComponent(
     @Composable
     private fun BarNavigation() =
         NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
-            itemMutableList.forEachIndexed { index, item ->
+            itemList.forEachIndexed { index, item ->
                 NavigationBarItem(
                     selected = isIndex(index = index),
                     onClick = {
@@ -122,7 +122,7 @@ class BottomNavigationComponent(
     @Composable
     private fun RailNavigation() =
         NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
-            itemMutableList.forEachIndexed { index, item ->
+            itemList.forEachIndexed { index, item ->
                 NavigationRailItem(
                     selected = isIndex(index = index),
                     onClick = {
