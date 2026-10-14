@@ -44,11 +44,17 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
     @Composable
     private fun BottonNavigation(
         typeBottonNavigation: TypeBottonNavigation, view: @Composable () -> Unit
-    ) = BottomNavigationComponent(
-        typeBottonNavigation = typeBottonNavigation,
-        itemMutableList = itemMutableList(),
-        position = mutableState?.position?.intValue.orEmpty()
-    ).OnCreate { view() }
+    ) {
+        BottomNavigationComponent(
+            typeBottonNavigation = typeBottonNavigation,
+            itemMutableList = itemMutableList(),
+            position = mutableState?.position?.intValue.orEmpty()
+        ).apply {
+            setOnclick { position ->
+                mutableState?.position?.intValue = position
+            }
+        }.OnCreate { view() }
+    }
 
     private fun itemMutableList() = mutableListOf(
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 1"),
