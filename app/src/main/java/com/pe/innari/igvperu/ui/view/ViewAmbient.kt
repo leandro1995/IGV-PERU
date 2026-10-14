@@ -23,6 +23,7 @@ abstract class ViewAmbient<S> {
      */
     @Composable
     fun OnCreate() {
+        InstanceMutableState()
         OrientationAdaptive.ViewType(
             phonePortrait = { View() },
             phoneLandscape = { PhoneLandscape() },
