@@ -21,6 +21,8 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNaviga
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottonNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
+import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
+import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
 class BottomNavigationComponent(
     private val typeBottonNavigation: TypeBottonNavigation,
@@ -81,7 +83,7 @@ class BottomNavigationComponent(
             NavigationBarItem(selected = isIndex(index = index), icon = {
                 IconItem(icon = item.icon)
             }, label = {
-                LabelItem(label = item.label)
+                LabelItem(label = item.label, isIndex = isIndex(index = index))
             }, onClick = {
                 bottomNavigationComponentCallback?.setPosition(index = index)
             })
@@ -94,7 +96,7 @@ class BottomNavigationComponent(
             NavigationRailItem(selected = isIndex(index = index), icon = {
                 IconItem(icon = item.icon)
             }, label = {
-                LabelItem(label = item.label)
+                LabelItem(label = item.label, isIndex = isIndex(index = index))
             }, onClick = {
                 bottomNavigationComponentCallback?.setPosition(index = index)
             })
@@ -106,7 +108,13 @@ class BottomNavigationComponent(
         Icon(painter = painterResource(icon), contentDescription = null)
 
     @Composable
-    private fun LabelItem(label: String) = Text(label)
+    private fun LabelItem(label: String, isIndex: Boolean) = Text(
+        text = label, style = if (isIndex) {
+            ItemSelectBottomNavigationComponent
+        } else {
+            ItemDeselectedBottomNavigationComponent
+        }
+    )
 
     private fun isIndex(index: Int) = position == index
 }
