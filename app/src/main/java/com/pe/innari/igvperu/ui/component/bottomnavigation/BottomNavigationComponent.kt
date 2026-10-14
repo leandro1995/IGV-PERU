@@ -30,29 +30,34 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 class BottomNavigationComponent(
     private val typeBottonNavigation: TypeBottonNavigation,
     private val itemMutableList: MutableList<ItemBottomNavigation>,
-    private val position: Int
+    private val position: Int,
 ) : ComponentAmbient() {
 
     private var bottomNavigationComponentCallback: BottomNavigationComponentCallback? = null
 
     @Composable
-    override fun OnCreate(view: @Composable (() -> Unit)) {
+    override fun OnCreate(view: @Composable () -> Unit) {
         when (typeBottonNavigation) {
             TypeBottonNavigation.BAR_NAVIGATION -> {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(), bottomBar = {
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
                         Column {
                             HorizontalDivider(
-                                thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                                thickness = Dimen1,
+                                color = MaterialTheme.colorScheme.outlineVariant,
                             )
                             BarNavigation()
                         }
-                    }) { paddingValues ->
+                    },
+                ) { paddingValues ->
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(paddingValues)
-                    ) { view() }
+                            .padding(paddingValues),
+                    ) {
+                        view()
+                    }
                 }
             }
 
@@ -61,11 +66,12 @@ class BottomNavigationComponent(
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(paddingValues)
+                            .padding(paddingValues),
                     ) {
                         RailNavigation()
                         VerticalDivider(
-                            thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                            thickness = Dimen1,
+                            color = MaterialTheme.colorScheme.outlineVariant,
                         )
                         view()
                     }
@@ -89,20 +95,27 @@ class BottomNavigationComponent(
         NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemMutableList.forEachIndexed { index, item ->
                 NavigationBarItem(
+                    selected = isIndex(index = index),
+                    onClick = {
+                        bottomNavigationComponentCallback?.setPosition(index = index)
+                    },
+                    icon = {
+                        IconItem(icon = item.icon)
+                    },
+                    label = {
+                        LabelItem(
+                            label = item.label,
+                            isIndex = isIndex(index = index),
+                        )
+                    },
                     colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                    selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-
-                ), selected = isIndex(index = index), icon = {
-                    IconItem(icon = item.icon)
-                }, label = {
-                    LabelItem(label = item.label, isIndex = isIndex(index = index))
-                }, onClick = {
-                    bottomNavigationComponentCallback?.setPosition(index = index)
-                })
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
+                )
             }
         }
 
@@ -111,20 +124,27 @@ class BottomNavigationComponent(
         NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemMutableList.forEachIndexed { index, item ->
                 NavigationRailItem(
+                    selected = isIndex(index = index),
+                    onClick = {
+                        bottomNavigationComponentCallback?.setPosition(index = index)
+                    },
+                    icon = {
+                        IconItem(icon = item.icon)
+                    },
+                    label = {
+                        LabelItem(
+                            label = item.label,
+                            isIndex = isIndex(index = index),
+                        )
+                    },
                     colors = NavigationRailItemDefaults.colors(
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                    selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-
-                ), selected = isIndex(index = index), icon = {
-                    IconItem(icon = item.icon)
-                }, label = {
-                    LabelItem(label = item.label, isIndex = isIndex(index = index))
-                }, onClick = {
-                    bottomNavigationComponentCallback?.setPosition(index = index)
-                })
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
+                )
             }
         }
 
@@ -134,12 +154,13 @@ class BottomNavigationComponent(
 
     @Composable
     private fun LabelItem(label: String, isIndex: Boolean) = Text(
-        text = label, style = if (isIndex) {
+        text = label,
+        style = if (isIndex) {
             ItemSelectBottomNavigationComponent
         } else {
             ItemDeselectedBottomNavigationComponent
-        }
+        },
     )
 
-    private fun isIndex(index: Int) = position == index
+    private fun isIndex(index: Int): Boolean = position == index
 }
