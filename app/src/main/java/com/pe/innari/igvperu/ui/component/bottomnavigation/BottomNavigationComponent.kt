@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNavigationComponentCallback
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottonNavigation
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -26,6 +27,8 @@ class BottomNavigationComponent(
     private val itemMutableList: MutableList<ItemBottomNavigation>,
     private val position: Int
 ) : ComponentAmbient() {
+
+    private var bottomNavigationComponentCallback: BottomNavigationComponentCallback? = null
 
     @Composable
     override fun OnCreate(view: @Composable (() -> Unit)) {
@@ -62,6 +65,16 @@ class BottomNavigationComponent(
         }
     }
 
+    fun setOnclick(itemPosition: (position: Int) -> Unit) {
+        if (bottomNavigationComponentCallback == null) {
+            bottomNavigationComponentCallback = object : BottomNavigationComponentCallback {
+                override fun setPosition(index: Int) {
+                    itemPosition(index)
+                }
+            }
+        }
+    }
+
     @Composable
     private fun BarNavigation() = NavigationBar {
         itemMutableList.forEachIndexed { index, item ->
@@ -69,7 +82,9 @@ class BottomNavigationComponent(
                 IconItem(icon = item.icon)
             }, label = {
                 LabelItem(label = item.label)
-            }, onClick = {})
+            }, onClick = {
+                bottomNavigationComponentCallback?.setPosition(index = index)
+            })
         }
     }
 
@@ -80,7 +95,9 @@ class BottomNavigationComponent(
                 IconItem(icon = item.icon)
             }, label = {
                 LabelItem(label = item.label)
-            }, onClick = {})
+            }, onClick = {
+                bottomNavigationComponentCallback?.setPosition(index = index)
+            })
         }
     }
 
