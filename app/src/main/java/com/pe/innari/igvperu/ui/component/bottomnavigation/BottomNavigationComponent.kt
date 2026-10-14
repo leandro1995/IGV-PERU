@@ -23,7 +23,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen1
 
 class BottomNavigationComponent(
     private val typeBottonNavigation: TypeBottonNavigation,
-    private val itemMutableList: MutableList<ItemBottomNavigation>
+    private val itemMutableList: MutableList<ItemBottomNavigation>,
+    private val position: Int
 ) : ComponentAmbient() {
 
     @Composable
@@ -64,7 +65,7 @@ class BottomNavigationComponent(
     @Composable
     private fun BarNavigation() = NavigationBar {
         itemMutableList.forEachIndexed { index, item ->
-            NavigationBarItem(selected = true, icon = {
+            NavigationBarItem(selected = isIndex(index = index), icon = {
                 IconItem(icon = item.icon)
             }, label = {
                 LabelItem(label = item.label)
@@ -75,7 +76,7 @@ class BottomNavigationComponent(
     @Composable
     private fun RailNavigation() = NavigationRail {
         itemMutableList.forEachIndexed { index, item ->
-            NavigationRailItem(selected = true, icon = {
+            NavigationRailItem(selected = isIndex(index = index), icon = {
                 IconItem(icon = item.icon)
             }, label = {
                 LabelItem(label = item.label)
@@ -89,4 +90,6 @@ class BottomNavigationComponent(
 
     @Composable
     private fun LabelItem(label: String) = Text(label)
+
+    private fun isIndex(index: Int) = position == index
 }
