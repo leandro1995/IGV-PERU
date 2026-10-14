@@ -1,3 +1,7 @@
 package com.pe.innari.igvperu.gallery.bottomnavigation.status
 
-class BottomNavigationStatus
+import androidx.compose.runtime.MutableIntState
+
+class BottomNavigationStatus(
+    val position: MutableIntState
+)
