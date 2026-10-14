@@ -8,7 +8,7 @@ import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.bottomnavigation.status.BottomNavigationStatus
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
-import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottonNavigation
+import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -23,36 +23,36 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
 
     @Composable
     override fun View() {
-        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.BAR_NAVIGATION) {
+        BottomNavigation(typeBottomNavigation = TypeBottomNavigation.BAR_NAVIGATION) {
             Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
     override fun PhoneLandscape() {
-        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
+        BottomNavigation(typeBottomNavigation = TypeBottomNavigation.RAIL_NAVIGATION) {
             Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
     override fun TabletLandscape() {
-        BottomNavigation(typeBottonNavigation = TypeBottonNavigation.RAIL_NAVIGATION) {
+        BottomNavigation(typeBottomNavigation = TypeBottomNavigation.RAIL_NAVIGATION) {
             Text(text = "Hello BottomNavigation!")
         }
     }
 
     @Composable
     private fun BottomNavigation(
-        typeBottonNavigation: TypeBottonNavigation,
+        typeBottomNavigation: TypeBottomNavigation,
         content: @Composable () -> Unit,
     ) {
         BottomNavigationComponent(
-            typeBottonNavigation = typeBottonNavigation,
-            itemMutableList = itemMutableList(),
+            typeBottomNavigation = typeBottomNavigation,
+            itemList = itemList(),
             position = mutableState?.position?.intValue.orEmpty(),
         ).apply {
-            setOnclick { position ->
+            setOnClick { position ->
                 mutableState?.position?.intValue = position
             }
         }.OnCreate {
@@ -60,7 +60,7 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
         }
     }
 
-    private fun itemMutableList() = mutableListOf(
+    private fun itemList() = listOf(
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 1"),
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 2"),
         ItemBottomNavigation(icon = android.R.drawable.star_on, label = "Item 3"),
