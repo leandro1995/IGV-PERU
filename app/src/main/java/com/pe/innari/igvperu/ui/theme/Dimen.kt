@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.sp
  * Definiciones de dimensiones estándar (en `dp`) para paddings, márgenes y tamaños de elementos visuales.
  */
 val Dimen1 = 1.dp
+val Dimen4 = 4.dp
 val Dimen8 = 8.dp
 val Dimen14 = 14.dp
 val Dimen18 = 18.dp
