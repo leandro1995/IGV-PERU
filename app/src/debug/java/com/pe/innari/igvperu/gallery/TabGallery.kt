@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.pe.innari.igvperu.ui.component.tab.TabComponent
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.view.ViewAmbient
@@ -17,7 +18,9 @@ class TabGallery : ViewAmbient<Any>() {
     override fun View() {
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
-                TabComponent(itemList = itemList()).OnCreate()
+                Column(modifier = Modifier.padding(16.dp)) {
+                    TabComponent(itemList = itemList(), position = 0).OnCreate()
+                }
             }
         }
     }
