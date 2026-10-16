@@ -24,6 +24,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen4
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
+import com.pe.innari.igvperu.ui.theme.ItemDeselectedTabComponent
+import com.pe.innari.igvperu.ui.theme.ItemSelectTabComponent
 
 class TabComponent(private val itemList: MutableList<ItemTab>, private val position: Int) :
     ComponentAmbient() {
@@ -64,7 +66,11 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
                         contentDescription = null,
                         tint = tintColor(index = index)
                     )
-                    Text(text = item.label, color = tintColor(index = index))
+                    Text(
+                        text = item.label,
+                        color = tintColor(index = index),
+                        style = textStyle(index = index)
+                    )
                 }
             }
         }
@@ -75,5 +81,12 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    @Composable
+    private fun textStyle(index: Int) = if (index == position) {
+        ItemSelectTabComponent
+    } else {
+        ItemDeselectedTabComponent
     }
 }
