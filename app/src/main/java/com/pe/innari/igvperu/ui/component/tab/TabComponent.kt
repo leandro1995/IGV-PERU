@@ -67,11 +67,7 @@ class TabComponent(
                         .weight(1f)
                         .fillMaxHeight()
                         .background(
-                            color = if (isSelected) {
-                                MaterialTheme.colorScheme.primaryContainer
-                            } else {
-                                MaterialTheme.colorScheme.surfaceContainer
-                            },
+                            color = backgroundColor(index = index),
                             shape = RoundedCornerShape(Dimen14),
                         )
                         .clickable(
@@ -111,6 +107,13 @@ class TabComponent(
         if (tabComponentCallback == null) {
             tabComponentCallback = TabComponentCallback(itemPosition)
         }
+    }
+
+    @Composable
+    private fun backgroundColor(index: Int) = if (isItemSelected(index = index)) {
+        MaterialTheme.colorScheme.primaryContainer
+    } else {
+        MaterialTheme.colorScheme.surfaceContainer
     }
 
     @Composable
