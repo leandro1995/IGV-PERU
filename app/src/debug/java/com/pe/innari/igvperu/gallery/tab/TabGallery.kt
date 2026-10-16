@@ -29,9 +29,10 @@ class TabGallery : ViewAmbient<TabStatus>() {
             Column(modifier = Modifier.padding(paddingValues)) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     TabComponent(
-                        itemList = itemList(), position = mutableState?.position?.intValue.orEmpty()
+                        itemList = itemList(),
+                        position = mutableState?.position?.intValue.orEmpty(),
                     ).apply {
-                        setOnclick { position ->
+                        setOnClick { position ->
                             mutableState?.position?.intValue = position
                         }
                     }.OnCreate()
@@ -40,9 +41,9 @@ class TabGallery : ViewAmbient<TabStatus>() {
         }
     }
 
-    private fun itemList() = mutableListOf(
+    private fun itemList() = listOf(
         ItemTab(icon = android.R.drawable.star_on, label = "Tab 1"),
-        ItemTab(icon = android.R.drawable.star_on, label = "Tab 2")
+        ItemTab(icon = android.R.drawable.star_on, label = "Tab 2"),
     )
 
     @AdaptivePreview
