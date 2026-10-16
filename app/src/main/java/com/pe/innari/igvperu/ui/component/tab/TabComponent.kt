@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,12 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
-import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallBack
+import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallback
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen4
-import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
 import com.pe.innari.igvperu.ui.theme.ItemDeselectedTabComponent
@@ -36,13 +35,15 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectTabComponent
  *
  * Permite seleccionar una pestaña dentro de una lista de elementos ([ItemTab]) con estilo e ícono personalizados.
  *
- * @param itemList Lista mutable de pestañas ([ItemTab]) a mostrar.
+ * @param itemList Lista de pestañas ([ItemTab]) a mostrar.
  * @param position Índice de la pestaña actualmente seleccionada.
  */
-class TabComponent(private val itemList: MutableList<ItemTab>, private val position: Int) :
-    ComponentAmbient() {
+class TabComponent(
+    private val itemList: List<ItemTab>,
+    private val position: Int,
+) : ComponentAmbient() {
 
-    private var tabComponentCallBack: TabComponentCallBack? = null
+    private var tabComponentCallback: TabComponentCallback? = null
 
     /**
      * Renderiza la interfaz de usuario composable correspondiente a las pestañas.
@@ -55,32 +56,33 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
                 .height(Dimen56)
                 .background(
                     color = MaterialTheme.colorScheme.surfaceContainer,
-                    shape = RoundedCornerShape(Dimen14)
+                    shape = RoundedCornerShape(Dimen14),
                 )
-                .padding(Dimen4)
+                .padding(Dimen4),
         ) {
             itemList.forEachIndexed { index, item ->
+                val isSelected = isItemSelected(index = index)
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .height(Dimen48)
+                        .weight(1f)
+                        .fillMaxHeight()
                         .background(
-                            color = if (index == position) {
+                            color = if (isSelected) {
                                 MaterialTheme.colorScheme.primaryContainer
                             } else {
                                 MaterialTheme.colorScheme.surfaceContainer
-                            }, shape = RoundedCornerShape(Dimen14)
+                            },
+                            shape = RoundedCornerShape(Dimen14),
                         )
-                        .weight(1F)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = {
-                                tabComponentCallBack?.setPosition(index = index)
-                            }
+                                tabComponentCallback?.setPosition(index = index)
+                            },
                         ),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     Icon(
                         modifier = Modifier
@@ -88,12 +90,12 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
                             .padding(end = Dimen8),
                         painter = painterResource(item.icon),
                         contentDescription = null,
-                        tint = tintColor(index = index)
+                        tint = tintColor(index = index),
                     )
                     Text(
                         text = item.label,
                         color = tintColor(index = index),
-                        style = textStyle(index = index)
+                        style = textStyle(index = index),
                     )
                 }
             }
@@ -105,27 +107,25 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
      *
      * @param itemPosition Función lambda que recibe la posición (índice) de la pestaña seleccionada.
      */
-    fun setOnclick(itemPosition: (position: Int) -> Unit) {
-        if (tabComponentCallBack == null) {
-            tabComponentCallBack = object : TabComponentCallBack {
-                override fun setPosition(index: Int) {
-                    itemPosition(index)
-                }
-            }
+    fun setOnClick(itemPosition: (position: Int) -> Unit) {
+        if (tabComponentCallback == null) {
+            tabComponentCallback = TabComponentCallback(itemPosition)
         }
     }
 
     @Composable
-    private fun tintColor(index: Int) = if (index == position) {
+    private fun tintColor(index: Int) = if (isItemSelected(index = index)) {
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
     }
 
     @Composable
-    private fun textStyle(index: Int) = if (index == position) {
+    private fun textStyle(index: Int) = if (isItemSelected(index = index)) {
         ItemSelectTabComponent
     } else {
         ItemDeselectedTabComponent
     }
+
+    private fun isItemSelected(index: Int): Boolean = position == index
 }
