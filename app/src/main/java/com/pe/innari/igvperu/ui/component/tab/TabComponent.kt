@@ -31,11 +31,22 @@ import com.pe.innari.igvperu.ui.theme.Dimen8
 import com.pe.innari.igvperu.ui.theme.ItemDeselectedTabComponent
 import com.pe.innari.igvperu.ui.theme.ItemSelectTabComponent
 
+/**
+ * Componente visual de pestañas (Tabs) que hereda de [ComponentAmbient].
+ *
+ * Permite seleccionar una pestaña dentro de una lista de elementos ([ItemTab]) con estilo e ícono personalizados.
+ *
+ * @param itemList Lista mutable de pestañas ([ItemTab]) a mostrar.
+ * @param position Índice de la pestaña actualmente seleccionada.
+ */
 class TabComponent(private val itemList: MutableList<ItemTab>, private val position: Int) :
     ComponentAmbient() {
 
     private var tabComponentCallBack: TabComponentCallBack? = null
 
+    /**
+     * Renderiza la interfaz de usuario composable correspondiente a las pestañas.
+     */
     @Composable
     override fun OnCreate() {
         Row(
@@ -89,6 +100,11 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
         }
     }
 
+    /**
+     * Configura la acción o evento que se ejecutará al hacer clic en una pestaña.
+     *
+     * @param itemPosition Función lambda que recibe la posición (índice) de la pestaña seleccionada.
+     */
     fun setOnclick(itemPosition: (position: Int) -> Unit) {
         if (tabComponentCallBack == null) {
             tabComponentCallBack = object : TabComponentCallBack {
