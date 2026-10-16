@@ -48,3 +48,15 @@ val ItemSelectBottomNavigationComponent = TextStyle(
 val ItemDeselectedBottomNavigationComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
 )
+
+/**
+ * Estilo de texto para los elementos seleccionados dentro de [com.pe.innari.igvperu.ui.component.tab.TabComponent].
+ */
+val ItemSelectTabComponent =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
+
+/**
+ * Estilo de texto para los elementos no seleccionados dentro de [com.pe.innari.igvperu.ui.component.tab.TabComponent].
+ */
+val ItemDeselectedTabComponent =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
