@@ -1,6 +1,8 @@
 package com.pe.innari.igvperu.ui.component.tab
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,10 +15,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallBack
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen18
@@ -29,6 +33,8 @@ import com.pe.innari.igvperu.ui.theme.ItemSelectTabComponent
 
 class TabComponent(private val itemList: MutableList<ItemTab>, private val position: Int) :
     ComponentAmbient() {
+
+    private var tabComponentCallBack: TabComponentCallBack? = null
 
     @Composable
     override fun OnCreate() {
@@ -54,7 +60,14 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
                                 MaterialTheme.colorScheme.surfaceContainer
                             }, shape = RoundedCornerShape(Dimen14)
                         )
-                        .weight(1F),
+                        .weight(1F)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                tabComponentCallBack?.setPosition(index = index)
+                            }
+                        ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -71,6 +84,16 @@ class TabComponent(private val itemList: MutableList<ItemTab>, private val posit
                         color = tintColor(index = index),
                         style = textStyle(index = index)
                     )
+                }
+            }
+        }
+    }
+
+    fun setOnclick(itemPosition: (position: Int) -> Unit) {
+        if (tabComponentCallBack == null) {
+            tabComponentCallBack = object : TabComponentCallBack {
+                override fun setPosition(index: Int) {
+                    itemPosition(index)
                 }
             }
         }
