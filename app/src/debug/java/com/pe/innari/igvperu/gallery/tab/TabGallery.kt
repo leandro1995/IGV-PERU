@@ -1,6 +1,5 @@
 package com.pe.innari.igvperu.gallery.tab
 
-import android.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -27,8 +26,8 @@ class TabGallery : ViewAmbient<Any>() {
     }
 
     private fun itemList() = mutableListOf(
-        ItemTab(icon = R.drawable.star_on, label = "Tab 1"),
-        ItemTab(icon = R.drawable.star_on, label = "Tab 2")
+        ItemTab(icon = android.R.drawable.star_on, label = "Tab 1"),
+        ItemTab(icon = android.R.drawable.star_on, label = "Tab 2")
     )
 
     @AdaptivePreview
