@@ -48,3 +48,9 @@ val ItemSelectBottomNavigationComponent = TextStyle(
 val ItemDeselectedBottomNavigationComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
 )
+
+val ItemSelectTabComponent =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
+
+val ItemDeselectedTabComponent =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
