@@ -1,3 +1,9 @@
 package com.pe.innari.igvperu.gallery.tab.status
 
-class TabStatus
+import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.Stable
+
+@Stable
+class TabStatus(
+    val position: MutableIntState
+)
