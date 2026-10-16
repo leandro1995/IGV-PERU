@@ -62,12 +62,13 @@ class TabComponent(
         ) {
             itemList.forEachIndexed { index, item ->
                 val isSelected = isItemSelected(index = index)
+
                 Row(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
                         .background(
-                            color = backgroundColor(index = index),
+                            color = backgroundColor(isSelected = isSelected),
                             shape = RoundedCornerShape(Dimen14),
                         )
                         .clickable(
@@ -86,12 +87,12 @@ class TabComponent(
                             .padding(end = Dimen8),
                         painter = painterResource(item.icon),
                         contentDescription = null,
-                        tint = tintColor(index = index),
+                        tint = tintColor(isSelected = isSelected),
                     )
                     Text(
                         text = item.label,
-                        color = tintColor(index = index),
-                        style = textStyle(index = index),
+                        color = tintColor(isSelected = isSelected),
+                        style = textStyle(isSelected = isSelected),
                     )
                 }
             }
@@ -110,21 +111,21 @@ class TabComponent(
     }
 
     @Composable
-    private fun backgroundColor(index: Int) = if (isItemSelected(index = index)) {
+    private fun backgroundColor(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer
     } else {
         MaterialTheme.colorScheme.surfaceContainer
     }
 
     @Composable
-    private fun tintColor(index: Int) = if (isItemSelected(index = index)) {
+    private fun tintColor(isSelected: Boolean) = if (isSelected) {
         MaterialTheme.colorScheme.onPrimaryContainer
     } else {
         MaterialTheme.colorScheme.onSurfaceVariant
     }
 
     @Composable
-    private fun textStyle(index: Int) = if (isItemSelected(index = index)) {
+    private fun textStyle(isSelected: Boolean) = if (isSelected) {
         ItemSelectTabComponent
     } else {
         ItemDeselectedTabComponent
