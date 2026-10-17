@@ -12,9 +12,8 @@ class DecimalEditTextComponentUtil : InputTransformation {
         val parts = value.split(".")
 
         val isValid =
-            parts.size <= 2 && value.count { it in '0'..'9' } <= MAX_DIGITS && parts.all { part ->
-                part.all { it in '0'..'9' }
-            } && (parts.size == 1 || parts[1].length <= MAX_DECIMAL)
+            parts.size <= 2 && parts[0].length <= MAX_DIGITS && parts[0].all { it in '0'..'9' }
+                    && (parts.size == 1 || (parts[1].length <= MAX_DECIMAL && parts[1].all { it in '0'..'9' }))
 
         if (!isValid) {
             revertAllChanges()
