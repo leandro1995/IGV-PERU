@@ -28,12 +28,18 @@ import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponent
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen15
+import com.pe.innari.igvperu.ui.theme.Dimen2
 import com.pe.innari.igvperu.ui.theme.Dimen50
 import com.pe.innari.igvperu.ui.theme.Dimen68
+import com.pe.innari.igvperu.ui.theme.PrefixEditTextComponent
+import com.pe.innari.igvperu.ui.theme.SuffixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 
-class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.INTEGER) :
-    ComponentAmbient() {
+class EditTextComponent(
+    private val typeEditText: TypeEditText = TypeEditText.INTEGER,
+    private var prefixLabel: String,
+    private var suffixLabel: String = ""
+) : ComponentAmbient() {
 
     @Composable
     override fun OnCreate() {
@@ -56,12 +62,24 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(modifier = Modifier.padding(end = Dimen50), text = "Monto")
-                    VerticalDivider(
-                        thickness = Dimen1,
-                        color = dividerColor(isFocus = interactionSource.collectIsFocusedAsState().value)
+                    Text(
+                        modifier = Modifier.padding(end = Dimen50),
+                        text = prefixLabel,
+                        style = PrefixEditTextComponent,
+                        color = prefixTextColor(isFocus = interactionSource.collectIsFocusedAsState().value)
                     )
-                    Text(modifier = Modifier.padding(start = Dimen15), text = "S/")
+                    VerticalDivider(
+                        thickness = thicknessDivider(isFocus = interactionSource.collectIsFocusedAsState().value),
+                        color = colorDivider(isFocus = interactionSource.collectIsFocusedAsState().value)
+                    )
+                    if (suffixLabel.isNotEmpty()) {
+                        Text(
+                            modifier = Modifier.padding(start = Dimen15),
+                            text = suffixLabel,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            style = SuffixEditTextComponent
+                        )
+                    }
                 }
             })
     }
@@ -97,9 +115,22 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
     }
 
     @Composable
-    private fun dividerColor(isFocus: Boolean) = if (isFocus) {
+    private fun colorDivider(isFocus: Boolean) = if (isFocus) {
         MaterialTheme.colorScheme.primary
     } else {
         MaterialTheme.colorScheme.outlineVariant
+    }
+
+    @Composable
+    private fun prefixTextColor(isFocus: Boolean) = if (isFocus) {
+        MaterialTheme.colorScheme.primary
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    private fun thicknessDivider(isFocus: Boolean) = if (isFocus) {
+        Dimen2
+    } else {
+        Dimen1
     }
 }
