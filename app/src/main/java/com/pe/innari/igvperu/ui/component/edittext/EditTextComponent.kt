@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
+import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
+import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen68
 import com.pe.innari.igvperu.ui.theme.OutlinedTextComponent
@@ -32,7 +34,8 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
             lineLimits = TextFieldLineLimits.SingleLine,
             textStyle = OutlinedTextComponent,
             colors = colors(),
-            keyboardOptions = keyboardType()
+            keyboardOptions = keyboardType(),
+            inputTransformation = transformation()
         )
     }
 
@@ -59,4 +62,10 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
             KeyboardType.Decimal
         }
     )
+
+    private fun transformation() = if (typeEditText == TypeEditText.INTEGER) {
+        IntegerEditTextComponentUtil()
+    } else {
+        DecimalEditTextComponentUtil()
+    }
 }
