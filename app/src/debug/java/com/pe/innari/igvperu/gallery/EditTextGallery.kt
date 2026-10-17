@@ -16,7 +16,7 @@ class EditTextGallery : ViewAmbient<Any>() {
     override fun View() {
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
-                EditTextComponent().OnCreate()
+                EditTextComponent(prefixLabel = "Monto").OnCreate()
             }
         }
     }
