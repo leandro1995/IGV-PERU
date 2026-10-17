@@ -65,3 +65,11 @@ val ItemDeselectedTabComponent =
 val ValueEditTextComponent = TextStyle(
     fontSize = Text20, fontFamily = FontFamily(Font(R.font.medium)), textAlign = TextAlign.End
 )
+
+val PrefixEditTextComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
+)
+
+val SuffixEditTextComponent = TextStyle(
+    fontSize = Text16, fontFamily = FontFamily(Font(R.font.medium))
+)
