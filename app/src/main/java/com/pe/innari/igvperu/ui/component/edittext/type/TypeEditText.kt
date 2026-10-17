@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.component.edittext.type
 
-enum class TypeEditText
+enum class TypeEditText {
+    INTEGER, DECIMAL
+}
