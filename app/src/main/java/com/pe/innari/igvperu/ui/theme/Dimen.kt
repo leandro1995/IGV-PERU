@@ -15,6 +15,7 @@ val Dimen20 = 20.dp
 val Dimen24 = 24.dp
 val Dimen48 = 48.dp
 val Dimen56 = 56.dp
+val Dimen68 = 68.dp
 val Dimen76 = 76.dp
 
 /**
