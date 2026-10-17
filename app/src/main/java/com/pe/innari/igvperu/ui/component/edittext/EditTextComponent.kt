@@ -10,11 +10,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen68
+import com.pe.innari.igvperu.ui.theme.OutlinedTextComponent
 
 class EditTextComponent : ComponentAmbient() {
 
@@ -27,8 +26,8 @@ class EditTextComponent : ComponentAmbient() {
             state = rememberTextFieldState(),
             shape = RoundedCornerShape(Dimen14),
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = TextStyle(textAlign = TextAlign.End),
-            colors = colors()
+            textStyle = OutlinedTextComponent,
+            colors = colors(),
         )
     }
 
