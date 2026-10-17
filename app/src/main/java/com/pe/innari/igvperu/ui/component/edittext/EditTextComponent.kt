@@ -1,7 +1,12 @@
 package com.pe.innari.igvperu.ui.component.edittext
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -9,22 +14,31 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
+import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen14
+import com.pe.innari.igvperu.ui.theme.Dimen15
+import com.pe.innari.igvperu.ui.theme.Dimen50
 import com.pe.innari.igvperu.ui.theme.Dimen68
-import com.pe.innari.igvperu.ui.theme.OutlinedTextComponent
+import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 
 class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.INTEGER) :
     ComponentAmbient() {
 
     @Composable
     override fun OnCreate() {
+        val interactionSource = remember { MutableInteractionSource() }
+
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -32,11 +46,24 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
             state = rememberTextFieldState(),
             shape = RoundedCornerShape(Dimen14),
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = OutlinedTextComponent,
+            textStyle = ValueEditTextComponent,
             colors = colors(),
             keyboardOptions = keyboardType(),
-            inputTransformation = transformation()
-        )
+            inputTransformation = transformation(),
+            interactionSource = interactionSource,
+            prefix = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(modifier = Modifier.padding(end = Dimen50), text = "Monto")
+                    VerticalDivider(
+                        thickness = Dimen1,
+                        color = dividerColor(isFocus = interactionSource.collectIsFocusedAsState().value)
+                    )
+                    Text(modifier = Modifier.padding(start = Dimen15), text = "S/")
+                }
+            })
     }
 
     @Composable
@@ -67,5 +94,12 @@ class EditTextComponent(private val typeEditText: TypeEditText = TypeEditText.IN
         IntegerEditTextComponentUtil()
     } else {
         DecimalEditTextComponentUtil()
+    }
+
+    @Composable
+    private fun dividerColor(isFocus: Boolean) = if (isFocus) {
+        MaterialTheme.colorScheme.primary
+    } else {
+        MaterialTheme.colorScheme.outlineVariant
     }
 }
