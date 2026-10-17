@@ -62,6 +62,6 @@ val ItemSelectTabComponent =
 val ItemDeselectedTabComponent =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
 
-val OutlinedTextComponent = TextStyle(
+val ValueEditTextComponent = TextStyle(
     fontSize = Text20, fontFamily = FontFamily(Font(R.font.medium)), textAlign = TextAlign.End
 )
