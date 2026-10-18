@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -36,6 +37,7 @@ import com.pe.innari.igvperu.ui.theme.SuffixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 
 class EditTextComponent(
+    private val state: TextFieldState,
     private val typeEditText: TypeEditText = TypeEditText.INTEGER,
     private var prefixLabel: String,
     private var suffixLeftLabel: String = "",
@@ -52,7 +54,7 @@ class EditTextComponent(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen68),
-            state = rememberTextFieldState(),
+            state = state,
             shape = RoundedCornerShape(Dimen14),
             lineLimits = TextFieldLineLimits.SingleLine,
             textStyle = ValueEditTextComponent,
