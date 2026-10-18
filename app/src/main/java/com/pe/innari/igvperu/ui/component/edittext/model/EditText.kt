@@ -23,7 +23,5 @@ class EditText(
     val typeEditText: TypeEditText = TypeEditText.INTEGER,
     val suffixLeftLabel: String = "",
     val suffixRight: @Composable (() -> Unit)? = null,
-    val isError: Boolean = false,
     val isDeactivate: Boolean = true,
-    val errorLabel: String = "",
 )
