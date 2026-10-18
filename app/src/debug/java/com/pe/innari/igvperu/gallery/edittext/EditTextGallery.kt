@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.edittext.status.EditTextStatus
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
+import com.pe.innari.igvperu.ui.component.edittext.config.EditTextConfig
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
@@ -44,55 +45,71 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                     EditTextComponent(
                         state = mutableState?.valueInteger.orEmpty(),
                         prefixLabel = "Monto",
-                        suffixLeftLabel = "S/"
+                        config = EditTextConfig(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueInteger.orEmpty(),
                         prefixLabel = "Monto",
-                        suffixLeftLabel = "S/",
-                        isError = true,
-                        errorLabel = "Error"
+                        config = EditTextConfig(
+                            suffixLeftLabel = "S/",
+                            isError = true,
+                            errorLabel = "Error"
+                        )
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueInteger.orEmpty(),
                         prefixLabel = "Monto",
-                        suffixLeftLabel = "S/",
-                        isDeactivate = false
+                        config = EditTextConfig(
+                            suffixLeftLabel = "S/",
+                            isDeactivate = false
+                        )
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueInteger.orEmpty(),
                         prefixLabel = "Monto",
-                        suffixLeftLabel = "S/",
-                        suffixRight = { Text(text = "AUTO") }).OnCreate()
+                        config = EditTextConfig(
+                            suffixLeftLabel = "S/",
+                            suffixRight = { Text(text = "AUTO") }
+                        )
+                    ).OnCreate()
 
                     Text("DECIMALES:")
                     EditTextComponent(
                         state = mutableState?.valueDecimal.orEmpty(),
                         prefixLabel = "Monto",
-                        typeEditText = TypeEditText.DECIMAL,
-                        suffixLeftLabel = "S/"
+                        config = EditTextConfig(
+                            typeEditText = TypeEditText.DECIMAL,
+                            suffixLeftLabel = "S/"
+                        )
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueDecimal.orEmpty(),
                         prefixLabel = "Monto",
-                        typeEditText = TypeEditText.DECIMAL,
-                        suffixLeftLabel = "S/",
-                        isError = true,
-                        errorLabel = "Error"
+                        config = EditTextConfig(
+                            typeEditText = TypeEditText.DECIMAL,
+                            suffixLeftLabel = "S/",
+                            isError = true,
+                            errorLabel = "Error"
+                        )
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueDecimal.orEmpty(),
                         prefixLabel = "Monto",
-                        typeEditText = TypeEditText.DECIMAL,
-                        suffixLeftLabel = "S/",
-                        isDeactivate = false
+                        config = EditTextConfig(
+                            typeEditText = TypeEditText.DECIMAL,
+                            suffixLeftLabel = "S/",
+                            isDeactivate = false
+                        )
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueDecimal.orEmpty(),
                         prefixLabel = "Monto",
-                        typeEditText = TypeEditText.DECIMAL,
-                        suffixLeftLabel = "S/",
-                        suffixRight = { Text(text = "AUTO") }).OnCreate()
+                        config = EditTextConfig(
+                            typeEditText = TypeEditText.DECIMAL,
+                            suffixLeftLabel = "S/",
+                            suffixRight = { Text(text = "AUTO") }
+                        )
+                    ).OnCreate()
                 }
             }
         }
