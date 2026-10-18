@@ -39,7 +39,8 @@ class EditTextComponent(
     private val typeEditText: TypeEditText = TypeEditText.INTEGER,
     private var prefixLabel: String,
     private var suffixLeftLabel: String = "",
-    private var suffixRight: @Composable (() -> Unit)? = null
+    private var suffixRight: @Composable (() -> Unit)? = null,
+    private var isError: Boolean = false
 ) : ComponentAmbient() {
 
     @Composable
@@ -83,7 +84,8 @@ class EditTextComponent(
                     }
                 }
             },
-            suffix = suffixRight
+            suffix = suffixRight,
+            isError = isError
         )
     }
 
@@ -118,17 +120,33 @@ class EditTextComponent(
     }
 
     @Composable
-    private fun colorDivider(isFocus: Boolean) = if (isFocus) {
-        MaterialTheme.colorScheme.primary
-    } else {
-        MaterialTheme.colorScheme.outlineVariant
+    private fun colorDivider(isFocus: Boolean) = when {
+        isError -> {
+            MaterialTheme.colorScheme.error
+        }
+
+        isFocus -> {
+            MaterialTheme.colorScheme.primary
+        }
+
+        else -> {
+            MaterialTheme.colorScheme.outlineVariant
+        }
     }
 
     @Composable
-    private fun prefixTextColor(isFocus: Boolean) = if (isFocus) {
-        MaterialTheme.colorScheme.primary
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
+    private fun prefixTextColor(isFocus: Boolean) = when {
+        isError -> {
+            MaterialTheme.colorScheme.error
+        }
+
+        isFocus -> {
+            MaterialTheme.colorScheme.primary
+        }
+
+        else -> {
+            MaterialTheme.colorScheme.onSurfaceVariant
+        }
     }
 
     private fun thicknessDivider(isFocus: Boolean) = if (isFocus) {
