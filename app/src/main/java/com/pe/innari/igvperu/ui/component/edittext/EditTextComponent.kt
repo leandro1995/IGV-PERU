@@ -81,31 +81,7 @@ class EditTextComponent(
             keyboardOptions = keyboardType(),
             inputTransformation = transformation(),
             interactionSource = interactionSource,
-            prefix = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = Dimen50),
-                        text = prefixLabel,
-                        style = PrefixEditTextComponent,
-                        color = prefixTextColor(isFocused = isFocused),
-                    )
-                    VerticalDivider(
-                        thickness = thicknessDivider(isFocused = isFocused),
-                        color = colorDivider(isFocused = isFocused),
-                    )
-                    if (suffixLeftLabel.isNotEmpty()) {
-                        Text(
-                            modifier = Modifier.padding(start = Dimen15),
-                            text = suffixLeftLabel,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = SuffixEditTextComponent,
-                        )
-                    }
-                }
-            },
+            prefix = prefix(isFocused = isFocused),
             suffix = suffixRight,
             isError = isError,
             enabled = isDeactivate,
@@ -127,6 +103,33 @@ class EditTextComponent(
         errorContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
     )
+
+
+    private fun prefix(isFocused: Boolean) = @Composable {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                modifier = Modifier.padding(end = Dimen50),
+                text = prefixLabel,
+                style = PrefixEditTextComponent,
+                color = prefixTextColor(isFocused = isFocused),
+            )
+            VerticalDivider(
+                thickness = thicknessDivider(isFocused = isFocused),
+                color = colorDivider(isFocused = isFocused),
+            )
+            if (suffixLeftLabel.isNotEmpty()) {
+                Text(
+                    modifier = Modifier.padding(start = Dimen15),
+                    text = suffixLeftLabel,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = SuffixEditTextComponent,
+                )
+            }
+        }
+    }
 
     private fun keyboardType() = KeyboardOptions(
         keyboardType = if (typeEditText == TypeEditText.INTEGER) {
