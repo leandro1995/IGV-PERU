@@ -1,7 +1,6 @@
 package com.pe.innari.igvperu.ui.component.edittext.model
 
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 
@@ -21,7 +20,5 @@ class EditText(
     val state: TextFieldState,
     val prefixLabel: String,
     val typeEditText: TypeEditText = TypeEditText.INTEGER,
-    val suffixLeftLabel: String = "",
-    val suffixRight: @Composable (() -> Unit)? = null,
     val isDeactivate: Boolean = true,
 )
