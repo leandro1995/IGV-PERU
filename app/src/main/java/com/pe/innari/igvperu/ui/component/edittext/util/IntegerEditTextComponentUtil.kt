@@ -18,6 +18,9 @@ class IntegerEditTextComponentUtil : InputTransformation {
         }
     }
 
+    /**
+     * Constantes de configuración para la validación y transformación de números enteros.
+     */
     companion object {
         private const val MAX_DIGITS = 3
     }
