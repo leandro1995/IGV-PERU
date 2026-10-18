@@ -38,7 +38,7 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 class EditTextComponent(
     private val typeEditText: TypeEditText = TypeEditText.INTEGER,
     private var prefixLabel: String,
-    private var suffixLabel: String = ""
+    private var suffixLeftLabel: String = ""
 ) : ComponentAmbient() {
 
     @Composable
@@ -72,10 +72,10 @@ class EditTextComponent(
                         thickness = thicknessDivider(isFocus = interactionSource.collectIsFocusedAsState().value),
                         color = colorDivider(isFocus = interactionSource.collectIsFocusedAsState().value)
                     )
-                    if (suffixLabel.isNotEmpty()) {
+                    if (suffixLeftLabel.isNotEmpty()) {
                         Text(
                             modifier = Modifier.padding(start = Dimen15),
-                            text = suffixLabel,
+                            text = suffixLeftLabel,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = SuffixEditTextComponent
                         )
