@@ -18,6 +18,7 @@ import com.pe.innari.igvperu.gallery.edittext.status.EditTextStatus
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
 import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
+import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
@@ -45,33 +46,28 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                     Text("ENTEROS:")
                     EditTextComponent(
                         editText = EditText(
-                            state = mutableState?.valueInteger.orEmpty(),
-                            prefixLabel = "Monto",
-                            suffixLeftLabel = "S/",
-                        )
+                            state = mutableState?.valueInteger.orEmpty(), prefixLabel = "Monto"
+                        ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
+                    ).OnCreate()
+                    EditTextComponent(
+                        editText = EditText(
+                            state = mutableState?.valueInteger.orEmpty(), prefixLabel = "Monto"
+                        ),
+                        errorEditText = ErrorEditText(isError = true, errorLabel = "Error"),
+                        suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
                             state = mutableState?.valueInteger.orEmpty(),
                             prefixLabel = "Monto",
-                            suffixLeftLabel = "S/"
-                        ), errorEditText = ErrorEditText(isError = true, errorLabel = "Error")
-                    ).OnCreate()
-                    EditTextComponent(
-                        editText = EditText(
-                            state = mutableState?.valueInteger.orEmpty(),
-                            prefixLabel = "Monto",
-                            suffixLeftLabel = "S/",
                             isDeactivate = false,
-                        )
+                        ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
-                            state = mutableState?.valueInteger.orEmpty(),
-                            prefixLabel = "Monto",
-                            suffixLeftLabel = "S/",
-                            suffixRight = { Text(text = "AUTO") },
-                        )
+                            state = mutableState?.valueInteger.orEmpty(), prefixLabel = "Monto"
+                        ), suffixEditText = SuffixEditText(
+                            suffixLeftLabel = "S/", suffixRight = { Text(text = "AUTO") })
                     ).OnCreate()
 
                     Text("DECIMALES:")
@@ -79,35 +75,33 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL,
-                            suffixLeftLabel = "S/",
-                        )
+                            typeEditText = TypeEditText.DECIMAL
+                        ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
+                    ).OnCreate()
+                    EditTextComponent(
+                        editText = EditText(
+                            state = mutableState?.valueDecimal.orEmpty(),
+                            prefixLabel = "Monto",
+                            typeEditText = TypeEditText.DECIMAL
+                        ),
+                        errorEditText = ErrorEditText(isError = true, errorLabel = "Error"),
+                        suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
                             typeEditText = TypeEditText.DECIMAL,
-                            suffixLeftLabel = "S/"
-                        ), errorEditText = ErrorEditText(isError = true, errorLabel = "Error")
-                    ).OnCreate()
-                    EditTextComponent(
-                        editText = EditText(
-                            state = mutableState?.valueDecimal.orEmpty(),
-                            prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL,
-                            suffixLeftLabel = "S/",
                             isDeactivate = false,
-                        )
+                        ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL,
-                            suffixLeftLabel = "S/",
-                            suffixRight = { Text(text = "AUTO") },
-                        )
+                            typeEditText = TypeEditText.DECIMAL
+                        ), suffixEditText = SuffixEditText(
+                            suffixLeftLabel = "S/", suffixRight = { Text(text = "AUTO") })
                     ).OnCreate()
                 }
             }
