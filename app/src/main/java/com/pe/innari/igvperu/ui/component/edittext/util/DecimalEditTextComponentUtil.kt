@@ -24,6 +24,9 @@ class DecimalEditTextComponentUtil : InputTransformation {
         }
     }
 
+    /**
+     * Constantes de configuración para la validación y transformación de números decimales.
+     */
     companion object {
         private const val MAX_DIGITS = 10
         private const val MAX_DECIMAL = 2
