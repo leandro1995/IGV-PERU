@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -47,14 +46,10 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * secundaria, sufijo opcional en la parte derecha y soporte para restricción de formato de entrada
  * (entero o decimal).
  *
- * @param state Estado del campo de texto manejado por [TextFieldState].
- * @param prefixLabel Etiqueta de texto para el prefijo principal (ej. "Monto").
- * @param config Configuración de opciones visuales y de comportamiento definida en [EditText].
+ * @param editText Datos de configuración y estado del campo de texto provistos por la clase [EditText].
  */
 class EditTextComponent(
-    private val state: TextFieldState,
-    private val prefixLabel: String,
-    private val config: EditText = EditText(),
+    private val editText: EditText,
 ) : ComponentAmbient() {
 
     /**
@@ -70,7 +65,7 @@ class EditTextComponent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(Dimen68),
-                state = state,
+                state = editText.state,
                 shape = RoundedCornerShape(Dimen14),
                 lineLimits = TextFieldLineLimits.SingleLine,
                 textStyle = ValueEditTextComponent,
@@ -79,9 +74,9 @@ class EditTextComponent(
                 inputTransformation = transformation(),
                 interactionSource = interactionSource,
                 prefix = prefix(isFocused = isFocused),
-                suffix = config.suffixRight,
-                isError = config.isError,
-                enabled = config.isDeactivate,
+                suffix = editText.suffixRight,
+                isError = editText.isError,
+                enabled = editText.isDeactivate,
             )
             SupportingText()
         }
@@ -110,7 +105,7 @@ class EditTextComponent(
         ) {
             Text(
                 modifier = Modifier.padding(end = Dimen50),
-                text = prefixLabel,
+                text = editText.prefixLabel,
                 style = PrefixEditTextComponent,
                 color = prefixTextColor(isFocused = isFocused),
             )
@@ -118,10 +113,10 @@ class EditTextComponent(
                 thickness = thicknessDivider(isFocused = isFocused),
                 color = colorDivider(isFocused = isFocused),
             )
-            if (config.suffixLeftLabel.isNotEmpty()) {
+            if (editText.suffixLeftLabel.isNotEmpty()) {
                 Text(
                     modifier = Modifier.padding(start = Dimen15),
-                    text = config.suffixLeftLabel,
+                    text = editText.suffixLeftLabel,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = SuffixEditTextComponent,
                 )
@@ -131,12 +126,12 @@ class EditTextComponent(
 
     @Composable
     private fun SupportingText() {
-        if (config.isError) {
+        if (editText.isError) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = Dimen4, top = Dimen4, end = Dimen4),
-                text = config.errorLabel,
+                text = editText.errorLabel,
                 style = ErrorEditTextComponent,
                 color = MaterialTheme.colorScheme.error,
             )
@@ -144,14 +139,14 @@ class EditTextComponent(
     }
 
     private fun keyboardType() = KeyboardOptions(
-        keyboardType = if (config.typeEditText == TypeEditText.INTEGER) {
+        keyboardType = if (editText.typeEditText == TypeEditText.INTEGER) {
             KeyboardType.Number
         } else {
             KeyboardType.Decimal
         },
     )
 
-    private fun transformation() = if (config.typeEditText == TypeEditText.INTEGER) {
+    private fun transformation() = if (editText.typeEditText == TypeEditText.INTEGER) {
         IntegerEditTextComponentUtil()
     } else {
         DecimalEditTextComponentUtil()
@@ -159,14 +154,14 @@ class EditTextComponent(
 
     @Composable
     private fun colorDivider(isFocused: Boolean) = when {
-        config.isError -> MaterialTheme.colorScheme.error
+        editText.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.outlineVariant
     }
 
     @Composable
     private fun prefixTextColor(isFocused: Boolean) = when {
-        config.isError -> MaterialTheme.colorScheme.error
+        editText.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
