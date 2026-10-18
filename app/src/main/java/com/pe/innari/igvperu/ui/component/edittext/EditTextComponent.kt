@@ -11,13 +11,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,19 +36,38 @@ import com.pe.innari.igvperu.ui.theme.PrefixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.SuffixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 
+/**
+ * Componente visual de campo de texto estructurado (EditText) que hereda de [ComponentAmbient].
+ *
+ * Proporciona un [OutlinedTextField] con prefijo personalizable (etiqueta y divisor), moneda o unidad
+ * secundaria, sufijo opcional en la parte derecha y soporte para restricción de formato de entrada
+ * (entero o decimal).
+ *
+ * @param state Estado del campo de texto manejado por [TextFieldState].
+ * @param typeEditText Tipo de entrada permitida ([TypeEditText.INTEGER] o [TypeEditText.DECIMAL]).
+ * @param prefixLabel Etiqueta de texto para el prefijo principal (ej. "Monto").
+ * @param suffixLeftLabel Etiqueta de texto secundaria mostrada junto al prefijo (ej. "S/").
+ * @param suffixRight Composable opcional mostrado en el extremo derecho del campo (ej. ícono o texto).
+ * @param isError Indica si el campo de texto se encuentra en estado de error visual.
+ * @param isDeactivate Indica si el campo de texto está activo o deshabilitado (true para habilitado).
+ */
 class EditTextComponent(
     private val state: TextFieldState,
     private val typeEditText: TypeEditText = TypeEditText.INTEGER,
-    private var prefixLabel: String,
-    private var suffixLeftLabel: String = "",
-    private var suffixRight: @Composable (() -> Unit)? = null,
-    private var isError: Boolean = false,
-    private var isDeactivate: Boolean = true
+    private val prefixLabel: String,
+    private val suffixLeftLabel: String = "",
+    private val suffixRight: @Composable (() -> Unit)? = null,
+    private val isError: Boolean = false,
+    private val isDeactivate: Boolean = true,
 ) : ComponentAmbient() {
 
+    /**
+     * Renderiza la interfaz de usuario composable correspondiente al EditText.
+     */
     @Composable
     override fun OnCreate() {
         val interactionSource = remember { MutableInteractionSource() }
+        val isFocused by interactionSource.collectIsFocusedAsState()
 
         OutlinedTextField(
             modifier = Modifier
@@ -65,31 +84,31 @@ class EditTextComponent(
             prefix = {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     Text(
                         modifier = Modifier.padding(end = Dimen50),
                         text = prefixLabel,
                         style = PrefixEditTextComponent,
-                        color = prefixTextColor(isFocus = interactionSource.collectIsFocusedAsState().value)
+                        color = prefixTextColor(isFocused = isFocused),
                     )
                     VerticalDivider(
-                        thickness = thicknessDivider(isFocus = interactionSource.collectIsFocusedAsState().value),
-                        color = colorDivider(isFocus = interactionSource.collectIsFocusedAsState().value)
+                        thickness = thicknessDivider(isFocused = isFocused),
+                        color = colorDivider(isFocused = isFocused),
                     )
                     if (suffixLeftLabel.isNotEmpty()) {
                         Text(
                             modifier = Modifier.padding(start = Dimen15),
                             text = suffixLeftLabel,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = SuffixEditTextComponent
+                            style = SuffixEditTextComponent,
                         )
                     }
                 }
             },
             suffix = suffixRight,
             isError = isError,
-            enabled = isDeactivate
+            enabled = isDeactivate,
         )
     }
 
@@ -106,7 +125,7 @@ class EditTextComponent(
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         errorContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
-        disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow
+        disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
     )
 
     private fun keyboardType() = KeyboardOptions(
@@ -114,7 +133,7 @@ class EditTextComponent(
             KeyboardType.Number
         } else {
             KeyboardType.Decimal
-        }
+        },
     )
 
     private fun transformation() = if (typeEditText == TypeEditText.INTEGER) {
@@ -124,36 +143,20 @@ class EditTextComponent(
     }
 
     @Composable
-    private fun colorDivider(isFocus: Boolean) = when {
-        isError -> {
-            MaterialTheme.colorScheme.error
-        }
-
-        isFocus -> {
-            MaterialTheme.colorScheme.primary
-        }
-
-        else -> {
-            MaterialTheme.colorScheme.outlineVariant
-        }
+    private fun colorDivider(isFocused: Boolean) = when {
+        isError -> MaterialTheme.colorScheme.error
+        isFocused -> MaterialTheme.colorScheme.primary
+        else -> MaterialTheme.colorScheme.outlineVariant
     }
 
     @Composable
-    private fun prefixTextColor(isFocus: Boolean) = when {
-        isError -> {
-            MaterialTheme.colorScheme.error
-        }
-
-        isFocus -> {
-            MaterialTheme.colorScheme.primary
-        }
-
-        else -> {
-            MaterialTheme.colorScheme.onSurfaceVariant
-        }
+    private fun prefixTextColor(isFocused: Boolean) = when {
+        isError -> MaterialTheme.colorScheme.error
+        isFocused -> MaterialTheme.colorScheme.primary
+        else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
-    private fun thicknessDivider(isFocus: Boolean) = if (isFocus) {
+    private fun thicknessDivider(isFocused: Boolean) = if (isFocused) {
         Dimen2
     } else {
         Dimen1
