@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.pe.innari.igvperu.R
 
@@ -60,3 +61,31 @@ val ItemSelectTabComponent =
  */
 val ItemDeselectedTabComponent =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
+
+/**
+ * Estilo de texto para el valor o número ingresado dentro de [com.pe.innari.igvperu.ui.component.edittext.EditTextComponent].
+ */
+val ValueEditTextComponent = TextStyle(
+    fontSize = Text20, fontFamily = FontFamily(Font(R.font.medium)), textAlign = TextAlign.End
+)
+
+/**
+ * Estilo de texto para la etiqueta del prefijo principal en [com.pe.innari.igvperu.ui.component.edittext.EditTextComponent].
+ */
+val PrefixEditTextComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium))
+)
+
+/**
+ * Estilo de texto para la etiqueta secundaria de unidad o moneda en [com.pe.innari.igvperu.ui.component.edittext.EditTextComponent].
+ */
+val SuffixEditTextComponent = TextStyle(
+    fontSize = Text16, fontFamily = FontFamily(Font(R.font.medium))
+)
+
+/**
+ * Estilo de texto para el mensaje de error de soporte en [com.pe.innari.igvperu.ui.component.edittext.EditTextComponent].
+ */
+val ErrorEditTextComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular))
+)
