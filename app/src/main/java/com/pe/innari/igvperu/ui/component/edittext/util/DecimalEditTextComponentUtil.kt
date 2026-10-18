@@ -3,19 +3,23 @@ package com.pe.innari.igvperu.ui.component.edittext.util
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldBuffer
 
+/**
+ * Transformación de entrada para campos de texto de tipo decimal.
+ *
+ * Restringe la entrada para que contenga únicamente dígitos numéricos, un único separador decimal
+ * y límites fijos para la parte entera ([MAX_DIGITS]) y decimal ([MAX_DECIMAL]).
+ */
 class DecimalEditTextComponentUtil : InputTransformation {
 
     override fun TextFieldBuffer.transformInput() {
-
         val value = asCharSequence().toString()
-
         val parts = value.split(".")
 
-        val isValid =
-            parts.size <= 2 && parts[0].length <= MAX_DIGITS && parts[0].all { it in '0'..'9' }
-                    && (parts.size == 1 || (parts[1].length <= MAX_DECIMAL && parts[1].all { it in '0'..'9' }))
+        val isCorrectParts = parts.size <= 2
+        val isIntegerValid = (parts[0].length <= MAX_DIGITS) && parts[0].all { it.isDigit() }
+        val isDecimalValid = (parts.size == 1) || ((parts[1].length <= MAX_DECIMAL) && parts[1].all { it.isDigit() })
 
-        if (!isValid) {
+        if (!isCorrectParts || !isIntegerValid || !isDecimalValid) {
             revertAllChanges()
         }
     }
