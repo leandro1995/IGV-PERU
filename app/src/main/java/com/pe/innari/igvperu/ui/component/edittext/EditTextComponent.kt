@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.edittext.config.EditTextConfig
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
@@ -47,23 +48,13 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * (entero o decimal).
  *
  * @param state Estado del campo de texto manejado por [TextFieldState].
- * @param typeEditText Tipo de entrada permitida ([TypeEditText.INTEGER] o [TypeEditText.DECIMAL]).
  * @param prefixLabel Etiqueta de texto para el prefijo principal (ej. "Monto").
- * @param suffixLeftLabel Etiqueta de texto secundaria mostrada junto al prefijo (ej. "S/").
- * @param suffixRight Composable opcional mostrado en el extremo derecho del campo (ej. ícono o texto).
- * @param isError Indica si el campo de texto se encuentra en estado de error visual.
- * @param isDeactivate Indica si el campo de texto está activo o deshabilitado (true para habilitado).
- * @param errorLabel Texto del mensaje de error mostrado debajo del campo cuando [isError] es true.
+ * @param config Configuración de opciones visuales y de comportamiento definida en [EditTextConfig].
  */
 class EditTextComponent(
     private val state: TextFieldState,
-    private val typeEditText: TypeEditText = TypeEditText.INTEGER,
     private val prefixLabel: String,
-    private val suffixLeftLabel: String = "",
-    private val suffixRight: @Composable (() -> Unit)? = null,
-    private val isError: Boolean = false,
-    private val isDeactivate: Boolean = true,
-    private val errorLabel: String = "",
+    private val config: EditTextConfig = EditTextConfig(),
 ) : ComponentAmbient() {
 
     /**
@@ -88,9 +79,9 @@ class EditTextComponent(
                 inputTransformation = transformation(),
                 interactionSource = interactionSource,
                 prefix = prefix(isFocused = isFocused),
-                suffix = suffixRight,
-                isError = isError,
-                enabled = isDeactivate,
+                suffix = config.suffixRight,
+                isError = config.isError,
+                enabled = config.isDeactivate,
             )
             SupportingText()
         }
@@ -127,10 +118,10 @@ class EditTextComponent(
                 thickness = thicknessDivider(isFocused = isFocused),
                 color = colorDivider(isFocused = isFocused),
             )
-            if (suffixLeftLabel.isNotEmpty()) {
+            if (config.suffixLeftLabel.isNotEmpty()) {
                 Text(
                     modifier = Modifier.padding(start = Dimen15),
-                    text = suffixLeftLabel,
+                    text = config.suffixLeftLabel,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = SuffixEditTextComponent,
                 )
@@ -140,27 +131,27 @@ class EditTextComponent(
 
     @Composable
     private fun SupportingText() {
-        if (isError) {
+        if (config.isError) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = Dimen4, top = Dimen4, end = Dimen4),
-                text = errorLabel,
+                text = config.errorLabel,
                 style = ErrorEditTextComponent,
-                color = MaterialTheme.colorScheme.error
+                color = MaterialTheme.colorScheme.error,
             )
         }
     }
 
     private fun keyboardType() = KeyboardOptions(
-        keyboardType = if (typeEditText == TypeEditText.INTEGER) {
+        keyboardType = if (config.typeEditText == TypeEditText.INTEGER) {
             KeyboardType.Number
         } else {
             KeyboardType.Decimal
         },
     )
 
-    private fun transformation() = if (typeEditText == TypeEditText.INTEGER) {
+    private fun transformation() = if (config.typeEditText == TypeEditText.INTEGER) {
         IntegerEditTextComponentUtil()
     } else {
         DecimalEditTextComponentUtil()
@@ -168,14 +159,14 @@ class EditTextComponent(
 
     @Composable
     private fun colorDivider(isFocused: Boolean) = when {
-        isError -> MaterialTheme.colorScheme.error
+        config.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.outlineVariant
     }
 
     @Composable
     private fun prefixTextColor(isFocused: Boolean) = when {
-        isError -> MaterialTheme.colorScheme.error
+        config.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
