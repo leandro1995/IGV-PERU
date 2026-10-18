@@ -73,3 +73,7 @@ val PrefixEditTextComponent = TextStyle(
 val SuffixEditTextComponent = TextStyle(
     fontSize = Text16, fontFamily = FontFamily(Font(R.font.medium))
 )
+
+val ErrorEditTextComponent = TextStyle(
+    fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular))
+)
