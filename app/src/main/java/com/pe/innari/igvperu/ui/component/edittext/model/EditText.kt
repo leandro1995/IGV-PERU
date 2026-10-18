@@ -17,7 +17,7 @@ import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
  * @param isDeactivate Indica si el campo de texto está activo o deshabilitado (true para habilitado).
  * @param errorLabel Texto del mensaje de error mostrado debajo del campo cuando [isError] es true.
  */
-class EditTextConfig(
+class EditText(
     val typeEditText: TypeEditText = TypeEditText.INTEGER,
     val suffixLeftLabel: String = "",
     val suffixRight: @Composable (() -> Unit)? = null,
