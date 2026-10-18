@@ -24,7 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
-import com.pe.innari.igvperu.ui.component.edittext.config.EditTextConfig
+import com.pe.innari.igvperu.ui.component.edittext.model.EditTextConfig
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
