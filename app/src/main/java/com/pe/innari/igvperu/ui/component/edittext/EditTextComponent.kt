@@ -3,6 +3,7 @@ package com.pe.innari.igvperu.ui.component.edittext
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,8 +31,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen15
 import com.pe.innari.igvperu.ui.theme.Dimen2
+import com.pe.innari.igvperu.ui.theme.Dimen4
 import com.pe.innari.igvperu.ui.theme.Dimen50
 import com.pe.innari.igvperu.ui.theme.Dimen68
+import com.pe.innari.igvperu.ui.theme.ErrorEditTextComponent
 import com.pe.innari.igvperu.ui.theme.PrefixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.SuffixEditTextComponent
 import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
@@ -59,6 +62,7 @@ class EditTextComponent(
     private val suffixRight: @Composable (() -> Unit)? = null,
     private val isError: Boolean = false,
     private val isDeactivate: Boolean = true,
+    private val errorLabel: String = "",
 ) : ComponentAmbient() {
 
     /**
@@ -69,23 +73,26 @@ class EditTextComponent(
         val interactionSource = remember { MutableInteractionSource() }
         val isFocused by interactionSource.collectIsFocusedAsState()
 
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimen68),
-            state = state,
-            shape = RoundedCornerShape(Dimen14),
-            lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = ValueEditTextComponent,
-            colors = colors(),
-            keyboardOptions = keyboardType(),
-            inputTransformation = transformation(),
-            interactionSource = interactionSource,
-            prefix = prefix(isFocused = isFocused),
-            suffix = suffixRight,
-            isError = isError,
-            enabled = isDeactivate,
-        )
+        Column(modifier = Modifier.fillMaxWidth()) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(Dimen68),
+                state = state,
+                shape = RoundedCornerShape(Dimen14),
+                lineLimits = TextFieldLineLimits.SingleLine,
+                textStyle = ValueEditTextComponent,
+                colors = colors(),
+                keyboardOptions = keyboardType(),
+                inputTransformation = transformation(),
+                interactionSource = interactionSource,
+                prefix = prefix(isFocused = isFocused),
+                suffix = suffixRight,
+                isError = isError,
+                enabled = isDeactivate,
+            )
+            SupportingText()
+        }
     }
 
     @Composable
@@ -103,7 +110,6 @@ class EditTextComponent(
         errorContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
     )
-
 
     private fun prefix(isFocused: Boolean) = @Composable {
         Row(
@@ -128,6 +134,20 @@ class EditTextComponent(
                     style = SuffixEditTextComponent,
                 )
             }
+        }
+    }
+
+    @Composable
+    private fun SupportingText() {
+        if (isError) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = Dimen4, top = Dimen4, end = Dimen4),
+                text = errorLabel,
+                style = ErrorEditTextComponent,
+                color = MaterialTheme.colorScheme.error
+            )
         }
     }
 
