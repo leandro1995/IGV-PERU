@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
@@ -49,7 +50,7 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * @param editText Datos de configuración y estado del campo de texto provistos por la clase [EditText].
  */
 class EditTextComponent(
-    private val editText: EditText,
+    private val editText: EditText, private val errorEditText: ErrorEditText = ErrorEditText()
 ) : ComponentAmbient() {
 
     /**
@@ -75,7 +76,7 @@ class EditTextComponent(
                 interactionSource = interactionSource,
                 prefix = prefix(isFocused = isFocused),
                 suffix = editText.suffixRight,
-                isError = editText.isError,
+                isError = errorEditText.isError,
                 enabled = editText.isDeactivate,
             )
             SupportingText()
@@ -126,12 +127,12 @@ class EditTextComponent(
 
     @Composable
     private fun SupportingText() {
-        if (editText.isError) {
+        if (errorEditText.isError) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = Dimen4, top = Dimen4, end = Dimen4),
-                text = editText.errorLabel,
+                text = errorEditText.errorLabel,
                 style = ErrorEditTextComponent,
                 color = MaterialTheme.colorScheme.error,
             )
@@ -154,14 +155,14 @@ class EditTextComponent(
 
     @Composable
     private fun colorDivider(isFocused: Boolean) = when {
-        editText.isError -> MaterialTheme.colorScheme.error
+        errorEditText.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.outlineVariant
     }
 
     @Composable
     private fun prefixTextColor(isFocused: Boolean) = when {
-        editText.isError -> MaterialTheme.colorScheme.error
+        errorEditText.isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
