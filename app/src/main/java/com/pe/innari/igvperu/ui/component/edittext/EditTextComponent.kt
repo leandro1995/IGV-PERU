@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
 import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
+import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
@@ -50,7 +51,9 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * @param editText Datos de configuración y estado del campo de texto provistos por la clase [EditText].
  */
 class EditTextComponent(
-    private val editText: EditText, private val errorEditText: ErrorEditText = ErrorEditText()
+    private val editText: EditText,
+    private val errorEditText: ErrorEditText = ErrorEditText(),
+    private val suffixEditText: SuffixEditText = SuffixEditText()
 ) : ComponentAmbient() {
 
     /**
@@ -75,7 +78,7 @@ class EditTextComponent(
                 inputTransformation = transformation(),
                 interactionSource = interactionSource,
                 prefix = prefix(isFocused = isFocused),
-                suffix = editText.suffixRight,
+                suffix = suffixEditText.suffixRight,
                 isError = errorEditText.isError,
                 enabled = editText.isDeactivate,
             )
@@ -114,10 +117,10 @@ class EditTextComponent(
                 thickness = thicknessDivider(isFocused = isFocused),
                 color = colorDivider(isFocused = isFocused),
             )
-            if (editText.suffixLeftLabel.isNotEmpty()) {
+            if (suffixEditText.suffixLeftLabel.isNotEmpty()) {
                 Text(
                     modifier = Modifier.padding(start = Dimen15),
-                    text = editText.suffixLeftLabel,
+                    text = suffixEditText.suffixLeftLabel,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = SuffixEditTextComponent,
                 )
