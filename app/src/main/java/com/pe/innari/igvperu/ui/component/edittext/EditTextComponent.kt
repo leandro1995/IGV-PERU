@@ -49,6 +49,8 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * (entero o decimal).
  *
  * @param editText Datos de configuración y estado del campo de texto provistos por la clase [EditText].
+ * @param errorEditText Datos de configuración de error y mensaje de soporte provistos por [ErrorEditText].
+ * @param suffixEditText Datos de configuración de sufijos y etiquetas secundarias provistos por [SuffixEditText].
  */
 class EditTextComponent(
     private val editText: EditText,
