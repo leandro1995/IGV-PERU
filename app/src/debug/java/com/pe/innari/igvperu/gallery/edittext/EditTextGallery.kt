@@ -17,6 +17,7 @@ import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.gallery.edittext.status.EditTextStatus
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
 import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
@@ -53,10 +54,8 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         editText = EditText(
                             state = mutableState?.valueInteger.orEmpty(),
                             prefixLabel = "Monto",
-                            suffixLeftLabel = "S/",
-                            isError = true,
-                            errorLabel = "Error",
-                        )
+                            suffixLeftLabel = "S/"
+                        ), errorEditText = ErrorEditText(isError = true, errorLabel = "Error")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
@@ -89,10 +88,8 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
                             typeEditText = TypeEditText.DECIMAL,
-                            suffixLeftLabel = "S/",
-                            isError = true,
-                            errorLabel = "Error",
-                        )
+                            suffixLeftLabel = "S/"
+                        ), errorEditText = ErrorEditText(isError = true, errorLabel = "Error")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
