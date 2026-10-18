@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.component.edittext.config
+package com.pe.innari.igvperu.ui.component.edittext.model
 
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
