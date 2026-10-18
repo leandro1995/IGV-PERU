@@ -50,7 +50,8 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         state = mutableState?.valueInteger.orEmpty(),
                         prefixLabel = "Monto",
                         suffixLeftLabel = "S/",
-                        isError = true
+                        isError = true,
+                        errorLabel = "Error"
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueInteger.orEmpty(),
@@ -76,7 +77,8 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         prefixLabel = "Monto",
                         typeEditText = TypeEditText.DECIMAL,
                         suffixLeftLabel = "S/",
-                        isError = true
+                        isError = true,
+                        errorLabel = "Error"
                     ).OnCreate()
                     EditTextComponent(
                         state = mutableState?.valueDecimal.orEmpty(),
