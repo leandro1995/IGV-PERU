@@ -40,7 +40,8 @@ class EditTextComponent(
     private var prefixLabel: String,
     private var suffixLeftLabel: String = "",
     private var suffixRight: @Composable (() -> Unit)? = null,
-    private var isError: Boolean = false
+    private var isError: Boolean = false,
+    private var isDeactivate: Boolean = true
 ) : ComponentAmbient() {
 
     @Composable
@@ -85,7 +86,8 @@ class EditTextComponent(
                 }
             },
             suffix = suffixRight,
-            isError = isError
+            isError = isError,
+            enabled = isDeactivate
         )
     }
 
