@@ -53,6 +53,7 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
  * @param suffixRight Composable opcional mostrado en el extremo derecho del campo (ej. ícono o texto).
  * @param isError Indica si el campo de texto se encuentra en estado de error visual.
  * @param isDeactivate Indica si el campo de texto está activo o deshabilitado (true para habilitado).
+ * @param errorLabel Texto del mensaje de error mostrado debajo del campo cuando [isError] es true.
  */
 class EditTextComponent(
     private val state: TextFieldState,
