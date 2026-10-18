@@ -38,7 +38,8 @@ import com.pe.innari.igvperu.ui.theme.ValueEditTextComponent
 class EditTextComponent(
     private val typeEditText: TypeEditText = TypeEditText.INTEGER,
     private var prefixLabel: String,
-    private var suffixLeftLabel: String = ""
+    private var suffixLeftLabel: String = "",
+    private var suffixRight: @Composable (() -> Unit)? = null
 ) : ComponentAmbient() {
 
     @Composable
@@ -81,7 +82,9 @@ class EditTextComponent(
                         )
                     }
                 }
-            })
+            },
+            suffix = suffixRight
+        )
     }
 
     @Composable
