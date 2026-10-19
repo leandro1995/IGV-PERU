@@ -1,3 +1,5 @@
 package com.pe.innari.igvperu.ui.component.button.model
 
-class Button
+import com.pe.innari.igvperu.ui.component.button.type.TypeButton
+
+class Button(val typeButton: TypeButton = TypeButton.PRIMARY)
