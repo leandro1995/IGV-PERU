@@ -20,7 +20,6 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.TypeButton
 import com.pe.innari.igvperu.ui.theme.Dimen12
-import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
@@ -39,7 +38,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             }
 
             TypeButton.SECONDARY -> {
-
+                SecondaryButton()
             }
 
             TypeButton.OUTLINE -> {
@@ -60,7 +59,23 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
                 .height(Dimen56),
             shape = shape(),
             onClick = {},
-            colors = colors()
+            colors = primaryButtonColors()
+        ) {
+            Row {
+                ContentButton()
+            }
+        }
+    }
+
+    @Composable
+    private fun SecondaryButton() {
+        ButtonMaterialPrimary(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimen56),
+            shape = shape(),
+            onClick = {},
+            colors = secondaryButtonColors()
         ) {
             Row {
                 ContentButton()
@@ -85,9 +100,15 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
     }
 
     @Composable
-    private fun colors() = ButtonDefaults.buttonColors(
+    private fun primaryButtonColors() = ButtonDefaults.buttonColors(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary
+    )
+
+    @Composable
+    private fun secondaryButtonColors() = ButtonDefaults.buttonColors(
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
     )
 
     private fun shape() = RoundedCornerShape(Dimen12)
