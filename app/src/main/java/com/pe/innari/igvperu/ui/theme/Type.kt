@@ -89,3 +89,7 @@ val SuffixEditTextComponent = TextStyle(
 val ErrorEditTextComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular))
 )
+
+val LabelButtonComponent = TextStyle(
+    fontSize = Text13, fontFamily = FontFamily(Font(R.font.semi_bold))
+)
