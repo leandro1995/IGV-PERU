@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pe.innari.igvperu.ui.component.button.ButtonComponent
 import com.pe.innari.igvperu.ui.component.button.model.Button
+import com.pe.innari.igvperu.ui.component.button.type.TypeButton
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -18,9 +19,31 @@ class ButtonGallery : ViewAmbient<Any>() {
     @Composable
     override fun View() {
         Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
-            Column(modifier = Modifier.padding(paddingValues), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(
+                modifier = Modifier.padding(paddingValues),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 ButtonComponent(button = Button(label = "Primary")).OnCreate()
-                ButtonComponent(button = Button(label = "Primary", icon = android.R.drawable.star_on)).OnCreate()
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        icon = android.R.drawable.star_on
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        typeButton = TypeButton.SECONDARY
+                    )
+                ).OnCreate()
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        icon = android.R.drawable.star_on,
+                        typeButton = TypeButton.SECONDARY
+                    )
+                ).OnCreate()
             }
         }
     }
