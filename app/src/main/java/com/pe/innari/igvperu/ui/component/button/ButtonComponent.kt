@@ -37,24 +37,26 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
     @Composable
     override fun OnCreate() {
 
-        when (button.typeButton) {
+        LocalRipple(method = {
+            when (button.typeButton) {
 
-            TypeButton.PRIMARY -> {
-                PrimaryButton()
-            }
+                TypeButton.PRIMARY -> {
+                    PrimaryButton()
+                }
 
-            TypeButton.SECONDARY -> {
-                SecondaryButton()
-            }
+                TypeButton.SECONDARY -> {
+                    SecondaryButton()
+                }
 
-            TypeButton.OUTLINE -> {
-                OutLineButton()
-            }
+                TypeButton.OUTLINE -> {
+                    OutLineButton()
+                }
 
-            TypeButton.DESTRUCTIVE -> {
-                DestructiveButton()
+                TypeButton.DESTRUCTIVE -> {
+                    DestructiveButton()
+                }
             }
-        }
+        })
     }
 
     @Composable
