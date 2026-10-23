@@ -18,7 +18,7 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
     )
 )
 
@@ -90,6 +90,9 @@ val ErrorEditTextComponent = TextStyle(
     fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular))
 )
 
+/**
+ * Estilo de texto para la etiqueta o texto principal dentro de [com.pe.innari.igvperu.ui.component.button.ButtonComponent].
+ */
 val LabelButtonComponent = TextStyle(
     fontSize = Text13, fontFamily = FontFamily(Font(R.font.semi_bold))
 )
