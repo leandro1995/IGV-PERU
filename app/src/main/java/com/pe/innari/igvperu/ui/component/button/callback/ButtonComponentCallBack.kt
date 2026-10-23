@@ -1,3 +1,6 @@
 package com.pe.innari.igvperu.ui.component.button.callback
 
-interface ButtonComponentCallBack
+interface ButtonComponentCallBack {
+
+    fun setOnClick()
+}
