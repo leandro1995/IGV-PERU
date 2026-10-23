@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.gallery
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,15 +27,13 @@ class ButtonGallery : ViewAmbient<Any>() {
                 ButtonComponent(button = Button(label = "Primary")).OnCreate()
                 ButtonComponent(
                     button = Button(
-                        label = "Primary",
-                        icon = android.R.drawable.star_on
+                        label = "Primary", icon = android.R.drawable.star_on
                     )
                 ).OnCreate()
 
                 ButtonComponent(
                     button = Button(
-                        label = "Primary",
-                        typeButton = TypeButton.SECONDARY
+                        label = "Primary", typeButton = TypeButton.SECONDARY
                     )
                 ).OnCreate()
 
@@ -48,8 +47,7 @@ class ButtonGallery : ViewAmbient<Any>() {
 
                 ButtonComponent(
                     button = Button(
-                        label = "Primary",
-                        typeButton = TypeButton.OUTLINE
+                        label = "Primary", typeButton = TypeButton.OUTLINE
                     )
                 ).OnCreate()
 
@@ -63,8 +61,7 @@ class ButtonGallery : ViewAmbient<Any>() {
 
                 ButtonComponent(
                     button = Button(
-                        label = "Primary",
-                        typeButton = TypeButton.DESTRUCTIVE
+                        label = "Primary", typeButton = TypeButton.DESTRUCTIVE
                     )
                 ).OnCreate()
 
@@ -74,7 +71,11 @@ class ButtonGallery : ViewAmbient<Any>() {
                         icon = android.R.drawable.star_on,
                         typeButton = TypeButton.DESTRUCTIVE
                     )
-                ).OnCreate()
+                ).apply {
+                    setOnClick {
+                        Log.e("ButtonGallery", "Click")
+                    }
+                }.OnCreate()
             }
         }
     }
