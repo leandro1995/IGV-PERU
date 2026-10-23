@@ -60,6 +60,21 @@ class ButtonGallery : ViewAmbient<Any>() {
                         typeButton = TypeButton.OUTLINE
                     )
                 ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        typeButton = TypeButton.DESTRUCTIVE
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        icon = android.R.drawable.star_on,
+                        typeButton = TypeButton.DESTRUCTIVE
+                    )
+                ).OnCreate()
             }
         }
     }
