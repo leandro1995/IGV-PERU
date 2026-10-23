@@ -1,6 +1,5 @@
 package com.pe.innari.igvperu.ui.component.button
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,9 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +18,8 @@ import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallBack
 import com.pe.innari.igvperu.ui.component.button.model.Button
+import com.pe.innari.igvperu.ui.component.button.style.ButtonComponentStyle
 import com.pe.innari.igvperu.ui.component.button.type.TypeButton
-import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
@@ -80,7 +77,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
-            colors = primaryButtonColors(),
+            colors = ButtonComponentStyle.primaryButtonColors(),
         ) {
             ContentButton()
         }
@@ -96,7 +93,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
-            colors = secondaryButtonColors(),
+            colors = ButtonComponentStyle.secondaryButtonColors(),
         ) {
             ContentButton()
         }
@@ -109,8 +106,8 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
                 .fillMaxWidth()
                 .height(Dimen56),
             shape = shape(),
-            colors = outlinedColors(),
-            border = outlinedBorder(),
+            colors = ButtonComponentStyle.outlinedColors(),
+            border = ButtonComponentStyle.outlinedBorder(),
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
@@ -126,8 +123,8 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
                 .fillMaxWidth()
                 .height(Dimen56),
             shape = shape(),
-            colors = destructiveColors(),
-            border = destructiveBorder(),
+            colors = ButtonComponentStyle.destructiveColors(),
+            border = ButtonComponentStyle.destructiveBorder(),
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
@@ -167,40 +164,6 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         }
         Text(text = button.label, style = LabelButtonComponent)
     }
-
-    @Composable
-    private fun primaryButtonColors() = ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary,
-    )
-
-    @Composable
-    private fun secondaryButtonColors() = ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-    )
-
-    @Composable
-    private fun outlinedColors() = ButtonDefaults.outlinedButtonColors(
-        contentColor = MaterialTheme.colorScheme.primary,
-    )
-
-    @Composable
-    private fun destructiveColors() = ButtonDefaults.outlinedButtonColors(
-        contentColor = MaterialTheme.colorScheme.error,
-    )
-
-    @Composable
-    private fun outlinedBorder() = BorderStroke(
-        width = Dimen1,
-        color = MaterialTheme.colorScheme.outline,
-    )
-
-    @Composable
-    private fun destructiveBorder() = BorderStroke(
-        width = Dimen1,
-        color = MaterialTheme.colorScheme.error,
-    )
 
     private fun shape() = RoundedCornerShape(Dimen12)
 }
