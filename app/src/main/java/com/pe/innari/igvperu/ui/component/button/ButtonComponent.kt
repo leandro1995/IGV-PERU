@@ -33,14 +33,15 @@ import androidx.compose.material3.Button as ButtonMaterialPrimary
  * Renderiza diferentes variantes de botones ([TypeButton]) como [TypeButton.PRIMARY], [TypeButton.SECONDARY],
  * [TypeButton.OUTLINE] y [TypeButton.DESTRUCTIVE], soportando opcionalmente un icono y gestión de clics mediante [setOnClick].
  *
- * @property button Modelo de datos [Button] que contiene la configuración del botón.
+ * @property button Modelo de datos [Button] que contiene la configuración y estado del botón.
  */
 class ButtonComponent(private val button: Button) : ComponentAmbient() {
 
     private var buttonComponentCallBack: ButtonComponentCallBack? = null
 
     /**
-     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.typeButton].
+     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.typeButton]
+     * dentro de un contenedor con efecto ripple (`LocalRipple`).
      */
     @Composable
     override fun OnCreate() {
