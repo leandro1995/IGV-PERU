@@ -21,17 +21,12 @@ import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.TypeButton
-import com.pe.innari.igvperu.ui.theme.Black950
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
 import com.pe.innari.igvperu.ui.theme.LabelButtonComponent
-import com.pe.innari.igvperu.ui.theme.Red100
-import com.pe.innari.igvperu.ui.theme.Red200
-import com.pe.innari.igvperu.ui.theme.Teal950
-import com.pe.innari.igvperu.ui.theme.White50
 import androidx.compose.material3.Button as ButtonMaterialPrimary
 
 class ButtonComponent(private val button: Button) : ComponentAmbient() {
@@ -54,7 +49,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             }
 
             TypeButton.DESTRUCTIVE -> {
-
+                DestructiveButton()
             }
         }
     }
@@ -108,6 +103,22 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
     }
 
     @Composable
+    private fun DestructiveButton() {
+        OutlinedButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimen56),
+            shape = shape(),
+            colors = destructiveColors(),
+            border = destructiveBorder(),
+            onClick = {}) {
+            Row {
+                ContentButton()
+            }
+        }
+    }
+
+    @Composable
     private fun ContentButton() = Row(
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
     ) {
@@ -141,8 +152,18 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
     )
 
     @Composable
+    private fun destructiveColors() = ButtonDefaults.outlinedButtonColors(
+        contentColor = MaterialTheme.colorScheme.error
+    )
+
+    @Composable
     private fun outlinedBorder() = BorderStroke(
         width = Dimen1, color = MaterialTheme.colorScheme.outline
+    )
+
+    @Composable
+    private fun destructiveBorder() = BorderStroke(
+        width = Dimen1, color = MaterialTheme.colorScheme.error
     )
 
     private fun shape() = RoundedCornerShape(Dimen12)
