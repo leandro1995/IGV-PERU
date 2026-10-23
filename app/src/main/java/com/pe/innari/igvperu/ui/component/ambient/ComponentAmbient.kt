@@ -31,6 +31,12 @@ abstract class ComponentAmbient {
     open fun OnCreate(view: @Composable () -> Unit) {
     }
 
+    /**
+     * Proveedor local de efecto Ripple (efecto de onda al presionar) para los componentes hijos.
+     *
+     * @param method Función composable hijo que estará envuelta por la configuración del ripple.
+     * @param color Color opcional para personalizar el efecto ripple.
+     */
     @Composable
     protected fun LocalRipple(method: @Composable () -> Unit, color: Color? = null) {
         CompositionLocalProvider(
