@@ -37,11 +37,27 @@ class ButtonGallery : ViewAmbient<Any>() {
                         typeButton = TypeButton.SECONDARY
                     )
                 ).OnCreate()
+
                 ButtonComponent(
                     button = Button(
                         label = "Primary",
                         icon = android.R.drawable.star_on,
                         typeButton = TypeButton.SECONDARY
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        typeButton = TypeButton.OUTLINE
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        icon = android.R.drawable.star_on,
+                        typeButton = TypeButton.OUTLINE
                     )
                 ).OnCreate()
             }
