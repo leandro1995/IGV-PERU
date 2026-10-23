@@ -64,9 +64,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             onClick = {},
             colors = primaryButtonColors()
         ) {
-            Row {
-                ContentButton()
-            }
+            ContentButton()
         }
     }
 
@@ -80,9 +78,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             onClick = {},
             colors = secondaryButtonColors()
         ) {
-            Row {
-                ContentButton()
-            }
+            ContentButton()
         }
     }
 
@@ -96,9 +92,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             colors = outlinedColors(),
             border = outlinedBorder(),
             onClick = {}) {
-            Row {
-                ContentButton()
-            }
+            ContentButton()
         }
     }
 
@@ -112,9 +106,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             colors = destructiveColors(),
             border = destructiveBorder(),
             onClick = {}) {
-            Row {
-                ContentButton()
-            }
+            ContentButton()
         }
     }
 
