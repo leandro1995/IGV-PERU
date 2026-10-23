@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallBack
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.TypeButton
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -30,6 +31,8 @@ import com.pe.innari.igvperu.ui.theme.LabelButtonComponent
 import androidx.compose.material3.Button as ButtonMaterialPrimary
 
 class ButtonComponent(private val button: Button) : ComponentAmbient() {
+
+    private var buttonComponentCallBack: ButtonComponentCallBack? = null
 
     @Composable
     override fun OnCreate() {
@@ -59,10 +62,9 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         ButtonMaterialPrimary(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Dimen56),
-            shape = shape(),
-            onClick = {},
-            colors = primaryButtonColors()
+                .height(Dimen56), shape = shape(), onClick = {
+                buttonComponentCallBack?.setOnClick()
+            }, colors = primaryButtonColors()
         ) {
             ContentButton()
         }
@@ -73,10 +75,9 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         ButtonMaterialPrimary(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Dimen56),
-            shape = shape(),
-            onClick = {},
-            colors = secondaryButtonColors()
+                .height(Dimen56), shape = shape(), onClick = {
+                buttonComponentCallBack?.setOnClick()
+            }, colors = secondaryButtonColors()
         ) {
             ContentButton()
         }
@@ -91,7 +92,9 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             shape = shape(),
             colors = outlinedColors(),
             border = outlinedBorder(),
-            onClick = {}) {
+            onClick = {
+                buttonComponentCallBack?.setOnClick()
+            }) {
             ContentButton()
         }
     }
@@ -105,8 +108,20 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             shape = shape(),
             colors = destructiveColors(),
             border = destructiveBorder(),
-            onClick = {}) {
+            onClick = {
+                buttonComponentCallBack?.setOnClick()
+            }) {
             ContentButton()
+        }
+    }
+
+    fun setOnClick(onClick: () -> Unit) {
+        if (buttonComponentCallBack == null) {
+            buttonComponentCallBack = object : ButtonComponentCallBack {
+                override fun setOnClick() {
+                    onClick()
+                }
+            }
         }
     }
 
