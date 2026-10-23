@@ -1,6 +1,10 @@
 package com.pe.innari.igvperu.ui.component.ambient
 
+import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.Color
 
 /**
  * Clase base abstracta para componentes ambientales o visuales de la interfaz de usuario.
@@ -25,5 +29,20 @@ abstract class ComponentAmbient {
      */
     @Composable
     open fun OnCreate(view: @Composable () -> Unit) {
+    }
+
+    @Composable
+    protected fun LocalRipple(method: @Composable () -> Unit, color: Color? = null) {
+        CompositionLocalProvider(
+            LocalRippleConfiguration provides rippleColor(color = color)
+        ) {
+            method()
+        }
+    }
+
+    private fun rippleColor(color: Color?) = if (color == null) {
+        null
+    } else {
+        RippleConfiguration(color = color)
     }
 }
