@@ -4,6 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
+import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
 /**
  * Objeto de utilidad que define los estilos y colores para los componentes de navegación
@@ -35,4 +37,10 @@ object BottomNavigationComponentStyle {
         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
     )
+
+    fun labelItemBottomNavigationSelect(isSelected: Boolean) = if (isSelected) {
+        ItemSelectBottomNavigationComponent
+    } else {
+        ItemDeselectedBottomNavigationComponent
+    }
 }
