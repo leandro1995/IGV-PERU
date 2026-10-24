@@ -3,7 +3,7 @@ package com.pe.innari.igvperu.ui.component.edittext.type
 /**
  * Enum que define el tipo de teclado e ingreso numérico permitido en [com.pe.innari.igvperu.ui.component.edittext.EditTextComponent].
  */
-enum class TypeEditText {
+enum class EditTextComponentType {
     /**
      * Permite únicamente el ingreso de números enteros.
      */
