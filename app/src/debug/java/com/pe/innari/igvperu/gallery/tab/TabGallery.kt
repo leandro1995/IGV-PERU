@@ -32,7 +32,7 @@ class TabGallery : ViewAmbient<TabStatus>() {
                         itemList = itemList(),
                         position = mutableState?.position?.intValue.orEmpty(),
                     ).apply {
-                        setOnClick { position ->
+                        setPosition { position ->
                             mutableState?.position?.intValue = position
                         }
                     }.OnCreate()

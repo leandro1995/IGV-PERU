@@ -22,13 +22,12 @@ import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallback
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
+import com.pe.innari.igvperu.ui.component.tab.style.TabComponentStyle
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen4
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
-import com.pe.innari.igvperu.ui.theme.ItemDeselectedTabComponent
-import com.pe.innari.igvperu.ui.theme.ItemSelectTabComponent
 
 /**
  * Componente visual de pestañas (Tabs) que hereda de [ComponentAmbient].
@@ -68,7 +67,7 @@ class TabComponent(
                         .weight(1f)
                         .fillMaxHeight()
                         .background(
-                            color = backgroundColor(isSelected = isSelected),
+                            color = TabComponentStyle.backgroundColor(isSelected = isSelected),
                             shape = RoundedCornerShape(Dimen14),
                         )
                         .clickable(
@@ -87,12 +86,12 @@ class TabComponent(
                             .padding(end = Dimen8),
                         painter = painterResource(item.icon),
                         contentDescription = null,
-                        tint = tintColor(isSelected = isSelected),
+                        tint = TabComponentStyle.tintColor(isSelected = isSelected),
                     )
                     Text(
                         text = item.label,
-                        color = tintColor(isSelected = isSelected),
-                        style = textStyle(isSelected = isSelected),
+                        color = TabComponentStyle.tintColor(isSelected = isSelected),
+                        style = TabComponentStyle.textStyle(isSelected = isSelected),
                     )
                 }
             }
@@ -104,31 +103,10 @@ class TabComponent(
      *
      * @param itemPosition Función lambda que recibe la posición (índice) de la pestaña seleccionada.
      */
-    fun setOnClick(itemPosition: (position: Int) -> Unit) {
+    fun setPosition(itemPosition: (position: Int) -> Unit) {
         if (tabComponentCallback == null) {
             tabComponentCallback = TabComponentCallback(itemPosition)
         }
-    }
-
-    @Composable
-    private fun backgroundColor(isSelected: Boolean) = if (isSelected) {
-        MaterialTheme.colorScheme.primaryContainer
-    } else {
-        MaterialTheme.colorScheme.surfaceContainer
-    }
-
-    @Composable
-    private fun tintColor(isSelected: Boolean) = if (isSelected) {
-        MaterialTheme.colorScheme.onPrimaryContainer
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant
-    }
-
-    @Composable
-    private fun textStyle(isSelected: Boolean) = if (isSelected) {
-        ItemSelectTabComponent
-    } else {
-        ItemDeselectedTabComponent
     }
 
     private fun isItemSelected(index: Int): Boolean = position == index

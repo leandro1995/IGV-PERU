@@ -19,7 +19,7 @@ import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
 import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
 import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
-import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -75,14 +75,14 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL
+                            editTextComponentType = EditTextComponentType.DECIMAL
                         ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
                     EditTextComponent(
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL
+                            editTextComponentType = EditTextComponentType.DECIMAL
                         ),
                         errorEditText = ErrorEditText(isError = true, errorLabel = "Error"),
                         suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
@@ -91,7 +91,7 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL,
+                            editTextComponentType = EditTextComponentType.DECIMAL,
                             isDeactivate = false,
                         ), suffixEditText = SuffixEditText(suffixLeftLabel = "S/")
                     ).OnCreate()
@@ -99,7 +99,7 @@ class EditTextGallery : ViewAmbient<EditTextStatus>() {
                         editText = EditText(
                             state = mutableState?.valueDecimal.orEmpty(),
                             prefixLabel = "Monto",
-                            typeEditText = TypeEditText.DECIMAL
+                            editTextComponentType = EditTextComponentType.DECIMAL
                         ), suffixEditText = SuffixEditText(
                             suffixLeftLabel = "S/", suffixRight = { Text(text = "AUTO") })
                     ).OnCreate()

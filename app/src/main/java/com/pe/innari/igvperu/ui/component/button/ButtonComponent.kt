@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -16,11 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
-import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallBack
+import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallback
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.style.ButtonComponentStyle
-import com.pe.innari.igvperu.ui.component.button.type.TypeButton
-import com.pe.innari.igvperu.ui.theme.Dimen12
+import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
@@ -30,42 +28,53 @@ import androidx.compose.material3.Button as ButtonMaterialPrimary
 /**
  * Componente visual de botón que hereda de [ComponentAmbient].
  *
- * Renderiza diferentes variantes de botones ([TypeButton]) como [TypeButton.PRIMARY], [TypeButton.SECONDARY],
- * [TypeButton.OUTLINE] y [TypeButton.DESTRUCTIVE], soportando opcionalmente un icono y gestión de clics mediante [setOnClick].
+ * Renderiza diferentes variantes de botones ([ButtonComponentType]) como [ButtonComponentType.PRIMARY], [ButtonComponentType.SECONDARY],
+ * [ButtonComponentType.OUTLINE] y [ButtonComponentType.DESTRUCTIVE], soportando opcionalmente un icono y gestión de clics mediante [setOnClick].
  *
  * @property button Modelo de datos [Button] que contiene la configuración y estado del botón.
  */
 class ButtonComponent(private val button: Button) : ComponentAmbient() {
 
-    private var buttonComponentCallBack: ButtonComponentCallBack? = null
+    private var buttonComponentCallback: ButtonComponentCallback? = null
 
     /**
-     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.typeButton]
+     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.buttonComponentType]
      * dentro de un contenedor con efecto ripple (`LocalRipple`).
      */
     @Composable
     override fun OnCreate() {
         LocalRipple(
             method = {
-                when (button.typeButton) {
-                    TypeButton.PRIMARY -> {
+                when (button.buttonComponentType) {
+                    ButtonComponentType.PRIMARY -> {
                         PrimaryButton()
                     }
 
-                    TypeButton.SECONDARY -> {
+                    ButtonComponentType.SECONDARY -> {
                         SecondaryButton()
                     }
 
-                    TypeButton.OUTLINE -> {
+                    ButtonComponentType.OUTLINE -> {
                         OutLineButton()
                     }
 
-                    TypeButton.DESTRUCTIVE -> {
+                    ButtonComponentType.DESTRUCTIVE -> {
                         DestructiveButton()
                     }
                 }
             },
         )
+    }
+
+    /**
+     * Configura el listener de clic para el botón.
+     *
+     * @param onClick Función lambda a ejecutar cuando se presione el botón.
+     */
+    fun setOnClick(onClick: () -> Unit) {
+        if (buttonComponentCallback == null) {
+            buttonComponentCallback = ButtonComponentCallback { onClick() }
+        }
     }
 
     @Composable
@@ -74,9 +83,9 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             onClick = {
-                buttonComponentCallBack?.setOnClick()
+                buttonComponentCallback?.setOnClick()
             },
             colors = ButtonComponentStyle.primaryButtonColors(),
         ) {
@@ -90,9 +99,9 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             onClick = {
-                buttonComponentCallBack?.setOnClick()
+                buttonComponentCallback?.setOnClick()
             },
             colors = ButtonComponentStyle.secondaryButtonColors(),
         ) {
@@ -106,11 +115,11 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             colors = ButtonComponentStyle.outlinedColors(),
             border = ButtonComponentStyle.outlinedBorder(),
             onClick = {
-                buttonComponentCallBack?.setOnClick()
+                buttonComponentCallback?.setOnClick()
             },
         ) {
             ContentButton()
@@ -123,29 +132,14 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             colors = ButtonComponentStyle.destructiveColors(),
             border = ButtonComponentStyle.destructiveBorder(),
             onClick = {
-                buttonComponentCallBack?.setOnClick()
+                buttonComponentCallback?.setOnClick()
             },
         ) {
             ContentButton()
-        }
-    }
-
-    /**
-     * Configura el listener de clic para el botón.
-     *
-     * @param onClick Función lambda a ejecutar cuando se presione el botón.
-     */
-    fun setOnClick(onClick: () -> Unit) {
-        if (buttonComponentCallBack == null) {
-            buttonComponentCallBack = object : ButtonComponentCallBack {
-                override fun setOnClick() {
-                    onClick()
-                }
-            }
         }
     }
 
@@ -165,6 +159,4 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         }
         Text(text = button.label, style = LabelButtonComponent)
     }
-
-    private fun shape() = RoundedCornerShape(Dimen12)
 }

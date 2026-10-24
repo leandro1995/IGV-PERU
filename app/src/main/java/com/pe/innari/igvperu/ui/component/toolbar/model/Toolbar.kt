@@ -9,7 +9,7 @@ import androidx.annotation.DrawableRes
  * @property title Texto del título principal.
  * @property subtitle Texto del subtítulo secundario o descriptivo.
  */
-class Toolbar(
+data class Toolbar(
     @DrawableRes val icon: Int,
     val title: String,
     val subtitle: String
