@@ -33,6 +33,12 @@ abstract class ComponentAmbient {
     open fun OnCreate(view: @Composable () -> Unit) {
     }
 
+    /**
+     * Sobrecarga de la función composable [OnCreate] para componentes de navegación que reciben
+     * un ámbito de proveedor de entradas [EntryProviderScope].
+     *
+     * @param entry Función composable que define las entradas de navegación en el ámbito [EntryProviderScope].
+     */
     @Composable
     open fun OnCreate(entry: @Composable (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
     }
