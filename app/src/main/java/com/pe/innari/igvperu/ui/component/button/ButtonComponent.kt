@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -20,7 +19,6 @@ import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallBac
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.style.ButtonComponentStyle
 import com.pe.innari.igvperu.ui.component.button.type.TypeButton
-import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
@@ -89,7 +87,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
@@ -105,7 +103,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             onClick = {
                 buttonComponentCallBack?.setOnClick()
             },
@@ -121,7 +119,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             colors = ButtonComponentStyle.outlinedColors(),
             border = ButtonComponentStyle.outlinedBorder(),
             onClick = {
@@ -138,7 +136,7 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen56),
-            shape = shape(),
+            shape = ButtonComponentStyle.shape(),
             colors = ButtonComponentStyle.destructiveColors(),
             border = ButtonComponentStyle.destructiveBorder(),
             onClick = {
@@ -165,6 +163,4 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         }
         Text(text = button.label, style = LabelButtonComponent)
     }
-
-    private fun shape() = RoundedCornerShape(Dimen12)
 }
