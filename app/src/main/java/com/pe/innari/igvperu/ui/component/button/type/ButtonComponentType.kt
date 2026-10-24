@@ -3,7 +3,7 @@ package com.pe.innari.igvperu.ui.component.button.type
 /**
  * Enumeración que define las variantes o tipos disponibles para [com.pe.innari.igvperu.ui.component.button.ButtonComponent].
  */
-enum class TypeButton {
+enum class ButtonComponentType {
     /** Botón principal con colores sólidos primarios. */
     PRIMARY,
 
