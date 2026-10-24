@@ -108,6 +108,11 @@ class BottomNavigationComponent(
         }
     }
 
+    /**
+     * Configura el evento que se ejecutará al seleccionar una clave de navegación [NavKey].
+     *
+     * @param itemNavKey Función que recibe la [NavKey] del elemento seleccionado.
+     */
     fun setNavKey(itemNavKey: (navKey: NavKey) -> Unit) {
         if (navigationCallback == null) {
             navigationCallback = object : BottomNavigationComponentCallback {
