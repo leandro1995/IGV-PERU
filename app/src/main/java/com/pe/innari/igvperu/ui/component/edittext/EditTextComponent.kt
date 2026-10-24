@@ -13,7 +13,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -26,7 +25,8 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
 import com.pe.innari.igvperu.ui.component.edittext.model.ErrorEditText
 import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
-import com.pe.innari.igvperu.ui.component.edittext.type.TypeEditText
+import com.pe.innari.igvperu.ui.component.edittext.style.EditTextComponentStyle
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
 import com.pe.innari.igvperu.ui.theme.Dimen1
@@ -75,7 +75,7 @@ class EditTextComponent(
                 shape = RoundedCornerShape(Dimen14),
                 lineLimits = TextFieldLineLimits.SingleLine,
                 textStyle = ValueEditTextComponent,
-                colors = colors(),
+                colors = EditTextComponentStyle.colors(),
                 keyboardOptions = keyboardType(),
                 inputTransformation = transformation(),
                 interactionSource = interactionSource,
@@ -88,22 +88,6 @@ class EditTextComponent(
         }
     }
 
-    @Composable
-    private fun colors() = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MaterialTheme.colorScheme.primary,
-        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-        errorBorderColor = MaterialTheme.colorScheme.error,
-        disabledBorderColor = MaterialTheme.colorScheme.outlineVariant,
-        focusedTextColor = MaterialTheme.colorScheme.onSurface,
-        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-        errorTextColor = MaterialTheme.colorScheme.onSurface,
-        disabledTextColor = MaterialTheme.colorScheme.onSurface,
-        focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
-        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
-        errorContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
-        disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-    )
-
     private fun prefix(isFocused: Boolean) = @Composable {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -113,11 +97,15 @@ class EditTextComponent(
                 modifier = Modifier.padding(end = Dimen50),
                 text = editText.prefixLabel,
                 style = PrefixEditTextComponent,
-                color = prefixTextColor(isFocused = isFocused),
+                color = EditTextComponentStyle.prefixTextColor(
+                    isFocused = isFocused, isError = errorEditText.isError
+                ),
             )
             VerticalDivider(
                 thickness = thicknessDivider(isFocused = isFocused),
-                color = colorDivider(isFocused = isFocused),
+                color = EditTextComponentStyle.colorDivider(
+                    isFocused = isFocused, isError = errorEditText.isError
+                ),
             )
             if (suffixEditText.suffixLeftLabel.isNotEmpty()) {
                 Text(
@@ -145,31 +133,17 @@ class EditTextComponent(
     }
 
     private fun keyboardType() = KeyboardOptions(
-        keyboardType = if (editText.typeEditText == TypeEditText.INTEGER) {
+        keyboardType = if (editText.editTextComponentType == EditTextComponentType.INTEGER) {
             KeyboardType.Number
         } else {
             KeyboardType.Decimal
         },
     )
 
-    private fun transformation() = if (editText.typeEditText == TypeEditText.INTEGER) {
+    private fun transformation() = if (editText.editTextComponentType == EditTextComponentType.INTEGER) {
         IntegerEditTextComponentUtil()
     } else {
         DecimalEditTextComponentUtil()
-    }
-
-    @Composable
-    private fun colorDivider(isFocused: Boolean) = when {
-        errorEditText.isError -> MaterialTheme.colorScheme.error
-        isFocused -> MaterialTheme.colorScheme.primary
-        else -> MaterialTheme.colorScheme.outlineVariant
-    }
-
-    @Composable
-    private fun prefixTextColor(isFocused: Boolean) = when {
-        errorEditText.isError -> MaterialTheme.colorScheme.error
-        isFocused -> MaterialTheme.colorScheme.primary
-        else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
     private fun thicknessDivider(isFocused: Boolean) = if (isFocused) {
