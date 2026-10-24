@@ -74,5 +74,8 @@ object ButtonComponentStyle {
         color = MaterialTheme.colorScheme.error,
     )
 
+    /**
+     * Retorna la forma redondeada estándar ([RoundedCornerShape]) para los botones con un radio de [Dimen12].
+     */
     fun shape() = RoundedCornerShape(Dimen12)
 }
