@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pe.innari.igvperu.ui.component.button.ButtonComponent
 import com.pe.innari.igvperu.ui.component.button.model.Button
-import com.pe.innari.igvperu.ui.component.button.type.TypeButton
+import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -33,7 +33,7 @@ class ButtonGallery : ViewAmbient<Any>() {
 
                 ButtonComponent(
                     button = Button(
-                        label = "Primary", typeButton = TypeButton.SECONDARY
+                        label = "Primary", buttonComponentType = ButtonComponentType.SECONDARY
                     )
                 ).OnCreate()
 
@@ -41,27 +41,13 @@ class ButtonGallery : ViewAmbient<Any>() {
                     button = Button(
                         label = "Primary",
                         icon = android.R.drawable.star_on,
-                        typeButton = TypeButton.SECONDARY
+                        buttonComponentType = ButtonComponentType.SECONDARY
                     )
                 ).OnCreate()
 
                 ButtonComponent(
                     button = Button(
-                        label = "Primary", typeButton = TypeButton.OUTLINE
-                    )
-                ).OnCreate()
-
-                ButtonComponent(
-                    button = Button(
-                        label = "Primary",
-                        icon = android.R.drawable.star_on,
-                        typeButton = TypeButton.OUTLINE
-                    )
-                ).OnCreate()
-
-                ButtonComponent(
-                    button = Button(
-                        label = "Primary", typeButton = TypeButton.DESTRUCTIVE
+                        label = "Primary", buttonComponentType = ButtonComponentType.OUTLINE
                     )
                 ).OnCreate()
 
@@ -69,7 +55,21 @@ class ButtonGallery : ViewAmbient<Any>() {
                     button = Button(
                         label = "Primary",
                         icon = android.R.drawable.star_on,
-                        typeButton = TypeButton.DESTRUCTIVE
+                        buttonComponentType = ButtonComponentType.OUTLINE
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary", buttonComponentType = ButtonComponentType.DESTRUCTIVE
+                    )
+                ).OnCreate()
+
+                ButtonComponent(
+                    button = Button(
+                        label = "Primary",
+                        icon = android.R.drawable.star_on,
+                        buttonComponentType = ButtonComponentType.DESTRUCTIVE
                     )
                 ).apply {
                     setOnClick {
