@@ -102,7 +102,7 @@ class EditTextComponent(
                 ),
             )
             VerticalDivider(
-                thickness = thicknessDivider(isFocused = isFocused),
+                thickness = EditTextComponentStyle.thicknessDivider(isFocused = isFocused),
                 color = EditTextComponentStyle.colorDivider(
                     isFocused = isFocused, isError = errorEditText.isError
                 ),
@@ -140,15 +140,10 @@ class EditTextComponent(
         },
     )
 
-    private fun transformation() = if (editText.editTextComponentType == EditTextComponentType.INTEGER) {
-        IntegerEditTextComponentUtil()
-    } else {
-        DecimalEditTextComponentUtil()
-    }
-
-    private fun thicknessDivider(isFocused: Boolean) = if (isFocused) {
-        Dimen2
-    } else {
-        Dimen1
-    }
+    private fun transformation() =
+        if (editText.editTextComponentType == EditTextComponentType.INTEGER) {
+            IntegerEditTextComponentUtil()
+        } else {
+            DecimalEditTextComponentUtil()
+        }
 }
