@@ -58,6 +58,11 @@ object EditTextComponentStyle {
         else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
+    /**
+     * Determina el grosor del divisor vertical en función de si el campo tiene el foco.
+     *
+     * @param isFocused Indica si el campo tiene el foco actual.
+     */
     fun thicknessDivider(isFocused: Boolean) = if (isFocused) {
         Dimen2
     } else {
