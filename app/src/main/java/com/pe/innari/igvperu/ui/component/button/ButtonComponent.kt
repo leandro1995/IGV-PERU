@@ -18,7 +18,7 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallBack
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.style.ButtonComponentStyle
-import com.pe.innari.igvperu.ui.component.button.type.TypeButton
+import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
 import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
@@ -28,8 +28,8 @@ import androidx.compose.material3.Button as ButtonMaterialPrimary
 /**
  * Componente visual de botón que hereda de [ComponentAmbient].
  *
- * Renderiza diferentes variantes de botones ([TypeButton]) como [TypeButton.PRIMARY], [TypeButton.SECONDARY],
- * [TypeButton.OUTLINE] y [TypeButton.DESTRUCTIVE], soportando opcionalmente un icono y gestión de clics mediante [setOnClick].
+ * Renderiza diferentes variantes de botones ([ButtonComponentType]) como [ButtonComponentType.PRIMARY], [ButtonComponentType.SECONDARY],
+ * [ButtonComponentType.OUTLINE] y [ButtonComponentType.DESTRUCTIVE], soportando opcionalmente un icono y gestión de clics mediante [setOnClick].
  *
  * @property button Modelo de datos [Button] que contiene la configuración y estado del botón.
  */
@@ -38,27 +38,27 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
     private var buttonComponentCallBack: ButtonComponentCallBack? = null
 
     /**
-     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.typeButton]
+     * Renderiza la interfaz gráfica del botón según su tipo configurado en [Button.buttonComponentType]
      * dentro de un contenedor con efecto ripple (`LocalRipple`).
      */
     @Composable
     override fun OnCreate() {
         LocalRipple(
             method = {
-                when (button.typeButton) {
-                    TypeButton.PRIMARY -> {
+                when (button.buttonComponentType) {
+                    ButtonComponentType.PRIMARY -> {
                         PrimaryButton()
                     }
 
-                    TypeButton.SECONDARY -> {
+                    ButtonComponentType.SECONDARY -> {
                         SecondaryButton()
                     }
 
-                    TypeButton.OUTLINE -> {
+                    ButtonComponentType.OUTLINE -> {
                         OutLineButton()
                     }
 
-                    TypeButton.DESTRUCTIVE -> {
+                    ButtonComponentType.DESTRUCTIVE -> {
                         DestructiveButton()
                     }
                 }
