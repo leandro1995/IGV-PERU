@@ -10,7 +10,7 @@ import androidx.navigation3.runtime.NavKey
  * @property label Texto descriptivo o etiqueta visual que se muestra junto al ícono.
  * @property navKey Clave de navegación [NavKey] asociada al elemento.
  */
-class ItemBottomNavigation(
+data class ItemBottomNavigation(
     @DrawableRes val icon: Int,
     val label: String,
     val navKey: NavKey
