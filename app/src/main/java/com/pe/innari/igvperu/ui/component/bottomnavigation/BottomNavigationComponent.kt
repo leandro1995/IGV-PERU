@@ -9,7 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
@@ -22,21 +21,22 @@ import androidx.compose.ui.res.painterResource
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 import com.pe.innari.igvperu.ui.component.bottomnavigation.callback.BottomNavigationComponentCallback
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
-import com.pe.innari.igvperu.ui.component.bottomnavigation.type.TypeBottomNavigation
+import com.pe.innari.igvperu.ui.component.bottomnavigation.style.BottomNavigationComponentStyle
+import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationComponentType
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
 import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
 /**
  * Componente visual de navegación que permite alternar entre distintas pantallas utilizando
- * una barra inferior ([TypeBottomNavigation.BAR_NAVIGATION]) o un riel lateral ([TypeBottomNavigation.RAIL_NAVIGATION]).
+ * una barra inferior ([BottomNavigationComponentType.BAR_NAVIGATION]) o un riel lateral ([BottomNavigationComponentType.RAIL_NAVIGATION]).
  *
- * @param typeBottomNavigation Define el modo de visualización de la navegación (barra o riel).
+ * @param bottomNavigationComponentType Define el modo de visualización de la navegación (barra o riel).
  * @param itemList Lista de elementos ([ItemBottomNavigation]) que conforman las opciones del menú.
  * @param position Índice del elemento actualmente seleccionado.
  */
 class BottomNavigationComponent(
-    private val typeBottomNavigation: TypeBottomNavigation,
+    private val bottomNavigationComponentType: BottomNavigationComponentType,
     private val itemList: List<ItemBottomNavigation>,
     private val position: Int,
 ) : ComponentAmbient() {
@@ -50,8 +50,8 @@ class BottomNavigationComponent(
      */
     @Composable
     override fun OnCreate(view: @Composable () -> Unit) {
-        when (typeBottomNavigation) {
-            TypeBottomNavigation.BAR_NAVIGATION -> {
+        when (bottomNavigationComponentType) {
+            BottomNavigationComponentType.BAR_NAVIGATION -> {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
@@ -74,7 +74,7 @@ class BottomNavigationComponent(
                 }
             }
 
-            TypeBottomNavigation.RAIL_NAVIGATION -> {
+            BottomNavigationComponentType.RAIL_NAVIGATION -> {
                 Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
                     Row(
                         modifier = Modifier
@@ -98,7 +98,7 @@ class BottomNavigationComponent(
      *
      * @param itemPosition Función que recibe la posición (índice) del elemento seleccionado.
      */
-    fun setOnClick(itemPosition: (position: Int) -> Unit) {
+    fun setPosition(itemPosition: (position: Int) -> Unit) {
         if (navigationCallback == null) {
             navigationCallback = object : BottomNavigationComponentCallback {
                 override fun setPosition(index: Int) {
@@ -113,26 +113,16 @@ class BottomNavigationComponent(
         NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemList.forEachIndexed { index, item ->
                 NavigationBarItem(
-                    selected = isItemSelected(index = index),
-                    onClick = {
+                    selected = isItemSelected(index = index), onClick = {
                         navigationCallback?.setPosition(index = index)
-                    },
-                    icon = {
+                    }, icon = {
                         NavigationItemIcon(iconResId = item.icon)
-                    },
-                    label = {
+                    }, label = {
                         NavigationItemLabel(
                             label = item.label,
                             isSelected = isItemSelected(index = index),
                         )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        selectedTextColor = MaterialTheme.colorScheme.primary,
-                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    ),
+                    }, colors = BottomNavigationComponentStyle.bottomNavigationBarColor()
                 )
             }
         }
@@ -142,26 +132,16 @@ class BottomNavigationComponent(
         NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceContainerLowest) {
             itemList.forEachIndexed { index, item ->
                 NavigationRailItem(
-                    selected = isItemSelected(index = index),
-                    onClick = {
+                    selected = isItemSelected(index = index), onClick = {
                         navigationCallback?.setPosition(index = index)
-                    },
-                    icon = {
+                    }, icon = {
                         NavigationItemIcon(iconResId = item.icon)
-                    },
-                    label = {
+                    }, label = {
                         NavigationItemLabel(
                             label = item.label,
                             isSelected = isItemSelected(index = index),
                         )
-                    },
-                    colors = NavigationRailItemDefaults.colors(
-                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        selectedTextColor = MaterialTheme.colorScheme.primary,
-                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    ),
+                    }, colors = BottomNavigationComponentStyle.navigationRailBarColor()
                 )
             }
         }
