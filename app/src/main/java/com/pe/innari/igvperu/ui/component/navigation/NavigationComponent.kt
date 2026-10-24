@@ -11,12 +11,12 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
 class NavigationComponent(private val backStack: NavBackStack<NavKey>) : ComponentAmbient() {
 
     @Composable
-    override fun OnCreate(view: @Composable ((entryProviderScope: EntryProviderScope<NavKey>) -> Unit)) {
+    override fun OnCreate(entry: @Composable ((entryProviderScope: EntryProviderScope<NavKey>) -> Unit)) {
         NavDisplay(
             backStack = backStack,
             onBack = { backStack.removeLastOrNull() },
             entryProvider = entryProvider {
-                view(this)
+                entry(this)
             })
     }
 }
