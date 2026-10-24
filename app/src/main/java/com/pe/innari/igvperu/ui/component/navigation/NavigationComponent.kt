@@ -1,5 +1,8 @@
 package com.pe.innari.igvperu.ui.component.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
@@ -15,8 +18,15 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
         NavDisplay(
             backStack = backStack,
             onBack = { backStack.removeLastOrNull() },
+            sizeTransform = null,
+            transitionSpec = { animationDisable() },
+            popTransitionSpec = { animationDisable() },
+            predictivePopTransitionSpec = { animationDisable() },
             entryProvider = entryProvider {
                 entry(this)
             })
     }
+
+    private fun animationDisable() = EnterTransition.None togetherWith ExitTransition.None
+
 }
