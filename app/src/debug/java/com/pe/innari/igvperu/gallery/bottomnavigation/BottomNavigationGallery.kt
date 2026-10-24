@@ -55,9 +55,9 @@ class BottomNavigationGallery : ViewAmbient<BottomNavigationStatus>() {
             setOnClick { position ->
                 mutableState?.position?.intValue = position
             }
-        }.OnCreate {
+        }.OnCreate(view = {
             content()
-        }
+        })
     }
 
     private fun itemList() = listOf(

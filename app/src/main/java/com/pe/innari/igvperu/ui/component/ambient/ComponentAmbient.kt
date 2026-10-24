@@ -5,6 +5,8 @@ import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 
 /**
  * Clase base abstracta para componentes ambientales o visuales de la interfaz de usuario.
@@ -29,6 +31,16 @@ abstract class ComponentAmbient {
      */
     @Composable
     open fun OnCreate(view: @Composable () -> Unit) {
+    }
+
+    /**
+     * Sobrecarga de la función composable [OnCreate] para componentes de navegación que reciben
+     * un ámbito de proveedor de entradas [EntryProviderScope].
+     *
+     * @param entry Función composable que define las entradas de navegación en el ámbito [EntryProviderScope].
+     */
+    @Composable
+    open fun OnCreate(entry: @Composable (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
     }
 
     /**
