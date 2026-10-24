@@ -12,7 +12,7 @@ import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
  * @property editTextComponentType Tipo de entrada permitida ([EditTextComponentType.INTEGER] o [EditTextComponentType.DECIMAL]).
  * @property isDeactivate Indica si el campo de texto está activo o deshabilitado (true para habilitado).
  */
-class EditText(
+data class EditText(
     val state: TextFieldState,
     val prefixLabel: String,
     val editTextComponentType: EditTextComponentType = EditTextComponentType.INTEGER,
