@@ -14,5 +14,10 @@ interface BottomNavigationComponentCallback {
      */
     fun setPosition(index: Int) {}
 
+    /**
+     * Notifica la clave de navegación [NavKey] seleccionada.
+     *
+     * @param navKey Clave de navegación del elemento seleccionado.
+     */
     fun setNavKey(navKey: NavKey) {}
 }
