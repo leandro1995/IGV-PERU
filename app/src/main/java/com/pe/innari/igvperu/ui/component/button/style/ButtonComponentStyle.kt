@@ -1,10 +1,12 @@
 package com.pe.innari.igvperu.ui.component.button.style
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.theme.Dimen1
+import com.pe.innari.igvperu.ui.theme.Dimen12
 
 /**
  * Objeto de utilidad que encapsula los estilos, colores y bordes reutilizables
@@ -71,4 +73,6 @@ object ButtonComponentStyle {
         width = Dimen1,
         color = MaterialTheme.colorScheme.error,
     )
+
+    fun shape() = RoundedCornerShape(Dimen12)
 }
