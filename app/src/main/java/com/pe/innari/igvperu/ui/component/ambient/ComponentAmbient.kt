@@ -34,7 +34,7 @@ abstract class ComponentAmbient {
     }
 
     @Composable
-    open fun OnCreate(view: @Composable (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
+    open fun OnCreate(entry: @Composable (entryProviderScope: EntryProviderScope<NavKey>) -> Unit) {
     }
 
     /**
