@@ -8,7 +8,7 @@ import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
  * @property isError Indica si el campo se encuentra en estado de error visual (true) o normal (false).
  * @property errorLabel Texto del mensaje de error mostrado debajo del campo cuando [isError] es true.
  */
-class ErrorEditText(
+data class ErrorEditText(
     val isError: Boolean = false,
     val errorLabel: String = ""
 )
