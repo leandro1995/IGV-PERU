@@ -5,8 +5,16 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.runtime.Composable
 
+/**
+ * Objeto de utilidad que define los estilos y colores para los componentes de navegación
+ * ([com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent]), tanto en modo barra inferior
+ * como riel lateral.
+ */
 object BottomNavigationComponentStyle {
 
+    /**
+     * Retorna la configuración de colores para los elementos de la barra de navegación inferior.
+     */
     @Composable
     fun bottomNavigationBarColor() = NavigationBarItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
@@ -16,6 +24,9 @@ object BottomNavigationComponentStyle {
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
     )
 
+    /**
+     * Retorna la configuración de colores para los elementos del riel de navegación lateral.
+     */
     @Composable
     fun navigationRailBarColor() = NavigationRailItemDefaults.colors(
         indicatorColor = MaterialTheme.colorScheme.primaryContainer,
