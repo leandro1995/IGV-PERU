@@ -3,6 +3,8 @@ package com.pe.innari.igvperu.ui.component.edittext.style
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
+import com.pe.innari.igvperu.ui.theme.Dimen1
+import com.pe.innari.igvperu.ui.theme.Dimen2
 
 /**
  * Objeto de utilidad que define los estilos, colores y propiedades visuales
@@ -54,5 +56,11 @@ object EditTextComponentStyle {
         isError -> MaterialTheme.colorScheme.error
         isFocused -> MaterialTheme.colorScheme.primary
         else -> MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    fun thicknessDivider(isFocused: Boolean) = if (isFocused) {
+        Dimen2
+    } else {
+        Dimen1
     }
 }
