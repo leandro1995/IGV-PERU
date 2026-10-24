@@ -38,6 +38,11 @@ object BottomNavigationComponentStyle {
         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
     )
 
+    /**
+     * Retorna el estilo tipográfico para la etiqueta del elemento de navegación según su estado de selección.
+     *
+     * @param isSelected Indica si el elemento de navegación está seleccionado.
+     */
     fun labelItemBottomNavigationSelect(isSelected: Boolean) = if (isSelected) {
         ItemSelectBottomNavigationComponent
     } else {
