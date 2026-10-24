@@ -10,7 +10,7 @@ import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
  * @property icon Recurso drawable opcional para mostrar un icono a la izquierda del texto.
  * @property buttonComponentType Tipo o variante de diseño del botón ([ButtonComponentType]).
  */
-class Button(
+data class Button(
     val label: String,
     @DrawableRes val icon: Int? = null,
     val buttonComponentType: ButtonComponentType = ButtonComponentType.PRIMARY
