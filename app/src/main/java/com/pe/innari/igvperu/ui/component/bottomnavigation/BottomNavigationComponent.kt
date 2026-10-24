@@ -163,11 +163,7 @@ class BottomNavigationComponent(
     @Composable
     private fun NavigationItemLabel(label: String, isSelected: Boolean) = Text(
         text = label,
-        style = if (isSelected) {
-            ItemSelectBottomNavigationComponent
-        } else {
-            ItemDeselectedBottomNavigationComponent
-        },
+        style = BottomNavigationComponentStyle.labelItemBottomNavigationSelect(isSelected = isSelected)
     )
 
     private fun isItemSelected(index: Int): Boolean = position == index
