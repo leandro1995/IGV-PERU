@@ -68,6 +68,21 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
         )
     }
 
+    /**
+     * Configura el listener de clic para el botón.
+     *
+     * @param onClick Función lambda a ejecutar cuando se presione el botón.
+     */
+    fun setOnClick(onClick: () -> Unit) {
+        if (buttonComponentCallBack == null) {
+            buttonComponentCallBack = object : ButtonComponentCallBack {
+                override fun setOnClick() {
+                    onClick()
+                }
+            }
+        }
+    }
+
     @Composable
     private fun PrimaryButton() {
         ButtonMaterialPrimary(
@@ -131,21 +146,6 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
             },
         ) {
             ContentButton()
-        }
-    }
-
-    /**
-     * Configura el listener de clic para el botón.
-     *
-     * @param onClick Función lambda a ejecutar cuando se presione el botón.
-     */
-    fun setOnClick(onClick: () -> Unit) {
-        if (buttonComponentCallBack == null) {
-            buttonComponentCallBack = object : ButtonComponentCallBack {
-                override fun setOnClick() {
-                    onClick()
-                }
-            }
         }
     }
 
