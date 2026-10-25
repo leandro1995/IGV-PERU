@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.screen
+package com.pe.innari.igvperu.ui.screen.home
 
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.view.ViewAmbient
