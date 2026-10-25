@@ -45,8 +45,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Companion object containing constants for [MainActivity].
+     */
     companion object {
-        /** Delay in seconds before dismissing the splash screen. */
         private const val SPLASH_SCREEN_DELAY = 1L
     }
 }
