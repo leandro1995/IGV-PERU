@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pe.innari.igvperu.background.TimerBackGround
 import com.pe.innari.igvperu.background.type.TimeBackGroundType
-import com.pe.innari.igvperu.ui.screen.HomeScreen
+import com.pe.innari.igvperu.ui.screen.home.HomeScreen
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 /**
