@@ -1,13 +1,31 @@
 package com.pe.innari.igvperu.ui.screen.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
+import com.pe.innari.igvperu.ui.theme.Dimen10
+import com.pe.innari.igvperu.ui.theme.Dimen12
+import com.pe.innari.igvperu.ui.theme.Dimen13
+import com.pe.innari.igvperu.ui.theme.Dimen20
+import com.pe.innari.igvperu.ui.theme.Dimen48
+import com.pe.innari.igvperu.ui.theme.TextInformation
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -17,6 +35,7 @@ class CalculatorScreen : ViewAmbient<Any>() {
     override fun View() {
         Column(modifier = Modifier.fillMaxSize()) {
             ToolbarComponent(toolbar = toolbar()).OnCreate()
+            CalculationView()
         }
     }
 
@@ -26,6 +45,34 @@ class CalculatorScreen : ViewAmbient<Any>() {
         title = stringResource(R.string.calculator_toolbar),
         subtitle = stringResource(R.string.calculator_subtitle_toolbar)
     )
+
+    @Composable
+    private fun CalculationView() {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimen48)
+                .background(
+                    color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(
+                        size = Dimen12
+                    )
+                ), verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.padding(start = Dimen13)) {
+                Icon(
+                    modifier = Modifier.size(Dimen20),
+                    painter = painterResource(R.drawable.ic_info),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
+            Text(
+                style = TextInformation,
+                modifier = Modifier.padding(start = Dimen10, end = Dimen13),
+                text = stringResource(R.string.calculator_information)
+            )
+        }
+    }
 
     @AdaptivePreview
     @Composable
