@@ -58,7 +58,9 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
             }
         }.OnCreate(view = {
             NavigationComponent(backStack = mutableState?.navKey.orEmpty()).apply {
-                setOnBackPressed { }
+                setOnBackPressed {
+                    activity?.finishAffinity()
+                }
             }.OnCreate(entry = { entry ->
                 entry.entry<HomeScreenNavigation.Calculator> {
                     Text("Calculator")
