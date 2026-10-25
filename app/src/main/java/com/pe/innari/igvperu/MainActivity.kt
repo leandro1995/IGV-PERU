@@ -16,6 +16,10 @@ import com.pe.innari.igvperu.background.TimerBackGround
 import com.pe.innari.igvperu.background.type.TimeBackGroundType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
+/**
+ * Main entry point activity for the application.
+ * Handles splash screen initialization, edge-to-edge layout, and initial Compose UI tree.
+ */
 class MainActivity : ComponentActivity() {
 
     private val timerBackGround = TimerBackGround(
@@ -42,10 +46,17 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
+        /** Delay in seconds before dismissing the splash screen. */
         private const val SPLASH_SCREEN_DELAY = 1L
     }
 }
 
+/**
+ * A sample greeting composable displaying a welcoming message.
+ *
+ * @param name The name to display in the greeting.
+ * @param modifier Optional modifier for styling or layout.
+ */
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -53,6 +64,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * Preview composable for [Greeting].
+ */
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
