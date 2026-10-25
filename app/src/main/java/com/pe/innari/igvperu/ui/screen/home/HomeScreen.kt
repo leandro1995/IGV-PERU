@@ -44,7 +44,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun View() {
-        BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.BAR_NAVIGATION)
+        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.BAR_NAVIGATION)
     }
 
     /**
@@ -53,7 +53,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun PhoneLandscape() {
-        BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
+        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
     /**
@@ -62,7 +62,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun TabletPortrait() {
-        BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
+        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
     /**
@@ -72,10 +72,10 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      * @param bottomNavigationComponentType Tipo de navegación a presentar (Barra o Riel).
      */
     @Composable
-    private fun BottomNavigation(bottomNavigationComponentType: BottomNavigationComponentType) =
+    private fun RenderBottomNavigation(bottomNavigationComponentType: BottomNavigationComponentType) =
         BottomNavigationComponent(
             bottomNavigationComponentType = bottomNavigationComponentType,
-            itemList = homeItemBottonNavigation(),
+            itemList = getHomeBottomNavigationItems(),
             position = mutableState?.position?.intValue.orEmpty()
         ).apply {
             setPosition { position ->
@@ -113,7 +113,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      * @return Lista mutable con los elementos de navegación.
      */
     @Composable
-    private fun homeItemBottonNavigation() = mutableListOf(
+    private fun getHomeBottomNavigationItems() = mutableListOf(
         ItemBottomNavigation(
             icon = R.drawable.ic_calculator,
             label = stringResource(R.string.calculator_bottom_navigation),
