@@ -44,7 +44,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun View() {
-        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.BAR_NAVIGATION)
+        HomeBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.BAR_NAVIGATION)
     }
 
     /**
@@ -53,7 +53,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun PhoneLandscape() {
-        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
+        HomeBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
     /**
@@ -62,20 +62,14 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
      */
     @Composable
     override fun TabletPortrait() {
-        RenderBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
+        HomeBottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
-    /**
-     * Configura y renderiza el componente de navegación adaptativo [BottomNavigationComponent]
-     * e integra las rutas de contenido mediante [NavigationComponent].
-     *
-     * @param bottomNavigationComponentType Tipo de navegación a presentar (Barra o Riel).
-     */
     @Composable
-    private fun RenderBottomNavigation(bottomNavigationComponentType: BottomNavigationComponentType) =
+    private fun HomeBottomNavigation(bottomNavigationComponentType: BottomNavigationComponentType) =
         BottomNavigationComponent(
             bottomNavigationComponentType = bottomNavigationComponentType,
-            itemList = getHomeBottomNavigationItems(),
+            itemList = homeBottomNavigationItems(),
             position = mutableState?.position?.intValue.orEmpty()
         ).apply {
             setPosition { position ->
@@ -106,14 +100,8 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
             })
         })
 
-    /**
-     * Construye la lista de elementos ([ItemBottomNavigation]) que se mostrarán
-     * en el menú de navegación principal.
-     *
-     * @return Lista mutable con los elementos de navegación.
-     */
     @Composable
-    private fun getHomeBottomNavigationItems() = mutableListOf(
+    private fun homeBottomNavigationItems() = mutableListOf(
         ItemBottomNavigation(
             icon = R.drawable.ic_calculator,
             label = stringResource(R.string.calculator_bottom_navigation),
