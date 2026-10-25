@@ -1,13 +1,13 @@
 package com.pe.innari.igvperu.background.type
 
 /**
- * Represents the time units supported by [com.pe.innari.igvperu.background.TimerBackGround].
+ * Representa las unidades de tiempo soportadas por [com.pe.innari.igvperu.background.TimerBackGround].
  */
 enum class TimeBackGroundType {
-    /** Represents hours. */
+    /** Representa horas. */
     HOURS,
-    /** Represents minutes. */
+    /** Representa minutos. */
     MINUTES,
-    /** Represents seconds. */
+    /** Representa segundos. */
     SECONDS
 }
