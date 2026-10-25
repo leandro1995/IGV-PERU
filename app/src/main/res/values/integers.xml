@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Splash screen -->
+    <integer name="splash_screen_time_out">200</integer>
+</resources>
