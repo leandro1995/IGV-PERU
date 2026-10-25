@@ -17,8 +17,8 @@ import com.pe.innari.igvperu.background.type.TimeBackGroundType
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 /**
- * Main entry point activity for the application.
- * Handles splash screen initialization, edge-to-edge layout, and initial Compose UI tree.
+ * Actividad principal y punto de entrada para la aplicación.
+ * Maneja la inicialización de la pantalla de bienvenida (Splash Screen), el diseño edge-to-edge y el árbol inicial de Compose.
  */
 class MainActivity : ComponentActivity() {
 
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
     }
 
     /**
-     * Companion object containing constants for [MainActivity].
+     * Objeto de compañía que contiene constantes para [MainActivity].
      */
     companion object {
         private const val SPLASH_SCREEN_DELAY = 1L
@@ -54,10 +54,10 @@ class MainActivity : ComponentActivity() {
 }
 
 /**
- * A sample greeting composable displaying a welcoming message.
+ * Composable de saludo de ejemplo que muestra un mensaje de bienvenida.
  *
- * @param name The name to display in the greeting.
- * @param modifier Optional modifier for styling or layout.
+ * @param name El nombre a mostrar en el saludo.
+ * @param modifier Modificador opcional para estilo o diseño.
  */
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -67,7 +67,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 /**
- * Preview composable for [Greeting].
+ * Composable de vista previa para [Greeting].
  */
 @Preview(showBackground = true)
 @Composable
