@@ -96,3 +96,5 @@ val ErrorEditTextComponent = TextStyle(
 val LabelButtonComponent = TextStyle(
     fontSize = Text13, fontFamily = FontFamily(Font(R.font.semi_bold))
 )
+
+val TextInformation = TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
