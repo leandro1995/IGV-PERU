@@ -13,13 +13,13 @@ class TimerBackGround(
 
     @Composable
     fun Start(view: () -> Unit) = LaunchedEffect(Unit) {
-        delay(timeType())
+        delay(timeType().milliseconds)
         view()
     }
 
     private fun timeType() = when (timeBackGroundType) {
-        TimeBackGroundType.HOURS -> TimeUnit.HOURS.toSeconds(duration).milliseconds
-        TimeBackGroundType.MINUTES -> TimeUnit.MINUTES.toSeconds(duration).milliseconds
-        TimeBackGroundType.SECONDS -> TimeUnit.SECONDS.toSeconds(duration).milliseconds
+        TimeBackGroundType.HOURS -> TimeUnit.HOURS.toMillis(duration)
+        TimeBackGroundType.MINUTES -> TimeUnit.MINUTES.toMillis(duration)
+        TimeBackGroundType.SECONDS -> TimeUnit.SECONDS.toMillis(duration)
     }
 }
