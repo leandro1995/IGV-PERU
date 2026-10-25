@@ -48,6 +48,11 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
             })
     }
 
+    /**
+     * Configura el listener para el evento de presionar el botón atrás en la navegación.
+     *
+     * @param method Función lambda que se ejecutará al activarse el evento atrás.
+     */
     fun setOnBackPressed(method: () -> Unit) {
         if (navigationComponentCallback == null) {
             navigationComponentCallback = NavigationComponentCallback(method)
