@@ -8,20 +8,20 @@ import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.milliseconds
 
 /**
- * Utility class to handle time-based background delays and actions in Jetpack Compose.
+ * Clase utilitaria para gestionar retardos y acciones temporizadas en segundo plano dentro de Jetpack Compose.
  *
- * @property timeBackGroundType The time unit type (Hours, Minutes, Seconds).
- * @property duration The duration value in the specified time unit.
+ * @property timeBackGroundType El tipo de unidad de tiempo (Horas, Minutos, Segundos).
+ * @property duration El valor de duración en la unidad de tiempo especificada.
  */
 class TimerBackGround(
     private var timeBackGroundType: TimeBackGroundType, private var duration: Long
 ) {
 
     /**
-     * Starts a coroutine delay based on the configured duration and unit,
-     * executing [view] once the delay completes.
+     * Inicia un retardo en una corrutina basado en la duración y unidad configuradas,
+     * ejecutando [view] una vez finalizado el retardo.
      *
-     * @param view Callback invoked after the timer finishes.
+     * @param view Retrollamada (callback) ejecutada al finalizar el temporizador.
      */
     @Composable
     fun Start(view: () -> Unit) = LaunchedEffect(Unit) {
