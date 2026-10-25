@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pe.innari.igvperu.background.TimerBackGround
 import com.pe.innari.igvperu.background.type.TimeBackGroundType
+import com.pe.innari.igvperu.ui.screen.HomeScreen
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 
 /**
@@ -15,6 +16,8 @@ import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
  * Maneja la inicialización de la pantalla de bienvenida (Splash Screen), el diseño edge-to-edge y el árbol inicial de Compose.
  */
 class MainActivity : ComponentActivity() {
+
+    private val homeScreen = HomeScreen()
 
     private val timerBackGround = TimerBackGround(
         timeBackGroundType = TimeBackGroundType.SECONDS, duration = SPLASH_SCREEN_DELAY
@@ -35,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun View() = IGVPERUTheme(dynamicColor = false) {
-
+        homeScreen.OnCreate()
     }
 
     /**
