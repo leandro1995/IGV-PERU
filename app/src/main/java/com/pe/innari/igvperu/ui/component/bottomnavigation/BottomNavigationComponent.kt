@@ -24,8 +24,6 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavig
 import com.pe.innari.igvperu.ui.component.bottomnavigation.style.BottomNavigationComponentStyle
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationComponentType
 import com.pe.innari.igvperu.ui.theme.Dimen1
-import com.pe.innari.igvperu.ui.theme.ItemDeselectedBottomNavigationComponent
-import com.pe.innari.igvperu.ui.theme.ItemSelectBottomNavigationComponent
 
 /**
  * Componente visual de navegación que permite alternar entre distintas pantallas utilizando
@@ -41,7 +39,8 @@ class BottomNavigationComponent(
     private val position: Int,
 ) : ComponentAmbient() {
 
-    private var navigationCallback: BottomNavigationComponentCallback? = null
+    private var itemPositionNavigationCallback: BottomNavigationComponentCallback? = null
+    private var itemNavKeyNavigationCallback: BottomNavigationComponentCallback? = null
 
     /**
      * Renderiza el contenedor de navegación (barra inferior o riel lateral) envolviendo la vista [view] suministrada.
@@ -99,8 +98,8 @@ class BottomNavigationComponent(
      * @param itemPosition Función que recibe la posición (índice) del elemento seleccionado.
      */
     fun setPosition(itemPosition: (position: Int) -> Unit) {
-        if (navigationCallback == null) {
-            navigationCallback = object : BottomNavigationComponentCallback {
+        if (itemPositionNavigationCallback == null) {
+            itemPositionNavigationCallback = object : BottomNavigationComponentCallback {
                 override fun setPosition(index: Int) {
                     itemPosition(index)
                 }
@@ -114,8 +113,8 @@ class BottomNavigationComponent(
      * @param itemNavKey Función que recibe la [NavKey] del elemento seleccionado.
      */
     fun setNavKey(itemNavKey: (navKey: NavKey) -> Unit) {
-        if (navigationCallback == null) {
-            navigationCallback = object : BottomNavigationComponentCallback {
+        if (itemNavKeyNavigationCallback == null) {
+            itemNavKeyNavigationCallback = object : BottomNavigationComponentCallback {
                 override fun setNavKey(navKey: NavKey) {
                     itemNavKey(navKey)
                 }
@@ -129,7 +128,8 @@ class BottomNavigationComponent(
             itemList.forEachIndexed { index, item ->
                 NavigationBarItem(
                     selected = isItemSelected(index = index), onClick = {
-                        navigationCallback?.setPosition(index = index)
+                        itemPositionNavigationCallback?.setPosition(index = index)
+                        itemNavKeyNavigationCallback?.setNavKey(navKey = item.navKey)
                     }, icon = {
                         NavigationItemIcon(iconResId = item.icon)
                     }, label = {
@@ -148,7 +148,9 @@ class BottomNavigationComponent(
             itemList.forEachIndexed { index, item ->
                 NavigationRailItem(
                     selected = isItemSelected(index = index), onClick = {
-                        navigationCallback?.setPosition(index = index)
+                        itemPositionNavigationCallback?.setPosition(index = index)
+                        itemNavKeyNavigationCallback?.setNavKey(navKey = item.navKey)
+
                     }, icon = {
                         NavigationItemIcon(iconResId = item.icon)
                     }, label = {
