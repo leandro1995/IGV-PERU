@@ -17,8 +17,19 @@ import com.pe.innari.igvperu.ui.screen.home.status.HomeScreenStatus
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
+/**
+ * Pantalla principal de la aplicación que hereda de [ViewAmbient].
+ *
+ * Implementa una interfaz adaptativa (barra inferior para móviles verticales y riel lateral para
+ * móviles horizontales y tabletas) utilizando [BottomNavigationComponent] y gestiona la navegación
+ * entre secciones mediante [NavigationComponent] con Jetpack Navigation 3.
+ */
 class HomeScreen : ViewAmbient<HomeScreenStatus>() {
 
+    /**
+     * Inicializa y recupera el estado mutable [HomeScreenStatus] conservando
+     * la posición seleccionada y la pila de navegación tras cambios de configuración.
+     */
     @Composable
     override fun InstanceMutableState() {
         mutableState = HomeScreenStatus(
@@ -27,21 +38,39 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
         )
     }
 
+    /**
+     * Vista principal para teléfonos en modo vertical (portrait).
+     * Renderiza la navegación inferior en formato de barra ([BottomNavigationComponentType.BAR_NAVIGATION]).
+     */
     @Composable
     override fun View() {
         BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.BAR_NAVIGATION)
     }
 
+    /**
+     * Vista para teléfonos en modo horizontal (landscape).
+     * Renderiza la navegación lateral en formato de riel ([BottomNavigationComponentType.RAIL_NAVIGATION]).
+     */
     @Composable
     override fun PhoneLandscape() {
         BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
+    /**
+     * Vista para tabletas en modo vertical (portrait).
+     * Renderiza la navegación lateral en formato de riel ([BottomNavigationComponentType.RAIL_NAVIGATION]).
+     */
     @Composable
     override fun TabletPortrait() {
         BottomNavigation(bottomNavigationComponentType = BottomNavigationComponentType.RAIL_NAVIGATION)
     }
 
+    /**
+     * Configura y renderiza el componente de navegación adaptativo [BottomNavigationComponent]
+     * e integra las rutas de contenido mediante [NavigationComponent].
+     *
+     * @param bottomNavigationComponentType Tipo de navegación a presentar (Barra o Riel).
+     */
     @Composable
     private fun BottomNavigation(bottomNavigationComponentType: BottomNavigationComponentType) =
         BottomNavigationComponent(
@@ -77,6 +106,12 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
             })
         })
 
+    /**
+     * Construye la lista de elementos ([ItemBottomNavigation]) que se mostrarán
+     * en el menú de navegación principal.
+     *
+     * @return Lista mutable con los elementos de navegación.
+     */
     @Composable
     private fun homeItemBottonNavigation() = mutableListOf(
         ItemBottomNavigation(
@@ -101,6 +136,9 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
         ),
     )
 
+    /**
+     * Genera la vista previa adaptativa en Android Studio utilizando la anotación [AdaptivePreview].
+     */
     @AdaptivePreview
     @Composable
     override fun Preview() {
