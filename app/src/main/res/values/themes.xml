@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme with no action bar -->
+    <!-- Tema base de la aplicación sin barra de acción -->
     <style name="Theme.IGVPERU" parent="android:Theme.Material.Light.NoActionBar" />
 
-    <!-- Splash screen theme configuration conforming to Core Splash Screen API -->
+    <!-- Configuración del tema para la pantalla de bienvenida (Splash Screen) conforme a la API Core SplashScreen -->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <!-- Background color of the splash screen -->
+        <!-- Color de fondo de la pantalla de bienvenida -->
         <item name="windowSplashScreenBackground">@color/splash_screen_background</item>
-        <!-- Icon displayed during splash screen -->
+        <!-- Ícono mostrado durante la pantalla de bienvenida -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher</item>
-        <!-- Duration of splash screen animation/timeout -->
+        <!-- Duración de la animación o tiempo de espera de la pantalla de bienvenida -->
         <item name="windowSplashScreenAnimationDuration">@integer/splash_screen_time_out</item>
-        <!-- Theme to apply after splash screen dismisses -->
+        <!-- Tema a aplicar después de ocultar la pantalla de bienvenida -->
         <item name="postSplashScreenTheme">@style/Theme.IGVPERU</item>
     </style>
 </resources>
