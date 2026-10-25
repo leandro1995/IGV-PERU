@@ -10,6 +10,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
+import com.pe.innari.igvperu.ui.component.navigation.callback.NavigationComponentCallback
 
 /**
  * Componente de navegación que hereda de [ComponentAmbient].
@@ -21,6 +22,8 @@ import com.pe.innari.igvperu.ui.component.ambient.ComponentAmbient
  */
 class NavigationComponent(private val backStack: NavBackStack<NavKey>) : ComponentAmbient() {
 
+    private var navigationComponentCallback: NavigationComponentCallback? = null
+
     /**
      * Renderiza el contenedor de navegación [NavDisplay] evaluando las entradas provistas por [entry].
      * Configura el manejo del botón atrás y desactiva las animaciones de transición predeterminadas.
@@ -31,7 +34,11 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
     override fun OnCreate(entry: @Composable ((entryProviderScope: EntryProviderScope<NavKey>) -> Unit)) {
         NavDisplay(
             backStack = backStack,
-            onBack = { backStack.removeLastOrNull() },
+            onBack = {
+                navigationComponentCallback?.setOnBackPressed() ?: run {
+                    backStack.removeLastOrNull()
+                }
+            },
             sizeTransform = null,
             transitionSpec = { animationDisable() },
             popTransitionSpec = { animationDisable() },
@@ -39,6 +46,12 @@ class NavigationComponent(private val backStack: NavBackStack<NavKey>) : Compone
             entryProvider = entryProvider {
                 entry(this)
             })
+    }
+
+    fun setOnBackPressed(method: () -> Unit) {
+        if (navigationComponentCallback == null) {
+            navigationComponentCallback = NavigationComponentCallback(method)
+        }
     }
 
     private fun animationDisable() = EnterTransition.None togetherWith ExitTransition.None
