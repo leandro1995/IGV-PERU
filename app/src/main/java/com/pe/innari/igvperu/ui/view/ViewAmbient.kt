@@ -1,5 +1,7 @@
 package com.pe.innari.igvperu.ui.view
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.theme.IGVPERUTheme
 import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
@@ -15,6 +17,8 @@ import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
  */
 abstract class ViewAmbient<S> {
 
+    protected var activity: Activity? = null
+
     /**
      * Estado mutable local gestionado por la vista.
      */
@@ -28,6 +32,7 @@ abstract class ViewAmbient<S> {
      */
     @Composable
     fun OnCreate() {
+        Instance()
         InstanceMutableState()
         OrientationAdaptive.ViewType(
             phonePortrait = { View() },
@@ -84,4 +89,9 @@ abstract class ViewAmbient<S> {
      */
     @Composable
     protected open fun Preview() = IGVPERUTheme(dynamicColor = false) { OnCreate() }
+
+    @Composable
+    private fun Instance() {
+        activity = LocalActivity.current
+    }
 }
