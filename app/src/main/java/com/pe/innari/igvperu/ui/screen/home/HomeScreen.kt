@@ -1,14 +1,17 @@
 package com.pe.innari.igvperu.ui.screen.home
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.res.stringResource
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationComponent
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationComponentType
+import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
 import com.pe.innari.igvperu.ui.screen.home.navigation.HomeScreenNavigation
 import com.pe.innari.igvperu.ui.screen.home.status.HomeScreenStatus
 import com.pe.innari.igvperu.ui.view.ViewAmbient
@@ -18,7 +21,10 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
 
     @Composable
     override fun InstanceMutableState() {
-        mutableState = HomeScreenStatus(position = rememberSaveable { mutableIntStateOf(0) })
+        mutableState = HomeScreenStatus(
+            position = rememberSaveable { mutableIntStateOf(0) },
+            navKey = rememberNavBackStack(HomeScreenNavigation.Calculator)
+        )
     }
 
     @Composable
@@ -46,7 +52,26 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
             setPosition { position ->
                 mutableState?.position?.intValue = position
             }
-        }.OnCreate(view = {})
+
+            setNavKey { navKey ->
+                mutableState?.navKey?.add(navKey)
+            }
+        }.OnCreate(view = {
+            NavigationComponent(backStack = mutableState?.navKey.orEmpty()).OnCreate(entry = { entry ->
+                entry.entry<HomeScreenNavigation.Calculator> {
+                    Text("Calculator")
+                }
+                entry.entry<HomeScreenNavigation.History> {
+                    Text("History")
+                }
+                entry.entry<HomeScreenNavigation.Calendar> {
+                    Text("Calendar")
+                }
+                entry.entry<HomeScreenNavigation.Configuration> {
+                    Text("Configuration")
+                }
+            })
+        })
 
     @Composable
     private fun homeItemBottonNavigation() = mutableListOf(
