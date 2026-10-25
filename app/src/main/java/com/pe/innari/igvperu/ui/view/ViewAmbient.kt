@@ -17,6 +17,9 @@ import com.pe.innari.igvperu.ui.view.adaptive.OrientationAdaptive
  */
 abstract class ViewAmbient<S> {
 
+    /**
+     * Referencia opcional a la actividad [Activity] actual en la que se ejecuta la vista.
+     */
     protected var activity: Activity? = null
 
     /**
