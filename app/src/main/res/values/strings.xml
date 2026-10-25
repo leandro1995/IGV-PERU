@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">IGV PERU</string>
 
+    <!-- Toolbar -->
+    <string name="calculator_toolbar">Calculadora</string>
+    <string name="calculator_subtitle_toolbar">Calcula y comprende el IGV</string>
+
     <!-- Bottom Navigation -->
     <string name="calculator_bottom_navigation">Calculadora</string>
     <string name="history_bottom_navigation">Historial</string>
