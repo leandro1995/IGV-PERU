@@ -36,11 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             timerBackGround.Start { splashScreenDisable = false }
             IGVPERUTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android", modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
             }
         }
     }
@@ -50,29 +46,5 @@ class MainActivity : ComponentActivity() {
      */
     companion object {
         private const val SPLASH_SCREEN_DELAY = 1L
-    }
-}
-
-/**
- * Composable de saludo de ejemplo que muestra un mensaje de bienvenida.
- *
- * @param name El nombre a mostrar en el saludo.
- * @param modifier Modificador opcional para estilo o diseño.
- */
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!", modifier = modifier
-    )
-}
-
-/**
- * Composable de vista previa para [Greeting].
- */
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IGVPERUTheme {
-        Greeting("Android")
     }
 }
