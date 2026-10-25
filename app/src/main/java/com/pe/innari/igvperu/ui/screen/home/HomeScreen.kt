@@ -86,7 +86,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
                 }
             }.OnCreate(entry = { entry ->
                 entry.entry<HomeScreenNavigation.Calculator> {
-                    Text("Calculator")
+                    CalculatorScreen().OnCreate()
                 }
                 entry.entry<HomeScreenNavigation.History> {
                     Text("History")
