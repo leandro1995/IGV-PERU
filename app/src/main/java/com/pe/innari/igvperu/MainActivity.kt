@@ -29,11 +29,12 @@ class MainActivity : ComponentActivity() {
         screenSplash.setKeepOnScreenCondition { splashScreenDisable }
         setContent {
             timerBackGround.Start { splashScreenDisable = false }
+            View()
         }
     }
 
     @Composable
-    private fun View() = IGVPERUTheme {
+    private fun View() = IGVPERUTheme(dynamicColor = false) {
 
     }
 
