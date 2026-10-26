@@ -37,6 +37,7 @@ import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.TextInformation
+import com.pe.innari.igvperu.ui.theme.TextMessage
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -119,7 +120,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
             }
             Text(
-                style = TextInformation,
+                style = TextMessage,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = Dimen10, end = Dimen13),
                 text = stringResource(R.string.calculator_information)
