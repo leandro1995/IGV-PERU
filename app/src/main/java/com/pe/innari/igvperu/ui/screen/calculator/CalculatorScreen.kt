@@ -9,19 +9,27 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
+import com.pe.innari.igvperu.extension.orEmpty
+import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
+import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
 import com.pe.innari.igvperu.ui.component.tab.TabComponent
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
+import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen13
@@ -31,7 +39,15 @@ import com.pe.innari.igvperu.ui.theme.TextInformation
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
-class CalculatorScreen : ViewAmbient<Any>() {
+class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
+
+    @Composable
+    override fun InstanceMutableState() {
+        mutableState = CalculatorScreenStatus(
+            subTotal = remember { TextFieldState() },
+            igv = remember { TextFieldState() },
+            total = remember { TextFieldState() })
+    }
 
     @Composable
     override fun View() {
@@ -75,7 +91,32 @@ class CalculatorScreen : ViewAmbient<Any>() {
             )
         }
         TabComponent(itemList = calculatorTabItems(), position = 0).OnCreate()
+        EditTextView(
+            state = mutableState?.subTotal.orEmpty(),
+            prefixLabel = stringResource(R.string.sub_total_edit_text)
+        )
+        EditTextView(
+            state = mutableState?.igv.orEmpty(),
+            prefixLabel = stringResource(R.string.igv_edit_text, 18)
+        )
+        EditTextView(
+            state = mutableState?.total.orEmpty(),
+            prefixLabel = stringResource(R.string.total_edit_text)
+        )
     }
+
+    @Composable
+    private fun EditTextView(
+        state: TextFieldState,
+        prefixLabel: String,
+    ) = EditTextComponent(
+        editText = EditText(
+            state = state,
+            prefixLabel = prefixLabel,
+            editTextComponentType = EditTextComponentType.DECIMAL
+        ),
+        suffixEditText = SuffixEditText(suffixLeftLabel = stringResource(R.string.sun_money_edit_text))
+    ).OnCreate()
 
     @Composable
     private fun calculatorTabItems() = mutableListOf(
