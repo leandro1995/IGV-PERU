@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,9 +32,11 @@ import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
+import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen13
+import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.TextInformation
@@ -57,6 +60,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         Column(modifier = Modifier.fillMaxSize()) {
             ToolbarComponent(toolbar = toolbar()).OnCreate()
             CalculationView()
+            TotalResponse()
         }
     }
 
@@ -95,8 +99,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             )
         }
         TabComponent(
-            itemList = calculatorTabItems(),
-            position = mutableState?.position?.intValue.orEmpty()
+            itemList = calculatorTabItems(), position = mutableState?.position?.intValue.orEmpty()
         ).OnCreate()
         EditTextView(
             state = mutableState?.subTotal.orEmpty(),
@@ -124,6 +127,32 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = Dimen10, end = Dimen13),
                 text = stringResource(R.string.calculator_information)
+            )
+        }
+    }
+
+    @Composable
+    private fun TotalResponse() {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    shape = RoundedCornerShape(size = Dimen18)
+                )
+        ) {
+            Text(
+                text = "Total de la operación", color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Text(text = "S/ 160.48", color = MaterialTheme.colorScheme.onPrimaryContainer)
+            HorizontalDivider(
+                thickness = Dimen1,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
+            )
+            Text(text = "Importe en letras", color = MaterialTheme.colorScheme.onPrimaryContainer)
+            Text(
+                text = "Ciento sesenta y 48/100 soles",
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
     }
