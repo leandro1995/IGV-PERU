@@ -12,6 +12,12 @@
     <string name="including_igv_tab">Con IGV</string>
     <string name="excluding_igv_tab">Sin IGV</string>
 
+    <!-- EditText -->
+    <string name="sub_total_edit_text">Sub Total</string>
+    <string name="igv_edit_text">IGV (%1$d %%)</string>
+    <string name="total_edit_text">Total</string>
+    <string name="sun_money_edit_text">S/</string>
+
     <!-- Bottom Navigation -->
     <string name="calculator_bottom_navigation">Calculadora</string>
     <string name="history_bottom_navigation">Historial</string>
