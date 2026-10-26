@@ -41,6 +41,10 @@ import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.TextInformation
 import com.pe.innari.igvperu.ui.theme.TextMessage
+import com.pe.innari.igvperu.ui.theme.TextNumberResult
+import com.pe.innari.igvperu.ui.theme.TextSubTitleResult
+import com.pe.innari.igvperu.ui.theme.TextTitleResult
+import com.pe.innari.igvperu.ui.theme.TextTotalResult
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -142,15 +146,26 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
         ) {
             Text(
-                text = "Total de la operación", color = MaterialTheme.colorScheme.onPrimaryContainer
+                style = TextTitleResult,
+                text = "Total de la operación",
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
-            Text(text = "S/ 160.48", color = MaterialTheme.colorScheme.onPrimaryContainer)
+            Text(
+                style = TextTotalResult,
+                text = "S/ 160.48",
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
             HorizontalDivider(
                 thickness = Dimen1,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
             )
-            Text(text = "Importe en letras", color = MaterialTheme.colorScheme.onPrimaryContainer)
             Text(
+                style = TextSubTitleResult,
+                text = "Importe en letras",
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Text(
+                style = TextNumberResult,
                 text = "Ciento sesenta y 48/100 soles",
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
