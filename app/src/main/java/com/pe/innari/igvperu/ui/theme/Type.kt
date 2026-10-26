@@ -98,3 +98,5 @@ val LabelButtonComponent = TextStyle(
 )
 
 val TextInformation = TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
+
+val TextMessage = TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
