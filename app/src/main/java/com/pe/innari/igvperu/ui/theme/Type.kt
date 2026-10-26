@@ -114,3 +114,9 @@ val TextSubTitleResultCalculatorScreen =
 
 val TextNumberResultCalculatorScreen =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.regular)))
+
+val TitleCalculationDetailsCalculationScreen =
+    TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.semi_bold)))
+
+val FormulaCalculationDetailsCalculationScreen =
+    TextStyle(fontSize = Text13, fontFamily = FontFamily(Font(R.font.medium)))
