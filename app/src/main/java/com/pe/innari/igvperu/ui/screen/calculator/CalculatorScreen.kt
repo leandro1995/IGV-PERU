@@ -1,5 +1,6 @@
 package com.pe.innari.igvperu.ui.screen.calculator
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,9 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
@@ -137,38 +140,43 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
     @Composable
     private fun TotalResponse() {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    shape = RoundedCornerShape(size = Dimen18)
-                )
-        ) {
-            Text(
-                style = TextTitleResult,
-                text = "Total de la operación",
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Text(
-                style = TextTotalResult,
-                text = "S/ 160.48",
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            HorizontalDivider(
-                thickness = Dimen1,
+        OutlinedCard(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(size = Dimen18),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ),
+            border = BorderStroke(
+                width = Dimen1,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
             )
-            Text(
-                style = TextSubTitleResult,
-                text = "Importe en letras",
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Text(
-                style = TextNumberResult,
-                text = "Ciento sesenta y 48/100 soles",
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
+        ) {
+            Column {
+                Text(
+                    style = TextTitleResult,
+                    text = "Total de la operación",
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    style = TextTotalResult,
+                    text = "S/ 160.48",
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                HorizontalDivider(
+                    thickness = Dimen1,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
+                )
+                Text(
+                    style = TextSubTitleResult,
+                    text = "Importe en letras",
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    style = TextNumberResult,
+                    text = "Ciento sesenta y 48/100 soles",
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
         }
     }
 
