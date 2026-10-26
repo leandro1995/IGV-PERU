@@ -86,6 +86,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             }
             Text(
                 style = TextInformation,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.padding(start = Dimen10, end = Dimen13),
                 text = stringResource(R.string.calculator_information)
             )
@@ -103,6 +104,22 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             state = mutableState?.total.orEmpty(),
             prefixLabel = stringResource(R.string.total_edit_text)
         )
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.padding(start = Dimen13)) {
+                Icon(
+                    modifier = Modifier.size(Dimen20),
+                    painter = painterResource(R.drawable.ic_refresh),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            Text(
+                style = TextInformation,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = Dimen10, end = Dimen13),
+                text = stringResource(R.string.calculator_information)
+            )
+        }
     }
 
     @Composable
