@@ -154,12 +154,12 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             Column {
                 Text(
                     style = TextTitleResult,
-                    text = "Total de la operación",
+                    text = stringResource(R.string.information_calculator_screen),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
                     style = TextTotalResult,
-                    text = "S/ 160.48",
+                    text = stringResource(R.string.total_calculator_screen, 18.50),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 HorizontalDivider(
@@ -168,12 +168,12 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
                 Text(
                     style = TextSubTitleResult,
-                    text = "Importe en letras",
+                    text = stringResource(R.string.text_subtitle_calculator_screen),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
                     style = TextNumberResult,
-                    text = "Ciento sesenta y 48/100 soles",
+                    text = "",
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
