@@ -8,6 +8,10 @@
     <!-- Information -->
     <string name="calculator_information"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
 
+    <!-- Tab -->
+    <string name="including_igv_tab">Con IGV</string>
+    <string name="excluding_igv_tab">Sin IGV</string>
+
     <!-- Bottom Navigation -->
     <string name="calculator_bottom_navigation">Calculadora</string>
     <string name="history_bottom_navigation">Historial</string>
