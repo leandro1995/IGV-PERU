@@ -178,6 +178,40 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
             }
         }
+
+        OutlinedCard(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(size = Dimen18),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
+            ),
+            border = BorderStroke(
+                width = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+            )
+        ) {
+            Column {
+                Row {
+                    Text(text = stringResource(R.string.detail_type_calculator_screen))
+                }
+
+                Text("El monto ingresado ya incluye IGV.")
+                HorizontalDivider(
+                    thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(text = stringResource(R.string.lending_rate_calculator_screen))
+                Text("18 %")
+                HorizontalDivider(
+                    thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(text = stringResource(R.string.subtotal_formula_calculator_screen))
+                Text("160.48 ÷ 1.18 = 136.00")
+                HorizontalDivider(
+                    thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(text = stringResource(R.string.total_formula_calculator_screen))
+                Text("160.48 − 136.00 = 24.48")
+            }
+        }
     }
 
     @Composable
