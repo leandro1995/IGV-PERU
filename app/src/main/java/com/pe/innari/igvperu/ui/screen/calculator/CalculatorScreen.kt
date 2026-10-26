@@ -42,12 +42,12 @@ import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
-import com.pe.innari.igvperu.ui.theme.TextInformation
-import com.pe.innari.igvperu.ui.theme.TextMessage
-import com.pe.innari.igvperu.ui.theme.TextNumberResult
-import com.pe.innari.igvperu.ui.theme.TextSubTitleResult
-import com.pe.innari.igvperu.ui.theme.TextTitleResult
-import com.pe.innari.igvperu.ui.theme.TextTotalResult
+import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextMessageCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextNumberResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextTotalResultCalculatorScreen
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -99,7 +99,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
             }
             Text(
-                style = TextInformation,
+                style = TextInformationCalculatorScreen,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.padding(start = Dimen10, end = Dimen13),
                 text = stringResource(R.string.calculator_information)
@@ -130,7 +130,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
             }
             Text(
-                style = TextMessage,
+                style = TextMessageCalculatorScreen,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = Dimen10, end = Dimen13),
                 text = stringResource(R.string.calculator_information)
@@ -153,12 +153,12 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         ) {
             Column {
                 Text(
-                    style = TextTitleResult,
+                    style = TextTitleResultCalculatorScreen,
                     text = stringResource(R.string.information_calculator_screen),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    style = TextTotalResult,
+                    style = TextTotalResultCalculatorScreen,
                     text = stringResource(R.string.total_calculator_screen, 18.50),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -167,12 +167,12 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
                 )
                 Text(
-                    style = TextSubTitleResult,
+                    style = TextSubTitleResultCalculatorScreen,
                     text = stringResource(R.string.text_subtitle_calculator_screen),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    style = TextNumberResult,
+                    style = TextNumberResultCalculatorScreen,
                     text = "",
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
