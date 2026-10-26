@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -27,6 +29,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.extension.orEmpty
+import com.pe.innari.igvperu.ui.component.button.ButtonComponent
+import com.pe.innari.igvperu.ui.component.button.model.Button
+import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
 import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
 import com.pe.innari.igvperu.ui.component.edittext.model.EditText
 import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
@@ -69,7 +74,11 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
     @Composable
     override fun View() {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
             ToolbarComponent(toolbar = toolbar()).OnCreate()
             CalculationView()
             TotalResponse()
@@ -268,6 +277,41 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 )
             }
         }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1F)
+            ) {
+                ButtonComponent(
+                    button = Button(
+                        icon = R.drawable.ic_save,
+                        label = stringResource(R.string.save_amount_button)
+                    )
+                ).OnCreate()
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1F)
+            ) {
+                ButtonComponent(
+                    button = Button(
+                        icon = R.drawable.ic_share,
+                        label = stringResource(R.string.share_button),
+                        buttonComponentType = ButtonComponentType.SECONDARY
+                    )
+                ).OnCreate()
+            }
+        }
+        ButtonComponent(
+            button = Button(
+                icon = R.drawable.ic_clear,
+                label = stringResource(R.string.clear_button),
+                buttonComponentType = ButtonComponentType.OUTLINE
+            )
+        ).OnCreate()
     }
 
     @Composable
