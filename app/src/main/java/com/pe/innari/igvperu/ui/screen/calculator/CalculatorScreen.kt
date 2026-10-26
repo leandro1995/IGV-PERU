@@ -2,6 +2,7 @@ package com.pe.innari.igvperu.ui.screen.calculator
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,14 +41,18 @@ import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen18
+import com.pe.innari.igvperu.ui.theme.Dimen19
 import com.pe.innari.igvperu.ui.theme.Dimen20
+import com.pe.innari.igvperu.ui.theme.Dimen36
 import com.pe.innari.igvperu.ui.theme.Dimen48
+import com.pe.innari.igvperu.ui.theme.FormulaCalculationDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextMessageCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextNumberResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTotalResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TitleCalculationDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -191,25 +196,76 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         ) {
             Column {
                 Row {
-                    Text(text = stringResource(R.string.detail_type_calculator_screen))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1F)
+                    ) {
+                        Text(
+                            style = TitleCalculationDetailsCalculationScreen,
+                            text = stringResource(R.string.detail_type_calculator_screen)
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1F),
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .size(Dimen36)
+                                .background(
+                                    color = MaterialTheme.colorScheme.surfaceContainer,
+                                    shape = RoundedCornerShape(Dimen12)
+                                ),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(Dimen19),
+                                painter = painterResource(R.drawable.ic_detail),
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                 }
 
-                Text("El monto ingresado ya incluye IGV.")
+                Text(
+                    style = FormulaCalculationDetailsCalculationScreen,
+                    text = "El monto ingresado ya incluye IGV."
+                )
                 HorizontalDivider(
                     thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
                 )
-                Text(text = stringResource(R.string.lending_rate_calculator_screen))
-                Text("18 %")
+                Text(
+                    style = TitleCalculationDetailsCalculationScreen,
+                    text = stringResource(R.string.lending_rate_calculator_screen)
+                )
+                Text(style = FormulaCalculationDetailsCalculationScreen, text = "18 %")
                 HorizontalDivider(
                     thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
                 )
-                Text(text = stringResource(R.string.subtotal_formula_calculator_screen))
-                Text("160.48 ÷ 1.18 = 136.00")
+                Text(
+                    style = TitleCalculationDetailsCalculationScreen,
+                    text = stringResource(R.string.subtotal_formula_calculator_screen)
+                )
+                Text(
+                    style = FormulaCalculationDetailsCalculationScreen,
+                    text = "160.48 ÷ 1.18 = 136.00"
+                )
                 HorizontalDivider(
                     thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
                 )
-                Text(text = stringResource(R.string.total_formula_calculator_screen))
-                Text("160.48 − 136.00 = 24.48")
+                Text(
+                    style = TitleCalculationDetailsCalculationScreen,
+                    text = stringResource(R.string.total_formula_calculator_screen)
+                )
+                Text(
+                    style = FormulaCalculationDetailsCalculationScreen,
+                    text = "160.48 − 136.00 = 24.48"
+                )
             }
         }
     }
