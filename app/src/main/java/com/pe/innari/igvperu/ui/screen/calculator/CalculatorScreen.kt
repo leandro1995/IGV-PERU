@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.ui.screen.home
+package com.pe.innari.igvperu.ui.screen.calculator
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
