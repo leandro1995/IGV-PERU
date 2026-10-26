@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
+import com.pe.innari.igvperu.ui.component.tab.TabComponent
+import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.theme.Dimen10
@@ -72,7 +74,17 @@ class CalculatorScreen : ViewAmbient<Any>() {
                 text = stringResource(R.string.calculator_information)
             )
         }
+        TabComponent(itemList = calculatorTabItems(), position = 0).OnCreate()
     }
+
+    @Composable
+    private fun calculatorTabItems() = mutableListOf(
+        ItemTab(
+            icon = R.drawable.ic_add_circle, label = stringResource(R.string.including_igv_tab)
+        ), ItemTab(
+            icon = R.drawable.ic_remove_circle, label = stringResource(R.string.excluding_igv_tab)
+        )
+    )
 
     @AdaptivePreview
     @Composable
