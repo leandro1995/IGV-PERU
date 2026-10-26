@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">IGV PERU</string>
 
+    <!-- Calculator Screen -->
+    <string name="information_calculator_screen">Total de la operación</string>
+    <string name="total_calculator_screen">S/ %1$.2f</string>
+    <string name="text_subtitle_calculator_screen">Importe en letras</string>
+
     <!-- Toolbar -->
     <string name="calculator_toolbar">Calculadora</string>
     <string name="calculator_subtitle_toolbar">Calcula y comprende el IGV</string>
