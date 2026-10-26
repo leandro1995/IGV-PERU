@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +45,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
     @Composable
     override fun InstanceMutableState() {
         mutableState = CalculatorScreenStatus(
+            position = remember { mutableIntStateOf(0) },
             subTotal = remember { TextFieldState() },
             igv = remember { TextFieldState() },
             total = remember { TextFieldState() })
@@ -91,7 +93,10 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 text = stringResource(R.string.calculator_information)
             )
         }
-        TabComponent(itemList = calculatorTabItems(), position = 0).OnCreate()
+        TabComponent(
+            itemList = calculatorTabItems(),
+            position = mutableState?.position?.intValue.orEmpty()
+        ).OnCreate()
         EditTextView(
             state = mutableState?.subTotal.orEmpty(),
             prefixLabel = stringResource(R.string.sub_total_edit_text)
