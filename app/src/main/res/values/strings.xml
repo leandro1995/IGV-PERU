@@ -5,6 +5,10 @@
     <string name="information_calculator_screen">Total de la operación</string>
     <string name="total_calculator_screen">S/ %1$.2f</string>
     <string name="text_subtitle_calculator_screen">Importe en letras</string>
+    <string name="detail_type_calculator_screen">Detalle del cálculo</string>
+    <string name="lending_rate_calculator_screen">Tasa activa</string>
+    <string name="subtotal_formula_calculator_screen">Sub Total = Total ÷ (1 + tasa/100)</string>
+    <string name="total_formula_calculator_screen">IGV = Total − Sub Total</string>
 
     <!-- Toolbar -->
     <string name="calculator_toolbar">Calculadora</string>
