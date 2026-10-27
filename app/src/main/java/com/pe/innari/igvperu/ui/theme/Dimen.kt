@@ -29,6 +29,7 @@ val Dimen50 = 50.dp
 val Dimen56 = 56.dp
 val Dimen68 = 68.dp
 val Dimen76 = 76.dp
+val Dimen104 = 104.dp
 
 /**
  * Definiciones de tamaños de texto estándar (en `sp`) para tipografías personalizadas.
