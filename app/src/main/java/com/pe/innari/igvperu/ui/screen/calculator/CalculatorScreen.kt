@@ -41,14 +41,17 @@ import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
+import com.pe.innari.igvperu.ui.theme.CounterIndicatorDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
+import com.pe.innari.igvperu.ui.theme.Dimen11
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen19
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen36
+import com.pe.innari.igvperu.ui.theme.Dimen40
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.FormulaCalculationDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
@@ -58,6 +61,7 @@ import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTotalResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TitleCalculationDetailsCalculationScreen
+import com.pe.innari.igvperu.ui.theme.TitleIndicatorDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -312,6 +316,33 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 buttonComponentType = ButtonComponentType.OUTLINE
             )
         ).OnCreate()
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimen40)
+                .background(
+                    color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(
+                        Dimen11
+                    )
+                ),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                style = TitleIndicatorDetailsCalculationScreen,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = Dimen11)
+                    .weight(1F),
+                text = "Montos guardados localmente"
+            )
+            Text(
+                style = CounterIndicatorDetailsCalculationScreen,
+                modifier = Modifier.padding(end = Dimen11),
+                text = "1"
+            )
+        }
     }
 
     @Composable
