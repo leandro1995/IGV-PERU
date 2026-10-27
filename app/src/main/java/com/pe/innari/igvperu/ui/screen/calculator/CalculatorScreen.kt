@@ -2,6 +2,7 @@ package com.pe.innari.igvperu.ui.screen.calculator
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -78,23 +79,41 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
     @Composable
     override fun View() {
-        /*Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
-            ToolbarComponent(toolbar = toolbar()).OnCreate()
-            CalculationView()
-            TotalResponse()
-        }*/
+        ContentView { }
     }
 
     @Composable
-    private fun toolbar() = Toolbar(
-        icon = R.drawable.ic_calculator,
-        title = stringResource(R.string.calculator_toolbar),
-        subtitle = stringResource(R.string.calculator_subtitle_toolbar)
-    )
+    override fun PhoneLandscape() {
+        ContentView { }
+    }
+
+    @Composable
+    override fun TabletPortrait() {
+        ContentView { }
+    }
+
+    @Composable
+    private fun ContentView(view: @Composable () -> Unit) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            ToolBarOnCreate()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+            ) {
+                view()
+            }
+        }
+    }
+
+    @Composable
+    private fun ToolBarOnCreate() = ToolbarComponent(
+        toolbar = Toolbar(
+            icon = R.drawable.ic_calculator,
+            title = stringResource(R.string.calculator_toolbar),
+            subtitle = stringResource(R.string.calculator_subtitle_toolbar)
+        )
+    ).OnCreate()
 
     @Composable
     private fun CalculationView() {
