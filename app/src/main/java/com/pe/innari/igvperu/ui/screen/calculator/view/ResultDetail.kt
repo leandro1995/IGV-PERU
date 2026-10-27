@@ -23,6 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
+import com.pe.innari.igvperu.ui.component.button.ButtonComponent
+import com.pe.innari.igvperu.ui.component.button.model.Button
+import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen12
@@ -172,4 +175,45 @@ internal fun ResultDetail() {
             Spacer(modifier = Modifier.height(Dimen10))
         }
     }
+    Spacer(modifier = Modifier.height(Dimen16))
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .padding(end = Dimen5)
+                .fillMaxWidth()
+                .weight(1F)
+        ) {
+            ButtonOnCreate(
+                icon = R.drawable.ic_save,
+                label = stringResource(R.string.save_amount_button),
+                buttonComponentType = ButtonComponentType.PRIMARY
+            )
+        }
+        Column(
+            modifier = Modifier
+                .padding(start = Dimen5)
+                .fillMaxWidth()
+                .weight(1F)
+        ) {
+            ButtonOnCreate(
+                icon = R.drawable.ic_share,
+                label = stringResource(R.string.share_button),
+                buttonComponentType = ButtonComponentType.SECONDARY
+            )
+        }
+    }
+    Spacer(modifier = Modifier.height(Dimen16))
+    ButtonOnCreate(
+        icon = R.drawable.ic_clear,
+        label = stringResource(R.string.clear_button),
+        buttonComponentType = ButtonComponentType.OUTLINE
+    )
 }
+
+@Composable
+private fun ButtonOnCreate(icon: Int, label: String, buttonComponentType: ButtonComponentType) =
+    ButtonComponent(
+        button = Button(
+            icon = icon, label = label, buttonComponentType = buttonComponentType
+        )
+    ).OnCreate()
