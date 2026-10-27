@@ -120,3 +120,9 @@ val TitleCalculationDetailsCalculationScreen =
 
 val FormulaCalculationDetailsCalculationScreen =
     TextStyle(fontSize = Text13, fontFamily = FontFamily(Font(R.font.medium)))
+
+val TitleIndicatorDetailsCalculationScreen =
+    TextStyle(fontSize = Text11, fontFamily = FontFamily(Font(R.font.regular)))
+
+val CounterIndicatorDetailsCalculationScreen =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.bold)))
