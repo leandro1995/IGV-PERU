@@ -47,7 +47,6 @@ import com.pe.innari.igvperu.ui.theme.TitleIndicatorDetailsCalculationScreen
 
 @Composable
 internal fun ResultDetail() {
-    Spacer(modifier = Modifier.height(Dimen16))
     OutlinedCard(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(size = Dimen18),
