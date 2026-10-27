@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.sp
 val Dimen1 = 1.dp
 val Dimen2 = 2.dp
 val Dimen4 = 4.dp
+val Dimen5 = 5.dp
 val Dimen8 = 8.dp
 val Dimen10 = 10.dp
 val Dimen11 = 11.dp
