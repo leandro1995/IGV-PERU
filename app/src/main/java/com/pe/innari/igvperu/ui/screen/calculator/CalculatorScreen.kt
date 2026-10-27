@@ -78,7 +78,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
     @Composable
     override fun View() {
-        Column(
+        /*Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -86,7 +86,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             ToolbarComponent(toolbar = toolbar()).OnCreate()
             CalculationView()
             TotalResponse()
-        }
+        }*/
     }
 
     @Composable
