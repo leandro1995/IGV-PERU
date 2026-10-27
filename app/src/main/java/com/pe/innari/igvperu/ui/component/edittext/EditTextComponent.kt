@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -29,10 +30,9 @@ import com.pe.innari.igvperu.ui.component.edittext.style.EditTextComponentStyle
 import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
 import com.pe.innari.igvperu.ui.component.edittext.util.DecimalEditTextComponentUtil
 import com.pe.innari.igvperu.ui.component.edittext.util.IntegerEditTextComponentUtil
-import com.pe.innari.igvperu.ui.theme.Dimen1
+import com.pe.innari.igvperu.ui.theme.Dimen104
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen15
-import com.pe.innari.igvperu.ui.theme.Dimen2
 import com.pe.innari.igvperu.ui.theme.Dimen4
 import com.pe.innari.igvperu.ui.theme.Dimen50
 import com.pe.innari.igvperu.ui.theme.Dimen68
@@ -94,7 +94,9 @@ class EditTextComponent(
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                modifier = Modifier.padding(end = Dimen50),
+                modifier = Modifier
+                    .width(Dimen104)
+                    .padding(end = Dimen15),
                 text = editText.prefixLabel,
                 style = PrefixEditTextComponent,
                 color = EditTextComponentStyle.prefixTextColor(
