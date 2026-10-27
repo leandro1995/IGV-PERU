@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,6 +35,7 @@ import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TextMessageCalculatorScreen
 
 @Composable
 internal fun AmountDataView(
@@ -86,6 +88,23 @@ internal fun AmountDataView(
         state = calculatorScreenStatus?.total.orEmpty(),
         prefixLabel = stringResource(R.string.total_edit_text)
     )
+    Spacer(modifier = Modifier.height(Dimen16))
+    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Column {
+            Icon(
+                modifier = Modifier.size(Dimen20),
+                painter = painterResource(R.drawable.ic_refresh),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+        Text(
+            style = TextMessageCalculatorScreen,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = Dimen10, end = Dimen13),
+            text = stringResource(R.string.calculator_information)
+        )
+    }
 }
 
 @Composable
