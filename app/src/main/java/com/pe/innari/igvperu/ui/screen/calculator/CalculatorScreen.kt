@@ -1,8 +1,11 @@
 package com.pe.innari.igvperu.ui.screen.calculator
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldState
@@ -18,7 +21,9 @@ import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
 import com.pe.innari.igvperu.ui.screen.calculator.view.AmountDataView
 import com.pe.innari.igvperu.ui.screen.calculator.view.ResultDetail
+import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen20
+import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
@@ -40,6 +45,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
                     mutableState?.position?.intValue = tabPosition
                 })
+            Spacer(modifier = Modifier.height(Dimen16))
             ResultDetail()
         }
     }
@@ -47,20 +53,39 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
     @Composable
     override fun PhoneLandscape() {
         ContentView {
-            AmountDataView(
-                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
-                    mutableState?.position?.intValue = tabPosition
-                })
+            Landscape()
         }
     }
 
     @Composable
     override fun TabletPortrait() {
         ContentView {
-            AmountDataView(
-                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
-                    mutableState?.position?.intValue = tabPosition
-                })
+            Landscape()
+        }
+    }
+
+    @Composable
+    private fun Landscape() {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .padding(end = Dimen5)
+                    .fillMaxWidth()
+                    .weight(1F)
+            ) {
+                AmountDataView(
+                    calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                        mutableState?.position?.intValue = tabPosition
+                    })
+            }
+            Column(
+                modifier = Modifier
+                    .padding(start = Dimen5)
+                    .fillMaxWidth()
+                    .weight(1F)
+            ) {
+                ResultDetail()
+            }
         }
     }
 
