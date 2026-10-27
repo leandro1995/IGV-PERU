@@ -2,7 +2,6 @@ package com.pe.innari.igvperu.ui.screen.calculator
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,34 +28,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
-import com.pe.innari.igvperu.extension.orEmpty
 import com.pe.innari.igvperu.ui.component.button.ButtonComponent
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
-import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
-import com.pe.innari.igvperu.ui.component.edittext.model.EditText
-import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
-import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
-import com.pe.innari.igvperu.ui.component.tab.TabComponent
-import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
 import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
+import com.pe.innari.igvperu.ui.screen.calculator.view.AmountDataView
 import com.pe.innari.igvperu.ui.theme.CounterIndicatorDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.Dimen1
-import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen11
 import com.pe.innari.igvperu.ui.theme.Dimen12
-import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen19
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen36
 import com.pe.innari.igvperu.ui.theme.Dimen40
-import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.FormulaCalculationDetailsCalculationScreen
-import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TextMessageCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextNumberResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
@@ -79,99 +67,52 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
     @Composable
     override fun View() {
-        ContentView { }
+        ContentView {
+            AmountDataView(
+                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                    mutableState?.position?.intValue = tabPosition
+                })
+        }
     }
 
     @Composable
     override fun PhoneLandscape() {
-        ContentView { }
+        ContentView {
+            AmountDataView(
+                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                    mutableState?.position?.intValue = tabPosition
+                })
+        }
     }
 
     @Composable
     override fun TabletPortrait() {
-        ContentView { }
+        ContentView {
+            AmountDataView(
+                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                    mutableState?.position?.intValue = tabPosition
+                })
+        }
     }
 
     @Composable
     private fun ContentView(view: @Composable () -> Unit) {
         Column(modifier = Modifier.fillMaxSize()) {
-            ToolBarOnCreate()
+            ToolbarComponent(
+                toolbar = Toolbar(
+                    icon = R.drawable.ic_calculator,
+                    title = stringResource(R.string.calculator_toolbar),
+                    subtitle = stringResource(R.string.calculator_subtitle_toolbar)
+                )
+            ).OnCreate()
             Column(
                 modifier = Modifier
+                    .padding(start = Dimen20, end = Dimen20)
                     .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
+                    .verticalScroll(rememberScrollState())
             ) {
                 view()
             }
-        }
-    }
-
-    @Composable
-    private fun ToolBarOnCreate() = ToolbarComponent(
-        toolbar = Toolbar(
-            icon = R.drawable.ic_calculator,
-            title = stringResource(R.string.calculator_toolbar),
-            subtitle = stringResource(R.string.calculator_subtitle_toolbar)
-        )
-    ).OnCreate()
-
-    @Composable
-    private fun CalculationView() {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimen48)
-                .background(
-                    color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(
-                        size = Dimen12
-                    )
-                ), verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(Modifier.padding(start = Dimen13)) {
-                Icon(
-                    modifier = Modifier.size(Dimen20),
-                    painter = painterResource(R.drawable.ic_info),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            }
-            Text(
-                style = TextInformationCalculatorScreen,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(start = Dimen10, end = Dimen13),
-                text = stringResource(R.string.calculator_information)
-            )
-        }
-        TabComponent(
-            itemList = calculatorTabItems(), position = mutableState?.position?.intValue.orEmpty()
-        ).OnCreate()
-        EditTextView(
-            state = mutableState?.subTotal.orEmpty(),
-            prefixLabel = stringResource(R.string.sub_total_edit_text)
-        )
-        EditTextView(
-            state = mutableState?.igv.orEmpty(),
-            prefixLabel = stringResource(R.string.igv_edit_text, 18)
-        )
-        EditTextView(
-            state = mutableState?.total.orEmpty(),
-            prefixLabel = stringResource(R.string.total_edit_text)
-        )
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.padding(start = Dimen13)) {
-                Icon(
-                    modifier = Modifier.size(Dimen20),
-                    painter = painterResource(R.drawable.ic_refresh),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-            Text(
-                style = TextMessageCalculatorScreen,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(start = Dimen10, end = Dimen13),
-                text = stringResource(R.string.calculator_information)
-            )
         }
     }
 
@@ -363,28 +304,6 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
             )
         }
     }
-
-    @Composable
-    private fun EditTextView(
-        state: TextFieldState,
-        prefixLabel: String,
-    ) = EditTextComponent(
-        editText = EditText(
-            state = state,
-            prefixLabel = prefixLabel,
-            editTextComponentType = EditTextComponentType.DECIMAL
-        ),
-        suffixEditText = SuffixEditText(suffixLeftLabel = stringResource(R.string.sun_money_edit_text))
-    ).OnCreate()
-
-    @Composable
-    private fun calculatorTabItems() = mutableListOf(
-        ItemTab(
-            icon = R.drawable.ic_add_circle, label = stringResource(R.string.including_igv_tab)
-        ), ItemTab(
-            icon = R.drawable.ic_remove_circle, label = stringResource(R.string.excluding_igv_tab)
-        )
-    )
 
     @AdaptivePreview
     @Composable
