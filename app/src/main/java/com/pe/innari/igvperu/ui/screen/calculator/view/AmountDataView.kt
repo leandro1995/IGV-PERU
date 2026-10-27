@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,8 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
+import com.pe.innari.igvperu.extension.orEmpty
+import com.pe.innari.igvperu.ui.component.edittext.EditTextComponent
+import com.pe.innari.igvperu.ui.component.edittext.model.EditText
+import com.pe.innari.igvperu.ui.component.edittext.model.SuffixEditText
+import com.pe.innari.igvperu.ui.component.edittext.type.EditTextComponentType
 import com.pe.innari.igvperu.ui.component.tab.TabComponent
 import com.pe.innari.igvperu.ui.screen.calculator.list.TabItemCalculatorScreenList
+import com.pe.innari.igvperu.ui.screen.calculator.status.CalculatorScreenStatus
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen11
 import com.pe.innari.igvperu.ui.theme.Dimen12
@@ -29,7 +36,9 @@ import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
 
 @Composable
-internal fun AmountDataView(position: Int, tabItemPosition: (position: Int) -> Unit) {
+internal fun AmountDataView(
+    calculatorScreenStatus: CalculatorScreenStatus?, tabItemPosition: (position: Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,8 +66,34 @@ internal fun AmountDataView(position: Int, tabItemPosition: (position: Int) -> U
     }
     Spacer(modifier = Modifier.height(Dimen16))
     TabComponent(
-        itemList = TabItemCalculatorScreenList.tabComponentItemList(), position = position
+        itemList = TabItemCalculatorScreenList.tabComponentItemList(),
+        position = calculatorScreenStatus?.position?.intValue.orEmpty()
     ).apply {
         setPosition { tabItemPosition(it) }
     }.OnCreate()
+    Spacer(modifier = Modifier.height(Dimen16))
+    EditTextOnCreate(
+        state = calculatorScreenStatus?.subTotal.orEmpty(),
+        prefixLabel = stringResource(R.string.sub_total_edit_text)
+    )
+    Spacer(modifier = Modifier.height(Dimen16))
+    EditTextOnCreate(
+        state = calculatorScreenStatus?.igv.orEmpty(),
+        prefixLabel = stringResource(R.string.igv_edit_text, 18)
+    )
+    Spacer(modifier = Modifier.height(Dimen16))
+    EditTextOnCreate(
+        state = calculatorScreenStatus?.total.orEmpty(),
+        prefixLabel = stringResource(R.string.total_edit_text)
+    )
 }
+
+@Composable
+private fun EditTextOnCreate(state: TextFieldState, prefixLabel: String) = EditTextComponent(
+    editText = EditText(
+        state = state,
+        prefixLabel = prefixLabel,
+        editTextComponentType = EditTextComponentType.DECIMAL
+    ),
+    suffixEditText = SuffixEditText(suffixLeftLabel = stringResource(R.string.sun_money_edit_text))
+).OnCreate()
