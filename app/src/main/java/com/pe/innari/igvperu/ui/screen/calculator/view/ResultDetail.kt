@@ -26,13 +26,16 @@ import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.button.ButtonComponent
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
+import com.pe.innari.igvperu.ui.theme.CounterIndicatorDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
+import com.pe.innari.igvperu.ui.theme.Dimen11
 import com.pe.innari.igvperu.ui.theme.Dimen12
 import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen19
 import com.pe.innari.igvperu.ui.theme.Dimen36
+import com.pe.innari.igvperu.ui.theme.Dimen40
 import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.theme.FormulaCalculationDetailsCalculationScreen
 import com.pe.innari.igvperu.ui.theme.TextNumberResultCalculatorScreen
@@ -40,6 +43,7 @@ import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TextTotalResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TitleCalculationDetailsCalculationScreen
+import com.pe.innari.igvperu.ui.theme.TitleIndicatorDetailsCalculationScreen
 
 @Composable
 internal fun ResultDetail() {
@@ -208,6 +212,34 @@ internal fun ResultDetail() {
         label = stringResource(R.string.clear_button),
         buttonComponentType = ButtonComponentType.OUTLINE
     )
+    Spacer(modifier = Modifier.height(Dimen16))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(Dimen40)
+            .background(
+                color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(
+                    Dimen11
+                )
+            ),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            style = TitleIndicatorDetailsCalculationScreen,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = Dimen11)
+                .weight(1F),
+            text = "Montos guardados localmente"
+        )
+        Text(
+            style = CounterIndicatorDetailsCalculationScreen,
+            modifier = Modifier.padding(end = Dimen11),
+            text = "1"
+        )
+    }
+    Spacer(modifier = Modifier.height(Dimen16))
 }
 
 @Composable
