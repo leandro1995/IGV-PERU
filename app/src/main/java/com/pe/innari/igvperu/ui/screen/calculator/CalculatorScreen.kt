@@ -41,12 +41,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
     @Composable
     override fun View() {
         ContentView {
-            AmountDataView(
-                calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
-                    mutableState?.position?.intValue = tabPosition
-                })
-            Spacer(modifier = Modifier.height(Dimen16))
-            ResultDetail()
+            Portrait()
         }
     }
 
@@ -60,8 +55,25 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
     @Composable
     override fun TabletPortrait() {
         ContentView {
+            Portrait()
+        }
+    }
+
+    @Composable
+    override fun TabletLandscape() {
+        ContentView {
             Landscape()
         }
+    }
+
+    @Composable
+    private fun Portrait() {
+        AmountDataView(
+            calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                mutableState?.position?.intValue = tabPosition
+            })
+        Spacer(modifier = Modifier.height(Dimen16))
+        ResultDetail()
     }
 
     @Composable
