@@ -247,13 +247,6 @@ internal fun ResultDetail() {
     Spacer(modifier = Modifier.height(Dimen16))
 }
 
-/**
- * Función auxiliar para instanciar y renderizar un botón interactivo ([ButtonComponent]).
- *
- * @param icon Recurso drawable para el icono del botón.
- * @param label Texto descriptivo del botón.
- * @param buttonComponentType Tipo o variante de diseño del botón ([ButtonComponentType]).
- */
 @Composable
 private fun ButtonOnCreate(icon: Int, label: String, buttonComponentType: ButtonComponentType) =
     ButtonComponent(
