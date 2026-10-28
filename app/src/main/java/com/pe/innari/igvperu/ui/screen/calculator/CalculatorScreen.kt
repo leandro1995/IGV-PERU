@@ -27,17 +27,31 @@ import com.pe.innari.igvperu.ui.theme.Dimen5
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
 
+/**
+ * Pantalla principal de la calculadora de IGV ([CalculatorScreen]) que hereda de [ViewAmbient].
+ *
+ * Gestiona el estado y la presentación adaptativa (portrait, landscape, tablet) para el cálculo
+ * de montos con o sin IGV (Impuesto General a las Ventas en Perú), mostrando la sección de entrada
+ * de datos ([AmountDataView]) y el detalle de resultados ([ResultDetail]).
+ */
 class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
 
+    /**
+     * Inicializa el estado mutable de la pantalla de la calculadora ([CalculatorScreenStatus]).
+     */
     @Composable
     override fun InstanceMutableState() {
         mutableState = CalculatorScreenStatus(
             position = remember { mutableIntStateOf(0) },
             subTotal = remember { TextFieldState() },
             igv = remember { TextFieldState() },
-            total = remember { TextFieldState() })
+            total = remember { TextFieldState() }
+        )
     }
 
+    /**
+     * Renderiza la vista principal para teléfono en orientación vertical.
+     */
     @Composable
     override fun View() {
         ContentView {
@@ -45,6 +59,9 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Renderiza la vista para teléfono en orientación horizontal.
+     */
     @Composable
     override fun PhoneLandscape() {
         ContentView {
@@ -52,6 +69,9 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Renderiza la vista para tablet en orientación vertical.
+     */
     @Composable
     override fun TabletPortrait() {
         ContentView {
@@ -59,6 +79,9 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Renderiza la vista para tablet en orientación horizontal.
+     */
     @Composable
     override fun TabletLandscape() {
         ContentView {
@@ -66,16 +89,23 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Disposición vertical de los componentes de entrada y detalle para pantallas en modo retrato.
+     */
     @Composable
     private fun Portrait() {
         AmountDataView(
             calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
                 mutableState?.position?.intValue = tabPosition
-            })
+            }
+        )
         Spacer(modifier = Modifier.height(Dimen16))
         ResultDetail()
     }
 
+    /**
+     * Disposición horizontal en dos columnas para pantallas en modo paisaje.
+     */
     @Composable
     private fun Landscape() {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -88,7 +118,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                 AmountDataView(
                     calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
                         mutableState?.position?.intValue = tabPosition
-                    })
+                    }
+                )
             }
             Column(
                 modifier = Modifier
@@ -101,6 +132,11 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Contenedor base que incluye la barra superior ([ToolbarComponent]) y desplazamiento vertical.
+     *
+     * @param view Contenido composable que se renderizará dentro del contenedor con scroll.
+     */
     @Composable
     private fun ContentView(view: @Composable () -> Unit) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -122,6 +158,9 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
+    /**
+     * Vista previa adaptable de la pantalla de la calculadora.
+     */
     @AdaptivePreview
     @Composable
     override fun Preview() {
