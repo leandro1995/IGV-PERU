@@ -24,12 +24,8 @@ import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallback
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.tab.style.TabComponentStyle
 import com.pe.innari.igvperu.ui.theme.Dimen14
-import com.pe.innari.igvperu.ui.theme.Dimen18
-import com.pe.innari.igvperu.ui.theme.Dimen20
-import com.pe.innari.igvperu.ui.theme.Dimen24
 import com.pe.innari.igvperu.ui.theme.Dimen25
 import com.pe.innari.igvperu.ui.theme.Dimen4
-import com.pe.innari.igvperu.ui.theme.Dimen40
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
 
