@@ -53,18 +53,18 @@ import com.pe.innari.igvperu.ui.theme.TitleIndicatorCalculatorScreen
  */
 @Composable
 internal fun ResultDetail() {
-    TotalOperation()
+    CalculatorResultCard()
     Spacer(modifier = Modifier.height(Dimen16))
-    OperationFormula()
+    CalculationFormulaCard()
     Spacer(modifier = Modifier.height(Dimen16))
-    ButtonView()
+    CalculatorActionButtons()
     Spacer(modifier = Modifier.height(Dimen16))
-    SavedAmounts()
+    SavedAmountsIndicator()
     Spacer(modifier = Modifier.height(Dimen16))
 }
 
 @Composable
-private fun TotalOperation() = OutlinedCard(
+private fun CalculatorResultCard() = OutlinedCard(
     modifier = Modifier.fillMaxWidth(),
     shape = RoundedCornerShape(size = Dimen18),
     colors = CardDefaults.cardColors(
@@ -107,7 +107,7 @@ private fun TotalOperation() = OutlinedCard(
 }
 
 @Composable
-private fun OperationFormula() = OutlinedCard(
+private fun CalculationFormulaCard() = OutlinedCard(
     modifier = Modifier.fillMaxWidth(),
     shape = RoundedCornerShape(size = Dimen18),
     colors = CardDefaults.cardColors(
@@ -196,7 +196,7 @@ private fun OperationFormula() = OutlinedCard(
 }
 
 @Composable
-private fun ButtonView() {
+private fun CalculatorActionButtons() {
     Row(modifier = Modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
@@ -204,7 +204,7 @@ private fun ButtonView() {
                 .fillMaxWidth()
                 .weight(1F)
         ) {
-            ButtonOnCreate(
+            CalculatorButton(
                 icon = R.drawable.ic_save,
                 label = stringResource(R.string.save_amount_button),
                 buttonComponentType = ButtonComponentType.PRIMARY
@@ -216,7 +216,7 @@ private fun ButtonView() {
                 .fillMaxWidth()
                 .weight(1F)
         ) {
-            ButtonOnCreate(
+            CalculatorButton(
                 icon = R.drawable.ic_share,
                 label = stringResource(R.string.share_button),
                 buttonComponentType = ButtonComponentType.SECONDARY
@@ -224,7 +224,7 @@ private fun ButtonView() {
         }
     }
     Spacer(modifier = Modifier.height(Dimen16))
-    ButtonOnCreate(
+    CalculatorButton(
         icon = R.drawable.ic_clear,
         label = stringResource(R.string.clear_button),
         buttonComponentType = ButtonComponentType.OUTLINE
@@ -232,7 +232,7 @@ private fun ButtonView() {
 }
 
 @Composable
-private fun SavedAmounts() = Row(
+private fun SavedAmountsIndicator() = Row(
     modifier = Modifier
         .fillMaxWidth()
         .height(Dimen40)
@@ -260,7 +260,7 @@ private fun SavedAmounts() = Row(
 }
 
 @Composable
-private fun ButtonOnCreate(icon: Int, label: String, buttonComponentType: ButtonComponentType) =
+private fun CalculatorButton(icon: Int, label: String, buttonComponentType: ButtonComponentType) =
     ButtonComponent(
         button = Button(
             icon = icon, label = label, buttonComponentType = buttonComponentType
