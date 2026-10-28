@@ -53,138 +53,150 @@ import com.pe.innari.igvperu.ui.theme.TitleIndicatorCalculatorScreen
  */
 @Composable
 internal fun ResultDetail() {
-    OutlinedCard(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(size = Dimen18),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
-        border = BorderStroke(
-            width = Dimen1, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
-        )
-    ) {
-        Column(modifier = Modifier.padding(Dimen18)) {
-            Text(
-                style = TitleResultCalculatorScreen,
-                text = stringResource(R.string.information_calculator_screen),
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.height(Dimen5))
-            Text(
-                style = TotalResultCalculatorScreen,
-                text = stringResource(R.string.total_calculator_screen, 18.50),
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            HorizontalDivider(
-                thickness = Dimen1,
-                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            Text(
-                style = SubtitleCalculatorScreen,
-                text = stringResource(R.string.text_subtitle_calculator_screen),
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.height(Dimen5))
-            Text(
-                style = NumberResultCalculatorScreen,
-                text = "Ciento sesenta y 48/100 soles",
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-        }
-    }
+    TotalOperation()
     Spacer(modifier = Modifier.height(Dimen16))
-    OutlinedCard(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(size = Dimen18),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
-        ),
-        border = BorderStroke(
-            width = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+    OperationFormula()
+    Spacer(modifier = Modifier.height(Dimen16))
+    ButtonView()
+    Spacer(modifier = Modifier.height(Dimen16))
+    SavedAmounts()
+    Spacer(modifier = Modifier.height(Dimen16))
+}
+
+@Composable
+private fun TotalOperation() = OutlinedCard(
+    modifier = Modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(size = Dimen18),
+    colors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.primaryContainer
+    ),
+    border = BorderStroke(
+        width = Dimen1, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
+    )
+) {
+    Column(modifier = Modifier.padding(Dimen18)) {
+        Text(
+            style = TitleResultCalculatorScreen,
+            text = stringResource(R.string.information_calculator_screen),
+            color = MaterialTheme.colorScheme.onPrimaryContainer
         )
-    ) {
-        Column(modifier = Modifier.padding(Dimen16)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+        Spacer(modifier = Modifier.height(Dimen5))
+        Text(
+            style = TotalResultCalculatorScreen,
+            text = stringResource(R.string.total_calculator_screen, 18.50),
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        HorizontalDivider(
+            thickness = Dimen1,
+            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18F)
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        Text(
+            style = SubtitleCalculatorScreen,
+            text = stringResource(R.string.text_subtitle_calculator_screen),
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+        Spacer(modifier = Modifier.height(Dimen5))
+        Text(
+            style = NumberResultCalculatorScreen,
+            text = "Ciento sesenta y 48/100 soles",
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    }
+}
+
+@Composable
+private fun OperationFormula() = OutlinedCard(
+    modifier = Modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(size = Dimen18),
+    colors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
+    ),
+    border = BorderStroke(
+        width = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+    )
+) {
+    Column(modifier = Modifier.padding(Dimen16)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1F)
+            ) {
+                Text(
+                    style = TitleDetailsCalculatorScreen,
+                    text = stringResource(R.string.detail_type_calculator_screen)
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1F), horizontalAlignment = Alignment.End
+            ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1F)
+                        .size(Dimen36)
+                        .background(
+                            color = MaterialTheme.colorScheme.surfaceContainer,
+                            shape = RoundedCornerShape(Dimen12)
+                        ),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        style = TitleDetailsCalculatorScreen,
-                        text = stringResource(R.string.detail_type_calculator_screen)
+                    Icon(
+                        modifier = Modifier.size(Dimen19),
+                        painter = painterResource(R.drawable.ic_detail),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1F),
-                    horizontalAlignment = Alignment.End
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .size(Dimen36)
-                            .background(
-                                color = MaterialTheme.colorScheme.surfaceContainer,
-                                shape = RoundedCornerShape(Dimen12)
-                            ),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(Dimen19),
-                            painter = painterResource(R.drawable.ic_detail),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
             }
-            Spacer(modifier = Modifier.height(Dimen16))
-            Text(
-                style = FormulaDetailsCalculatorScreen,
-                text = "El monto ingresado ya incluye IGV."
-            )
-            Spacer(modifier = Modifier.height(Dimen12))
-            HorizontalDivider(
-                thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            Text(
-                style = TitleDetailsCalculatorScreen,
-                text = stringResource(R.string.lending_rate_calculator_screen)
-            )
-            Text(style = FormulaDetailsCalculatorScreen, text = "18 %")
-            Spacer(modifier = Modifier.height(Dimen10))
-            HorizontalDivider(
-                thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            Text(
-                style = TitleDetailsCalculatorScreen,
-                text = stringResource(R.string.subtotal_formula_calculator_screen)
-            )
-            Text(
-                style = FormulaDetailsCalculatorScreen, text = "160.48 ÷ 1.18 = 136.00"
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            HorizontalDivider(
-                thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
-            Text(
-                style = TitleDetailsCalculatorScreen,
-                text = stringResource(R.string.total_formula_calculator_screen)
-            )
-            Text(
-                style = FormulaDetailsCalculatorScreen, text = "160.48 − 136.00 = 24.48"
-            )
-            Spacer(modifier = Modifier.height(Dimen10))
         }
+        Spacer(modifier = Modifier.height(Dimen16))
+        Text(
+            style = FormulaDetailsCalculatorScreen, text = "El monto ingresado ya incluye IGV."
+        )
+        Spacer(modifier = Modifier.height(Dimen12))
+        HorizontalDivider(
+            thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        Text(
+            style = TitleDetailsCalculatorScreen,
+            text = stringResource(R.string.lending_rate_calculator_screen)
+        )
+        Text(style = FormulaDetailsCalculatorScreen, text = "18 %")
+        Spacer(modifier = Modifier.height(Dimen10))
+        HorizontalDivider(
+            thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        Text(
+            style = TitleDetailsCalculatorScreen,
+            text = stringResource(R.string.subtotal_formula_calculator_screen)
+        )
+        Text(
+            style = FormulaDetailsCalculatorScreen, text = "160.48 ÷ 1.18 = 136.00"
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        HorizontalDivider(
+            thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
+        Text(
+            style = TitleDetailsCalculatorScreen,
+            text = stringResource(R.string.total_formula_calculator_screen)
+        )
+        Text(
+            style = FormulaDetailsCalculatorScreen, text = "160.48 − 136.00 = 24.48"
+        )
+        Spacer(modifier = Modifier.height(Dimen10))
     }
-    Spacer(modifier = Modifier.height(Dimen16))
+}
+
+@Composable
+private fun ButtonView() {
     Row(modifier = Modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
@@ -217,34 +229,34 @@ internal fun ResultDetail() {
         label = stringResource(R.string.clear_button),
         buttonComponentType = ButtonComponentType.OUTLINE
     )
-    Spacer(modifier = Modifier.height(Dimen16))
-    Row(
+}
+
+@Composable
+private fun SavedAmounts() = Row(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(Dimen40)
+        .background(
+            color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(
+                Dimen11
+            )
+        ),
+    horizontalArrangement = Arrangement.Center,
+    verticalAlignment = Alignment.CenterVertically,
+) {
+    Text(
+        style = TitleIndicatorCalculatorScreen,
         modifier = Modifier
             .fillMaxWidth()
-            .height(Dimen40)
-            .background(
-                color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(
-                    Dimen11
-                )
-            ),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            style = TitleIndicatorCalculatorScreen,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = Dimen11)
-                .weight(1F),
-            text = "Montos guardados localmente"
-        )
-        Text(
-            style = CounterIndicatorCalculatorScreen,
-            modifier = Modifier.padding(end = Dimen11),
-            text = "1"
-        )
-    }
-    Spacer(modifier = Modifier.height(Dimen16))
+            .padding(start = Dimen11)
+            .weight(1F),
+        text = stringResource(R.string.amount_save_calculator_screen)
+    )
+    Text(
+        style = CounterIndicatorCalculatorScreen,
+        modifier = Modifier.padding(end = Dimen11),
+        text = "1"
+    )
 }
 
 @Composable
