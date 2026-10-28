@@ -45,6 +45,12 @@ import com.pe.innari.igvperu.ui.theme.TotalResultCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TitleDetailsCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.TitleIndicatorCalculatorScreen
 
+/**
+ * Vista interna de detalles y desglose de resultados de la calculadora ([ResultDetail]).
+ *
+ * Muestra tarjetas con el resultado total calculado en número y letras, desglose de fórmulas matemáticas,
+ * botones de acción (Guardar, Compartir, Limpiar) y el indicador de montos guardados localmente.
+ */
 @Composable
 internal fun ResultDetail() {
     OutlinedCard(
@@ -241,6 +247,13 @@ internal fun ResultDetail() {
     Spacer(modifier = Modifier.height(Dimen16))
 }
 
+/**
+ * Función auxiliar para instanciar y renderizar un botón interactivo ([ButtonComponent]).
+ *
+ * @param icon Recurso drawable para el icono del botón.
+ * @param label Texto descriptivo del botón.
+ * @param buttonComponentType Tipo o variante de diseño del botón ([ButtonComponentType]).
+ */
 @Composable
 private fun ButtonOnCreate(icon: Int, label: String, buttonComponentType: ButtonComponentType) =
     ButtonComponent(
