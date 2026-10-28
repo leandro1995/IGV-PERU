@@ -38,43 +38,43 @@ import com.pe.innari.igvperu.ui.theme.InformationCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.MessageCalculatorScreen
 
 /**
- * Vista interna de entrada de datos y configuración del cálculo de montos ([AmountDataView]).
+ * Vista de entrada de datos y configuración del cálculo de montos ([AmountDataView]).
  *
  * Muestra el banner informativo inicial, las pestañas de selección ([TabComponent]), los campos de texto
  * para Subtotal, IGV y Total ([EditTextComponent]), y el mensaje de pie de instrucción.
  *
  * @param calculatorScreenStatus Estado actual de la pantalla de la calculadora.
- * @param tabItemPosition Callback que notifica el cambio de índice de la pestaña seleccionada.
+ * @param onTabSelected Callback que notifica el cambio de índice de la pestaña seleccionada.
  */
 @Composable
 internal fun AmountDataView(
-    calculatorScreenStatus: CalculatorScreenStatus?, tabItemPosition: (position: Int) -> Unit
+    calculatorScreenStatus: CalculatorScreenStatus?,
+    onTabSelected: (position: Int) -> Unit
 ) {
-    InformationBannerView()
+    CalculatorInstructionBanner()
     Spacer(modifier = Modifier.height(Dimen16))
-    TabView(
-        position = calculatorScreenStatus?.position?.intValue.orEmpty(),
-        tabItemPosition = tabItemPosition
+    CalculatorTabs(
+        selectedPosition = calculatorScreenStatus?.position?.intValue.orEmpty(),
+        onTabSelected = onTabSelected
     )
     Spacer(modifier = Modifier.height(Dimen16))
-    EditTextView(
-        subTotal = calculatorScreenStatus?.subTotal.orEmpty(),
+    AmountInputFields(
+        subtotal = calculatorScreenStatus?.subTotal.orEmpty(),
         igv = calculatorScreenStatus?.igv.orEmpty(),
         total = calculatorScreenStatus?.total.orEmpty()
     )
     Spacer(modifier = Modifier.height(Dimen16))
-    InformationView()
+    CalculatorFooterInfo()
 }
 
 @Composable
-private fun InformationBannerView() = Row(
+private fun CalculatorInstructionBanner() = Row(
     modifier = Modifier
         .fillMaxWidth()
         .height(Dimen48)
         .background(
-            color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(
-                size = Dimen12
-            )
+            color = MaterialTheme.colorScheme.primaryContainer,
+            shape = RoundedCornerShape(size = Dimen12)
         )
 ) {
     Column(Modifier.padding(start = Dimen13, top = Dimen11)) {
@@ -94,31 +94,37 @@ private fun InformationBannerView() = Row(
 }
 
 @Composable
-private fun TabView(position: Int, tabItemPosition: (position: Int) -> Unit) = TabComponent(
-    itemList = TabItemCalculatorScreenList.tabComponentItemList(), position = position
+private fun CalculatorTabs(selectedPosition: Int, onTabSelected: (position: Int) -> Unit) = TabComponent(
+    itemList = TabItemCalculatorScreenList.tabComponentItemList(),
+    position = selectedPosition
 ).apply {
-    setPosition { tabItemPosition(it) }
+    setPosition { onTabSelected(it) }
 }.OnCreate()
 
 @Composable
-private fun EditTextView(
-    subTotal: TextFieldState, igv: TextFieldState, total: TextFieldState
+private fun AmountInputFields(
+    subtotal: TextFieldState,
+    igv: TextFieldState,
+    total: TextFieldState
 ) {
-    EditTextOnCreate(
-        state = subTotal, prefixLabel = stringResource(R.string.sub_total_edit_text)
+    AmountTextField(
+        state = subtotal,
+        prefixLabel = stringResource(R.string.sub_total_edit_text)
     )
     Spacer(modifier = Modifier.height(Dimen16))
-    EditTextOnCreate(
-        state = igv, prefixLabel = stringResource(R.string.igv_edit_text, 18)
+    AmountTextField(
+        state = igv,
+        prefixLabel = stringResource(R.string.igv_edit_text, 18)
     )
     Spacer(modifier = Modifier.height(Dimen16))
-    EditTextOnCreate(
-        state = total, prefixLabel = stringResource(R.string.total_edit_text)
+    AmountTextField(
+        state = total,
+        prefixLabel = stringResource(R.string.total_edit_text)
     )
 }
 
 @Composable
-private fun InformationView() =
+private fun CalculatorFooterInfo() =
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Column {
             Icon(
@@ -137,7 +143,7 @@ private fun InformationView() =
     }
 
 @Composable
-private fun EditTextOnCreate(state: TextFieldState, prefixLabel: String) = EditTextComponent(
+private fun AmountTextField(state: TextFieldState, prefixLabel: String) = EditTextComponent(
     editText = EditText(
         state = state,
         prefixLabel = prefixLabel,
