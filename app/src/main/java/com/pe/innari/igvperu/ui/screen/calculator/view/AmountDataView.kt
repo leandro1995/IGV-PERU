@@ -37,6 +37,15 @@ import com.pe.innari.igvperu.ui.theme.Dimen48
 import com.pe.innari.igvperu.ui.theme.InformationCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.MessageCalculatorScreen
 
+/**
+ * Vista interna de entrada de datos y configuración del cálculo de montos ([AmountDataView]).
+ *
+ * Muestra el banner informativo inicial, las pestañas de selección ([TabComponent]), los campos de texto
+ * para Subtotal, IGV y Total ([EditTextComponent]), y el mensaje de pie de instrucción.
+ *
+ * @param calculatorScreenStatus Estado actual de la pantalla de la calculadora.
+ * @param tabItemPosition Callback que notifica el cambio de índice de la pestaña seleccionada.
+ */
 @Composable
 internal fun AmountDataView(
     calculatorScreenStatus: CalculatorScreenStatus?, tabItemPosition: (position: Int) -> Unit
@@ -107,6 +116,12 @@ internal fun AmountDataView(
     }
 }
 
+/**
+ * Función auxiliar para instanciar y renderizar un componente de campo de texto numérico/decimal ([EditTextComponent]).
+ *
+ * @param state Estado reactivo del campo de texto ([TextFieldState]).
+ * @param prefixLabel Etiqueta de prefijo para el campo de texto.
+ */
 @Composable
 private fun EditTextOnCreate(state: TextFieldState, prefixLabel: String) = EditTextComponent(
     editText = EditText(
