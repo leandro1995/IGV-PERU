@@ -1,9 +1,39 @@
 <resources>
     <string name="app_name">IGV PERU</string>
 
+    <!-- Calculator Screen -->
+    <string name="information_calculator_screen">Total de la operación</string>
+    <string name="total_calculator_screen">S/ %1$.2f</string>
+    <string name="text_subtitle_calculator_screen">Importe en letras</string>
+    <string name="detail_type_calculator_screen">Detalle del cálculo</string>
+    <string name="lending_rate_calculator_screen">Tasa activa</string>
+    <string name="subtotal_formula_calculator_screen">Sub Total = Total ÷ (1 + tasa/100)</string>
+    <string name="total_formula_calculator_screen">IGV = Total − Sub Total</string>
+    <string name="instruction_calculator_screen"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
+    <string name="amount_save_calculator_screen">Montos guardados localmente</string>
+
+    <!-- Toolbar -->
+    <string name="calculator_toolbar">Calculadora</string>
+    <string name="calculator_subtitle_toolbar">Calcula y comprende el IGV</string>
+
+    <!-- Tab -->
+    <string name="including_igv_tab">Con IGV</string>
+    <string name="excluding_igv_tab">Sin IGV</string>
+
+    <!-- EditText -->
+    <string name="sub_total_edit_text">Sub Total</string>
+    <string name="igv_edit_text">IGV (%1$d %%)</string>
+    <string name="total_edit_text">Total</string>
+    <string name="sun_money_edit_text">S/</string>
+
     <!-- Bottom Navigation -->
     <string name="calculator_bottom_navigation">Calculadora</string>
     <string name="history_bottom_navigation">Historial</string>
     <string name="calendar_bottom_navigation">Cronograma</string>
     <string name="configuration_bottom_navigation">Configuración</string>
+
+    <!-- Botton -->
+    <string name="save_amount_button">Guardar monto</string>
+    <string name="share_button">Compartir</string>
+    <string name="clear_button">Limpiar</string>
 </resources>

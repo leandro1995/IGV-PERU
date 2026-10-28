@@ -43,12 +43,11 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimen76)
-                .padding(start = Dimen20, end = Dimen20)
                 .background(MaterialTheme.colorScheme.surface)
         ) {
             Column(
                 modifier = Modifier
-                    .padding(end = Dimen14)
+                    .padding(start = Dimen20, end = Dimen14)
                     .fillMaxHeight(),
                 verticalArrangement = Arrangement.Center
             ) {
@@ -61,6 +60,7 @@ class ToolbarComponent(private val toolbar: Toolbar) : ComponentAmbient() {
             }
             Column(
                 modifier = Modifier
+                    .padding(end = Dimen20)
                     .fillMaxSize()
                     .weight(1F),
                 verticalArrangement = Arrangement.Center

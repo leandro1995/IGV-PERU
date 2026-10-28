@@ -24,7 +24,7 @@ import com.pe.innari.igvperu.ui.component.tab.callback.TabComponentCallback
 import com.pe.innari.igvperu.ui.component.tab.model.ItemTab
 import com.pe.innari.igvperu.ui.component.tab.style.TabComponentStyle
 import com.pe.innari.igvperu.ui.theme.Dimen14
-import com.pe.innari.igvperu.ui.theme.Dimen18
+import com.pe.innari.igvperu.ui.theme.Dimen25
 import com.pe.innari.igvperu.ui.theme.Dimen4
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
@@ -82,7 +82,7 @@ class TabComponent(
                 ) {
                     Icon(
                         modifier = Modifier
-                            .size(Dimen18)
+                            .size(Dimen25)
                             .padding(end = Dimen8),
                         painter = painterResource(item.icon),
                         contentDescription = null,

@@ -9,22 +9,36 @@ import androidx.compose.ui.unit.sp
 val Dimen1 = 1.dp
 val Dimen2 = 2.dp
 val Dimen4 = 4.dp
+val Dimen5 = 5.dp
 val Dimen8 = 8.dp
+val Dimen10 = 10.dp
+val Dimen11 = 11.dp
 val Dimen12 = 12.dp
+val Dimen13 = 13.dp
 val Dimen14 = 14.dp
 val Dimen15 = 15.dp
+val Dimen16 = 16.dp
 val Dimen18 = 18.dp
+val Dimen19 = 19.dp
 val Dimen20 = 20.dp
 val Dimen24 = 24.dp
+val Dimen25 = 25.dp
+val Dimen36 = 36.dp
+val Dimen40 = 40.dp
+val Dimen48 = 48.dp
 val Dimen50 = 50.dp
 val Dimen56 = 56.dp
 val Dimen68 = 68.dp
 val Dimen76 = 76.dp
+val Dimen104 = 104.dp
 
 /**
  * Definiciones de tamaños de texto estándar (en `sp`) para tipografías personalizadas.
  */
+val Text11 = 11.sp
 val Text12 = 12.sp
 val Text13 = 13.sp
+val Text14 = 14.sp
 val Text16 = 16.sp
 val Text20 = 20.sp
+val Text36 = 36.sp

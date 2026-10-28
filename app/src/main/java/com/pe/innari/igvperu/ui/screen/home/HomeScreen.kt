@@ -12,6 +12,7 @@ import com.pe.innari.igvperu.ui.component.bottomnavigation.BottomNavigationCompo
 import com.pe.innari.igvperu.ui.component.bottomnavigation.model.ItemBottomNavigation
 import com.pe.innari.igvperu.ui.component.bottomnavigation.type.BottomNavigationComponentType
 import com.pe.innari.igvperu.ui.component.navigation.NavigationComponent
+import com.pe.innari.igvperu.ui.screen.calculator.CalculatorScreen
 import com.pe.innari.igvperu.ui.screen.home.navigation.HomeScreenNavigation
 import com.pe.innari.igvperu.ui.screen.home.status.HomeScreenStatus
 import com.pe.innari.igvperu.ui.view.ViewAmbient
@@ -86,7 +87,7 @@ class HomeScreen : ViewAmbient<HomeScreenStatus>() {
                 }
             }.OnCreate(entry = { entry ->
                 entry.entry<HomeScreenNavigation.Calculator> {
-                    Text("Calculator")
+                    CalculatorScreen().OnCreate()
                 }
                 entry.entry<HomeScreenNavigation.History> {
                     Text("History")
