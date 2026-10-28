@@ -97,32 +97,62 @@ val LabelButtonComponent = TextStyle(
     fontSize = Text13, fontFamily = FontFamily(Font(R.font.semi_bold))
 )
 
+/**
+ * Estilo de texto para la información introductoria en la pantalla de la calculadora.
+ */
 val InformationCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
 
+/**
+ * Estilo de texto para los mensajes explicativos o de pie en la pantalla de la calculadora.
+ */
 val MessageCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
 
+/**
+ * Estilo de texto para el título de resultados en la pantalla de la calculadora.
+ */
 val TitleResultCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
+/**
+ * Estilo de texto para el valor total destacado en la pantalla de la calculadora.
+ */
 val TotalResultCalculatorScreen =
     TextStyle(fontSize = Text36, fontFamily = FontFamily(Font(R.font.bold)))
 
+/**
+ * Estilo de texto para el subtítulo de resultados en la pantalla de la calculadora.
+ */
 val SubtitleCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
+/**
+ * Estilo de texto para el valor del resultado expresado en número/letras en la pantalla de la calculadora.
+ */
 val NumberResultCalculatorScreen =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.regular)))
 
+/**
+ * Estilo de texto para los títulos de la sección de detalles y fórmulas de la calculadora.
+ */
 val TitleDetailsCalculatorScreen =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
+/**
+ * Estilo de texto para el contenido de fórmulas matemáticas en la pantalla de la calculadora.
+ */
 val FormulaDetailsCalculatorScreen =
     TextStyle(fontSize = Text13, fontFamily = FontFamily(Font(R.font.medium)))
 
+/**
+ * Estilo de texto para el título del indicador de almacenamiento local en la calculadora.
+ */
 val TitleIndicatorCalculatorScreen =
     TextStyle(fontSize = Text11, fontFamily = FontFamily(Font(R.font.regular)))
 
+/**
+ * Estilo de texto para el contador del indicador de almacenamiento local en la calculadora.
+ */
 val CounterIndicatorCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.bold)))
