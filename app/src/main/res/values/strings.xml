@@ -10,6 +10,7 @@
     <string name="subtotal_formula_calculator_screen">Sub Total = Total ÷ (1 + tasa/100)</string>
     <string name="total_formula_calculator_screen">IGV = Total − Sub Total</string>
     <string name="instruction_calculator_screen"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
+    <string name="amount_save_calculator_screen">Montos guardados localmente</string>
 
     <!-- Toolbar -->
     <string name="calculator_toolbar">Calculadora</string>
