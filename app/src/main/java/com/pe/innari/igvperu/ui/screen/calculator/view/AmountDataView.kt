@@ -50,54 +50,75 @@ import com.pe.innari.igvperu.ui.theme.MessageCalculatorScreen
 internal fun AmountDataView(
     calculatorScreenStatus: CalculatorScreenStatus?, tabItemPosition: (position: Int) -> Unit
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Dimen48)
-            .background(
-                color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(
-                    size = Dimen12
-                )
+    InformationBannerView()
+    Spacer(modifier = Modifier.height(Dimen16))
+    TabView(
+        position = calculatorScreenStatus?.position?.intValue.orEmpty(),
+        tabItemPosition = tabItemPosition
+    )
+    Spacer(modifier = Modifier.height(Dimen16))
+    EditTextView(
+        subTotal = calculatorScreenStatus?.subTotal.orEmpty(),
+        igv = calculatorScreenStatus?.igv.orEmpty(),
+        total = calculatorScreenStatus?.total.orEmpty()
+    )
+    Spacer(modifier = Modifier.height(Dimen16))
+    InformationView()
+}
+
+@Composable
+private fun InformationBannerView() = Row(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(Dimen48)
+        .background(
+            color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(
+                size = Dimen12
             )
-    ) {
-        Column(Modifier.padding(start = Dimen13, top = Dimen11)) {
-            Icon(
-                modifier = Modifier.size(Dimen20),
-                painter = painterResource(R.drawable.ic_info),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-        }
-        Text(
-            style = InformationCalculatorScreen,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            modifier = Modifier.padding(start = Dimen10, end = Dimen13, top = Dimen11),
-            text = stringResource(R.string.instruction_calculator_screen)
+        )
+) {
+    Column(Modifier.padding(start = Dimen13, top = Dimen11)) {
+        Icon(
+            modifier = Modifier.size(Dimen20),
+            painter = painterResource(R.drawable.ic_info),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onPrimaryContainer
         )
     }
-    Spacer(modifier = Modifier.height(Dimen16))
-    TabComponent(
-        itemList = TabItemCalculatorScreenList.tabComponentItemList(),
-        position = calculatorScreenStatus?.position?.intValue.orEmpty()
-    ).apply {
-        setPosition { tabItemPosition(it) }
-    }.OnCreate()
-    Spacer(modifier = Modifier.height(Dimen16))
+    Text(
+        style = InformationCalculatorScreen,
+        color = MaterialTheme.colorScheme.onPrimaryContainer,
+        modifier = Modifier.padding(start = Dimen10, end = Dimen13, top = Dimen11),
+        text = stringResource(R.string.instruction_calculator_screen)
+    )
+}
+
+@Composable
+private fun TabView(position: Int, tabItemPosition: (position: Int) -> Unit) = TabComponent(
+    itemList = TabItemCalculatorScreenList.tabComponentItemList(), position = position
+).apply {
+    setPosition { tabItemPosition(it) }
+}.OnCreate()
+
+@Composable
+private fun EditTextView(
+    subTotal: TextFieldState, igv: TextFieldState, total: TextFieldState
+) {
     EditTextOnCreate(
-        state = calculatorScreenStatus?.subTotal.orEmpty(),
-        prefixLabel = stringResource(R.string.sub_total_edit_text)
+        state = subTotal, prefixLabel = stringResource(R.string.sub_total_edit_text)
     )
     Spacer(modifier = Modifier.height(Dimen16))
     EditTextOnCreate(
-        state = calculatorScreenStatus?.igv.orEmpty(),
-        prefixLabel = stringResource(R.string.igv_edit_text, 18)
+        state = igv, prefixLabel = stringResource(R.string.igv_edit_text, 18)
     )
     Spacer(modifier = Modifier.height(Dimen16))
     EditTextOnCreate(
-        state = calculatorScreenStatus?.total.orEmpty(),
-        prefixLabel = stringResource(R.string.total_edit_text)
+        state = total, prefixLabel = stringResource(R.string.total_edit_text)
     )
-    Spacer(modifier = Modifier.height(Dimen16))
+}
+
+@Composable
+private fun InformationView() =
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Column {
             Icon(
@@ -114,7 +135,6 @@ internal fun AmountDataView(
             text = stringResource(R.string.instruction_calculator_screen)
         )
     }
-}
 
 @Composable
 private fun EditTextOnCreate(state: TextFieldState, prefixLabel: String) = EditTextComponent(
