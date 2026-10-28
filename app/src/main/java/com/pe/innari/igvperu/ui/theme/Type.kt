@@ -97,32 +97,32 @@ val LabelButtonComponent = TextStyle(
     fontSize = Text13, fontFamily = FontFamily(Font(R.font.semi_bold))
 )
 
-val TextInformationCalculatorScreen =
+val InformationCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.medium)))
 
-val TextMessageCalculatorScreen =
+val MessageCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
 
-val TextTitleResultCalculatorScreen =
+val TitleResultCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
-val TextTotalResultCalculatorScreen =
+val TotalResultCalculatorScreen =
     TextStyle(fontSize = Text36, fontFamily = FontFamily(Font(R.font.bold)))
 
-val TextSubTitleResultCalculatorScreen =
+val SubtitleCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
-val TextNumberResultCalculatorScreen =
+val NumberResultCalculatorScreen =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.regular)))
 
-val TitleCalculationDetailsCalculationScreen =
+val TitleDetailsCalculatorScreen =
     TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.semi_bold)))
 
-val FormulaCalculationDetailsCalculationScreen =
+val FormulaDetailsCalculatorScreen =
     TextStyle(fontSize = Text13, fontFamily = FontFamily(Font(R.font.medium)))
 
-val TitleIndicatorDetailsCalculationScreen =
+val TitleIndicatorCalculatorScreen =
     TextStyle(fontSize = Text11, fontFamily = FontFamily(Font(R.font.regular)))
 
-val CounterIndicatorDetailsCalculationScreen =
+val CounterIndicatorCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.bold)))
