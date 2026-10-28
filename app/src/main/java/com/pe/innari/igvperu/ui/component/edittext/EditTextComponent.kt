@@ -34,7 +34,6 @@ import com.pe.innari.igvperu.ui.theme.Dimen104
 import com.pe.innari.igvperu.ui.theme.Dimen14
 import com.pe.innari.igvperu.ui.theme.Dimen15
 import com.pe.innari.igvperu.ui.theme.Dimen4
-import com.pe.innari.igvperu.ui.theme.Dimen50
 import com.pe.innari.igvperu.ui.theme.Dimen68
 import com.pe.innari.igvperu.ui.theme.ErrorEditTextComponent
 import com.pe.innari.igvperu.ui.theme.PrefixEditTextComponent
