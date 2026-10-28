@@ -92,7 +92,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
     @Composable
     private fun VerticalCalculatorContent() {
         AmountDataView(
-            calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+            calculatorScreenStatus = mutableState, onTabSelected = { tabPosition ->
                 mutableState?.position?.intValue = tabPosition
             }
         )
@@ -110,7 +110,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                     .weight(1F)
             ) {
                 AmountDataView(
-                    calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
+                    calculatorScreenStatus = mutableState, onTabSelected = { tabPosition ->
                         mutableState?.position?.intValue = tabPosition
                     }
                 )
