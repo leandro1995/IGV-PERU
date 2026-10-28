@@ -116,12 +116,6 @@ internal fun AmountDataView(
     }
 }
 
-/**
- * Función auxiliar para instanciar y renderizar un componente de campo de texto numérico/decimal ([EditTextComponent]).
- *
- * @param state Estado reactivo del campo de texto ([TextFieldState]).
- * @param prefixLabel Etiqueta de prefijo para el campo de texto.
- */
 @Composable
 private fun EditTextOnCreate(state: TextFieldState, prefixLabel: String) = EditTextComponent(
     editText = EditText(
