@@ -54,8 +54,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
      */
     @Composable
     override fun View() {
-        ContentView {
-            Portrait()
+        CalculatorContainer {
+            VerticalCalculatorContent()
         }
     }
 
@@ -64,8 +64,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
      */
     @Composable
     override fun PhoneLandscape() {
-        ContentView {
-            Landscape()
+        CalculatorContainer {
+            HorizontalCalculatorContent()
         }
     }
 
@@ -74,8 +74,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
      */
     @Composable
     override fun TabletPortrait() {
-        ContentView {
-            Portrait()
+        CalculatorContainer {
+            VerticalCalculatorContent()
         }
     }
 
@@ -84,16 +84,13 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
      */
     @Composable
     override fun TabletLandscape() {
-        ContentView {
-            Landscape()
+        CalculatorContainer {
+            HorizontalCalculatorContent()
         }
     }
 
-    /**
-     * Disposición vertical de los componentes de entrada y detalle para pantallas en modo retrato.
-     */
     @Composable
-    private fun Portrait() {
+    private fun VerticalCalculatorContent() {
         AmountDataView(
             calculatorScreenStatus = mutableState, tabItemPosition = { tabPosition ->
                 mutableState?.position?.intValue = tabPosition
@@ -103,11 +100,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         ResultDetail()
     }
 
-    /**
-     * Disposición horizontal en dos columnas para pantallas en modo paisaje.
-     */
     @Composable
-    private fun Landscape() {
+    private fun HorizontalCalculatorContent() {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier
@@ -132,13 +126,8 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
         }
     }
 
-    /**
-     * Contenedor base que incluye la barra superior ([ToolbarComponent]) y desplazamiento vertical.
-     *
-     * @param view Contenido composable que se renderizará dentro del contenedor con scroll.
-     */
     @Composable
-    private fun ContentView(view: @Composable () -> Unit) {
+    private fun CalculatorContainer(content: @Composable () -> Unit) {
         Column(modifier = Modifier.fillMaxSize()) {
             ToolbarComponent(
                 toolbar = Toolbar(
@@ -153,7 +142,7 @@ class CalculatorScreen : ViewAmbient<CalculatorScreenStatus>() {
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
-                view()
+                content()
             }
         }
     }
