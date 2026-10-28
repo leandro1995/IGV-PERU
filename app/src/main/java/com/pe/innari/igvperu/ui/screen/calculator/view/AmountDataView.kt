@@ -63,7 +63,7 @@ internal fun AmountDataView(
             style = TextInformationCalculatorScreen,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             modifier = Modifier.padding(start = Dimen10, end = Dimen13, top = Dimen11),
-            text = stringResource(R.string.calculator_information)
+            text = stringResource(R.string.instruction_calculator_screen)
         )
     }
     Spacer(modifier = Modifier.height(Dimen16))
@@ -102,7 +102,7 @@ internal fun AmountDataView(
             style = TextMessageCalculatorScreen,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = Dimen10, end = Dimen13),
-            text = stringResource(R.string.calculator_information)
+            text = stringResource(R.string.instruction_calculator_screen)
         )
     }
 }
