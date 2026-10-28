@@ -26,7 +26,7 @@ import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.button.ButtonComponent
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
-import com.pe.innari.igvperu.ui.theme.CounterIndicatorDetailsCalculationScreen
+import com.pe.innari.igvperu.ui.theme.CounterIndicatorCalculatorScreen
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen10
 import com.pe.innari.igvperu.ui.theme.Dimen11
@@ -37,13 +37,13 @@ import com.pe.innari.igvperu.ui.theme.Dimen19
 import com.pe.innari.igvperu.ui.theme.Dimen36
 import com.pe.innari.igvperu.ui.theme.Dimen40
 import com.pe.innari.igvperu.ui.theme.Dimen5
-import com.pe.innari.igvperu.ui.theme.FormulaCalculationDetailsCalculationScreen
-import com.pe.innari.igvperu.ui.theme.TextNumberResultCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TextSubTitleResultCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TextTitleResultCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TextTotalResultCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TitleCalculationDetailsCalculationScreen
-import com.pe.innari.igvperu.ui.theme.TitleIndicatorDetailsCalculationScreen
+import com.pe.innari.igvperu.ui.theme.FormulaDetailsCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.NumberResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.SubtitleCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TitleResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TotalResultCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TitleDetailsCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.TitleIndicatorCalculatorScreen
 
 @Composable
 internal fun ResultDetail() {
@@ -59,13 +59,13 @@ internal fun ResultDetail() {
     ) {
         Column(modifier = Modifier.padding(Dimen18)) {
             Text(
-                style = TextTitleResultCalculatorScreen,
+                style = TitleResultCalculatorScreen,
                 text = stringResource(R.string.information_calculator_screen),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Spacer(modifier = Modifier.height(Dimen5))
             Text(
-                style = TextTotalResultCalculatorScreen,
+                style = TotalResultCalculatorScreen,
                 text = stringResource(R.string.total_calculator_screen, 18.50),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -76,13 +76,13 @@ internal fun ResultDetail() {
             )
             Spacer(modifier = Modifier.height(Dimen10))
             Text(
-                style = TextSubTitleResultCalculatorScreen,
+                style = SubtitleCalculatorScreen,
                 text = stringResource(R.string.text_subtitle_calculator_screen),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Spacer(modifier = Modifier.height(Dimen5))
             Text(
-                style = TextNumberResultCalculatorScreen,
+                style = NumberResultCalculatorScreen,
                 text = "Ciento sesenta y 48/100 soles",
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -107,7 +107,7 @@ internal fun ResultDetail() {
                         .weight(1F)
                 ) {
                     Text(
-                        style = TitleCalculationDetailsCalculationScreen,
+                        style = TitleDetailsCalculatorScreen,
                         text = stringResource(R.string.detail_type_calculator_screen)
                     )
                 }
@@ -138,7 +138,7 @@ internal fun ResultDetail() {
             }
             Spacer(modifier = Modifier.height(Dimen16))
             Text(
-                style = FormulaCalculationDetailsCalculationScreen,
+                style = FormulaDetailsCalculatorScreen,
                 text = "El monto ingresado ya incluye IGV."
             )
             Spacer(modifier = Modifier.height(Dimen12))
@@ -147,21 +147,21 @@ internal fun ResultDetail() {
             )
             Spacer(modifier = Modifier.height(Dimen10))
             Text(
-                style = TitleCalculationDetailsCalculationScreen,
+                style = TitleDetailsCalculatorScreen,
                 text = stringResource(R.string.lending_rate_calculator_screen)
             )
-            Text(style = FormulaCalculationDetailsCalculationScreen, text = "18 %")
+            Text(style = FormulaDetailsCalculatorScreen, text = "18 %")
             Spacer(modifier = Modifier.height(Dimen10))
             HorizontalDivider(
                 thickness = Dimen1, color = MaterialTheme.colorScheme.outlineVariant
             )
             Spacer(modifier = Modifier.height(Dimen10))
             Text(
-                style = TitleCalculationDetailsCalculationScreen,
+                style = TitleDetailsCalculatorScreen,
                 text = stringResource(R.string.subtotal_formula_calculator_screen)
             )
             Text(
-                style = FormulaCalculationDetailsCalculationScreen, text = "160.48 ÷ 1.18 = 136.00"
+                style = FormulaDetailsCalculatorScreen, text = "160.48 ÷ 1.18 = 136.00"
             )
             Spacer(modifier = Modifier.height(Dimen10))
             HorizontalDivider(
@@ -169,11 +169,11 @@ internal fun ResultDetail() {
             )
             Spacer(modifier = Modifier.height(Dimen10))
             Text(
-                style = TitleCalculationDetailsCalculationScreen,
+                style = TitleDetailsCalculatorScreen,
                 text = stringResource(R.string.total_formula_calculator_screen)
             )
             Text(
-                style = FormulaCalculationDetailsCalculationScreen, text = "160.48 − 136.00 = 24.48"
+                style = FormulaDetailsCalculatorScreen, text = "160.48 − 136.00 = 24.48"
             )
             Spacer(modifier = Modifier.height(Dimen10))
         }
@@ -225,7 +225,7 @@ internal fun ResultDetail() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            style = TitleIndicatorDetailsCalculationScreen,
+            style = TitleIndicatorCalculatorScreen,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = Dimen11)
@@ -233,7 +233,7 @@ internal fun ResultDetail() {
             text = "Montos guardados localmente"
         )
         Text(
-            style = CounterIndicatorDetailsCalculationScreen,
+            style = CounterIndicatorCalculatorScreen,
             modifier = Modifier.padding(end = Dimen11),
             text = "1"
         )
