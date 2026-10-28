@@ -34,8 +34,8 @@ import com.pe.innari.igvperu.ui.theme.Dimen13
 import com.pe.innari.igvperu.ui.theme.Dimen16
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.theme.Dimen48
-import com.pe.innari.igvperu.ui.theme.TextInformationCalculatorScreen
-import com.pe.innari.igvperu.ui.theme.TextMessageCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.InformationCalculatorScreen
+import com.pe.innari.igvperu.ui.theme.MessageCalculatorScreen
 
 @Composable
 internal fun AmountDataView(
@@ -60,7 +60,7 @@ internal fun AmountDataView(
             )
         }
         Text(
-            style = TextInformationCalculatorScreen,
+            style = InformationCalculatorScreen,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             modifier = Modifier.padding(start = Dimen10, end = Dimen13, top = Dimen11),
             text = stringResource(R.string.instruction_calculator_screen)
@@ -99,7 +99,7 @@ internal fun AmountDataView(
             )
         }
         Text(
-            style = TextMessageCalculatorScreen,
+            style = MessageCalculatorScreen,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = Dimen10, end = Dimen13),
             text = stringResource(R.string.instruction_calculator_screen)
