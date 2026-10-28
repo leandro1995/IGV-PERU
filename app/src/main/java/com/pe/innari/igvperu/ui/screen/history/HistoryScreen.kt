@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import com.pe.innari.igvperu.R
 import com.pe.innari.igvperu.ui.component.toolbar.ToolbarComponent
 import com.pe.innari.igvperu.ui.component.toolbar.model.Toolbar
+import com.pe.innari.igvperu.ui.screen.history.view.ExecutiveSummary
 import com.pe.innari.igvperu.ui.theme.Dimen20
 import com.pe.innari.igvperu.ui.view.ViewAmbient
 import com.pe.innari.igvperu.ui.view.preview.AdaptivePreview
@@ -38,6 +39,7 @@ class HistoryScreen : ViewAmbient<Any>() {
                     .fillMaxWidth()
                     .padding(start = Dimen20, end = Dimen20)
             ) {
+                ExecutiveSummary()
                 content()
             }
         }
