@@ -9,13 +9,11 @@
     <string name="lending_rate_calculator_screen">Tasa activa</string>
     <string name="subtotal_formula_calculator_screen">Sub Total = Total ÷ (1 + tasa/100)</string>
     <string name="total_formula_calculator_screen">IGV = Total − Sub Total</string>
+    <string name="instruction_calculator_screen"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
 
     <!-- Toolbar -->
     <string name="calculator_toolbar">Calculadora</string>
     <string name="calculator_subtitle_toolbar">Calcula y comprende el IGV</string>
-
-    <!-- Information -->
-    <string name="calculator_information"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
 
     <!-- Tab -->
     <string name="including_igv_tab">Con IGV</string>
