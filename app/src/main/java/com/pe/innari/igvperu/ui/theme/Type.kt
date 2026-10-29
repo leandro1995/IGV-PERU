@@ -156,3 +156,9 @@ val TitleIndicatorCalculatorScreen =
  */
 val CounterIndicatorCalculatorScreen =
     TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.bold)))
+
+val TitleExecutiveSummaryHistoryScreen =
+    TextStyle(fontSize = Text14, fontFamily = FontFamily(Font(R.font.bold)))
+
+val SubTitleExecutiveSummaryHistoryScreen =
+    TextStyle(fontSize = Text12, fontFamily = FontFamily(Font(R.font.regular)))
