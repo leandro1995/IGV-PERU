@@ -12,6 +12,10 @@
     <string name="instruction_calculator_screen"><b>Con IGV:</b> ingresa el Total y obtén el desglose automáticamente</string>
     <string name="amount_save_calculator_screen">Montos guardados localmente</string>
 
+    <!-- History Screen -->
+    <string name="save_history_history_screen">%1$d montos guardados</string>
+    <string name="save_history_local_history_screen">Guardado localmente</string>
+
     <!-- Toolbar -->
     <string name="calculator_toolbar">Calculadora</string>
     <string name="calculator_subtitle_toolbar">Calcula y comprende el IGV</string>
@@ -38,4 +42,5 @@
     <string name="save_amount_button">Guardar monto</string>
     <string name="share_button">Compartir</string>
     <string name="clear_button">Limpiar</string>
+    <string name="delete_history_button">Eliminar historial</string>
 </resources>
