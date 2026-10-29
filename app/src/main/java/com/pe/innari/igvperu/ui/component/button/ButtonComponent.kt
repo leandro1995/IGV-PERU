@@ -1,6 +1,7 @@
 package com.pe.innari.igvperu.ui.component.button
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,7 +20,7 @@ import com.pe.innari.igvperu.ui.component.button.callback.ButtonComponentCallbac
 import com.pe.innari.igvperu.ui.component.button.model.Button
 import com.pe.innari.igvperu.ui.component.button.style.ButtonComponentStyle
 import com.pe.innari.igvperu.ui.component.button.type.ButtonComponentType
-import com.pe.innari.igvperu.ui.theme.Dimen24
+import com.pe.innari.igvperu.ui.theme.Dimen18
 import com.pe.innari.igvperu.ui.theme.Dimen56
 import com.pe.innari.igvperu.ui.theme.Dimen8
 import com.pe.innari.igvperu.ui.theme.LabelButtonComponent
@@ -145,18 +146,25 @@ class ButtonComponent(private val button: Button) : ComponentAmbient() {
 
     @Composable
     private fun ContentButton() = Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
     ) {
-        if (button.isIcon()) {
-            Icon(
-                modifier = Modifier
-                    .size(Dimen24)
-                    .padding(end = Dimen8),
-                painter = painterResource(button.icon.orEmpty()),
-                contentDescription = null,
+        val isIcon = button.isIcon()
+
+        if (isIcon) {
+            Column(modifier = Modifier.padding(end = Dimen8)) {
+                Icon(
+                    modifier = Modifier.size(Dimen18),
+                    painter = painterResource(button.icon.orEmpty()),
+                    contentDescription = null,
+                )
+            }
+        }
+        Column {
+            Text(
+                text = button.label,
+                style = LabelButtonComponent,
+                textAlign = ButtonComponentStyle.textAlign(isIcon = isIcon)
             )
         }
-        Text(text = button.label, style = LabelButtonComponent)
     }
 }
