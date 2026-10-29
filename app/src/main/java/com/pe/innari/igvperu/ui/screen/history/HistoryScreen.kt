@@ -20,7 +20,21 @@ class HistoryScreen : ViewAmbient<Any>() {
     @Composable
     override fun View() {
         HistoryContainer {
+            ExecutiveSummary(weight = 1.5F)
+        }
+    }
 
+    @Composable
+    override fun PhoneLandscape() {
+        HistoryContainer {
+            ExecutiveSummary(weight = 2.5F)
+        }
+    }
+
+    @Composable
+    override fun TabletLandscape() {
+        HistoryContainer {
+            ExecutiveSummary(weight = 3.5F)
         }
     }
 
@@ -39,7 +53,6 @@ class HistoryScreen : ViewAmbient<Any>() {
                     .fillMaxWidth()
                     .padding(start = Dimen20, end = Dimen20)
             ) {
-                ExecutiveSummary()
                 content()
             }
         }
