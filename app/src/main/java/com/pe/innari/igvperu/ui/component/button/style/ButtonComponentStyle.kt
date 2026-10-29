@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
 import com.pe.innari.igvperu.ui.theme.Dimen1
 import com.pe.innari.igvperu.ui.theme.Dimen12
 
@@ -78,4 +79,10 @@ object ButtonComponentStyle {
      * Retorna la forma redondeada estándar ([RoundedCornerShape]) para los botones con un radio de [Dimen12].
      */
     fun shape() = RoundedCornerShape(Dimen12)
+
+    fun textAlign(isIcon: Boolean) = if (isIcon) {
+        null
+    } else {
+        TextAlign.Center
+    }
 }
