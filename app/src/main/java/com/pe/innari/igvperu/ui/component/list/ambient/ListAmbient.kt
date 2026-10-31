@@ -16,15 +16,15 @@ abstract class ListAmbient<T>(protected val list: List<T>) : ComponentAmbient() 
 
     /**
      * Función composable principal que evalúa si la lista está vacía.
-     * Renderiza [ListEmpty] si no hay elementos o [ListView] si la lista contiene datos.
+     * Renderiza [EmptyContent] si no hay elementos o [ListContent] si la lista contiene datos.
      */
     @Composable
     override fun OnCreate() {
 
         if (isEmpty()) {
-            ListEmpty()
+            EmptyContent()
         } else {
-            ListView()
+            ListContent()
         }
     }
 
@@ -33,14 +33,14 @@ abstract class ListAmbient<T>(protected val list: List<T>) : ComponentAmbient() 
      * Debe ser implementada por las subclases concretas.
      */
     @Composable
-    protected abstract fun ListEmpty()
+    protected abstract fun EmptyContent()
 
     /**
      * Función composable abstracta que define la interfaz a mostrar cuando la lista contiene elementos.
      * Debe ser implementada por las subclases concretas.
      */
     @Composable
-    protected abstract fun ListView()
+    protected abstract fun ListContent()
 
     /**
      * Verifica si la lista está vacía.
