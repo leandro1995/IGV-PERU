@@ -8,5 +8,18 @@ abstract class ListAmbient<T>(protected val list: List<T>) : ComponentAmbient() 
     @Composable
     override fun OnCreate() {
 
+        if (isEmpty()) {
+            ListEmpty()
+        } else {
+            ListView()
+        }
     }
+
+    @Composable
+    protected abstract fun ListEmpty()
+
+    @Composable
+    protected abstract fun ListView()
+
+    private fun isEmpty() = list.isEmpty()
 }
