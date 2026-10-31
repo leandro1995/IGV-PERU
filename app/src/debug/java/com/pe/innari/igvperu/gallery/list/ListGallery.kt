@@ -1,4 +1,4 @@
-package com.pe.innari.igvperu.gallery
+package com.pe.innari.igvperu.gallery.list
 
 import androidx.compose.runtime.Composable
 import com.pe.innari.igvperu.ui.view.ViewAmbient
