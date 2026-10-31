@@ -11,12 +11,12 @@ import com.pe.innari.igvperu.ui.component.list.ambient.ListAmbient
 class ListList(list: List<Int>) : ListAmbient<Int>(list = list) {
 
     @Composable
-    override fun ListEmpty() {
+    override fun EmptyContent() {
         Text("No hay datos")
     }
 
     @Composable
-    override fun ListView() {
+    override fun ListContent() {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(list) {
                 Text("Contado : $it")
