@@ -21,7 +21,7 @@ abstract class ListAmbient<T>(protected val list: List<T>) : ComponentAmbient() 
     @Composable
     override fun OnCreate() {
 
-        if (isEmpty()) {
+        if (isListEmpty()) {
             EmptyContent()
         } else {
             ListContent()
@@ -42,10 +42,5 @@ abstract class ListAmbient<T>(protected val list: List<T>) : ComponentAmbient() 
     @Composable
     protected abstract fun ListContent()
 
-    /**
-     * Verifica si la lista está vacía.
-     *
-     * @return `true` si la lista no contiene elementos, `false` en caso contrario.
-     */
-    private fun isEmpty() = list.isEmpty()
+    private fun isListEmpty() = list.isEmpty()
 }
